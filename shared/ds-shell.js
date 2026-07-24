@@ -195,9 +195,10 @@ function renderNav(activeId) {
     });
   }
 
-  // Scroll active into view
+  // Scroll active item into view on initial page load only (not on click).
+  // 'center' keeps it mid-sidebar rather than snapping it to the bottom edge.
   const active = nav.querySelector('.active');
-  if (active) active.scrollIntoView({ block: 'nearest' });
+  if (active) active.scrollIntoView({ block: 'center', behavior: 'instant' });
 }
 
 // ── SEARCH ──────────────────────────────────────────────────────
