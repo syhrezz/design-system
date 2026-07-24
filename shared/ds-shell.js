@@ -195,10 +195,15 @@ function renderNav(activeId) {
     });
   }
 
-  // Scroll active item into view on initial page load only (not on click).
-  // 'center' keeps it mid-sidebar rather than snapping it to the bottom edge.
+  // Only scroll the active item into view if it's outside the sidebar's visible area.
+  // This avoids jarring jumps when the item is already visible after clicking.
   const active = nav.querySelector('.active');
-  if (active) active.scrollIntoView({ block: 'center', behavior: 'instant' });
+  if (active) {
+    const navRect = nav.getBoundingClientRect();
+    const activeRect = active.getBoundingClientRect();
+    const isOutOfView = activeRect.bottom > navRect.bottom || activeRect.top < navRect.top;
+    if (isOutOfView) active.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+  }
 }
 
 // ── SEARCH ──────────────────────────────────────────────────────
