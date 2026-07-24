@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Add Customer — Syhrezz App</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Plus Jakarta Sans',sans-serif;background:#F8FAFC;}
+.app-shell{display:flex;height:100vh;overflow:hidden;}
+.app-sidebar{width:240px;flex-shrink:0;background:#0F172A;display:flex;flex-direction:column;height:100vh;}
+.app-sidebar-logo{padding:20px 20px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.08);}
+.app-sidebar-logo-icon{width:32px;height:32px;background:#6366F1;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;}
+.app-sidebar-logo-name{font-size:14px;font-weight:700;color:#fff;}
+.app-sidebar-logo-version{font-size:10px;color:#64748B;margin-top:1px;}
+.app-nav{flex:1;overflow-y:auto;padding:12px 10px;}
+.app-nav-section{font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.8px;padding:8px 10px 4px;}
+.app-nav-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;font-size:13px;font-weight:500;color:#94A3B8;cursor:pointer;transition:all .15s;margin-bottom:2px;}
+.app-nav-item:hover{background:rgba(255,255,255,.06);color:#fff;}
+.app-nav-item.active{background:#6366F1;color:#fff;}
+.app-sidebar-footer{padding:12px 10px;border-top:1px solid rgba(255,255,255,.08);}
+.app-user{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;}
+.app-user-avatar{width:30px;height:30px;border-radius:50%;background:#6366F1;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;}
+.app-user-name{font-size:12px;font-weight:600;color:#fff;}
+.app-user-role{font-size:10px;color:#64748B;}
+.app-main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.app-topbar{height:56px;background:#fff;border-bottom:1px solid #E2E8F0;display:flex;align-items:center;padding:0 24px;gap:12px;flex-shrink:0;}
+.breadcrumb{display:flex;align-items:center;gap:6px;font-size:13px;flex:1;}
+.breadcrumb a{color:#64748B;text-decoration:none;}.breadcrumb a:hover{color:#6366F1;}
+.breadcrumb span{color:#CBD5E1;}
+.breadcrumb strong{color:#0F172A;font-weight:600;}
+.app-content{flex:1;overflow-y:auto;padding:24px;}
+.form-layout{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start;}
+.section-card{background:#fff;border-radius:14px;border:1px solid #E2E8F0;overflow:hidden;margin-bottom:16px;}
+.section-header{padding:16px 20px;border-bottom:1px solid #F1F5F9;}
+.section-title{font-size:13px;font-weight:700;color:#0F172A;}
+.section-desc{font-size:12px;color:#94A3B8;margin-top:2px;}
+.section-body{padding:20px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-group{margin-bottom:14px;}
+.form-group:last-child{margin-bottom:0;}
+.form-label{display:block;font-size:12px;font-weight:700;color:#64748B;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}
+.form-hint{font-size:11px;color:#94A3B8;margin-top:4px;}
+.form-error{font-size:11px;color:#F05252;margin-top:4px;display:none;}
+.input{width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid #E2E8F0;font-size:13px;font-family:inherit;outline:none;color:#0F172A;transition:border-color .2s,box-shadow .2s;}
+.input:focus{border-color:#6366F1;box-shadow:0 0 0 3px rgba(99,102,241,.1);}
+.input.error{border-color:#F05252;box-shadow:0 0 0 3px rgba(240,82,82,.1);}
+select.input{cursor:pointer;}
+textarea.input{resize:vertical;min-height:80px;}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #F8FAFC;}
+.toggle-row:last-child{border-bottom:none;}
+.toggle-label{font-size:13px;font-weight:500;color:#0F172A;}
+.toggle-desc{font-size:11px;color:#94A3B8;margin-top:1px;}
+.toggle{position:relative;width:36px;height:20px;flex-shrink:0;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;inset:0;background:#E2E8F0;border-radius:999px;cursor:pointer;transition:.2s;}
+.toggle-slider::before{content:'';position:absolute;width:14px;height:14px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;}
+.toggle input:checked + .toggle-slider{background:#6366F1;}
+.toggle input:checked + .toggle-slider::before{transform:translateX(16px);}
+/* STICKY SIDEBAR */
+.form-sidebar{position:sticky;top:0;}
+.summary-card{background:#fff;border-radius:14px;border:1px solid #E2E8F0;overflow:hidden;margin-bottom:16px;}
+.summary-item{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid #F8FAFC;font-size:13px;}
+.summary-item:last-child{border-bottom:none;}
+.summary-label{color:#64748B;}
+.summary-value{font-weight:600;color:#0F172A;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;width:100%;margin-bottom:8px;}
+.btn-primary{background:#6366F1;color:#fff;box-shadow:0 4px 12px rgba(99,102,241,.25);}
+.btn-primary:hover{background:#4F46E5;transform:translateY(-1px);}
+.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}
+.btn-outline:hover{border-color:#6366F1;color:#6366F1;}
+.progress-steps{display:flex;flex-direction:column;gap:0;padding:16px 20px;}
+.progress-step{display:flex;align-items:center;gap:10px;padding:8px 0;position:relative;}
+.progress-step:not(:last-child)::after{content:'';position:absolute;left:11px;top:32px;width:2px;height:calc(100% - 8px);background:#E2E8F0;}
+.ps-circle{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;z-index:1;}
+.ps-circle.done{background:#10B981;color:#fff;}
+.ps-circle.active{background:#6366F1;color:#fff;box-shadow:0 0 0 3px rgba(99,102,241,.2);}
+.ps-circle.pending{background:#F1F5F9;color:#94A3B8;border:2px solid #E2E8F0;}
+.ps-label{font-size:12px;font-weight:600;color:#94A3B8;}
+.ps-label.active{color:#6366F1;}
+.ps-label.done{color:#10B981;}
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="app-sidebar-logo">
+      <div class="app-sidebar-logo-icon">S</div>
+      <div><div class="app-sidebar-logo-name">Syhrezz</div><div class="app-sidebar-logo-version">Admin Panel</div></div>
+    </div>
+    <nav class="app-nav">
+      <div class="app-nav-section">Main</div>
+      <div class="app-nav-item"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>Dashboard</div>
+      <div class="app-nav-item active"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Customers</div>
+      <div class="app-nav-item"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Orders</div>
+      <div class="app-nav-item"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>Settings</div>
+    </nav>
+    <div class="app-sidebar-footer">
+      <div class="app-user"><div class="app-user-avatar">BS</div><div><div class="app-user-name">Budi Santoso</div><div class="app-user-role">Administrator</div></div></div>
+    </div>
+  </aside>
+  <div class="app-main">
+    <header class="app-topbar">
+      <div class="breadcrumb"><a href="#">Customers</a><span>/</span><strong>Add Customer</strong></div>
+      <div style="display:flex;gap:8px">
+        <button style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #E2E8F0;background:#fff;color:#0F172A;font-family:inherit">Discard</button>
+      </div>
+    </header>
+    <div class="app-content">
+      <div class="form-layout">
+        <div>
+          <!-- BASIC INFO -->
+          <div class="section-card">
+            <div class="section-header"><div class="section-title">Basic Information</div><div class="section-desc">Customer contact and identity details</div></div>
+            <div class="section-body">
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">First Name <span style="color:#F05252">*</span></label><input class="input" id="fname" placeholder="Budi" oninput="validate()"/><div class="form-error" id="fname-err">First name is required</div></div>
+                <div class="form-group"><label class="form-label">Last Name <span style="color:#F05252">*</span></label><input class="input" id="lname" placeholder="Santoso" oninput="validate()"/><div class="form-error" id="lname-err">Last name is required</div></div>
+              </div>
+              <div class="form-group"><label class="form-label">Email Address <span style="color:#F05252">*</span></label><input class="input" id="email" type="email" placeholder="budi@example.com" oninput="validate()"/><div class="form-hint">We'll send account notifications to this address.</div><div class="form-error" id="email-err">A valid email is required</div></div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Phone</label><input class="input" placeholder="+62 812 3456 7890"/></div>
+                <div class="form-group"><label class="form-label">Country</label><select class="input"><option>Indonesia</option><option>Singapore</option><option>Malaysia</option><option>Other</option></select></div>
+              </div>
+            </div>
+          </div>
+          <!-- COMPANY -->
+          <div class="section-card">
+            <div class="section-header"><div class="section-title">Company Details</div><div class="section-desc">Optional company and role information</div></div>
+            <div class="section-body">
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Company Name</label><input class="input" placeholder="Acme Corp"/></div>
+                <div class="form-group"><label class="form-label">Job Title</label><input class="input" placeholder="Product Manager"/></div>
+              </div>
+              <div class="form-group"><label class="form-label">Website</label><input class="input" placeholder="https://acme.com"/></div>
+              <div class="form-group"><label class="form-label">Notes</label><textarea class="input" placeholder="Any additional notes about this customer..."></textarea></div>
+            </div>
+          </div>
+          <!-- SUBSCRIPTION -->
+          <div class="section-card">
+            <div class="section-header"><div class="section-title">Subscription</div><div class="section-desc">Plan and billing preferences</div></div>
+            <div class="section-body">
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Plan <span style="color:#F05252">*</span></label><select class="input" id="plan" onchange="updateSummary()"><option value="Starter">Starter — $49/mo</option><option value="Pro">Pro — $120/mo</option><option value="Enterprise">Enterprise — $499/mo</option></select></div>
+                <div class="form-group"><label class="form-label">Billing Cycle</label><select class="input" id="cycle" onchange="updateSummary()"><option value="Monthly">Monthly</option><option value="Annually">Annually (save 20%)</option></select></div>
+              </div>
+              <div class="form-group"><label class="form-label">Status</label><select class="input" id="status" onchange="updateSummary()"><option value="Trial">Trial</option><option value="Active">Active</option><option value="Inactive">Inactive</option></select></div>
+            </div>
+          </div>
+          <!-- NOTIFICATIONS -->
+          <div class="section-card">
+            <div class="section-header"><div class="section-title">Notifications</div><div class="section-desc">Control which emails this customer receives</div></div>
+            <div class="section-body" style="padding:4px 20px">
+              <div class="toggle-row"><div><div class="toggle-label">Welcome Email</div><div class="toggle-desc">Send a welcome email on account creation</div></div><label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
+              <div class="toggle-row"><div><div class="toggle-label">Invoice Notifications</div><div class="toggle-desc">Email receipts for every payment</div></div><label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
+              <div class="toggle-row"><div><div class="toggle-label">Product Updates</div><div class="toggle-desc">Feature announcements and changelog emails</div></div><label class="toggle"><input type="checkbox"/><span class="toggle-slider"></span></label></div>
+              <div class="toggle-row"><div><div class="toggle-label">Marketing Emails</div><div class="toggle-desc">Promotional offers and newsletters</div></div><label class="toggle"><input type="checkbox"/><span class="toggle-slider"></span></label></div>
+            </div>
+          </div>
+        </div>
+        <!-- SIDEBAR -->
+        <div class="form-sidebar">
+          <div class="summary-card">
+            <div class="section-header"><div class="section-title">Summary</div></div>
+            <div id="summary">
+              <div class="summary-item"><span class="summary-label">Plan</span><span class="summary-value" id="sum-plan">Starter</span></div>
+              <div class="summary-item"><span class="summary-label">Billing</span><span class="summary-value" id="sum-cycle">Monthly</span></div>
+              <div class="summary-item"><span class="summary-label">MRR</span><span class="summary-value" id="sum-mrr">$49/mo</span></div>
+              <div class="summary-item"><span class="summary-label">Status</span><span class="summary-value" id="sum-status">Trial</span></div>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="submitForm()">Create Customer</button>
+          <button class="btn btn-outline">Save as Draft</button>
+          <!-- PROGRESS -->
+          <div class="summary-card" style="margin-top:8px">
+            <div class="section-header"><div class="section-title">Form Progress</div></div>
+            <div class="progress-steps">
+              <div class="progress-step"><div class="ps-circle done" id="ps1"><svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div><div class="ps-label done">Basic Info</div></div>
+              <div class="progress-step"><div class="ps-circle active" id="ps2">2</div><div class="ps-label active">Company</div></div>
+              <div class="progress-step"><div class="ps-circle pending" id="ps3">3</div><div class="ps-label" id="ps3-label">Subscription</div></div>
+              <div class="progress-step"><div class="ps-circle pending" id="ps4">4</div><div class="ps-label" id="ps4-label">Notifications</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+var mrr = {Starter:49,Pro:120,Enterprise:499};
+function updateSummary() {
+  var plan = document.getElementById('plan').value;
+  var cycle = document.getElementById('cycle').value;
+  var status = document.getElementById('status').value;
+  var base = mrr[plan];
+  var amt = cycle === 'Annually' ? Math.round(base * 0.8) : base;
+  document.getElementById('sum-plan').textContent = plan;
+  document.getElementById('sum-cycle').textContent = cycle;
+  document.getElementById('sum-mrr').textContent = '$' + amt + '/mo';
+  document.getElementById('sum-status').textContent = status;
+}
+function validate() {
+  var ok = true;
+  ['fname','lname'].forEach(function(id) {
+    var el = document.getElementById(id);
+    var err = document.getElementById(id+'-err');
+    if (!el.value.trim()) { el.classList.add('error'); err.style.display='block'; ok=false; }
+    else { el.classList.remove('error'); err.style.display='none'; }
+  });
+  var email = document.getElementById('email');
+  var emailErr = document.getElementById('email-err');
+  var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value);
+  if (!email.value || !valid) { email.classList.add('error'); emailErr.style.display='block'; ok=false; }
+  else { email.classList.remove('error'); emailErr.style.display='none'; }
+  return ok;
+}
+function submitForm() { if (validate()) alert('Customer created successfully!'); }
+updateSummary();
+</script>
+</body>
+</html>

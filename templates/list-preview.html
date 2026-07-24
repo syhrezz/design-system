@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Customers — Syhrezz App</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Plus Jakarta Sans',sans-serif;background:#F8FAFC;}
+.app-shell{display:flex;height:100vh;overflow:hidden;}
+.app-sidebar{width:240px;flex-shrink:0;background:#0F172A;display:flex;flex-direction:column;height:100vh;}
+.app-sidebar-logo{padding:20px 20px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.08);}
+.app-sidebar-logo-icon{width:32px;height:32px;background:#6366F1;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;}
+.app-sidebar-logo-name{font-size:14px;font-weight:700;color:#fff;}
+.app-sidebar-logo-version{font-size:10px;color:#64748B;margin-top:1px;}
+.app-nav{flex:1;overflow-y:auto;padding:12px 10px;}
+.app-nav-section{font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.8px;padding:8px 10px 4px;}
+.app-nav-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;font-size:13px;font-weight:500;color:#94A3B8;cursor:pointer;transition:all .15s;margin-bottom:2px;}
+.app-nav-item:hover{background:rgba(255,255,255,.06);color:#fff;}
+.app-nav-item.active{background:#6366F1;color:#fff;}
+.app-sidebar-footer{padding:12px 10px;border-top:1px solid rgba(255,255,255,.08);}
+.app-user{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;}
+.app-user-avatar{width:30px;height:30px;border-radius:50%;background:#6366F1;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;}
+.app-user-name{font-size:12px;font-weight:600;color:#fff;}
+.app-user-role{font-size:10px;color:#64748B;}
+.app-main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.app-topbar{height:56px;background:#fff;border-bottom:1px solid #E2E8F0;display:flex;align-items:center;padding:0 24px;gap:16px;flex-shrink:0;}
+.app-topbar-title{font-size:15px;font-weight:700;color:#0F172A;flex:1;}
+.app-content{flex:1;overflow-y:auto;padding:24px;}
+.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.page-title{font-size:18px;font-weight:800;color:#0F172A;letter-spacing:-.3px;}
+.page-sub{font-size:13px;color:#64748B;margin-top:2px;}
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center;}
+.search-wrap{position:relative;flex:1;min-width:200px;max-width:320px;}
+.search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#94A3B8;}
+.search-input{width:100%;padding:8px 12px 8px 34px;border-radius:9px;border:1px solid #E2E8F0;font-size:13px;font-family:inherit;outline:none;color:#0F172A;background:#fff;}
+.search-input:focus{border-color:#6366F1;box-shadow:0 0 0 3px rgba(99,102,241,.1);}
+.filter-select{padding:8px 12px;border-radius:9px;border:1px solid #E2E8F0;font-size:13px;font-family:inherit;color:#0F172A;background:#fff;cursor:pointer;outline:none;}
+.filter-select:focus{border-color:#6366F1;}
+.table-card{background:#fff;border-radius:14px;border:1px solid #E2E8F0;overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+th{padding:10px 16px;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.5px;text-align:left;background:#F8FAFC;border-bottom:1px solid #E2E8F0;}
+td{padding:12px 16px;font-size:13px;color:#0F172A;border-bottom:1px solid #F1F5F9;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#F8FAFC;}
+.avatar-sm{width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;}
+.badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:700;}
+.badge-success{background:#DEF7EC;color:#03543F;}
+.badge-warning{background:#FEF3C7;color:#92400E;}
+.badge-danger{background:#FDE8E8;color:#9B1C1C;}
+.badge-info{background:#E1EFFE;color:#1E429F;}
+.badge-neutral{background:#F1F5F9;color:#475569;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}
+.btn-primary{background:#6366F1;color:#fff;box-shadow:0 4px 12px rgba(99,102,241,.25);}
+.btn-primary:hover{background:#4F46E5;transform:translateY(-1px);}
+.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}
+.btn-outline:hover{border-color:#6366F1;color:#6366F1;}
+.btn-ghost{background:none;color:#64748B;border:none;padding:6px 8px;border-radius:7px;}
+.btn-ghost:hover{background:#F1F5F9;color:#0F172A;}
+.btn-danger{background:#F05252;color:#fff;}
+.btn-danger:hover{background:#DC2626;}
+.btn-sm{padding:5px 10px;font-size:12px;border-radius:7px;}
+.table-footer{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #F1F5F9;}
+.table-count{font-size:12px;color:#94A3B8;}
+.pagination{display:flex;gap:4px;}
+.page-btn{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #E2E8F0;background:#fff;color:#64748B;transition:all .15s;}
+.page-btn:hover{border-color:#6366F1;color:#6366F1;}
+.page-btn.active{background:#6366F1;color:#fff;border-color:#6366F1;}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;width:100%;max-width:500px;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.18);animation:modalIn .25s ease;}
+@keyframes modalIn{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-header{padding:20px 24px;border-bottom:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;}
+.modal-title{font-size:15px;font-weight:800;color:#0F172A;}
+.modal-close{background:none;border:none;cursor:pointer;color:#94A3B8;font-size:18px;line-height:1;padding:4px;border-radius:6px;}
+.modal-close:hover{background:#F1F5F9;color:#0F172A;}
+.modal-body{padding:24px;}
+.modal-footer{padding:16px 24px;border-top:1px solid #E2E8F0;display:flex;justify-content:flex-end;gap:10px;}
+.form-group{margin-bottom:14px;}
+.form-label{display:block;font-size:12px;font-weight:700;color:#64748B;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.input{width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid #E2E8F0;font-size:13px;font-family:inherit;outline:none;color:#0F172A;transition:border-color .2s,box-shadow .2s;box-sizing:border-box;}
+.input:focus{border-color:#6366F1;box-shadow:0 0 0 3px rgba(99,102,241,.1);}
+select.input{cursor:pointer;}
+.checkbox-row{display:flex;align-items:center;gap:8px;font-size:13px;color:#0F172A;}
+.empty-state{text-align:center;padding:48px 24px;display:none;}
+.empty-state-icon{width:48px;height:48px;background:#F1F5F9;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;color:#94A3B8;}
+.empty-state-title{font-size:14px;font-weight:700;color:#0F172A;margin-bottom:4px;}
+.empty-state-desc{font-size:13px;color:#64748B;}
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="app-sidebar-logo">
+      <div class="app-sidebar-logo-icon">S</div>
+      <div><div class="app-sidebar-logo-name">Syhrezz</div><div class="app-sidebar-logo-version">Admin Panel</div></div>
+    </div>
+    <nav class="app-nav">
+      <div class="app-nav-section">Main</div>
+      <div class="app-nav-item"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>Dashboard</div>
+      <div class="app-nav-item active"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Customers</div>
+      <div class="app-nav-item"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Orders</div>
+      <div class="app-nav-item"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>Products</div>
+      <div class="app-nav-section">Settings</div>
+      <div class="app-nav-item"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>Settings</div>
+    </nav>
+    <div class="app-sidebar-footer">
+      <div class="app-user"><div class="app-user-avatar">BS</div><div><div class="app-user-name">Budi Santoso</div><div class="app-user-role">Administrator</div></div></div>
+    </div>
+  </aside>
+  <div class="app-main">
+    <header class="app-topbar">
+      <div class="app-topbar-title">Customers</div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:32px;height:32px;border-radius:50%;background:#6366F1;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;">BS</div>
+      </div>
+    </header>
+    <div class="app-content">
+      <div class="page-header">
+        <div><div class="page-title">Customers</div><div class="page-sub">Manage and track your customer base</div></div>
+        <button class="btn btn-primary" onclick="document.getElementById('addModal').classList.add('open')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>Add Customer</button>
+      </div>
+      <div class="filter-bar">
+        <div class="search-wrap">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input class="search-input" id="searchInput" placeholder="Search customers..." oninput="filterTable()"/>
+        </div>
+        <select class="filter-select" id="statusFilter" onchange="filterTable()">
+          <option value="">All Status</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+          <option value="Trial">Trial</option>
+        </select>
+        <select class="filter-select" id="planFilter" onchange="filterTable()">
+          <option value="">All Plans</option>
+          <option value="Starter">Starter</option>
+          <option value="Pro">Pro</option>
+          <option value="Enterprise">Enterprise</option>
+        </select>
+      </div>
+      <div class="table-card">
+        <table id="customerTable">
+          <thead><tr><th><input type="checkbox" id="selectAll" onchange="toggleAll(this)"/></th><th>Customer</th><th>Plan</th><th>Status</th><th>MRR</th><th>Joined</th><th>Actions</th></tr></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+        <div class="empty-state" id="emptyState">
+          <div class="empty-state-icon"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+          <div class="empty-state-title">No customers found</div>
+          <div class="empty-state-desc">Try adjusting your search or filters.</div>
+        </div>
+        <div class="table-footer">
+          <div class="table-count" id="tableCount">Showing 8 of 8 customers</div>
+          <div class="pagination">
+            <div class="page-btn">&#8592;</div>
+            <div class="page-btn active">1</div>
+            <div class="page-btn">2</div>
+            <div class="page-btn">3</div>
+            <div class="page-btn">&#8594;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ADD MODAL -->
+<div class="modal-overlay" id="addModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">Add Customer</div><button class="modal-close" onclick="document.getElementById('addModal').classList.remove('open')">&#x2715;</button></div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First Name</label><input class="input" placeholder="Budi"/></div>
+        <div class="form-group"><label class="form-label">Last Name</label><input class="input" placeholder="Santoso"/></div>
+      </div>
+      <div class="form-group"><label class="form-label">Email</label><input class="input" type="email" placeholder="budi@example.com"/></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Plan</label><select class="input"><option>Starter</option><option>Pro</option><option>Enterprise</option></select></div>
+        <div class="form-group"><label class="form-label">Status</label><select class="input"><option>Active</option><option>Trial</option><option>Inactive</option></select></div>
+      </div>
+      <div class="form-group"><label class="form-label">Company</label><input class="input" placeholder="Acme Corp"/></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-outline" onclick="document.getElementById('addModal').classList.remove('open')">Cancel</button><button class="btn btn-primary">Add Customer</button></div>
+  </div>
+</div>
+<!-- DELETE MODAL -->
+<div class="modal-overlay" id="deleteModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header"><div class="modal-title">Delete Customer?</div><button class="modal-close" onclick="document.getElementById('deleteModal').classList.remove('open')">&#x2715;</button></div>
+    <div class="modal-body"><p style="font-size:13px;color:#64748B;line-height:1.6">This will permanently delete <strong id="deleteCustomerName" style="color:#0F172A"></strong> and all associated data. This action cannot be undone.</p></div>
+    <div class="modal-footer"><button class="btn btn-outline" onclick="document.getElementById('deleteModal').classList.remove('open')">Cancel</button><button class="btn btn-danger">Delete</button></div>
+  </div>
+</div>
+<script>
+var customers = [
+  {id:1,name:'Andi Nugroho',email:'andi@acme.com',company:'Acme Corp',plan:'Pro',status:'Active',mrr:120,joined:'Jan 12, 2026',avatar:'AN',color:'#6366F1'},
+  {id:2,name:'Siti Rahayu',email:'siti@bunga.id',company:'Bunga Media',plan:'Starter',status:'Trial',mrr:49,joined:'Feb 3, 2026',avatar:'SR',color:'#10B981'},
+  {id:3,name:'Budi Wijaya',email:'budi@nusantara.co',company:'Nusantara Co',plan:'Enterprise',status:'Active',mrr:499,joined:'Mar 18, 2026',avatar:'BW',color:'#F59E0B'},
+  {id:4,name:'Dewi Putri',email:'dewi@kreasi.id',company:'Kreasi Studio',plan:'Pro',status:'Inactive',mrr:0,joined:'Apr 2, 2026',avatar:'DP',color:'#F05252'},
+  {id:5,name:'Rizky Hakim',email:'rizky@techlab.id',company:'TechLab',plan:'Starter',status:'Active',mrr:49,joined:'Apr 28, 2026',avatar:'RH',color:'#8B5CF6'},
+  {id:6,name:'Maya Kusuma',email:'maya@desain.co',company:'Desain Co',plan:'Pro',status:'Active',mrr:120,joined:'May 10, 2026',avatar:'MK',color:'#EC4899'},
+  {id:7,name:'Fajar Hidayat',email:'fajar@solusi.id',company:'Solusi Digital',plan:'Enterprise',status:'Active',mrr:499,joined:'Jun 1, 2026',avatar:'FH',color:'#14B8A6'},
+  {id:8,name:'Nadia Santika',email:'nadia@pixel.id',company:'Pixel Works',plan:'Starter',status:'Trial',mrr:49,joined:'Jul 15, 2026',avatar:'NS',color:'#6366F1'},
+];
+var statusColors = {Active:'badge-success',Inactive:'badge-danger',Trial:'badge-warning'};
+function renderTable(data) {
+  var tbody = document.getElementById('tableBody');
+  tbody.innerHTML = data.map(function(c) {
+    return '<tr><td><input type="checkbox"/></td>' +
+      '<td><div style="display:flex;align-items:center;gap:10px"><div class="avatar-sm" style="background:'+c.color+'">'+c.avatar+'</div><div><div style="font-weight:600">'+c.name+'</div><div style="font-size:11px;color:#94A3B8">'+c.email+'</div></div></div></td>' +
+      '<td><span style="font-size:12px;font-weight:600;color:#64748B">'+c.plan+'</span></td>' +
+      '<td><span class="badge '+statusColors[c.status]+'">'+c.status+'</span></td>' +
+      '<td style="font-weight:700">'+( c.mrr > 0 ? '$'+c.mrr+'/mo' : '—')+'</td>' +
+      '<td style="color:#64748B;font-size:12px">'+c.joined+'</td>' +
+      '<td><div style="display:flex;gap:4px"><button class="btn btn-ghost btn-sm">Edit</button><button class="btn btn-ghost btn-sm" style="color:#F05252" onclick="openDelete(\''+c.name+'\')">Delete</button></div></td></tr>';
+  }).join('');
+  document.getElementById('emptyState').style.display = data.length ? 'none' : 'block';
+  document.getElementById('tableCount').textContent = 'Showing '+data.length+' of '+customers.length+' customers';
+}
+function filterTable() {
+  var q = document.getElementById('searchInput').value.toLowerCase();
+  var s = document.getElementById('statusFilter').value;
+  var p = document.getElementById('planFilter').value;
+  var filtered = customers.filter(function(c) {
+    return (!q || c.name.toLowerCase().includes(q) || c.email.toLowerCase().includes(q) || c.company.toLowerCase().includes(q)) &&
+           (!s || c.status === s) && (!p || c.plan === p);
+  });
+  renderTable(filtered);
+}
+function toggleAll(cb) { document.querySelectorAll('#tableBody input[type=checkbox]').forEach(function(c){c.checked=cb.checked;}); }
+function openDelete(name) { document.getElementById('deleteCustomerName').textContent = name; document.getElementById('deleteModal').classList.add('open'); }
+renderTable(customers);
+</script>
+</body>
+</html>

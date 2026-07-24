@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dashboard — Syhrezz App</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Plus Jakarta Sans',sans-serif;background:#F8FAFC;}
+.app-shell{display:flex;height:100vh;overflow:hidden;}
+/* SIDEBAR */
+.app-sidebar{width:240px;flex-shrink:0;background:#0F172A;display:flex;flex-direction:column;height:100vh;}
+.app-sidebar-logo{padding:20px 20px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.08);}
+.app-sidebar-logo-icon{width:32px;height:32px;background:#6366F1;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;}
+.app-sidebar-logo-name{font-size:14px;font-weight:700;color:#fff;}
+.app-sidebar-logo-version{font-size:10px;color:#64748B;margin-top:1px;}
+.app-nav{flex:1;overflow-y:auto;padding:12px 10px;}
+.app-nav-section{font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.8px;padding:8px 10px 4px;}
+.app-nav-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;font-size:13px;font-weight:500;color:#94A3B8;cursor:pointer;transition:all .15s;margin-bottom:2px;}
+.app-nav-item:hover{background:rgba(255,255,255,.06);color:#fff;}
+.app-nav-item.active{background:#6366F1;color:#fff;}
+.app-nav-item svg{flex-shrink:0;opacity:.7;}
+.app-nav-item.active svg{opacity:1;}
+.app-sidebar-footer{padding:12px 10px;border-top:1px solid rgba(255,255,255,.08);}
+.app-user{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;cursor:pointer;transition:all .15s;}
+.app-user:hover{background:rgba(255,255,255,.06);}
+.app-user-avatar{width:30px;height:30px;border-radius:50%;background:#6366F1;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;}
+.app-user-name{font-size:12px;font-weight:600;color:#fff;}
+.app-user-role{font-size:10px;color:#64748B;}
+/* MAIN */
+.app-main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+/* TOPBAR */
+.app-topbar{height:56px;background:#fff;border-bottom:1px solid #E2E8F0;display:flex;align-items:center;padding:0 24px;gap:16px;flex-shrink:0;}
+.app-topbar-title{font-size:15px;font-weight:700;color:#0F172A;flex:1;}
+.app-topbar-actions{display:flex;align-items:center;gap:8px;}
+.app-topbar-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#64748B;cursor:pointer;transition:all .15s;position:relative;}
+.app-topbar-icon:hover{background:#F1F5F9;color:#0F172A;}
+.app-notif-dot{position:absolute;top:7px;right:7px;width:6px;height:6px;background:#F05252;border-radius:50%;border:1.5px solid #fff;}
+/* CONTENT */
+.app-content{flex:1;overflow-y:auto;padding:24px;}
+/* KPI CARDS */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
+.kpi-card{background:#fff;border-radius:14px;padding:20px;border:1px solid #E2E8F0;position:relative;overflow:hidden;}
+.kpi-card::after{content:'';position:absolute;right:-20px;bottom:-20px;width:80px;height:80px;border-radius:50%;opacity:.07;}
+.kpi-indigo::after{background:#6366F1;}
+.kpi-green::after{background:#10B981;}
+.kpi-amber::after{background:#F59E0B;}
+.kpi-red::after{background:#F05252;}
+.kpi-label{font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.kpi-value{font-size:26px;font-weight:800;color:#0F172A;letter-spacing:-1px;margin-bottom:6px;}
+.kpi-change{font-size:11px;font-weight:600;display:flex;align-items:center;gap:4px;}
+.kpi-up{color:#10B981;} .kpi-down{color:#F05252;}
+/* CHARTS ROW */
+.charts-row{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:24px;}
+.chart-card{background:#fff;border-radius:14px;border:1px solid #E2E8F0;padding:20px;}
+.chart-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.chart-card-title{font-size:13px;font-weight:700;color:#0F172A;}
+.chart-card-sub{font-size:11px;color:#94A3B8;margin-top:2px;}
+.chart-wrap{position:relative;height:200px;}
+/* TABLE CARD */
+.table-card{background:#fff;border-radius:14px;border:1px solid #E2E8F0;overflow:hidden;}
+.table-card-header{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #F1F5F9;}
+.table-card-title{font-size:13px;font-weight:700;color:#0F172A;}
+table{width:100%;border-collapse:collapse;}
+th{padding:10px 16px;font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.5px;text-align:left;background:#F8FAFC;border-bottom:1px solid #E2E8F0;}
+td{padding:12px 16px;font-size:13px;color:#0F172A;border-bottom:1px solid #F1F5F9;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#F8FAFC;}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:700;}
+.badge-success{background:#DEF7EC;color:#03543F;}
+.badge-warning{background:#FEF3C7;color:#92400E;}
+.badge-danger{background:#FDE8E8;color:#9B1C1C;}
+.badge-info{background:#E1EFFE;color:#1E429F;}
+.avatar-sm{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}
+.btn-primary{background:#6366F1;color:#fff;}
+.btn-primary:hover{background:#4F46E5;}
+.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}
+.btn-outline:hover{border-color:#6366F1;color:#6366F1;}
+.btn-ghost{background:none;color:#64748B;border:none;padding:7px 8px;}
+.btn-ghost:hover{background:#F1F5F9;color:#0F172A;}
+select.filter-select{padding:7px 12px;border-radius:8px;border:1px solid #E2E8F0;font-size:12px;font-family:inherit;color:#0F172A;background:#fff;cursor:pointer;outline:none;}
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <!-- SIDEBAR -->
+  <aside class="app-sidebar">
+    <div class="app-sidebar-logo">
+      <div class="app-sidebar-logo-icon">S</div>
+      <div>
+        <div class="app-sidebar-logo-name">Syhrezz</div>
+        <div class="app-sidebar-logo-version">Admin Panel</div>
+      </div>
+    </div>
+    <nav class="app-nav">
+      <div class="app-nav-section">Main</div>
+      <div class="app-nav-item active">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        Dashboard
+      </div>
+      <div class="app-nav-item">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Customers
+      </div>
+      <div class="app-nav-item">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        Orders
+      </div>
+      <div class="app-nav-item">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        Products
+      </div>
+      <div class="app-nav-section">Analytics</div>
+      <div class="app-nav-item">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        Reports
+      </div>
+      <div class="app-nav-item">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+        Analytics
+      </div>
+      <div class="app-nav-section">Settings</div>
+      <div class="app-nav-item">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+        Settings
+      </div>
+    </nav>
+    <div class="app-sidebar-footer">
+      <div class="app-user">
+        <div class="app-user-avatar">BS</div>
+        <div>
+          <div class="app-user-name">Budi Santoso</div>
+          <div class="app-user-role">Administrator</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <!-- MAIN -->
+  <div class="app-main">
+    <!-- TOPBAR -->
+    <header class="app-topbar">
+      <div class="app-topbar-title">Dashboard</div>
+      <div class="app-topbar-actions">
+        <select class="filter-select">
+          <option>Last 30 days</option>
+          <option>Last 7 days</option>
+          <option>This month</option>
+          <option>This year</option>
+        </select>
+        <div class="app-topbar-icon">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          <div class="app-notif-dot"></div>
+        </div>
+        <div class="app-user-avatar" style="width:32px;height:32px;font-size:11px;background:#6366F1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;cursor:pointer;">BS</div>
+      </div>
+    </header>
+    <!-- CONTENT -->
+    <div class="app-content">
+      <!-- KPI -->
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-indigo">
+          <div class="kpi-label">Total Revenue</div>
+          <div class="kpi-value">$84,240</div>
+          <div class="kpi-change kpi-up"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>+12.5% vs last month</div>
+        </div>
+        <div class="kpi-card kpi-green">
+          <div class="kpi-label">New Customers</div>
+          <div class="kpi-value">1,284</div>
+          <div class="kpi-change kpi-up"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>+8.2% vs last month</div>
+        </div>
+        <div class="kpi-card kpi-amber">
+          <div class="kpi-label">Total Orders</div>
+          <div class="kpi-value">3,572</div>
+          <div class="kpi-change kpi-down"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>-2.1% vs last month</div>
+        </div>
+        <div class="kpi-card kpi-red">
+          <div class="kpi-label">Churn Rate</div>
+          <div class="kpi-value">3.2%</div>
+          <div class="kpi-change kpi-up"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>+0.4% vs last month</div>
+        </div>
+      </div>
+      <!-- CHARTS -->
+      <div class="charts-row">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div><div class="chart-card-title">Revenue Overview</div><div class="chart-card-sub">Monthly revenue for 2026</div></div>
+            <button class="btn btn-outline">Export</button>
+          </div>
+          <div class="chart-wrap"><canvas id="revenueChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div><div class="chart-card-title">Orders by Status</div><div class="chart-card-sub">Current period</div></div>
+          </div>
+          <div class="chart-wrap"><canvas id="statusChart"></canvas></div>
+        </div>
+      </div>
+      <!-- TABLE -->
+      <div class="table-card">
+        <div class="table-card-header">
+          <div class="chart-card-title">Recent Orders</div>
+          <div style="display:flex;gap:8px">
+            <input style="padding:7px 12px;border-radius:8px;border:1px solid #E2E8F0;font-size:12px;font-family:inherit;outline:none;width:180px" placeholder="Search orders..."/>
+            <button class="btn btn-primary"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>New Order</button>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>Order ID</th><th>Customer</th><th>Product</th><th>Amount</th><th>Status</th><th>Date</th><th></th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:600;color:#6366F1">#ORD-8821</td><td><div style="display:flex;align-items:center;gap:8px"><div class="avatar-sm" style="background:#6366F1">AN</div>Andi Nugroho</div></td><td>Pro Plan</td><td style="font-weight:700">$120.00</td><td><span class="badge badge-success">Completed</span></td><td style="color:#64748B">Jul 24, 2026</td><td><button class="btn btn-ghost"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td></tr>
+            <tr><td style="font-weight:600;color:#6366F1">#ORD-8820</td><td><div style="display:flex;align-items:center;gap:8px"><div class="avatar-sm" style="background:#10B981">SR</div>Siti Rahayu</div></td><td>Starter Plan</td><td style="font-weight:700">$49.00</td><td><span class="badge badge-warning">Pending</span></td><td style="color:#64748B">Jul 24, 2026</td><td><button class="btn btn-ghost"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td></tr>
+            <tr><td style="font-weight:600;color:#6366F1">#ORD-8819</td><td><div style="display:flex;align-items:center;gap:8px"><div class="avatar-sm" style="background:#F59E0B">BW</div>Budi Wijaya</div></td><td>Enterprise</td><td style="font-weight:700">$499.00</td><td><span class="badge badge-info">Processing</span></td><td style="color:#64748B">Jul 23, 2026</td><td><button class="btn btn-ghost"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td></tr>
+            <tr><td style="font-weight:600;color:#6366F1">#ORD-8818</td><td><div style="display:flex;align-items:center;gap:8px"><div class="avatar-sm" style="background:#F05252">DP</div>Dewi Putri</div></td><td>Pro Plan</td><td style="font-weight:700">$120.00</td><td><span class="badge badge-danger">Cancelled</span></td><td style="color:#64748B">Jul 23, 2026</td><td><button class="btn btn-ghost"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td></tr>
+            <tr><td style="font-weight:600;color:#6366F1">#ORD-8817</td><td><div style="display:flex;align-items:center;gap:8px"><div class="avatar-sm" style="background:#8B5CF6">RH</div>Rizky Hakim</div></td><td>Starter Plan</td><td style="font-weight:700">$49.00</td><td><span class="badge badge-success">Completed</span></td><td style="color:#64748B">Jul 22, 2026</td><td><button class="btn btn-ghost"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+// Revenue chart
+new Chart(document.getElementById('revenueChart'), {
+  type: 'line',
+  data: {
+    labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    datasets: [{
+      label: 'Revenue',
+      data: [42000,58000,51000,67000,73000,69000,84240,null,null,null,null,null],
+      borderColor: '#6366F1', backgroundColor: 'rgba(99,102,241,.08)',
+      borderWidth: 2.5, fill: true, tension: 0.4, pointRadius: 4,
+      pointBackgroundColor: '#6366F1', pointBorderColor: '#fff', pointBorderWidth: 2
+    }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#F1F5F9' }, ticks: { font: { size: 11 }, color: '#94A3B8', callback: v => '$' + (v/1000).toFixed(0) + 'k' } }, x: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#94A3B8' } } } }
+});
+// Status chart
+new Chart(document.getElementById('statusChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Completed','Pending','Processing','Cancelled'],
+    datasets: [{ data: [58, 22, 14, 6], backgroundColor: ['#10B981','#F59E0B','#6366F1','#F05252'], borderWidth: 0, hoverOffset: 4 }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, color: '#64748B', padding: 12, usePointStyle: true } } }, cutout: '68%' }
+});
+</script>
+</body>
+</html>
