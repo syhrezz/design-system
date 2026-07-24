@@ -166,9 +166,11 @@ function renderNav(activeId) {
       const targetFile = href.split('#')[0]; // e.g. '../index.html' or 'index.html'
       const targetAnchorEl = document.getElementById(anchor);
       if (targetAnchorEl) {
-        // Already on the right page — scroll smoothly
+        // Already on the right page — scroll smoothly, offset by fixed topbar height
         e.preventDefault();
-        targetAnchorEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const topbarHeight = document.querySelector('.ds-topbar')?.offsetHeight || 52;
+        const targetTop = targetAnchorEl.getBoundingClientRect().top + window.scrollY - topbarHeight - 16;
+        window.scrollTo({ top: targetTop, behavior: 'smooth' });
         // Update active state
         nav.querySelectorAll('.ds-nav-link').forEach(l => l.classList.remove('active'));
         a.classList.add('active');
