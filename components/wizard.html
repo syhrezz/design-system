@@ -1,0 +1,638 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Wizard — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+/* ── WIZARD CORE ── */
+.wz-wrap{border:1px solid #E2E8F0;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.06);background:#fff;}
+.wz-header{padding:28px 32px 24px;border-bottom:1px solid #E2E8F0;}
+.wz-steps{display:flex;align-items:center;gap:0;margin-bottom:0;}
+.wz-step{display:flex;align-items:center;flex:1;}
+.wz-step:last-child{flex:none;}
+.wz-step-node{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1;}
+.wz-step-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:"Plus Jakarta Sans",sans-serif;transition:all .25s;flex-shrink:0;}
+.wz-step-circle.pending{background:#F1F5F9;color:#94A3B8;border:2px solid #E2E8F0;}
+.wz-step-circle.active{background:#6366F1;color:#fff;box-shadow:0 0 0 4px rgba(99,102,241,.18);}
+.wz-step-circle.done{background:#10B981;color:#fff;}
+.wz-step-label{font-size:11px;font-weight:600;color:#94A3B8;white-space:nowrap;font-family:"Plus Jakarta Sans",sans-serif;transition:color .2s;}
+.wz-step-label.active{color:#6366F1;}
+.wz-step-label.done{color:#10B981;}
+.wz-connector{flex:1;height:2px;background:#E2E8F0;margin:0 8px;margin-bottom:20px;transition:background .3s;}
+.wz-connector.done{background:#10B981;}
+.wz-body{padding:28px 32px;}
+.wz-panel{display:none;}
+.wz-panel.active{display:block;animation:wz-in .22s ease;}
+@keyframes wz-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.wz-panel-title{font-size:15px;font-weight:800;color:#0F172A;margin-bottom:4px;letter-spacing:-.2px;}
+.wz-panel-desc{font-size:13px;color:#64748B;margin-bottom:20px;line-height:1.6;}
+.wz-footer{padding:16px 32px;border-top:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;background:#FAFAFA;}
+.wz-footer-left{display:flex;align-items:center;gap:8px;}
+.wz-progress-text{font-size:12px;color:#94A3B8;font-weight:500;}
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;font-family:"Plus Jakarta Sans",sans-serif;cursor:pointer;transition:all .2s;border:none;}
+.btn-primary{background:#6366F1;color:#fff;box-shadow:0 4px 14px rgba(99,102,241,.3);}
+.btn-primary:hover{background:#4F46E5;transform:translateY(-1px);}
+.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}
+.btn-outline:hover{border-color:#6366F1;color:#6366F1;background:#EEF2FF;}
+.btn-ghost{background:none;color:#64748B;border:none;padding:9px 12px;}
+.btn-ghost:hover{color:#0F172A;background:#F1F5F9;}
+.btn-success{background:#10B981;color:#fff;box-shadow:0 4px 14px rgba(16,185,129,.3);}
+.btn-success:hover{background:#059669;transform:translateY(-1px);}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none!important;}
+/* ── FORM ELEMENTS ── */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-group{margin-bottom:14px;}
+.form-label{display:block;font-size:12px;font-weight:700;color:#64748B;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}
+.input{width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid #E2E8F0;font-size:13px;font-family:inherit;outline:none;color:#0F172A;transition:border-color .2s,box-shadow .2s;box-sizing:border-box;}
+.input:focus{border-color:#6366F1;box-shadow:0 0 0 3px rgba(99,102,241,.1);}
+select.input{cursor:pointer;}
+/* ── REVIEW CARD ── */
+.review-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.review-item{background:#F8FAFC;border-radius:10px;padding:12px 14px;}
+.review-item-label{font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
+.review-item-value{font-size:13px;font-weight:600;color:#0F172A;}
+/* ── SUCCESS ── */
+.wz-success{text-align:center;padding:16px 0 8px;}
+.wz-success-icon{width:56px;height:56px;background:#DCFCE7;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+.wz-success-title{font-size:17px;font-weight:800;color:#0F172A;margin-bottom:6px;letter-spacing:-.3px;}
+.wz-success-desc{font-size:13px;color:#64748B;line-height:1.6;}
+/* ── VARIANTS ── */
+/* Vertical wizard */
+.wz-vert{display:flex;gap:0;border:1px solid #E2E8F0;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.06);background:#fff;}
+.wz-vert-nav{width:200px;flex-shrink:0;border-right:1px solid #E2E8F0;padding:20px 0;background:#FAFAFA;}
+.wz-vert-step{display:flex;align-items:center;gap:12px;padding:10px 20px;cursor:default;transition:background .15s;}
+.wz-vert-step.clickable{cursor:pointer;}
+.wz-vert-step.clickable:hover{background:#F1F5F9;}
+.wz-vert-circle{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;transition:all .2s;}
+.wz-vert-circle.pending{background:#F1F5F9;color:#94A3B8;border:2px solid #E2E8F0;}
+.wz-vert-circle.active{background:#6366F1;color:#fff;box-shadow:0 0 0 3px rgba(99,102,241,.18);}
+.wz-vert-circle.done{background:#10B981;color:#fff;}
+.wz-vert-label{font-size:12px;font-weight:600;color:#94A3B8;font-family:"Plus Jakarta Sans",sans-serif;transition:color .2s;}
+.wz-vert-label.active{color:#6366F1;}
+.wz-vert-label.done{color:#10B981;}
+.wz-vert-connector{width:2px;height:16px;background:#E2E8F0;margin:0 auto;margin-left:33px;transition:background .3s;}
+.wz-vert-connector.done{background:#10B981;}
+.wz-vert-body{flex:1;display:flex;flex-direction:column;}
+.wz-vert-content{flex:1;padding:28px;}
+.wz-vert-footer{padding:16px 28px;border-top:1px solid #E2E8F0;display:flex;justify-content:space-between;background:#FAFAFA;}
+/* ── DOT STEPPER ── */
+.wz-dots{display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.wz-dot{width:8px;height:8px;border-radius:50%;background:#E2E8F0;transition:all .2s;}
+.wz-dot.active{background:#6366F1;width:24px;border-radius:4px;}
+.wz-dot.done{background:#10B981;}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-header">
+    <div class="ds-sidebar-logo">
+      <div class="ds-sidebar-logo-icon">S</div>
+      <div class="ds-sidebar-logo-text">
+        <div class="ds-sidebar-logo-name">Syhrezz</div>
+        <div class="ds-sidebar-logo-version">v1.0</div>
+      </div>
+    </div>
+    <div class="ds-search-wrap">
+      <div class="ds-search-box">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/>
+        <span class="ds-search-kbd">&#8984;K</span>
+      </div>
+      <div id="ds-search-results"></div>
+    </div>
+  </div>
+  <nav class="ds-sidebar-nav" id="ds-nav-links"></nav>
+</aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Components</a><span>/</span><strong>Wizard</strong></nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main"><article class="ds-page">
+
+<div class="ds-page-header-full">
+  <div class="ds-status-bar"><span class="ds-status-badge stable">Stable</span><span class="ds-version-badge">v1.0.0</span><span class="ds-meta-badge type">Navigation</span></div>
+  <h1>Wizard</h1>
+</div>
+<p class="ds-page-lead">A Wizard guides users through a multi-step process with a clear progress indicator, step validation, and linear navigation. Use it for onboarding, checkout, setup flows, and any task too complex to fit on a single form.</p>
+
+<h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use">
+    <div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Wizard when</div>
+    <ul class="ds-when-list">
+      <li>A task requires 3 or more sequential steps</li>
+      <li>Each step depends on data from the previous one</li>
+      <li>You need to reduce cognitive load on long forms</li>
+      <li>Onboarding new users through a setup flow</li>
+      <li>Checkout or multi-step purchase flows</li>
+    </ul>
+  </div>
+  <div class="ds-when-card ds-when-avoid">
+    <div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Avoid Wizard when</div>
+    <ul class="ds-when-list">
+      <li>The task fits comfortably on one screen</li>
+      <li>Steps are optional or non-linear</li>
+      <li>Users need to jump back and forth freely</li>
+      <li>The process has only 2 steps — use a modal instead</li>
+    </ul>
+  </div>
+</div>
+
+<h2 id="default">Default Wizard</h2>
+<div class="ds-callout ds-callout-info" style="margin-bottom:16px">
+  <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+  <div class="ds-callout-content">A horizontal step header with numbered circles, connector lines, and a form body. Back/Next navigation with a summary review before submission.</div>
+</div>
+
+<div class="ds-demo-wrap">
+  <div class="ds-demo-toolbar"><span class="ds-demo-label">Interactive Demo</span></div>
+  <div class="ds-demo-canvas" style="padding:32px">
+    <div class="wz-wrap" id="wz1">
+      <!-- HEADER -->
+      <div class="wz-header">
+        <div class="wz-steps" id="wz1-steps">
+          <div class="wz-step">
+            <div class="wz-step-node">
+              <div class="wz-step-circle active" id="wz1-c1">1</div>
+              <div class="wz-step-label active" id="wz1-l1">Account</div>
+            </div>
+            <div class="wz-connector" id="wz1-conn1"></div>
+          </div>
+          <div class="wz-step">
+            <div class="wz-step-node">
+              <div class="wz-step-circle pending" id="wz1-c2">2</div>
+              <div class="wz-step-label" id="wz1-l2">Profile</div>
+            </div>
+            <div class="wz-connector" id="wz1-conn2"></div>
+          </div>
+          <div class="wz-step">
+            <div class="wz-step-node">
+              <div class="wz-step-circle pending" id="wz1-c3">3</div>
+              <div class="wz-step-label" id="wz1-l3">Review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- BODY -->
+      <div class="wz-body">
+        <!-- Step 1 -->
+        <div class="wz-panel active" id="wz1-p1">
+          <div class="wz-panel-title">Create your account</div>
+          <div class="wz-panel-desc">Start by entering your login credentials.</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input class="input" type="email" placeholder="you@example.com" id="wz1-email"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <input class="input" type="password" placeholder="Min. 8 characters" id="wz1-pass"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Plan</label>
+            <select class="input" id="wz1-plan">
+              <option value="">Select a plan...</option>
+              <option>Free</option>
+              <option>Pro — $12/mo</option>
+              <option>Team — $39/mo</option>
+            </select>
+          </div>
+        </div>
+        <!-- Step 2 -->
+        <div class="wz-panel" id="wz1-p2">
+          <div class="wz-panel-title">Set up your profile</div>
+          <div class="wz-panel-desc">Tell us a bit about yourself.</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input class="input" placeholder="Budi" id="wz1-fname"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input class="input" placeholder="Santoso" id="wz1-lname"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Role</label>
+            <select class="input" id="wz1-role">
+              <option value="">Select your role...</option>
+              <option>Designer</option>
+              <option>Frontend Developer</option>
+              <option>Fullstack Developer</option>
+              <option>Product Manager</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <!-- Step 3 — Review -->
+        <div class="wz-panel" id="wz1-p3">
+          <div class="wz-panel-title">Review your details</div>
+          <div class="wz-panel-desc">Check everything looks right before submitting.</div>
+          <div class="review-grid" id="wz1-review"></div>
+        </div>
+        <!-- Step 4 — Success -->
+        <div class="wz-panel" id="wz1-p4">
+          <div class="wz-success">
+            <div class="wz-success-icon">
+              <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#10B981"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div class="wz-success-title">Account Created!</div>
+            <div class="wz-success-desc">You are all set. Check your email for a confirmation link.</div>
+          </div>
+        </div>
+      </div>
+      <!-- FOOTER -->
+      <div class="wz-footer" id="wz1-footer">
+        <div class="wz-footer-left">
+          <button class="btn btn-ghost" id="wz1-back" onclick="wz1Go(-1)" disabled>&#8592; Back</button>
+          <span class="wz-progress-text" id="wz1-prog">Step 1 of 3</span>
+        </div>
+        <button class="btn btn-primary" id="wz1-next" onclick="wz1Go(1)">Next &#8594;</button>
+      </div>
+    </div>
+  </div>
+  <div class="ds-code-block">
+    <div class="ds-code-toolbar"><span class="ds-code-label">HTML</span><button class="ds-copy-btn" data-copy="wz-html">Copy</button></div>
+    <pre><code id="wz-html">&lt;div class="wz-wrap"&gt;
+  &lt;div class="wz-header"&gt;
+    &lt;div class="wz-steps"&gt;
+      &lt;div class="wz-step"&gt;
+        &lt;div class="wz-step-node"&gt;
+          &lt;div class="wz-step-circle active"&gt;1&lt;/div&gt;
+          &lt;div class="wz-step-label active"&gt;Account&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="wz-connector"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;!-- more steps... --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="wz-body"&gt;
+    &lt;div class="wz-panel active"&gt;...step content...&lt;/div&gt;
+    &lt;div class="wz-panel"&gt;...step content...&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="wz-footer"&gt;
+    &lt;button class="btn btn-ghost"&gt;Back&lt;/button&gt;
+    &lt;button class="btn btn-primary"&gt;Next&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+</div>
+
+<h2 id="vertical">Vertical Wizard</h2>
+<div class="ds-callout ds-callout-info" style="margin-bottom:16px">
+  <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+  <div class="ds-callout-content">A side-nav step list works well in wider layouts or settings/configuration flows where labels need more space.</div>
+</div>
+<div class="ds-demo-wrap">
+  <div class="ds-demo-toolbar"><span class="ds-demo-label">Interactive Demo</span></div>
+  <div class="ds-demo-canvas" style="padding:32px">
+    <div class="wz-vert" id="wz2">
+      <div class="wz-vert-nav" id="wz2-nav">
+        <div class="wz-vert-step" id="wz2-vs1">
+          <div class="wz-vert-circle active" id="wz2-vc1">1</div>
+          <div class="wz-vert-label active" id="wz2-vl1">Workspace</div>
+        </div>
+        <div class="wz-vert-connector" id="wz2-vconn1"></div>
+        <div class="wz-vert-step" id="wz2-vs2">
+          <div class="wz-vert-circle pending" id="wz2-vc2">2</div>
+          <div class="wz-vert-label" id="wz2-vl2">Team</div>
+        </div>
+        <div class="wz-vert-connector" id="wz2-vconn2"></div>
+        <div class="wz-vert-step" id="wz2-vs3">
+          <div class="wz-vert-circle pending" id="wz2-vc3">3</div>
+          <div class="wz-vert-label" id="wz2-vl3">Billing</div>
+        </div>
+        <div class="wz-vert-connector" id="wz2-vconn3"></div>
+        <div class="wz-vert-step" id="wz2-vs4">
+          <div class="wz-vert-circle pending" id="wz2-vc4">4</div>
+          <div class="wz-vert-label" id="wz2-vl4">Done</div>
+        </div>
+      </div>
+      <div class="wz-vert-body">
+        <div class="wz-vert-content">
+          <div class="wz-panel active" id="wz2-p1">
+            <div class="wz-panel-title">Name your workspace</div>
+            <div class="wz-panel-desc">This is how your team will identify the project.</div>
+            <div class="form-group">
+              <label class="form-label">Workspace Name</label>
+              <input class="input" placeholder="e.g. Acme Corp" id="wz2-wsname"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Workspace URL</label>
+              <input class="input" placeholder="acme-corp" id="wz2-wsurl"/>
+            </div>
+          </div>
+          <div class="wz-panel" id="wz2-p2">
+            <div class="wz-panel-title">Invite your team</div>
+            <div class="wz-panel-desc">Add team members by email. You can add more later.</div>
+            <div class="form-group">
+              <label class="form-label">Email addresses</label>
+              <input class="input" placeholder="colleague@example.com" id="wz2-emails"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Default Role</label>
+              <select class="input">
+                <option>Member</option>
+                <option>Admin</option>
+                <option>Viewer</option>
+              </select>
+            </div>
+          </div>
+          <div class="wz-panel" id="wz2-p3">
+            <div class="wz-panel-title">Choose a plan</div>
+            <div class="wz-panel-desc">All plans include a 14-day free trial.</div>
+            <div class="form-group">
+              <label class="form-label">Billing Plan</label>
+              <select class="input">
+                <option>Starter — Free</option>
+                <option>Growth — $49/mo</option>
+                <option>Enterprise — Custom</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Billing Cycle</label>
+              <select class="input">
+                <option>Monthly</option>
+                <option>Annually (save 20%)</option>
+              </select>
+            </div>
+          </div>
+          <div class="wz-panel" id="wz2-p4">
+            <div class="wz-success">
+              <div class="wz-success-icon">
+                <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#10B981"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <div class="wz-success-title">Workspace Ready!</div>
+              <div class="wz-success-desc">Your workspace has been created. Redirecting you now...</div>
+            </div>
+          </div>
+        </div>
+        <div class="wz-vert-footer">
+          <button class="btn btn-outline" id="wz2-back" onclick="wz2Go(-1)" disabled>&#8592; Back</button>
+          <button class="btn btn-primary" id="wz2-next" onclick="wz2Go(1)">Next &#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 id="dot">Dot Progress Wizard</h2>
+<div class="ds-callout ds-callout-info" style="margin-bottom:16px">
+  <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+  <div class="ds-callout-content">A minimal dot-style progress indicator — ideal for short flows like onboarding slides or simple setup dialogs.</div>
+</div>
+<div class="ds-demo-wrap">
+  <div class="ds-demo-toolbar"><span class="ds-demo-label">Interactive Demo</span></div>
+  <div class="ds-demo-canvas" style="padding:32px">
+    <div class="wz-wrap" id="wz3" style="max-width:480px;margin:0 auto">
+      <div class="wz-body">
+        <div class="wz-dots" id="wz3-dots">
+          <div class="wz-dot active"></div>
+          <div class="wz-dot"></div>
+          <div class="wz-dot"></div>
+        </div>
+        <div class="wz-panel active" id="wz3-p1">
+          <div class="wz-panel-title">Welcome to Syhrezz</div>
+          <div class="wz-panel-desc">A design system built for speed and consistency. Let us show you around in 3 quick steps.</div>
+        </div>
+        <div class="wz-panel" id="wz3-p2">
+          <div class="wz-panel-title">Plug-and-play tokens</div>
+          <div class="wz-panel-desc">Drop in a single CSS file and every color, spacing, radius, and shadow is ready to use across your entire app.</div>
+        </div>
+        <div class="wz-panel" id="wz3-p3">
+          <div class="wz-panel-title">Ship faster</div>
+          <div class="wz-panel-desc">30+ production-ready components with HTML and React snippets. Copy, paste, done.</div>
+        </div>
+      </div>
+      <div class="wz-footer">
+        <button class="btn btn-ghost" id="wz3-back" onclick="wz3Go(-1)" disabled>&#8592;</button>
+        <button class="btn btn-primary" id="wz3-next" onclick="wz3Go(1)">Get Started &#8594;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 id="anatomy">Anatomy</h2>
+<div class="ds-anatomy-wrap">
+  <div class="ds-anatomy-item"><span class="ds-anatomy-num">1</span><strong>Step circle</strong> — shows step number; changes to checkmark when done</div>
+  <div class="ds-anatomy-item"><span class="ds-anatomy-num">2</span><strong>Connector</strong> — line between steps; fills green as steps complete</div>
+  <div class="ds-anatomy-item"><span class="ds-anatomy-num">3</span><strong>Step label</strong> — short name for each step, positioned below the circle</div>
+  <div class="ds-anatomy-item"><span class="ds-anatomy-num">4</span><strong>Panel body</strong> — the active step content area</div>
+  <div class="ds-anatomy-item"><span class="ds-anatomy-num">5</span><strong>Footer</strong> — Back / Next navigation and optional progress text</div>
+</div>
+
+<h2 id="states">Step States</h2>
+<div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead><tr><th>State</th><th>Circle style</th><th>Label color</th><th>Connector</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ds-status-badge stable">pending</span></td><td>Grey fill, grey border</td><td>#94A3B8</td><td>Grey</td></tr>
+      <tr><td><span class="ds-status-badge beta">active</span></td><td>Indigo fill, indigo glow</td><td>#6366F1</td><td>Grey (leading), fills on completion</td></tr>
+      <tr><td><span class="ds-status-badge new">done</span></td><td>Green fill, checkmark icon</td><td>#10B981</td><td>Green</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2 id="props">Props / API</h2>
+<div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead><tr><th>Attribute</th><th>Values</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>data-step</code></td><td>number</td><td>1</td><td>Current active step (1-indexed)</td></tr>
+      <tr><td><code>data-total</code></td><td>number</td><td>—</td><td>Total number of steps</td></tr>
+      <tr><td><code>data-allow-skip</code></td><td>true / false</td><td>false</td><td>Allow clicking completed steps to jump back</td></tr>
+      <tr><td><code>.wz-step-circle</code> class</td><td>pending / active / done</td><td>pending</td><td>Visual state of each step node</td></tr>
+      <tr><td><code>.wz-connector</code> class</td><td>— / done</td><td>—</td><td>Add <code>done</code> to fill connector green</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2 id="accessibility">Accessibility</h2>
+<div class="ds-callout ds-callout-warning">
+  <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+  <div class="ds-callout-content">Add <code>aria-label="Step X of N: Label"</code> to each step circle. Wrap the step content in a <code>role="region"</code> with <code>aria-live="polite"</code> so screen readers announce step changes.</div>
+</div>
+
+<h2 id="best-practices">Best Practices</h2>
+<div class="ds-guidelines-grid">
+  <div class="ds-guideline-card ds-guideline-do">
+    <div class="ds-guideline-title">Do</div>
+    <ul class="ds-guideline-list">
+      <li>Keep step labels short (1–2 words)</li>
+      <li>Validate each step before allowing Next</li>
+      <li>Always offer a Back button from step 2 onward</li>
+      <li>Show a summary/review step before final submission</li>
+      <li>Preserve form data when navigating back</li>
+    </ul>
+  </div>
+  <div class="ds-guideline-card ds-guideline-dont">
+    <div class="ds-guideline-title">Don&apos;t</div>
+    <ul class="ds-guideline-list">
+      <li>Don&apos;t use more than 5–6 steps — split into separate pages</li>
+      <li>Don&apos;t lose user input on Back navigation</li>
+      <li>Don&apos;t hide the step count from users</li>
+      <li>Don&apos;t use a wizard for tasks that fit on one screen</li>
+      <li>Don&apos;t disable the Back button on the first step — hide it instead</li>
+    </ul>
+  </div>
+</div>
+
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog">
+  <div class="ds-changelog-entry">
+    <div class="ds-changelog-header">
+      <span class="ds-changelog-version">v1.0.0</span>
+      <span class="ds-changelog-date">July 2026</span>
+      <span class="ds-changelog-badge added">Added</span>
+    </div>
+    <div class="ds-changelog-body">
+      <ul>
+        <li>Initial release — horizontal, vertical, and dot-progress variants</li>
+        <li>Pending / active / done step states with animated transitions</li>
+        <li>Review step with dynamic data summary</li>
+        <li>Success state panel</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>
+// ── WIZARD 1 — Horizontal default ──
+var wz1Step = 1;
+var wz1Total = 3;
+function wz1Go(dir) {
+  var next = wz1Step + dir;
+  if (next < 1 || next > wz1Total + 1) return;
+  // Update old step circle
+  var c = document.getElementById('wz1-c' + wz1Step);
+  var l = document.getElementById('wz1-l' + wz1Step);
+  if (c && wz1Step <= wz1Total) {
+    c.className = 'wz-step-circle done';
+    c.innerHTML = '<svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>';
+    l.className = 'wz-step-label done';
+    // Fill connector
+    var conn = document.getElementById('wz1-conn' + wz1Step);
+    if (conn) conn.classList.add('done');
+  }
+  // Hide old panel
+  var oldP = document.getElementById('wz1-p' + wz1Step);
+  if (oldP) oldP.classList.remove('active');
+  wz1Step = next;
+  // Show new panel
+  var newP = document.getElementById('wz1-p' + wz1Step);
+  if (newP) newP.classList.add('active');
+  // Update new step circle
+  if (wz1Step <= wz1Total) {
+    var nc = document.getElementById('wz1-c' + wz1Step);
+    var nl = document.getElementById('wz1-l' + wz1Step);
+    if (nc) { nc.className = 'wz-step-circle active'; nc.textContent = wz1Step; }
+    if (nl) { nl.className = 'wz-step-label active'; }
+  }
+  // Populate review
+  if (wz1Step === 3) {
+    var r = document.getElementById('wz1-review');
+    r.innerHTML = [
+      ['Email', document.getElementById('wz1-email').value || '—'],
+      ['Plan', document.getElementById('wz1-plan').value || '—'],
+      ['First Name', document.getElementById('wz1-fname').value || '—'],
+      ['Last Name', document.getElementById('wz1-lname').value || '—'],
+      ['Role', document.getElementById('wz1-role').value || '—']
+    ].map(function(i){
+      return '<div class="review-item"><div class="review-item-label">'+i[0]+'</div><div class="review-item-value">'+i[1]+'</div></div>';
+    }).join('');
+  }
+  // Footer
+  var footer = document.getElementById('wz1-footer');
+  var backBtn = document.getElementById('wz1-back');
+  var nextBtn = document.getElementById('wz1-next');
+  var prog = document.getElementById('wz1-prog');
+  if (wz1Step > wz1Total) {
+    footer.style.display = 'none';
+  } else {
+    footer.style.display = '';
+    backBtn.disabled = wz1Step === 1;
+    prog.textContent = 'Step ' + wz1Step + ' of ' + wz1Total;
+    if (wz1Step === wz1Total) {
+      nextBtn.textContent = 'Submit';
+      nextBtn.className = 'btn btn-success';
+    } else {
+      nextBtn.innerHTML = 'Next &#8594;';
+      nextBtn.className = 'btn btn-primary';
+    }
+  }
+}
+
+// ── WIZARD 2 — Vertical ──
+var wz2Step = 1;
+var wz2Total = 4;
+function wz2Go(dir) {
+  var next = wz2Step + dir;
+  if (next < 1 || next > wz2Total) return;
+  // Mark old as done
+  var oc = document.getElementById('wz2-vc' + wz2Step);
+  var ol = document.getElementById('wz2-vl' + wz2Step);
+  if (oc) { oc.className = 'wz-vert-circle done'; oc.innerHTML = '<svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>'; }
+  if (ol) { ol.className = 'wz-vert-label done'; }
+  var conn = document.getElementById('wz2-vconn' + wz2Step);
+  if (conn) conn.classList.add('done');
+  // Hide old panel
+  document.getElementById('wz2-p' + wz2Step).classList.remove('active');
+  wz2Step = next;
+  document.getElementById('wz2-p' + wz2Step).classList.add('active');
+  // Activate new
+  var nc = document.getElementById('wz2-vc' + wz2Step);
+  var nl = document.getElementById('wz2-vl' + wz2Step);
+  if (nc) { nc.className = 'wz-vert-circle active'; nc.textContent = wz2Step; }
+  if (nl) { nl.className = 'wz-vert-label active'; }
+  // Buttons
+  var backBtn = document.getElementById('wz2-back');
+  var nextBtn = document.getElementById('wz2-next');
+  backBtn.disabled = wz2Step === 1;
+  if (wz2Step === wz2Total) {
+    nextBtn.style.display = 'none';
+  } else if (wz2Step === wz2Total - 1) {
+    nextBtn.textContent = 'Finish';
+    nextBtn.className = 'btn btn-success';
+  } else {
+    nextBtn.innerHTML = 'Next &#8594;';
+    nextBtn.className = 'btn btn-primary';
+  }
+}
+
+// ── WIZARD 3 — Dot progress ──
+var wz3Step = 1;
+var wz3Total = 3;
+function wz3Go(dir) {
+  var next = wz3Step + dir;
+  if (next < 1 || next > wz3Total) return;
+  document.getElementById('wz3-p' + wz3Step).classList.remove('active');
+  wz3Step = next;
+  document.getElementById('wz3-p' + wz3Step).classList.add('active');
+  // Update dots
+  var dots = document.querySelectorAll('#wz3-dots .wz-dot');
+  dots.forEach(function(d, i) {
+    d.className = 'wz-dot' + (i < wz3Step - 1 ? ' done' : i === wz3Step - 1 ? ' active' : '');
+  });
+  // Buttons
+  document.getElementById('wz3-back').disabled = wz3Step === 1;
+  var nextBtn = document.getElementById('wz3-next');
+  if (wz3Step === wz3Total) {
+    nextBtn.textContent = 'Finish';
+    nextBtn.className = 'btn btn-success';
+  } else {
+    nextBtn.innerHTML = 'Get Started &#8594;';
+    nextBtn.className = 'btn btn-primary';
+  }
+}
+</script>
+<script>window.DS_ACTIVE_PAGE = 'wizard';</script>
+<script src="../shared/ds-shell.js"></script>
+</body>
+</html>

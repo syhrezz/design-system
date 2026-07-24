@@ -81,6 +81,7 @@ const DS_NAV_DEF = [
       { label: 'Topbar',         href: 'components/topbar.html',        id: 'topbar-comp' },
       { label: 'Pagination',     href: 'components/pagination.html',    id: 'pagination' },
       { label: 'Empty State',    href: 'components/empty-state.html',   id: 'empty-state' },
+      { label: 'Wizard',         href: 'components/wizard.html',        id: 'wizard' },
     ]
   },
   {
