@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Textarea — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.form-group{margin-bottom:16px;}
+.form-label{display:block;font-size:12px;font-weight:700;color:#64748B;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;}
+.input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid #E2E8F0;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;outline:none;color:#0F172A;background:#fff;transition:border-color .2s,box-shadow .2s;}
+.input:focus{border-color:#3B5BDB;box-shadow:0 0 0 3px rgba(59,91,219,.1);}
+.input::placeholder{color:#94A3B8;}
+.input:disabled{background:#F8FAFC;color:#94A3B8;cursor:not-allowed;}
+.input-error{border-color:#F05252!important;}
+.input-error:focus{box-shadow:0 0 0 3px rgba(240,82,82,.1)!important;}
+.form-hint{font-size:11px;color:#94A3B8;margin-top:4px;}
+.form-error-msg{font-size:11px;color:#F05252;margin-top:4px;font-weight:600;}
+.char-count{font-size:10px;color:#94A3B8;text-align:right;margin-top:3px;}
+.char-count.over{color:#F05252;font-weight:700;}
+textarea.input{resize:vertical;min-height:80px;line-height:1.6;}
+</style>
+</head><body><div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">N</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar"><nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Components</a><span>/</span><strong>Textarea</strong></nav><div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div></header>
+<div class="ds-main"><article class="ds-page">
+  <div class="ds-page-header"><div class="ds-page-meta"><span class="ds-meta-badge stable">Stable</span><span class="ds-meta-badge type">Form</span></div>
+    <h1>Textarea</h1>
+    <p class="ds-page-lead">Multi-line text input for longer content like notes, descriptions, and messages. Uses the same <code>.input</code> class as all other form fields — consistent styling, focus ring, and validation states.</p>
+  </div>
+  <h2 id="overview">Overview</h2>
+  <p>Textarea shares the exact same base style as <code>&lt;input&gt;</code> and <code>&lt;select&gt;</code> — the <code>.input</code> class. The only additions are <code>resize:vertical</code> (allow height resize, never width) and <code>min-height:80px</code>. Always wrap in <code>.form-group</code> with a <code>.form-label</code>.</p>
+  <h2 id="variants">Variants</h2>
+  <div class="ds-example">
+    <div class="ds-example-toolbar"><span class="ds-example-title">All States</span><button class="ds-show-source-btn">Show source</button></div>
+    <div class="ds-preview" style="max-width:480px">
+      <div class="form-group">
+        <label class="form-label">Notes</label>
+        <textarea class="input" rows="3" placeholder="Add notes about this customer..."></textarea>
+        <div class="form-hint">Optional. Max 500 characters.</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description <span style="color:#F05252">*</span></label>
+        <textarea class="input" rows="4" placeholder="Describe the issue..."></textarea>
+        <div style="display:flex;justify-content:space-between;margin-top:3px">
+          <div class="form-hint">Required field.</div>
+          <div class="char-count" id="charCount">0 / 300</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Error State</label>
+        <textarea class="input input-error" rows="2">This content is too short.</textarea>
+        <div class="form-error-msg">Description must be at least 20 characters.</div>
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">Disabled</label>
+        <textarea class="input" rows="2" disabled>Read only content that cannot be edited.</textarea>
+      </div>
+    </div>
+    <div class="ds-code-block" style="display:none"><button class="ds-copy-btn">Copy</button><pre><code><span class="cm">&lt;!-- Default textarea --&gt;</span>
+<span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"form-group"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;label</span> <span class="prop">class</span>=<span class="str">"form-label"</span><span class="kw">&gt;</span>Notes<span class="kw">&lt;/label&gt;</span>
+  <span class="kw">&lt;textarea</span> <span class="prop">class</span>=<span class="str">"input"</span> <span class="prop">rows</span>=<span class="str">"3"</span> <span class="prop">placeholder</span>=<span class="str">"Add notes..."</span><span class="kw">&gt;&lt;/textarea&gt;</span>
+  <span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"form-hint"</span><span class="kw">&gt;</span>Optional.<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/div&gt;</span>
+
+<span class="cm">&lt;!-- Error state --&gt;</span>
+<span class="kw">&lt;textarea</span> <span class="prop">class</span>=<span class="str">"input input-error"</span> <span class="prop">rows</span>=<span class="str">"3"</span><span class="kw">&gt;&lt;/textarea&gt;</span>
+<span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"form-error-msg"</span><span class="kw">&gt;</span>Error message here<span class="kw">&lt;/div&gt;</span></code></pre></div>
+  </div>
+  <h2 id="tokens">Token Reference</h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Property</th><th>Value</th><th>Notes</th></tr></thead><tbody>
+    <tr><td>Base class</td><td class="mono">.input</td><td>Identical to input/select — same padding, radius, border, focus ring</td></tr>
+    <tr><td>Min height</td><td class="default">80px</td><td>Never let textarea collapse smaller than this</td></tr>
+    <tr><td>Resize</td><td class="default">vertical only</td><td>Never allow horizontal resize — breaks layout</td></tr>
+    <tr><td>line-height</td><td class="default">1.6</td><td>More readable for multi-line content</td></tr>
+    <tr><td>rows attribute</td><td class="default">3–5</td><td>Use rows="3" for notes, rows="5" for descriptions</td></tr>
+  </tbody></table></div>
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Textarea uses the exact same <code>.input</code> class as text inputs — no separate class needed. Add <code>resize:vertical</code> and <code>min-height:80px</code> via CSS on the <code>textarea.input</code> selector. Always set a <code>rows</code> attribute. For character counters, use a JS <code>input</code> event listener that updates a <code>.char-count</code> div. Never use <code>resize:none</code> — always allow vertical resize.</div>
+  </div>
+  <h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Textarea when</div><ul class="ds-when-list"><li>Multi-line text content (notes, descriptions, messages)</li><li>Content expected to exceed 100 characters</li><li>Free-form text that benefits from vertical space</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Textarea when</div><ul class="ds-when-list"><li>Single-line data — use Input instead</li><li>Rich text with formatting needed — use a rich text editor</li><li>Code input — use a code editor component</li></ul></div>
+</div>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">rows</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">3</span></td><td class="ds-prop-desc">Initial visible row count. Use 3 for notes, 5 for descriptions. min-height:80px enforced.</td></tr>
+  <tr><td><span class="ds-prop-name">maxLength</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Character limit. When set, show .input-char-count below. Turns red (.over class) when exceeded.</td></tr>
+  <tr><td><span class="ds-prop-name">resize</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">'vertical'</span></td><td class="ds-prop-desc">CSS resize property. Always vertical — never none or both.</td></tr>
+</tbody></table>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why allow vertical resize but not horizontal?</div><div class="ds-decision-a">Vertical resize lets users adjust height to see more of their content — a common and useful interaction. Horizontal resize would break the layout by allowing the textarea to overflow its container or misalign with other form fields. Horizontal resize is disabled in all cases.</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>Shares .input class with input and select for visual consistency</li><li>Character counter support, vertical-only resize</li></ul></div></div></div><div class="ds-states-grid"><div class="ds-state-cell"><div class="ds-state-cell-preview"><textarea class="input" rows="2" style="width:180px;resize:none" placeholder="Add notes..."></textarea></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Default</div><div class="ds-state-cell-desc">Same as input, resize:vertical</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview"><textarea class="input" rows="2" style="width:180px;resize:none;border-color:#3B5BDB;box-shadow:0 0 0 3px rgba(59,91,219,.1)" placeholder="Focused..."></textarea></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Focus</div><div class="ds-state-cell-desc">Same focus ring as input</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview"><textarea class="input input-error" rows="2" style="width:180px;resize:none">Too short.</textarea><div class="form-error-msg" style="font-size:10px"><svg style="width:10px;height:10px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>Min 20 chars</div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Error</div><div class="ds-state-cell-desc">border:#F05252 + error msg</div></div></div></div><h2 id="accessibility">Accessibility</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody><tr><td>label</td><td>Always include .form-label linked via for/id. Textarea must have an associated label.</td></tr><tr><td>aria-describedby</td><td>Link hint text: aria-describedby="hintId". Link error: aria-describedby="errorId" with aria-invalid="true".</td></tr><tr><td>Resize</td><td>resize:vertical is user-controlled and acceptable for accessibility. Never use resize:none — it restricts users who need larger text area.</td></tr></tbody></table></div><h2 id="composition">Composition</h2><div class="ds-composition-grid"><div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Inside .form-group with .form-label</div><div class="ds-composition-item">With character counter (.input-char-count)</div><div class="ds-composition-item">Modal body for notes/description fields</div></div></div><div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">resize:none — always allow vertical resize</div><div class="ds-composition-item">Without min-height:80px — always enforce minimum</div><div class="ds-composition-item">For short single-line data — use Input instead</div></div></div></div><h2 id="best-practices">Best Practices</h2><div class="ds-bp-grid"><div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Set appropriate rows attribute — rows="3" for brief notes, rows="5" for detailed descriptions.</div><div class="ds-bp-reason">Initial height sets user expectation about expected content length.</div></div></div><div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Use rows="1" with resize:none to make textarea look like an input.</div><div class="ds-bp-reason">If you want an input, use an input — misusing textarea creates inconsistent behavior.</div></div></div></div><h2 id="related">Related Components</h2><div class="ds-related-grid"><a href="input.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></div><div class="ds-related-card-name">Input</div><div class="ds-related-card-desc">Single-line text</div></a><a href="select.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div><div class="ds-related-card-name">Select</div><div class="ds-related-card-desc">Predefined options</div></a></div><h2 id="anatomy">Anatomy</h2><div class="ds-anatomy-parts"><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Label</div><div class="ds-anatomy-part-desc">label.form-label. UPPERCASE 12px fw-700. Identical to input label.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Textarea Element</div><div class="ds-anatomy-part-desc">textarea.input. Same border, radius, focus ring as input. resize:vertical, min-height:80px, line-height:1.6.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Character Counter (optional)</div><div class="ds-anatomy-part-desc">div.input-char-count. 10px color:#94A3B8, text-align:right. Adds class .over when maxLength exceeded.</div></div></div><h2 id="content">Content Rules</h2><div class="ds-content-rules"><div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good placeholder</div><div class="ds-content-example">Add notes about this customer...</div><div class="ds-content-reason">Contextual. Hints at expected content type.</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad placeholder</div><div class="ds-content-example">Notes</div><div class="ds-content-reason">Duplicates the label. Placeholder should hint at content format, not repeat the field name.</div></div></div></div>
+
+  <h2 id="states">States</h2>
+<div class="ds-states-grid">
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><textarea class="input" rows="2" style="width:180px;resize:none" placeholder="Add notes..."></textarea></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Default</div><div class="ds-state-cell-desc">border:#E2E8F0, bg:#fff</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><textarea class="input" rows="2" style="width:180px;resize:none;border-color:#3B5BDB;box-shadow:0 0 0 3px rgba(59,91,219,.1)"></textarea></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Focus</div><div class="ds-state-cell-desc">border:#3B5BDB + 3px ring</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><textarea class="input input-error" rows="2" style="width:180px;resize:none">Too short.</textarea><div class="form-error-msg" style="font-size:10px"><svg style="width:10px;height:10px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>Min 20 chars</div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Error</div><div class="ds-state-cell-desc">border:#F05252 + error msg</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><textarea class="input" rows="2" style="width:180px;resize:none" disabled>Read only content.</textarea></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Disabled</div><div class="ds-state-cell-desc">bg:#F8FAFC, cursor:not-allowed</div></div></div>
+</div>
+<h2 id="behavior">Behavior</h2>
+<table class="ds-behavior-table"><thead><tr><th>Trigger</th><th>Behavior</th></tr></thead><tbody>
+  <tr><td><span class="ds-behavior-trigger">Focus</span></td><td>border-color:#3B5BDB + box-shadow: 0 0 0 3px rgba(59,91,219,.1). Same focus ring as input.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Type</span></td><td>Updates value. Character counter updates if maxLength set. No validation on keystroke — validate on blur.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Blur</span></td><td>Triggers validation if field was touched. Error state applied if invalid. Focus ring removed.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Vertical resize</span></td><td>User can drag bottom-right handle to increase height. Minimum height: 80px. Horizontal resize is disabled (resize:vertical only).</td></tr>
+  <tr><td><span class="ds-behavior-trigger">maxLength exceeded</span></td><td>.input-char-count div turns red (.over class). Input continues to accept characters — the character count is a warning, not a hard stop (unless maxLength HTML attribute is also set).</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Disabled</span></td><td>bg:#F8FAFC, cursor:not-allowed, no editing, no resize. opacity:.75.</td></tr>
+</tbody></table><div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 'textarea';</script>
+<script src="../shared/ds-shell.js"></script>
+<script>
+const ta = document.querySelector('textarea:nth-of-type(2)');
+const cc = document.getElementById('charCount');
+if(ta && cc){ta.addEventListener('input',()=>{const l=ta.value.length;cc.textContent=l+' / 300';cc.classList.toggle('over',l>300);});}
+</script>
+</body></html>

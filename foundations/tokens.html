@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Design Tokens — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-header">
+    <div class="ds-sidebar-logo">
+      <div class="ds-sidebar-logo-icon">N</div>
+      <div class="ds-sidebar-logo-text">
+        <div class="ds-sidebar-logo-name">Syhrezz</div>
+        <div class="ds-sidebar-logo-version">v1.0</div>
+      </div>
+    </div>
+    <div class="ds-search-wrap">
+      <div class="ds-search-box">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/>
+        <span class="ds-search-kbd">&#8984;K</span>
+      </div>
+      <div id="ds-search-results"></div>
+    </div>
+  </div>
+  <nav class="ds-sidebar-nav" id="ds-nav-links"></nav>
+</aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb">
+    <a href="../index.html">Syhrezz</a><span>/</span>
+    <a href="#">Foundations</a><span>/</span>
+    <strong>Design Tokens</strong>
+  </nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Foundation</span></div>
+</header>
+<div class="ds-main">
+<article class="ds-page">
+  <div class="ds-page-header">
+    <div class="ds-page-meta"><span class="ds-meta-badge stable">Stable</span></div>
+    <h1>Design Tokens</h1>
+    <p class="ds-page-lead">Design tokens are the single source of truth for all visual values in Syhrezz. Every color, size, spacing, shadow, radius, and transition is defined as a CSS custom property in <code>ds-tokens.css</code>. Never hardcode values in components.</p>
+  </div>
+
+  <div class="ds-callout ds-callout-info">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <div class="ds-callout-content"><strong>Import once:</strong> Add <code>&lt;link rel="stylesheet" href="path/to/ds-tokens.css"/&gt;</code> to your page head. All tokens are available globally via CSS custom properties (<code>var(--token-name)</code>).</div>
+  </div>
+
+  <h2 id="color-tokens">Color Tokens</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">--primary</td><td><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#3B5BDB;display:inline-block"></span><span class="mono">#3B5BDB</span></span></td><td>Main brand blue — links, focus rings</td></tr>
+        <tr><td class="mono">--primary-light</td><td><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#EEF2FF;border:1px solid #E2E8F0;display:inline-block"></span><span class="mono">#EEF2FF</span></span></td><td>Tinted surfaces, badge backgrounds</td></tr>
+        <tr><td class="mono">--accent-director</td><td><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#6366F1;display:inline-block"></span><span class="mono">#6366F1</span></span></td><td>Accent role accent color</td></tr>
+        <tr><td class="mono">--success</td><td><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#0E9F6E;display:inline-block"></span><span class="mono">#0E9F6E</span></span></td><td>Positive states, icon strokes</td></tr>
+        <tr><td class="mono">--warning</td><td><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#E3A008;display:inline-block"></span><span class="mono">#E3A008</span></span></td><td>Warnings, caution states</td></tr>
+        <tr><td class="mono">--danger</td><td><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#F05252;display:inline-block"></span><span class="mono">#F05252</span></span></td><td>Errors, destructive actions</td></tr>
+        <tr><td class="mono">--surface</td><td><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#F8FAFC;border:1px solid #E2E8F0;display:inline-block"></span><span class="mono">#F8FAFC</span></span></td><td>Page background</td></tr>
+        <tr><td class="mono">--card</td><td><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#fff;border:1px solid #E2E8F0;display:inline-block"></span><span class="mono">#FFFFFF</span></span></td><td>Card/panel background</td></tr>
+        <tr><td class="mono">--border</td><td><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#E2E8F0;display:inline-block"></span><span class="mono">#E2E8F0</span></span></td><td>Default borders</td></tr>
+        <tr><td class="mono">--text-primary</td><td><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#0F172A;display:inline-block"></span><span class="mono">#0F172A</span></span></td><td>Headings, primary content</td></tr>
+        <tr><td class="mono">--text-secondary</td><td><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#64748B;display:inline-block"></span><span class="mono">#64748B</span></span></td><td>Sub-labels, secondary content</td></tr>
+        <tr><td class="mono">--text-muted</td><td><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#94A3B8;display:inline-block"></span><span class="mono">#94A3B8</span></span></td><td>Placeholders, disabled, hints</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="spacing-tokens">Spacing Tokens</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Common Usage</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">--sp-1</td><td class="default">2px</td><td>Tight gaps, badge padding-y</td></tr>
+        <tr><td class="mono">--sp-2</td><td class="default">4px</td><td>Nav item margin-bottom, dot indicators</td></tr>
+        <tr><td class="mono">--sp-4</td><td class="default">8px</td><td>btn-sm padding, badge padding, small gap</td></tr>
+        <tr><td class="mono">--sp-5</td><td class="default">10px</td><td>Nav item padding, compact card padding</td></tr>
+        <tr><td class="mono">--sp-6</td><td class="default">12px</td><td>Nav item gap, sidebar padding, button gap</td></tr>
+        <tr><td class="mono">--sp-8</td><td class="default">16px</td><td>Modal header padding-y, grid gaps</td></tr>
+        <tr><td class="mono">--sp-10</td><td class="default">20px</td><td>Card padding (sm), stat card padding</td></tr>
+        <tr><td class="mono">--sp-12</td><td class="default">24px</td><td>Card padding (default), modal body, logo area</td></tr>
+        <tr><td class="mono">--sp-14</td><td class="default">28px</td><td>Page header margin-bottom</td></tr>
+        <tr><td class="mono">--sp-16</td><td class="default">32px</td><td>Hero banner padding-x, main content padding</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="radius-tokens">Border Radius Tokens</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">--r-xs</td><td class="default">6px</td><td>Tiny elements, nav active bar</td></tr>
+        <tr><td class="mono">--r-sm</td><td class="default">8px</td><td>btn-sm, small inputs, dropdown items</td></tr>
+        <tr><td class="mono">--r-md</td><td class="default">10px</td><td>Nav items, inputs, buttons (Dark), dropdowns</td></tr>
+        <tr><td class="mono">--r-lg</td><td class="default">12px</td><td>Nav items (Accent), logo icon, modals</td></tr>
+        <tr><td class="mono">--r-xl</td><td class="default">14px</td><td>Stat cards, table containers</td></tr>
+        <tr><td class="mono">--r-2xl</td><td class="default">16px</td><td>Modals, sales cards, KPI cards</td></tr>
+        <tr><td class="mono">--r-3xl</td><td class="default">18px</td><td>Hero banner</td></tr>
+        <tr><td class="mono">--r-4xl</td><td class="default">20px</td><td>Standard cards (default)</td></tr>
+        <tr><td class="mono">--r-full</td><td class="default">999px</td><td>Badges, pills, avatars, nav-badge</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="shadow-tokens">Shadow Tokens</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">--shadow-xs</td><td class="default">0 1px 3px rgba(0,0,0,0.06)</td><td>Subtle lift, table wrap</td></tr>
+        <tr><td class="mono">--shadow-sm</td><td class="default">0 4px 6px rgba(0,0,0,0.02)</td><td>Card default state</td></tr>
+        <tr><td class="mono">--shadow-md</td><td class="default">0 4px 16px rgba(37,99,235,0.06)</td><td>Sales/manager cards</td></tr>
+        <tr><td class="mono">--shadow-lg</td><td class="default">0 12px 30px rgba(0,0,0,0.06)</td><td>Card hover state</td></tr>
+        <tr><td class="mono">--shadow-xl</td><td class="default">0 12px 40px rgba(67,56,202,0.35)</td><td>Hero banner, director cards</td></tr>
+        <tr><td class="mono">--shadow-btn-primary</td><td class="default">0 4px 14px rgba(99,102,241,0.3)</td><td>Primary button default</td></tr>
+        <tr><td class="mono">--shadow-btn-hover</td><td class="default">0 6px 20px rgba(99,102,241,0.4)</td><td>Primary button hover</td></tr>
+        <tr><td class="mono">--shadow-modal</td><td class="default">0 20px 60px rgba(0,0,0,0.2)</td><td>Modal dialog</td></tr>
+        <tr><td class="mono">--shadow-toast</td><td class="default">0 8px 24px rgba(0,0,0,0.1)</td><td>Toast notifications</td></tr>
+        <tr><td class="mono">--shadow-sidebar</td><td class="default">10px 0 30px rgba(0,0,0,0.1)</td><td>Sidebar right edge</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="motion-tokens">Motion Tokens</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">--transition-fast</td><td class="default">all 0.15s ease</td><td>Row hover, feed item, tooltip</td></tr>
+        <tr><td class="mono">--transition-base</td><td class="default">all 0.2s ease</td><td>Buttons, badges, nav items (Dark)</td></tr>
+        <tr><td class="mono">--transition-smooth</td><td class="default">all 0.2s cubic-bezier(0.4,0,0.2,1)</td><td>Nav items (Accent), card hover, button hover</td></tr>
+        <tr><td class="mono">--transition-sidebar</td><td class="default">all 0.35s cubic-bezier(0.4,0,0.2,1)</td><td>Sidebar collapse/expand</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="z-index-tokens">Z-Index Tokens</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Element</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">--z-topbar</td><td class="default">100</td><td>Top navigation bar</td></tr>
+        <tr><td class="mono">--z-sidebar</td><td class="default">1000</td><td>Fixed sidebar</td></tr>
+        <tr><td class="mono">--z-modal</td><td class="default">200</td><td>Modal overlay</td></tr>
+        <tr><td class="mono">--z-dropdown</td><td class="default">300</td><td>Dropdown menus</td></tr>
+        <tr><td class="mono">--z-tooltip</td><td class="default">400</td><td>Tooltips</td></tr>
+        <tr><td class="mono">--z-toast</td><td class="default">9999</td><td>Toast notifications (always on top)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="complete-file">Complete Token File</h2>
+  <p>All tokens are defined in <code>shared/ds-tokens.css</code>. Import this file before any component styles.</p>
+  <div class="ds-code-block">
+    <button class="ds-copy-btn">Copy</button>
+    <pre><code><span class="cm">/* In your HTML head */</span>
+<span class="kw">&lt;link</span> <span class="prop">rel</span>=<span class="str">"stylesheet"</span> <span class="prop">href</span>=<span class="str">"path/to/ds-tokens.css"</span><span class="kw">/&gt;</span>
+
+<span class="cm">/* In your CSS — use tokens everywhere */</span>
+<span class="cls">.my-component</span> {
+  <span class="prop">background</span>: <span class="fn">var</span>(<span class="str">--card</span>);
+  <span class="prop">border</span>: <span class="num">1px</span> solid <span class="fn">var</span>(<span class="str">--border</span>);
+  <span class="prop">border-radius</span>: <span class="fn">var</span>(<span class="str">--r-4xl</span>);
+  <span class="prop">padding</span>: <span class="fn">var</span>(<span class="str">--sp-12</span>);
+  <span class="prop">box-shadow</span>: <span class="fn">var</span>(<span class="str">--shadow-sm</span>);
+  <span class="prop">transition</span>: <span class="fn">var</span>(<span class="str">--transition-smooth</span>);
+  <span class="prop">font-family</span>: <span class="fn">var</span>(<span class="str">--font-primary</span>);
+  <span class="prop">color</span>: <span class="fn">var</span>(<span class="str">--text-primary</span>);
+}</code></pre>
+  </div>
+
+  <div id="ds-prev-next"></div>
+</article>
+<aside class="ds-toc" id="ds-toc"></aside>
+</div>
+</div>
+<script>window.DS_ACTIVE_PAGE = 'tokens';</script>
+<script src="../shared/ds-shell.js"></script>
+</body>
+</html>

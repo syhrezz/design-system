@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Checkbox — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.check-group{display:flex;flex-direction:column;gap:10px;}
+.check-item{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;}
+.check-item input[type=checkbox]{width:16px;height:16px;border-radius:4px;accent-color:#6366F1;cursor:pointer;flex-shrink:0;}
+.check-label{font-size:13px;font-weight:500;color:#0F172A;font-family:'Plus Jakarta Sans',sans-serif;}
+.check-label-sub{font-size:11px;color:#94A3B8;margin-top:1px;}
+.check-item.disabled{opacity:.5;cursor:not-allowed;}
+.check-item.disabled input{cursor:not-allowed;}
+.form-group{margin-bottom:20px;}
+.form-label{display:block;font-size:12px;font-weight:700;color:#64748B;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;}
+</style>
+</head><body><div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">N</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar"><nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Components</a><span>/</span><strong>Checkbox</strong></nav><div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div></header>
+<div class="ds-main"><article class="ds-page">
+  <div class="ds-page-header"><div class="ds-page-meta"><span class="ds-meta-badge stable">Stable</span><span class="ds-meta-badge type">Form</span></div>
+    <h1>Checkbox</h1>
+    <p class="ds-page-lead">Checkboxes allow users to select one or more options from a set. Syhrezz uses the native HTML checkbox styled with <code>accent-color: #6366F1</code> for consistent cross-browser appearance.</p>
+  </div>
+  <h2 id="overview">Overview</h2>
+  <p>Checkboxes use the native <code>&lt;input type="checkbox"&gt;</code> element. The accent color is set to the director accent <code>#6366F1</code> globally. In tables, checkboxes use <code>accent-color: #6366F1</code> for row selection. Always wrap label text in a <code>&lt;label&gt;</code> element linked to the input for proper click-target size.</p>
+  <h2 id="variants">Variants</h2>
+  <div class="ds-example">
+    <div class="ds-example-toolbar"><span class="ds-example-title">All States</span><button class="ds-show-source-btn">Show source</button></div>
+    <div class="ds-preview">
+      <div class="form-group">
+        <div class="form-label">Permissions</div>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" checked/><div><div class="check-label">View Reports</div><div class="check-label-sub">Can view all team memberorts</div></div></label>
+          <label class="check-item"><input type="checkbox"/><div><div class="check-label">Edit Users</div><div class="check-label-sub">Can add and modify user accounts</div></div></label>
+          <label class="check-item"><input type="checkbox" checked/><div><div class="check-label">Export Data</div><div class="check-label-sub">Can export data to CSV/Excel</div></div></label>
+          <label class="check-item disabled"><input type="checkbox" disabled/><div><div class="check-label">Delete Records</div><div class="check-label-sub">Restricted — contact admin</div></div></label>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <div class="form-label">Table Row Selection</div>
+        <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid #F1F5F9;background:#fff">
+            <input type="checkbox" style="width:16px;height:16px;accent-color:#6366F1;cursor:pointer"/>
+            <span style="font-size:12px;font-weight:600;color:#0F172A">Select all rows</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid #F1F5F9;background:#EEF2FF">
+            <input type="checkbox" checked style="width:16px;height:16px;accent-color:#6366F1;cursor:pointer"/>
+            <span style="font-size:12px;color:#0F172A">Budi Santoso — PT Maju Jaya</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px">
+            <input type="checkbox" style="width:16px;height:16px;accent-color:#6366F1;cursor:pointer"/>
+            <span style="font-size:12px;color:#0F172A">Ani Wijaya — CV Sukses Makmur</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code-block" style="display:none"><button class="ds-copy-btn">Copy</button><pre><code><span class="cm">&lt;!-- Standard checkbox with label --&gt;</span>
+<span class="kw">&lt;label</span> <span class="prop">class</span>=<span class="str">"check-item"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;input</span> <span class="prop">type</span>=<span class="str">"checkbox"</span><span class="kw">/&gt;</span>
+  <span class="kw">&lt;div&gt;</span>
+    <span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"check-label"</span><span class="kw">&gt;</span>Option Label<span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"check-label-sub"</span><span class="kw">&gt;</span>Description<span class="kw">&lt;/div&gt;</span>
+  <span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/label&gt;</span>
+
+<span class="cm">&lt;!-- Table row checkbox --&gt;</span>
+<span class="kw">&lt;input</span> <span class="prop">type</span>=<span class="str">"checkbox"</span> <span class="prop">style</span>=<span class="str">"width:16px;height:16px;accent-color:#6366F1;cursor:pointer"</span><span class="kw">/&gt;</span></code></pre></div>
+  </div>
+  <h2 id="tokens">Token Reference</h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Property</th><th>Value</th><th>Notes</th></tr></thead><tbody>
+    <tr><td>Size</td><td class="default">16x16px</td><td>width:16px; height:16px always</td></tr>
+    <tr><td>Border radius</td><td class="default">4px</td><td>Native — browser renders</td></tr>
+    <tr><td>Accent color</td><td class="default">#6366F1</td><td>accent-color CSS property</td></tr>
+    <tr><td>Cursor</td><td class="default">pointer</td><td>Always — indicates interactivity</td></tr>
+    <tr><td>Gap (icon to label)</td><td class="default">10px</td><td>flex gap between checkbox and text</td></tr>
+    <tr><td>Label font</td><td class="default">13px fw-500</td><td>check-label class</td></tr>
+    <tr><td>Sub-label font</td><td class="default">11px #94A3B8</td><td>check-label-sub class</td></tr>
+    <tr><td>Disabled opacity</td><td class="default">0.5</td><td>check-item.disabled</td></tr>
+  </tbody></table></div>
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Always use native <code>&lt;input type="checkbox"&gt;</code> — never a custom div-based checkbox. Set <code>accent-color:#6366F1</code> for the brand color. Always wrap in a <code>&lt;label&gt;</code> element so the entire row is clickable. In tables, checkboxes are 16x16px with no label wrapping — the row itself is the click target. Selected table rows get <code>background:#EEF2FF</code>.</div>
+  </div>
+  <h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Checkbox when</div><ul class="ds-when-list"><li>Selecting one or more items from a set</li><li>Binary opt-in preferences (agree to terms)</li><li>Table row selection</li><li>Permission/feature toggles in settings</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Checkbox when</div><ul class="ds-when-list"><li>Only one option can be selected — use radio buttons</li><li>Immediate action on toggle — use a toggle switch</li><li>Filtering data — use pill tabs or a select</li></ul></div>
+</div>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">checked</span></td><td><span class="ds-prop-type">boolean</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">false</span></td><td class="ds-prop-desc">Checked state.</td></tr>
+  <tr><td><span class="ds-prop-name">indeterminate</span></td><td><span class="ds-prop-type">boolean</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">false</span></td><td class="ds-prop-desc">Partial selection state. Set via JavaScript: el.indeterminate=true. Used for "select all" header when some rows are selected.</td></tr>
+  <tr><td><span class="ds-prop-name">disabled</span></td><td><span class="ds-prop-type">boolean</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">false</span></td><td class="ds-prop-desc">Disabled state. opacity:.5, cursor:not-allowed.</td></tr>
+  <tr><td><span class="ds-prop-name">label</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Label text wrapped in &lt;label&gt; element for full-row click target. Include .check-label and optional .check-label-sub.</td></tr>
+</tbody></table>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why native checkbox with accent-color instead of a custom component?</div><div class="ds-decision-a">Native checkboxes handle indeterminate state, keyboard interactions, form submission, and screen reader announcements without any custom code. The CSS accent-color property applies the brand color (#6366F1) to native checkboxes in all modern browsers, making custom components unnecessary for this use case.</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>Native checkbox with accent-color:#6366F1</li><li>Indeterminate state for table select-all pattern</li><li>Label + sub-label composition pattern</li></ul></div></div></div><div class="ds-states-grid"><div class="ds-state-cell"><div class="ds-state-cell-preview"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" style="width:16px;height:16px;accent-color:#6366F1"/><span style="font-size:12px;color:#0F172A">Unchecked</span></label></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Unchecked</div><div class="ds-state-cell-desc">Default empty state</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" checked style="width:16px;height:16px;accent-color:#6366F1"/><span style="font-size:12px;color:#0F172A">Checked</span></label></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Checked</div><div class="ds-state-cell-desc">accent-color:#6366F1</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview"><label style="display:flex;align-items:center;gap:8px;cursor:not-allowed;opacity:.5"><input type="checkbox" disabled style="width:16px;height:16px;accent-color:#6366F1"/><span style="font-size:12px;color:#0F172A">Disabled</span></label></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Disabled</div><div class="ds-state-cell-desc">opacity:.5, cursor:not-allowed</div></div></div></div><h2 id="accessibility">Accessibility</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody><tr><td>label element</td><td>Always wrap in &lt;label&gt; to make entire row clickable and screen-reader accessible.</td></tr><tr><td>Keyboard</td><td>Tab focuses checkbox. Space toggles. Native behavior — no JS needed.</td></tr><tr><td>Indeterminate</td><td>Set via JS: el.indeterminate=true. Cannot be set via HTML attribute alone.</td></tr><tr><td>Group label</td><td>Wrap checkbox groups in &lt;fieldset&gt; with &lt;legend&gt; for screen reader context.</td></tr></tbody></table></div><h2 id="composition">Composition</h2><div class="ds-composition-grid"><div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Permission/feature lists with label + sub-label</div><div class="ds-composition-item">Table row selection (header + row checkboxes)</div><div class="ds-composition-item">Settings toggles for boolean preferences</div></div></div><div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">Without a &lt;label&gt; element wrapper</div><div class="ds-composition-item">For single mutually exclusive options — use radio</div><div class="ds-composition-item">For immediate-action toggles — use a switch component</div></div></div></div><h2 id="best-practices">Best Practices</h2><div class="ds-bp-grid"><div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Always wrap checkbox + label text in a &lt;label&gt; element so the entire row is clickable.</div><div class="ds-bp-reason">Small checkboxes are hard to click precisely — wrapping in label expands the touch/click target.</div></div></div><div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Place checkbox label text before the checkbox element.</div><div class="ds-bp-reason">Checkbox should come first (left) with label text after (right) for left-to-right reading languages.</div></div></div></div><h2 id="related">Related Components</h2><div class="ds-related-grid"><a href="input.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></div><div class="ds-related-card-name">Input</div><div class="ds-related-card-desc">Text form fields</div></a><a href="select.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div><div class="ds-related-card-name">Select</div><div class="ds-related-card-desc">Option selection</div></a><a href="table.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div><div class="ds-related-card-name">Table</div><div class="ds-related-card-desc">Row selection</div></a></div><h2 id="anatomy">Anatomy</h2><div class="ds-anatomy-parts"><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Label wrapper</div><div class="ds-anatomy-part-desc">label.check-item. display:flex, align-items:center, gap:10px, cursor:pointer. Wrapping label makes entire row clickable.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Checkbox input</div><div class="ds-anatomy-part-desc">input[type=checkbox]. width/height:16px, accent-color:#6366F1, cursor:pointer, flex-shrink:0.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Label text</div><div class="ds-anatomy-part-desc">div.check-label. 13px fw-500. Optional .check-label-sub below at 11px #94A3B8.</div></div></div><h2 id="content">Content Rules</h2><div class="ds-content-rules"><div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good Label</div><div class="ds-content-example">View Reports</div><div class="ds-content-reason">Action-oriented, specific permission</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad Label</div><div class="ds-content-example">Reports</div><div class="ds-content-reason">Ambiguous — view, edit, or delete?</div></div></div></div>
+
+  <h2 id="states">States</h2>
+<div class="ds-states-grid">
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" style="width:16px;height:16px;accent-color:#6366F1"/><span style="font-size:12px;color:#0F172A">Unchecked</span></label></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Unchecked</div><div class="ds-state-cell-desc">Default. Empty box.</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" checked style="width:16px;height:16px;accent-color:#6366F1"/><span style="font-size:12px;color:#0F172A">Checked</span></label></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Checked</div><div class="ds-state-cell-desc">Filled with accent-color:#6366F1</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><label style="display:flex;align-items:center;gap:8px;cursor:not-allowed;opacity:.5"><input type="checkbox" disabled style="width:16px;height:16px;accent-color:#6366F1"/><span style="font-size:12px;color:#0F172A">Disabled</span></label></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Disabled</div><div class="ds-state-cell-desc">opacity:.5, cursor:not-allowed</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" checked disabled style="width:16px;height:16px;accent-color:#6366F1;opacity:.5"/><span style="font-size:12px;color:#94A3B8">Checked Disabled</span></label></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Checked + Disabled</div><div class="ds-state-cell-desc">Read-only checked state</div></div></div>
+</div>
+<h2 id="behavior">Behavior</h2>
+<table class="ds-behavior-table"><thead><tr><th>Trigger</th><th>Behavior</th></tr></thead><tbody>
+  <tr><td><span class="ds-behavior-trigger">Click (label or input)</span></td><td>Toggles checked state. Wrapping in &lt;label&gt; extends click target to entire row. Native browser behavior — no JS needed.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Space key</span></td><td>Toggles checked state when input is focused. Native behavior.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Indeterminate state</span></td><td>Set programmatically via <code>el.indeterminate = true</code>. Used for "select all" header when only some rows are selected. Cannot be set via HTML attribute.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Disabled</span></td><td>No toggle, no hover, cursor:not-allowed. opacity:.5 on wrapper. Both checked and unchecked disabled states are valid.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Group behavior</span></td><td>Checkboxes operate independently by default. Group logic (select all, indeterminate) must be implemented in JS using the indeterminate property.</td></tr>
+</tbody></table><div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 'checkbox';</script>
+<script src="../shared/ds-shell.js"></script>
+</body></html>

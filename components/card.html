@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Card — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.card{background:#fff;border-radius:20px;border:1px solid #E2E8F0;padding:24px;box-shadow:0 4px 6px rgba(0,0,0,.02);transition:all .3s ease;}
+.card:hover{box-shadow:0 12px 30px rgba(0,0,0,.06);}
+.card-sm{border-radius:14px;padding:20px;}
+.card-dark{background:linear-gradient(135deg,#0F172A,#1E293B);border:none;color:#fff;}
+.card-glass{background:rgba(255,255,255,.8);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.3);}
+.card-kpi{border-radius:16px;padding:20px;color:#fff;position:relative;overflow:hidden;}
+.card-kpi::before{content:'';position:absolute;right:-28px;top:-28px;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.1);}
+.card-kpi::after{content:'';position:absolute;right:16px;bottom:-28px;width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.07);}
+.kpi-blue{background:linear-gradient(135deg,#3B5BDB,#2F4AC7);}
+.kpi-green{background:linear-gradient(135deg,#0E9F6E,#057A55);}
+.kpi-amber{background:linear-gradient(135deg,#E3A008,#B45309);}
+.kpi-red{background:linear-gradient(135deg,#F05252,#C81E1E);}
+.kpi-purple{background:linear-gradient(135deg,#6366F1,#4F46E5);}
+.kpi-teal{background:linear-gradient(135deg,#0694A2,#047481);}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-header">
+    <div class="ds-sidebar-logo">
+      <div class="ds-sidebar-logo-icon">N</div>
+      <div class="ds-sidebar-logo-text">
+        <div class="ds-sidebar-logo-name">Syhrezz</div>
+        <div class="ds-sidebar-logo-version">v1.0</div>
+      </div>
+    </div>
+    <div class="ds-search-wrap">
+      <div class="ds-search-box">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/>
+        <span class="ds-search-kbd">&#8984;K</span>
+      </div>
+      <div id="ds-search-results"></div>
+    </div>
+  </div>
+  <nav class="ds-sidebar-nav" id="ds-nav-links"></nav>
+</aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb">
+    <a href="../index.html">Syhrezz</a><span>/</span>
+    <a href="#">Components</a><span>/</span>
+    <strong>Card</strong>
+  </nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main">
+<article class="ds-page">
+
+  <div class="ds-page-header">
+    <div class="ds-page-meta">
+      <span class="ds-meta-badge stable">Stable</span>
+      <span class="ds-meta-badge type">Layout</span>
+    </div>
+    <h1>Card</h1>
+    <p class="ds-page-lead">Cards are the primary content container in Syhrezz. Every dashboard section, data panel, and form lives inside a card. They establish consistent elevation, spacing, and grouping.</p>
+  </div>
+
+  <h2 id="overview">Overview</h2>
+  <p>Cards use white backgrounds with a subtle border and shadow at rest, lifting to a deeper shadow on hover. The standard card uses <code>20px</code> border radius — the largest radius in the system. Smaller cards use <code>14px</code>. Never nest a card inside another card.</p>
+
+  <div class="ds-callout ds-callout-info">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <div class="ds-callout-content"><strong>KPI Cards vs. Standard Cards:</strong> Standard cards are white content containers. KPI cards are colored gradient surfaces used exclusively for top-of-dashboard metric display. They have different padding, radius, and hover behavior.</div>
+  </div>
+
+  <!-- VARIANTS -->
+  <h2 id="variants">Variants</h2>
+
+  <div class="ds-example">
+    <div class="ds-example-toolbar"><span class="ds-example-title">Standard Cards</span><button class="ds-show-source-btn">Show source</button></div>
+    <div class="ds-preview ds-preview-surface" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="card">
+        <div style="font-size:14px;font-weight:800;color:#0F172A;margin-bottom:6px">Standard Card</div>
+        <div style="font-size:13px;color:#64748B">White bg, 20px radius, 1px border, shadow-sm. Lifts on hover.</div>
+      </div>
+      <div class="card card-sm">
+        <div style="font-size:13px;font-weight:800;color:#0F172A;margin-bottom:6px">Small Card</div>
+        <div style="font-size:12px;color:#64748B">14px radius, 20px padding. Used for stat cards, compact panels.</div>
+      </div>
+      <div class="card card-dark">
+        <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:6px">Dark Card</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.6)">Gradient #0F172A→#1E293B. Used for maintenance panels, quick actions.</div>
+      </div>
+      <div class="card card-glass" style="background:linear-gradient(135deg,#F0F4FF,#EEF2FF)">
+        <div style="font-size:13px;font-weight:800;color:#0F172A;margin-bottom:6px">Glass Card</div>
+        <div style="font-size:12px;color:#64748B">backdrop-filter:blur(12px). Used in Executive dashboard over gradient backgrounds.</div>
+      </div>
+    </div>
+    <div class="ds-code-block" style="display:none">
+      <button class="ds-copy-btn">Copy</button>
+      <pre><code><span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"card"</span><span class="kw">&gt;</span>Standard<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"card card-sm"</span><span class="kw">&gt;</span>Small<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"card card-dark"</span><span class="kw">&gt;</span>Dark<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"card card-glass"</span><span class="kw">&gt;</span>Glass<span class="kw">&lt;/div&gt;</span></code></pre>
+    </div>
+  </div>
+
+  <!-- KPI CARDS -->
+  <h2 id="kpi">KPI Cards</h2>
+  <p>Gradient colored cards for dashboard metric display. Six color themes. Each has two decorative translucent circles via <code>::before</code> and <code>::after</code> pseudo-elements. Hover lifts <code>translateY(-4px)</code>.</p>
+
+  <div class="ds-example">
+    <div class="ds-example-toolbar"><span class="ds-example-title">KPI Card Colors</span><button class="ds-show-source-btn">Show source</button></div>
+    <div class="ds-preview ds-preview-surface" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <div class="card-kpi kpi-blue" style="cursor:default;transition:transform .2s" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
+        <div style="font-size:10px;font-weight:700;opacity:.7;position:relative;z-index:1">REVENUE MTD</div>
+        <div style="font-size:22px;font-weight:800;letter-spacing:-.5px;position:relative;z-index:1">$24.5M</div>
+        <div style="font-size:10px;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:20px;display:inline-flex;margin-top:8px;position:relative;z-index:1;font-weight:700">&#8593; 12.4%</div>
+      </div>
+      <div class="card-kpi kpi-green" style="cursor:default;transition:transform .2s" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
+        <div style="font-size:10px;font-weight:700;opacity:.7;position:relative;z-index:1">DEALS CLOSED</div>
+        <div style="font-size:22px;font-weight:800;letter-spacing:-.5px;position:relative;z-index:1">42</div>
+        <div style="font-size:10px;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:20px;display:inline-flex;margin-top:8px;position:relative;z-index:1;font-weight:700">&#8593; 8 new</div>
+      </div>
+      <div class="card-kpi kpi-amber" style="cursor:default;transition:transform .2s" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
+        <div style="font-size:10px;font-weight:700;opacity:.7;position:relative;z-index:1">PROSPECTS</div>
+        <div style="font-size:22px;font-weight:800;letter-spacing:-.5px;position:relative;z-index:1">127</div>
+        <div style="font-size:10px;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:20px;display:inline-flex;margin-top:8px;position:relative;z-index:1;font-weight:700">&#8594; Flat</div>
+      </div>
+      <div class="card-kpi kpi-red" style="cursor:default;transition:transform .2s" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
+        <div style="font-size:10px;font-weight:700;opacity:.7;position:relative;z-index:1">OVERDUE</div>
+        <div style="font-size:22px;font-weight:800;letter-spacing:-.5px;position:relative;z-index:1">18</div>
+        <div style="font-size:10px;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:20px;display:inline-flex;margin-top:8px;position:relative;z-index:1;font-weight:700">&#8595; Needs action</div>
+      </div>
+      <div class="card-kpi kpi-purple" style="cursor:default;transition:transform .2s" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
+        <div style="font-size:10px;font-weight:700;opacity:.7;position:relative;z-index:1">TARGET</div>
+        <div style="font-size:22px;font-weight:800;letter-spacing:-.5px;position:relative;z-index:1">89%</div>
+        <div style="font-size:10px;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:20px;display:inline-flex;margin-top:8px;position:relative;z-index:1;font-weight:700">&#8593; On track</div>
+      </div>
+      <div class="card-kpi kpi-teal" style="cursor:default;transition:transform .2s" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
+        <div style="font-size:10px;font-weight:700;opacity:.7;position:relative;z-index:1">VISITS TODAY</div>
+        <div style="font-size:22px;font-weight:800;letter-spacing:-.5px;position:relative;z-index:1">24</div>
+        <div style="font-size:10px;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:20px;display:inline-flex;margin-top:8px;position:relative;z-index:1;font-weight:700">&#8593; +6 avg</div>
+      </div>
+    </div>
+    <div class="ds-code-block" style="display:none">
+      <button class="ds-copy-btn">Copy</button>
+      <pre><code><span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"card-kpi kpi-blue"</span><span class="kw">&gt;</span>
+  <span class="cm">&lt;!-- decorative circles via ::before ::after --&gt;</span>
+  <span class="kw">&lt;div</span> <span class="prop">style</span>=<span class="str">"position:relative;z-index:1"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;div</span> <span class="prop">style</span>=<span class="str">"font-size:10px;font-weight:700;opacity:.7"</span><span class="kw">&gt;</span>REVENUE MTD<span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;div</span> <span class="prop">style</span>=<span class="str">"font-size:22px;font-weight:800"</span><span class="kw">&gt;</span>$24.5M<span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;div</span> <span class="prop">style</span>=<span class="str">"font-size:10px;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:20px;display:inline-flex;margin-top:8px;font-weight:700"</span><span class="kw">&gt;</span>&#8593; 12.4%<span class="kw">&lt;/div&gt;</span>
+  <span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/div&gt;</span></code></pre>
+    </div>
+  </div>
+
+  <!-- TOKEN TABLE -->
+  <h2 id="tokens">Token Reference</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Variant</th><th>Class</th><th>Radius</th><th>Padding</th><th>Shadow</th><th>Use For</th></tr></thead>
+      <tbody>
+        <tr><td>Standard</td><td class="mono">.card</td><td class="default">20px</td><td class="default">24px</td><td class="default">shadow-sm + hover shadow-lg</td><td>Main content sections, data panels</td></tr>
+        <tr><td>Small</td><td class="mono">.card.card-sm</td><td class="default">14px</td><td class="default">20px</td><td class="default">shadow-xs</td><td>Stat cards, compact metric panels</td></tr>
+        <tr><td>Dark</td><td class="mono">.card.card-dark</td><td class="default">20px</td><td class="default">24px</td><td class="default">none</td><td>Maintenance panels, quick action areas</td></tr>
+        <tr><td>Glass</td><td class="mono">.card.card-glass</td><td class="default">20px</td><td class="default">24px</td><td class="default">none</td><td>Executive dashboard, over gradient bg</td></tr>
+        <tr><td>KPI</td><td class="mono">.card-kpi.kpi-{color}</td><td class="default">16px</td><td class="default">20px</td><td class="default">hover translateY(-4px)</td><td>Top dashboard metric row only</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DO/DON'T -->
+  <h2 id="guidelines">Guidelines</h2>
+  <div class="ds-do-dont">
+    <div class="ds-do">
+      <div class="ds-do-header"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Do</div>
+      <div class="ds-do-body">
+        <div class="card card-sm" style="padding:14px"><div style="font-size:12px;font-weight:700;color:#0F172A">Section Title</div><div style="font-size:11px;color:#64748B;margin-top:4px">Content lives inside a single card.</div></div>
+        <p class="ds-do-reason">One card per logical content section. Keep consistent padding.</p>
+      </div>
+    </div>
+    <div class="ds-dont">
+      <div class="ds-dont-header"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg> Don't</div>
+      <div class="ds-dont-body">
+        <div class="card card-sm" style="padding:14px"><div class="card" style="padding:10px;font-size:11px;color:#64748B">Nested card inside a card</div></div>
+        <p class="ds-dont-reason">Never nest cards. Use sections or dividers to separate content within a card.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI SPEC -->
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content">
+      <strong>For AI coding assistants:</strong> Cards are always <code>&lt;div&gt;</code> elements. Use <code>.card</code> for standard content, <code>.card.card-sm</code> for stat/metric cards, and <code>.card-kpi.kpi-{color}</code> for gradient dashboard metrics. KPI cards require <code>position:relative;z-index:1</code> on all child content to appear above the decorative circles. The KPI grid is always <code>grid-template-columns:repeat(4,1fr)</code> at the top of a dashboard page.
+    </div>
+  </div>
+
+  <h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Card when</div><ul class="ds-when-list"><li>Grouping related content into a distinct section</li><li>Dashboard panels, data sections, form wrappers</li><li>Metric display (stat cards, KPI cards)</li><li>Any content that benefits from visual separation</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Card when</div><ul class="ds-when-list"><li>As an interactive button — use a Button instead</li><li>Nesting cards inside cards</li><li>Wrapping small inline elements (use a badge or chip)</li></ul></div>
+</div>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">variant</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">'default'</span></td><td class="ds-prop-desc">Visual style.<div class="ds-prop-values">'default' | 'sm' | 'dark' | 'glass' | 'kpi-{color}'</div></td></tr>
+  <tr><td><span class="ds-prop-name">hover</span></td><td><span class="ds-prop-type">boolean</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">true</span></td><td class="ds-prop-desc">Enables hover shadow lift. Disable for static display cards.</td></tr>
+</tbody></table>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why 20px border-radius for the default card?</div><div class="ds-decision-a">20px is the largest radius in the scale and gives cards a distinctly "soft" character. This differentiates them from controls (buttons: 12px, inputs: 10px) and communicates "I am a container, not a control." Smaller elements inside cards use smaller radii to maintain visual hierarchy.</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>4 card variants: default, sm, dark, glass</li><li>6 KPI gradient variants (blue, green, amber, red, purple, teal)</li><li>Hover shadow lift on default and sm variants</li></ul></div></div></div><h2 id="states">States</h2><div class="ds-states-grid" style="grid-template-columns:repeat(3,1fr)"><div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="card card-sm" style="width:140px;font-size:11px;color:#64748B">Card content</div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Default</div><div class="ds-state-cell-desc">shadow-sm, border #E2E8F0</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="card card-sm" style="width:140px;font-size:11px;color:#64748B;box-shadow:0 12px 30px rgba(0,0,0,.06);transform:translateY(-3px)">Card content</div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Hover</div><div class="ds-state-cell-desc">translateY(-3px), shadow-lg</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview" style="background:#0F172A"><div class="card card-dark card-sm" style="width:140px;font-size:11px;color:rgba(255,255,255,.6)">Dark content</div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Dark Variant</div><div class="ds-state-cell-desc">Dark gradient bg, white text</div></div></div></div><h2 id="accessibility">Accessibility</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody><tr><td>Semantic</td><td>Cards are div elements — no ARIA role needed for static containers. If a card is clickable, use role="link" or role="button" and ensure keyboard access.</td></tr><tr><td>Focus</td><td>If entire card is clickable, add tabindex="0" and keyboard handler for Enter/Space.</td></tr><tr><td>Heading</td><td>Always include a visible heading inside clickable cards for context.</td></tr></tbody></table></div><h2 id="composition">Composition</h2><div class="ds-composition-grid"><div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Section header (title + subtitle + action)</div><div class="ds-composition-item">Content area (table, list, chart, form fields)</div><div class="ds-composition-item">Card footer with actions</div><div class="ds-composition-item">Nested sections with dividers</div></div></div><div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">Nested cards inside cards</div><div class="ds-composition-item">Card used as a button without proper ARIA</div><div class="ds-composition-item">Mixing card variants in the same grid</div></div></div></div><h2 id="best-practices">Best Practices</h2><div class="ds-bp-grid"><div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Use consistent card sizes in a grid. All cards in the same row use the same variant.</div><div class="ds-bp-reason">Visual consistency creates scannable, predictable layouts.</div></div></div><div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Mix standard, dark, and glass cards in the same row without purpose.</div><div class="ds-bp-reason">Inconsistent card variants create visual noise and confusion.</div></div></div></div><h2 id="related">Related Components</h2><div class="ds-related-grid"><a href="table.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div><div class="ds-related-card-name">Table</div><div class="ds-related-card-desc">Data inside a card</div></a><a href="modal.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm0 8a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zm12 0a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg></div><div class="ds-related-card-name">Modal</div><div class="ds-related-card-desc">Card in overlay</div></a><a href="progress.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div><div class="ds-related-card-name">Progress</div><div class="ds-related-card-desc">Metrics in cards</div></a></div><h2 id="anatomy">Anatomy</h2><div class="ds-anatomy-parts"><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Container</div><div class="ds-anatomy-part-desc">div.card. bg:#fff, border-radius:20px, border:1px solid #E2E8F0, padding:24px, box-shadow:shadow-sm. Hover: shadow-lg + translateY(-3px).</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Section Header (optional)</div><div class="ds-anatomy-part-desc">Title (15px fw-800) + optional subtitle (12px muted) + optional action button. Margin-bottom:16px.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Content Area</div><div class="ds-anatomy-part-desc">Free-form content. Tables, lists, charts, forms. No fixed structure — card is a generic container.</div></div></div><h2 id="content">Content Rules</h2><div class="ds-content-rules"><div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good Card Title</div><div class="ds-content-example">Performance by Region</div><div class="ds-content-reason">Describes content. 15px fw-800. Specific.</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad Card Title</div><div class="ds-content-example">Data</div><div class="ds-content-reason">Too vague — does not describe what data is shown.</div></div></div></div>
+
+  <h2 id="behavior">Behavior</h2>
+<table class="ds-behavior-table"><thead><tr><th>Trigger</th><th>Behavior</th></tr></thead><tbody>
+  <tr><td><span class="ds-behavior-trigger">Hover</span></td><td>Standard card: translateY(-3px) + shadow-lg. KPI card: translateY(-4px). Transition: 0.3s ease. Ghost cards: no hover effect.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Clickable card</span></td><td>If entire card is a link, add cursor:pointer, role="link", tabindex="0", and keyboard Enter/Space handler. Focus ring via outline:2px solid #6366F1.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Loading state</span></td><td>Replace card content with skeleton elements (.skeleton) while data loads. Card shell remains visible to prevent layout shift.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Empty state</span></td><td>When card contains a list with no items, render the empty state component inside the card body.</td></tr>
+</tbody></table><div id="ds-prev-next"></div>
+</article>
+<aside class="ds-toc" id="ds-toc"></aside>
+</div>
+</div>
+<script>window.DS_ACTIVE_PAGE = 'card';</script>
+<script src="../shared/ds-shell.js"></script>
+</body>
+</html>

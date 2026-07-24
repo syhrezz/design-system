@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dashboard Layout — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+</head><body><div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">N</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar"><nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Patterns</a><span>/</span><strong>Dashboard Layout</strong></nav><div class="ds-topbar-right"><span class="ds-topbar-tag">Pattern</span></div></header>
+<div class="ds-main"><article class="ds-page ds-page-wide">
+  <div class="ds-page-header"><div class="ds-page-meta"><span class="ds-meta-badge stable">Stable</span></div>
+    <h1>Dashboard Layout</h1>
+    <p class="ds-page-lead">The dashboard is the primary landing page for every Syhrezz role. It always follows a fixed composition: page header, optional alert, KPI grid, main content grid, and secondary content grid.</p>
+  </div>
+  <h2 id="structure">Composition</h2>
+  <div class="ds-code-block"><button class="ds-copy-btn">Copy</button><pre><code><span class="cm">/* Dashboard page structure — always in this order */</span>
+
+<span class="num">1.</span> <span class="kw">Page Header</span>  — h1 (24px fw-800) + subtitle + action buttons (top-right)
+<span class="num">2.</span> <span class="kw">Alert Banner</span> — optional, shows if system warnings exist (alert-warning / alert-danger)
+<span class="num">3.</span> <span class="kw">KPI Grid</span>     — 4 columns, gradient colored cards (kpi-card) OR white stat-cards
+<span class="num">4.</span> <span class="kw">Main Grid</span>    — grid-3-2 (3fr chart + 2fr panel) OR grid-2 (two equal columns)
+                  Left: Revenue chart / Activity feed / Follow-up list
+                  Right: Target card / Todo list / location panel
+<span class="num">5.</span> <span class="kw">Secondary</span>    — grid-3 with table (2fr) + donut chart/todo (1fr)
+<span class="num">6.</span> <span class="kw">Toast container</span> — fixed bottom-right, auto-shows welcome toast on load</code></pre></div>
+  <h2 id="role-variants">Role Variants</h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Role</th><th>KPI Style</th><th>Hero Banner</th><th>Special Elements</th></tr></thead><tbody>
+    <tr><td>Admin</td><td>White stat-cards (4-col)</td><td>None</td><td>System health, user activity, audit log preview</td></tr>
+    <tr><td>Director</td><td>Hero KPI banner (5-col strip)</td><td>Dark gradient hero</td><td>Executive KPI strip, regional performance, team leaderboard</td></tr>
+    <tr><td>Supervisor</td><td>White stat-cards (4-col)</td><td>None</td><td>Location violations, team check-in status, alert banners</td></tr>
+    <tr><td>Sales</td><td>Gradient KPI cards (4-col)</td><td>None</td><td>Follow-up list, activity feed, data table, todo list</td></tr>
+    <tr><td>Manager</td><td>Gradient KPI cards (4-col)</td><td>None</td><td>Team leaderboard, rep performance chart, pipeline donut</td></tr>
+  </tbody></table></div>
+  <h2 id="kpi-grid">KPI Grid Rules</h2>
+  <div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <div class="ds-callout-content">KPI cards always animate in with staggered <code>.fade-up .fu-1</code> through <code>.fu-4</code> classes. Sales/Manager use gradient <code>.kpi-card .kpi-{color}</code>. primary role use white <code>.stat-card</code> with colored icon boxes. Director uses a single <code>.hero-banner</code> spanning full width with 5 KPI items inside.</div>
+  </div>
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Every dashboard page must: (1) have a page header with h1 24px fw-800 + subtitle, (2) KPI grid with exactly 4 cards for Sales/primary role or the hero banner for accent role, (3) at least one chart (Chart.js), (4) a toast container at the bottom that auto-fires a welcome/info toast after 700ms. Charts always use <code>responsive:true, maintainAspectRatio:false</code> with a fixed-height container div. Always add <code>.fade-up .fu-1</code> through <code>.fu-4</code> to the KPI cards.</div>
+  </div>
+  <div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 'p-dashboard';</script>
+<script src="../shared/ds-shell.js"></script></body></html>

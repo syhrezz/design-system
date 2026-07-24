@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Table — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.table-wrap{background:#fff;border-radius:14px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+.table-toolbar{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #E2E8F0;gap:10px;flex-wrap:wrap;}
+.table-title{font-size:14px;font-weight:700;color:#0F172A;}
+.table-toolbar-actions{display:flex;gap:8px;align-items:center;}
+table{width:100%;border-collapse:collapse;}
+thead tr{background:#F8FAFC;}
+th{padding:9px 14px;text-align:left;font-size:10px;font-weight:700;color:#64748B;letter-spacing:.5px;text-transform:uppercase;border-bottom:1px solid #E2E8F0;white-space:nowrap;cursor:pointer;user-select:none;}
+th:hover{background:#F1F5F9;}
+th.sort-asc::after{content:' ↑';}
+th.sort-desc::after{content:' ↓';}
+td{padding:11px 14px;font-size:12px;color:#0F172A;border-bottom:1px solid #F1F5F9;vertical-align:middle;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:#FAFBFF;cursor:pointer;}
+tbody tr.selected{background:#EEF2FF;}
+.user-cell{display:flex;align-items:center;gap:10px;}
+.u-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;}
+.u-name{font-size:12px;font-weight:600;color:#0F172A;}
+.u-sub{font-size:10px;color:#94A3B8;}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:700;}
+.badge-success{background:#DEF7EC;color:#03543F;}
+.badge-warning{background:#FEF3C7;color:#92400E;}
+.badge-danger{background:#FDE2E2;color:#9B1C1C;}
+.badge-info{background:#E1EFFE;color:#1E429F;}
+.badge-dot::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;display:inline-block;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;border:none;font-family:inherit;}
+.btn-primary{background:#6366F1;color:#fff;}
+.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}
+.btn-outline:hover{border-color:#6366F1;color:#6366F1;background:#EEF2FF;}
+.btn-ghost-sm{background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;color:#64748B;font-size:11px;font-family:inherit;transition:all .15s;}
+.btn-ghost-sm:hover{background:#F1F5F9;color:#0F172A;}
+.btn-ghost-danger{color:#F05252;}
+.btn-ghost-danger:hover{background:#FDE2E2;}
+.table-checkbox{width:16px;height:16px;accent-color:#6366F1;cursor:pointer;}
+.table-pagination{padding:12px 18px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #E2E8F0;font-size:12px;color:#64748B;}
+.page-btns{display:flex;gap:4px;}
+.page-btn{width:28px;height:28px;border-radius:7px;border:1px solid #E2E8F0;background:#fff;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;color:#64748B;}
+.page-btn:hover{border-color:#6366F1;color:#6366F1;}
+.page-btn.active{background:#6366F1;border-color:#6366F1;color:#fff;}
+.mono-val{font-family:'JetBrains Mono',monospace;font-size:11px;color:#64748B;}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-header">
+    <div class="ds-sidebar-logo">
+      <div class="ds-sidebar-logo-icon">N</div>
+      <div class="ds-sidebar-logo-text">
+        <div class="ds-sidebar-logo-name">Syhrezz</div>
+        <div class="ds-sidebar-logo-version">v1.0</div>
+      </div>
+    </div>
+    <div class="ds-search-wrap">
+      <div class="ds-search-box">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/>
+        <span class="ds-search-kbd">&#8984;K</span>
+      </div>
+      <div id="ds-search-results"></div>
+    </div>
+  </div>
+  <nav class="ds-sidebar-nav" id="ds-nav-links"></nav>
+</aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb">
+    <a href="../index.html">Syhrezz</a><span>/</span>
+    <a href="#">Components</a><span>/</span>
+    <strong>Table</strong>
+  </nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main">
+<article class="ds-page ds-page-wide">
+
+  <div class="ds-page-header">
+    <div class="ds-page-meta">
+      <span class="ds-meta-badge stable">Stable</span>
+      <span class="ds-meta-badge type">Data Display</span>
+    </div>
+    <h1>Table</h1>
+    <p class="ds-page-lead">Data tables display structured information in rows and columns. Syhrezz tables are always wrapped in a card container with a toolbar, support row hover, selection, sorting, and pagination.</p>
+  </div>
+
+  <h2 id="anatomy">Anatomy</h2>
+  <p>Every table follows a fixed structure: <strong>table-wrap</strong> (card container) → <strong>toolbar</strong> (title + actions) → <strong>table element</strong> → <strong>pagination</strong>. This structure is non-negotiable.</p>
+
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Layer</th><th>Class</th><th>Contents</th></tr></thead>
+      <tbody>
+        <tr><td>Container</td><td class="mono">.table-wrap</td><td>bg:#fff, radius:14px, border, shadow-xs, overflow:hidden</td></tr>
+        <tr><td>Toolbar</td><td class="mono">.table-toolbar</td><td>Title (14px fw-700) + action buttons. Border-bottom.</td></tr>
+        <tr><td>Head row</td><td><code>thead tr</code></td><td>bg:#F8FAFC, 10px UPPERCASE fw-700 #64748B headers</td></tr>
+        <tr><td>Body rows</td><td><code>tbody tr</code></td><td>Border-bottom:#F1F5F9. Last row: no border. Hover: bg:#FAFBFF</td></tr>
+        <tr><td>User cell</td><td class="mono">.user-cell</td><td>30px avatar + stacked name/subtext</td></tr>
+        <tr><td>Mono values</td><td class="mono">.mono-val</td><td>JetBrains Mono 11px for dates, IDs, numbers</td></tr>
+        <tr><td>Actions col</td><td>—</td><td>Always last column. Ghost buttons for row actions.</td></tr>
+        <tr><td>Pagination</td><td class="mono">.table-pagination</td><td>Count text left, page buttons right. Border-top.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FULL TABLE DEMO -->
+  <h2 id="full-example">Full Example</h2>
+  <div class="ds-example">
+    <div class="ds-example-toolbar"><span class="ds-example-title">Table with toolbar, selection, badges, and pagination</span><button class="ds-show-source-btn">Show source</button></div>
+    <div class="ds-preview" style="padding:0;overflow:hidden;border-radius:14px;border:1px solid #E2E8F0;">
+      <div class="table-wrap" style="border:none;border-radius:0;box-shadow:none">
+        <div class="table-toolbar">
+          <div class="table-title">User Directory <span style="font-size:11px;font-weight:500;color:#94A3B8;margin-left:6px">124 users</span></div>
+          <div class="table-toolbar-actions">
+            <div style="display:flex;align-items:center;gap:6px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:6px 10px">
+              <svg style="width:13px;height:13px;color:#94A3B8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <input type="text" placeholder="Search..." style="border:none;background:none;outline:none;font-size:12px;color:#64748B;font-family:inherit;width:140px"/>
+            </div>
+            <button class="btn btn-outline">Export</button>
+            <button class="btn btn-primary">+ Add User</button>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width:36px"><input type="checkbox" class="table-checkbox"/></th>
+              <th class="sort-asc">User</th>
+              <th>Role</th>
+              <th>Region</th>
+              <th>Status</th>
+              <th>Last Login</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="selected">
+              <td><input type="checkbox" class="table-checkbox" checked/></td>
+              <td><div class="user-cell"><div class="u-avatar" style="background:#1E293B">BS</div><div><div class="u-name">Budi Santoso</div><div class="u-sub">budi@Syhrezz.id</div></div></div></td>
+              <td><span class="badge badge-info">Supervisor</span></td>
+              <td style="color:#64748B">Jakarta</td>
+              <td><span class="badge badge-success badge-dot">Active</span></td>
+              <td class="mono-val">2026-07-24 09:14</td>
+              <td><div style="display:flex;gap:4px"><button class="btn-ghost-sm">Edit</button><button class="btn-ghost-sm btn-ghost-danger">Delete</button></div></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="table-checkbox"/></td>
+              <td><div class="user-cell"><div class="u-avatar" style="background:#312E81">AW</div><div><div class="u-name">Ani Wijaya</div><div class="u-sub">ani@Syhrezz.id</div></div></div></td>
+              <td><span class="badge badge-info" style="background:#F5F3FF;color:#5521B5">Director</span></td>
+              <td style="color:#64748B">Surabaya</td>
+              <td><span class="badge badge-success badge-dot">Active</span></td>
+              <td class="mono-val">2026-07-24 07:32</td>
+              <td><div style="display:flex;gap:4px"><button class="btn-ghost-sm">Edit</button><button class="btn-ghost-sm btn-ghost-danger">Delete</button></div></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="table-checkbox"/></td>
+              <td><div class="user-cell"><div class="u-avatar" style="background:#065F46">RP</div><div><div class="u-name">Rina Putri</div><div class="u-sub">rina@Syhrezz.id</div></div></div></td>
+              <td><span class="badge badge-warning">Sales</span></td>
+              <td style="color:#64748B">Bandung</td>
+              <td><span class="badge badge-warning badge-dot">Pending</span></td>
+              <td class="mono-val">—</td>
+              <td><div style="display:flex;gap:4px"><button class="btn-ghost-sm">Edit</button><button class="btn-ghost-sm btn-ghost-danger">Delete</button></div></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-pagination">
+          <span>Showing <strong>1–3</strong> of <strong>124</strong> users</span>
+          <div class="page-btns">
+            <button class="page-btn">&#8249;</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn" style="width:auto;padding:0 8px">...</button>
+            <button class="page-btn">42</button>
+            <button class="page-btn">&#8250;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code-block" style="display:none">
+      <button class="ds-copy-btn">Copy</button>
+      <pre><code><span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"table-wrap"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"table-toolbar"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"table-title"</span><span class="kw">&gt;</span>User Directory<span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"table-toolbar-actions"</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"btn btn-outline"</span><span class="kw">&gt;</span>Export<span class="kw">&lt;/button&gt;</span>
+      <span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"btn btn-primary"</span><span class="kw">&gt;</span>+ Add User<span class="kw">&lt;/button&gt;</span>
+    <span class="kw">&lt;/div&gt;</span>
+  <span class="kw">&lt;/div&gt;</span>
+  <span class="kw">&lt;table&gt;</span>
+    <span class="kw">&lt;thead&gt;&lt;tr&gt;</span>
+      <span class="kw">&lt;th&gt;</span>User<span class="kw">&lt;/th&gt;&lt;th&gt;</span>Role<span class="kw">&lt;/th&gt;&lt;th&gt;</span>Status<span class="kw">&lt;/th&gt;&lt;th&gt;</span>Actions<span class="kw">&lt;/th&gt;</span>
+    <span class="kw">&lt;/tr&gt;&lt;/thead&gt;</span>
+    <span class="kw">&lt;tbody&gt;</span>
+      <span class="kw">&lt;tr&gt;</span>
+        <span class="kw">&lt;td&gt;&lt;div</span> <span class="prop">class</span>=<span class="str">"user-cell"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;&lt;/td&gt;</span>
+        <span class="kw">&lt;td&gt;&lt;span</span> <span class="prop">class</span>=<span class="str">"badge badge-info"</span><span class="kw">&gt;</span>Supervisor<span class="kw">&lt;/span&gt;&lt;/td&gt;</span>
+        <span class="kw">&lt;td&gt;&lt;span</span> <span class="prop">class</span>=<span class="str">"badge badge-success badge-dot"</span><span class="kw">&gt;</span>Active<span class="kw">&lt;/span&gt;&lt;/td&gt;</span>
+        <span class="kw">&lt;td&gt;&lt;button</span> <span class="prop">class</span>=<span class="str">"btn-ghost-sm"</span><span class="kw">&gt;</span>Edit<span class="kw">&lt;/button&gt;&lt;/td&gt;</span>
+      <span class="kw">&lt;/tr&gt;</span>
+    <span class="kw">&lt;/tbody&gt;</span>
+  <span class="kw">&lt;/table&gt;</span>
+  <span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"table-pagination"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/div&gt;</span></code></pre>
+    </div>
+  </div>
+
+  <!-- AI SPEC -->
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content">
+      <strong>For AI coding assistants:</strong> Tables are ALWAYS inside a <code>.table-wrap</code> container — never a bare <code>&lt;table&gt;</code>. User cells combine a 30px circle avatar + stacked name/email. Dates and IDs always use <code>.mono-val</code> (JetBrains Mono). Action buttons in the last column use <code>.btn-ghost-sm</code> — never full-sized buttons. Selected rows add <code>.selected</code> class (bg:#EEF2FF). Row hover is CSS-only via <code>tbody tr:hover</code>.
+    </div>
+  </div>
+
+  <h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Table when</div><ul class="ds-when-list"><li>Displaying structured data with multiple attributes per row</li><li>Users need to scan, sort, filter, or select records</li><li>CRUD operations on a collection of items</li><li>Comparing values across multiple items</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Table when</div><ul class="ds-when-list"><li>Displaying 1-2 attributes — use a list instead</li><li>Non-tabular data like settings or profiles</li><li>Only 1-3 items — use cards instead</li></ul></div>
+</div>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Class/Element</th><th>Type</th><th>Required</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">.table-wrap</span></td><td><span class="ds-prop-type">container</span></td><td><span class="ds-prop-required">required</span></td><td class="ds-prop-desc">Outer wrapper — bg:#fff, radius:14px, border, shadow-xs, overflow:hidden. NEVER use bare table.</td></tr>
+  <tr><td><span class="ds-prop-name">.table-toolbar</span></td><td><span class="ds-prop-type">header</span></td><td><span class="ds-prop-required">required</span></td><td class="ds-prop-desc">Title + actions row. border-bottom. flex space-between.</td></tr>
+  <tr><td><span class="ds-prop-name">.user-cell</span></td><td><span class="ds-prop-type">cell pattern</span></td><td><span class="ds-prop-optional">optional</span></td><td class="ds-prop-desc">30px avatar + stacked name (fw-600) + sub-text (10px muted). Use for entity columns.</td></tr>
+  <tr><td><span class="ds-prop-name">.table-pagination</span></td><td><span class="ds-prop-type">footer</span></td><td><span class="ds-prop-required">required</span></td><td class="ds-prop-desc">Count left + page buttons right. border-top.</td></tr>
+  <tr><td><span class="ds-prop-name">.mono-val</span></td><td><span class="ds-prop-type">cell style</span></td><td><span class="ds-prop-optional">optional</span></td><td class="ds-prop-desc">JetBrains Mono 11px for dates, IDs, amounts. Never use for names or descriptions.</td></tr>
+</tbody></table>
+<h2 id="behavior">Behavior</h2>
+<table class="ds-behavior-table"><thead><tr><th>Trigger</th><th>Behavior</th></tr></thead><tbody>
+  <tr><td><span class="ds-behavior-trigger">Row hover</span></td><td>background:#FAFBFF. Transition:0.15s. Cursor:pointer if row is clickable.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Checkbox select</span></td><td>Row gets background:#EEF2FF (.selected class). Header checkbox shows indeterminate when partial rows selected.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Sort click (th)</span></td><td>Toggle .sort-asc / .sort-desc class on th. ::after adds arrow character. Re-fetch or re-sort data.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Empty state</span></td><td>When data.length===0, replace tbody with empty state div. Different messages for "no data" vs "no filter results".</td></tr>
+</tbody></table>
+<h2 id="best-practices">Best Practices</h2>
+<div class="ds-bp-grid">
+  <div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:11px;color:#64748B">Always wrap in .table-wrap with toolbar + pagination</div><div class="ds-bp-reason">Provides consistent chrome, sort, filter, and action affordances.</div></div></div>
+  <div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:11px;color:#64748B">Full-size .btn buttons in table action columns</div><div class="ds-bp-reason">Use .btn-ghost-sm instead — full buttons clutter rows and break density.</div></div></div>
+</div>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why border-radius:14px on .table-wrap instead of matching the card (20px)?</div><div class="ds-decision-a">Tables are data-dense and rectangular in nature. A slightly smaller radius (14px) reduces the visual softness, giving tables a more structured, data-focused feel compared to content cards (20px). It signals "this is a structured data view" not "this is a content block."</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>Initial release — toolbar, sortable headers, user cell pattern, pagination</li><li>Row selection with checkbox + .selected state</li><li>Mono-val pattern for dates, IDs, amounts</li><li>Empty state integration</li></ul></div></div></div><h2 id="states">States</h2><div class="ds-states-grid"><div class="ds-state-cell"><div class="ds-state-cell-preview" style="padding:8px"><div style="height:40px;background:#F8FAFC;border-radius:6px;border:1px solid #E2E8F0"></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Default</div><div class="ds-state-cell-desc">White rows, subtle dividers</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview" style="padding:8px"><div style="height:40px;background:#FAFBFF;border-radius:6px;border:1px solid #E2E8F0"></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Row Hover</div><div class="ds-state-cell-desc">bg:#FAFBFF, cursor:pointer</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview" style="padding:8px"><div style="height:40px;background:#EEF2FF;border-radius:6px;border:1px solid #C7D2FE"></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Row Selected</div><div class="ds-state-cell-desc">bg:#EEF2FF, .selected class</div></div></div></div><h2 id="accessibility">Accessibility</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody><tr><td>scope="col"</td><td>Add to all &lt;th&gt; elements for column headers.</td></tr><tr><td>role="grid"</td><td>Add to &lt;table&gt; for interactive tables with selection.</td></tr><tr><td>aria-sort</td><td>Add to sorted th: aria-sort="ascending" or "descending".</td></tr><tr><td>Checkbox label</td><td>Select-all and row checkboxes need aria-label="Select all" / "Select row".</td></tr></tbody></table></div><h2 id="composition">Composition</h2><div class="ds-composition-grid"><div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Inside .table-wrap with toolbar</div><div class="ds-composition-item">Filter bar above table</div><div class="ds-composition-item">Badges in status columns</div><div class="ds-composition-item">User-cell pattern for entity columns</div></div></div><div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">Full-size buttons in action columns (use ghost-sm)</div><div class="ds-composition-item">Bare table without .table-wrap</div><div class="ds-composition-item">More than 8 columns without horizontal scroll</div></div></div></div><h2 id="best-practices">Best Practices</h2><div class="ds-bp-grid"><div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Keep action columns minimal — 2 ghost-sm buttons max per row.</div><div class="ds-bp-reason">Dense action columns overwhelm the data.</div></div></div><div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Full-size .btn buttons in every table row cell.</div><div class="ds-bp-reason">Buttons overpower the data and waste row height.</div></div></div></div><h2 id="related">Related Components</h2><div class="ds-related-grid"><a href="pagination.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg></div><div class="ds-related-card-name">Pagination</div><div class="ds-related-card-desc">Table navigation</div></a><a href="badge.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg></div><div class="ds-related-card-name">Badge</div><div class="ds-related-card-desc">Status in columns</div></a><a href="empty-state.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg></div><div class="ds-related-card-name">Empty State</div><div class="ds-related-card-desc">No rows fallback</div></a></div><h2 id="content">Content Rules</h2><div class="ds-content-rules"><div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good column header</div><div class="ds-content-example">Last Login</div><div class="ds-content-reason">Noun phrase. Concise. 10px UPPERCASE.</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad column header</div><div class="ds-content-example">The Date When The User Last Logged In</div><div class="ds-content-reason">Column headers must be short — max 2-3 words.</div></div></div><div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Empty state message</div><div class="ds-content-example">No users found · Try adjusting your filters.</div><div class="ds-content-reason">Specific entity + actionable guidance.</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad empty state</div><div class="ds-content-example">No data</div><div class="ds-content-reason">Vague, provides no path forward.</div></div></div></div>
+
+  <div id="ds-prev-next"></div>
+</article>
+<aside class="ds-toc" id="ds-toc"></aside>
+</div>
+</div>
+<script>window.DS_ACTIVE_PAGE = 'table';</script>
+<script src="../shared/ds-shell.js"></script>
+</body>
+</html>

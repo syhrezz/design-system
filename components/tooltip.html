@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tooltip — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+[data-tip]{position:relative;cursor:help;}
+[data-tip]::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#0F172A;color:#fff;font-size:11px;font-weight:500;padding:6px 10px;border-radius:7px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:9999;font-family:'Plus Jakarta Sans',sans-serif;line-height:1.4;max-width:220px;white-space:normal;text-align:center;}
+[data-tip]::before{content:'';position:absolute;bottom:calc(100% + 3px);left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#0F172A;opacity:0;transition:opacity .15s;pointer-events:none;}
+[data-tip]:hover::after,[data-tip]:hover::before{opacity:1;}
+[data-tip-bottom]::after{top:calc(100% + 8px);bottom:auto;}
+[data-tip-bottom]::before{top:calc(100% + 3px);bottom:auto;border-top-color:transparent;border-bottom-color:#0F172A;}
+[data-tip-left]::after{right:calc(100% + 8px);left:auto;bottom:50%;transform:translateY(50%);}
+[data-tip-left]::before{right:calc(100% + 3px);left:auto;bottom:50%;transform:translateY(50%);border-top-color:transparent;border-left-color:#0F172A;}
+[data-tip-right]::after{left:calc(100% + 8px);right:auto;bottom:50%;transform:translateY(50%);}
+[data-tip-right]::before{left:calc(100% + 3px);right:auto;bottom:50%;transform:translateY(50%);border-top-color:transparent;border-right-color:#0F172A;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .2s;border:none;}
+.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}
+.btn-outline:hover{border-color:#6366F1;color:#6366F1;background:#EEF2FF;}
+</style>
+</head><body><div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">N</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar"><nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Components</a><span>/</span><strong>Tooltip</strong></nav><div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div></header>
+<div class="ds-main"><article class="ds-page">
+  <div class="ds-page-header"><div class="ds-page-meta"><span class="ds-meta-badge stable">Stable</span><span class="ds-meta-badge type">Overlay</span></div>
+    <h1>Tooltip</h1>
+    <p class="ds-page-lead">Tooltips provide brief contextual information on hover. Syhrezz uses a pure CSS tooltip system via the <code>data-tip</code> attribute — no JavaScript required. Four position variants: top (default), bottom, left, right.</p>
+  </div>
+  <h2 id="overview">Overview</h2>
+  <p>Add <code>data-tip="Your tooltip text"</code> to any element. The tooltip appears on hover via CSS <code>::before</code> and <code>::after</code> pseudo-elements. No JS, no wrapper elements. The element must be <code>position:relative</code> — add <code>cursor:help</code> for info tooltips or <code>cursor:pointer</code> for action tooltips.</p>
+  <h2 id="positions">Positions</h2>
+  <div class="ds-example">
+    <div class="ds-example-toolbar"><span class="ds-example-title">All 4 positions (hover each button)</span><button class="ds-show-source-btn">Show source</button></div>
+    <div class="ds-preview" style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;padding:40px 20px">
+      <button class="btn btn-outline" data-tip="This appears above the element">Top (default)</button>
+      <button class="btn btn-outline" data-tip-bottom data-tip="This appears below the element">Bottom</button>
+      <button class="btn btn-outline" data-tip-left data-tip="This appears to the left">Left</button>
+      <button class="btn btn-outline" data-tip-right data-tip="This appears to the right">Right</button>
+    </div>
+    <div class="ds-code-block" style="display:none"><button class="ds-copy-btn">Copy</button><pre><code><span class="cm">&lt;!-- Top (default) --&gt;</span>
+<span class="kw">&lt;button</span> <span class="prop">data-tip</span>=<span class="str">"Tooltip text appears above"</span><span class="kw">&gt;</span>Hover me<span class="kw">&lt;/button&gt;</span>
+
+<span class="cm">&lt;!-- Bottom --&gt;</span>
+<span class="kw">&lt;button</span> <span class="prop">data-tip-bottom</span> <span class="prop">data-tip</span>=<span class="str">"Tooltip text appears below"</span><span class="kw">&gt;</span>Hover me<span class="kw">&lt;/button&gt;</span>
+
+<span class="cm">&lt;!-- Left --&gt;</span>
+<span class="kw">&lt;button</span> <span class="prop">data-tip-left</span> <span class="prop">data-tip</span>=<span class="str">"Tooltip text appears left"</span><span class="kw">&gt;</span>Hover me<span class="kw">&lt;/button&gt;</span>
+
+<span class="cm">&lt;!-- Right --&gt;</span>
+<span class="kw">&lt;button</span> <span class="prop">data-tip-right</span> <span class="prop">data-tip</span>=<span class="str">"Tooltip text appears right"</span><span class="kw">&gt;</span>Hover me<span class="kw">&lt;/button&gt;</span></code></pre></div>
+  </div>
+  <h2 id="usage">Common Use Cases</h2>
+  <div class="ds-preview" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+    <span data-tip="Location data refreshes periodically" style="display:inline-flex;align-items:center;gap:4px;font-size:13px;color:#64748B;cursor:help">
+      Location Status
+      <svg style="width:14px;height:14px;color:#94A3B8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    </span>
+    <button class="btn btn-outline" data-tip="Export all data as CSV file">
+      <svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+      Export
+    </button>
+    <span data-tip="This action cannot be undone" style="display:inline-flex">
+      <button class="btn" style="background:#F05252;color:#fff;padding:8px 16px;font-size:12px;border-radius:8px;border:none;cursor:pointer">Delete</button>
+    </span>
+  </div>
+  <h2 id="tokens">Token Reference</h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Property</th><th>Value</th></tr></thead><tbody>
+    <tr><td>Background</td><td class="default">#0F172A (--sidebar-bg)</td></tr>
+    <tr><td>Text color</td><td class="default">#fff</td></tr>
+    <tr><td>Font size</td><td class="default">11px, fw-500</td></tr>
+    <tr><td>Padding</td><td class="default">6px 10px</td></tr>
+    <tr><td>Border radius</td><td class="default">7px (--r-xs + 1px)</td></tr>
+    <tr><td>Max width</td><td class="default">220px (wraps long text)</td></tr>
+    <tr><td>Offset from element</td><td class="default">8px gap</td></tr>
+    <tr><td>Arrow size</td><td class="default">5px border triangle</td></tr>
+    <tr><td>Animation</td><td class="default">opacity 0→1, 0.15s ease</td></tr>
+    <tr><td>z-index</td><td class="default">9999 (always on top)</td></tr>
+  </tbody></table></div>
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Tooltips are purely CSS — no JavaScript needed. Add <code>data-tip="text"</code> to any element. The element must have <code>position:relative</code> (or be a block/inline-block element). For bottom position add the boolean attribute <code>data-tip-bottom</code> in addition to <code>data-tip</code>. Tooltip text must be plain text only — no HTML inside <code>data-tip</code>. For long tooltip text, the <code>max-width:220px</code> rule will wrap it automatically.</div>
+  </div>
+  <h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Tooltip when</div><ul class="ds-when-list"><li>Explaining icon-only buttons (aria complement)</li><li>Showing additional context for truncated text</li><li>Providing keyboard shortcut hints</li><li>Explaining technical terms inline</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Tooltip when</div><ul class="ds-when-list"><li>Critical information users must see — use hint text or alert</li><li>Long explanations (&gt;2 sentences) — use a popover</li><li>On mobile — tooltips require hover, unavailable on touch</li></ul></div>
+</div>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">data-tip</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Tooltip text. Plain text only. Max 220px width with automatic wrapping.</td></tr>
+  <tr><td><span class="ds-prop-name">position</span></td><td><span class="ds-prop-type">attribute</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">top</span></td><td class="ds-prop-desc">Add positional attribute for other directions.<div class="ds-prop-values">data-tip (top) | data-tip-bottom | data-tip-left | data-tip-right</div></td></tr>
+</tbody></table>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why pure CSS instead of JavaScript?</div><div class="ds-decision-a">CSS-only tooltips via data-tip attribute require zero JavaScript, zero DOM manipulation, and zero event listeners. They work instantly, have no bundle cost, and degrade gracefully. The tradeoff is no smart positioning — tooltips can be clipped at viewport edges. For simple contextual hints, this tradeoff is acceptable.</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>Pure CSS implementation via data-tip attribute</li><li>4 positions: top, bottom, left, right</li><li>0.15s fade-in opacity transition</li></ul></div></div></div><h2 id="states">States</h2><p>Tooltips have two states: hidden (default, opacity:0, pointer-events:none) and visible (on :hover of parent, opacity:1). Transition: opacity 0.15s ease. No other states apply.</p><h2 id="accessibility">Accessibility</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody><tr><td>aria-label supplement</td><td>Tooltips are visible supplements — never the sole source of information. Icon-only buttons must have aria-label even if they have a tooltip.</td></tr><tr><td>Touch devices</td><td>CSS :hover tooltips do not work on touch devices. Ensure all tooltip content is also accessible without hover.</td></tr><tr><td>Screen readers</td><td>Tooltip content (via data-tip) is NOT read by screen readers — it is a CSS pseudo-element. Use aria-label or title for assistive technology.</td></tr></tbody></table></div><h2 id="composition">Composition</h2><div class="ds-composition-grid"><div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">On icon-only buttons (supplements aria-label)</div><div class="ds-composition-item">On truncated text to show full content</div><div class="ds-composition-item">On info SVG icons next to labels</div></div></div><div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">On mobile — hover not available on touch</div><div class="ds-composition-item">For critical information users must act on</div><div class="ds-composition-item">With HTML content inside data-tip</div></div></div></div><h2 id="best-practices">Best Practices</h2><div class="ds-bp-grid"><div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Use tooltips to supplement information, never as the only way to convey it.</div><div class="ds-bp-reason">Tooltips are invisible until hover — critical info must be visible by default.</div></div></div><div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Rely on tooltip text as the aria-label replacement for icon buttons.</div><div class="ds-bp-reason">aria-label must be on the element itself — tooltips are CSS-only and not announced by screen readers.</div></div></div></div><h2 id="related">Related Components</h2><div class="ds-related-grid"><a href="button.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></div><div class="ds-related-card-name">Button</div><div class="ds-related-card-desc">Icon-only buttons</div></a></div><h2 id="anatomy">Anatomy</h2><div class="ds-anatomy-parts"><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Trigger Element</div><div class="ds-anatomy-part-desc">Any element with data-tip attribute. Must be position:relative (or block/inline-block). cursor:help for informational tooltips.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Tooltip Body (::after)</div><div class="ds-anatomy-part-desc">CSS pseudo-element. bg:#0F172A, color:#fff, 11px fw-500, padding:6px 10px, radius:7px, max-width:220px. Offset 8px from element.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Arrow (::before)</div><div class="ds-anatomy-part-desc">CSS border triangle (5px). Color matches tooltip bg. Positioned between element and tooltip body.</div></div></div><h2 id="content">Content Rules</h2><div class="ds-content-rules"><div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good tooltip text</div><div class="ds-content-example">Export all data as CSV file</div><div class="ds-content-reason">Plain text, brief, explains what happens</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad tooltip text</div><div class="ds-content-example">Click this button to begin the process of exporting your data...</div><div class="ds-content-reason">Too long. Tooltips should be 1 short sentence max.</div></div></div></div>
+
+  <h2 id="behavior">Behavior</h2><p>Tooltips are CSS-only — no JavaScript involved. They appear on <code>:hover</code> of the parent element via <code>::after</code> pseudo-element with <code>opacity:0 → opacity:1</code> at 0.15s ease. They disappear immediately when hover ends. Position is fixed relative to the trigger element — they do not reposition to avoid viewport edges. On touch devices, tooltips are not accessible (no hover). Always ensure the information in the tooltip is also accessible through another means on touch.</p><div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 'tooltip';</script>
+<script src="../shared/ds-shell.js"></script>
+</body></html>

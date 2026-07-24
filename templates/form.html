@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Form Page Template — Syhrezz Design System</title><link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}.btn-primary{background:#6366F1;color:#fff;}.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}.btn-sm{padding:6px 12px;font-size:12px;border-radius:8px;}.tpl-section{background:#EEF2FF;border:2px dashed #C7D2FE;border-radius:10px;padding:12px 16px;font-size:11px;font-weight:700;color:#6366F1;text-align:center;margin-bottom:8px;}.form-group{margin-bottom:14px;}.form-label{display:block;font-size:12px;font-weight:700;color:#64748B;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}.input{width:100%;padding:9px 12px;border-radius:10px;border:1px solid #E2E8F0;font-size:13px;font-family:inherit;outline:none;color:#0F172A;background:#fff;}.input:focus{border-color:#3B5BDB;box-shadow:0 0 0 3px rgba(59,91,219,.1);}</style>
+</head><body><div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">N</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar"><nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Templates</a><span>/</span><strong>Form Page Template</strong></nav><div class="ds-topbar-right"><span class="ds-topbar-tag">Template</span></div></header>
+<div class="ds-main"><article class="ds-page ds-page-wide">
+  <div class="ds-page-header"><div class="ds-page-meta"><span class="ds-meta-badge new">Template</span></div>
+    <h1>Form Page Template</h1>
+    <p class="ds-page-lead">The form page template is used for standalone create/edit pages where the form is too complex for a modal. It wraps the form in a card with a clear page header, sectioned fields, and a sticky footer with actions.</p>
+  </div>
+  <h2 id="wireframe">Wireframe</h2>
+  <div class="ds-preview ds-preview-surface">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <div class="tpl-section" style="margin:0;padding:8px 14px;flex:0">← Back</div>
+      <div class="tpl-section" style="margin:0;padding:8px 14px;flex:1">Page Title (e.g. "Edit User Profile")</div>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px">
+      <div>
+        <div class="tpl-section" style="padding:8px">Section: Basic Information</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+          <div class="tpl-section" style="margin:0;padding:20px">Full Name</div>
+          <div class="tpl-section" style="margin:0;padding:20px">Email</div>
+        </div>
+        <div class="tpl-section" style="padding:8px">Section: Assignment</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+          <div class="tpl-section" style="margin:0;padding:20px">Role</div>
+          <div class="tpl-section" style="margin:0;padding:20px">Region</div>
+        </div>
+        <div class="tpl-section" style="padding:8px">Section: Notes</div>
+        <div class="tpl-section" style="padding:32px;margin-bottom:0">Textarea</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="tpl-section" style="padding:32px">Summary / Preview card</div>
+        <div class="tpl-section" style="padding:24px">Danger zone (Delete option)</div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #C7D2FE;margin-top:12px;padding-top:12px;display:flex;justify-content:flex-end;gap:8px">
+      <div class="tpl-section" style="margin:0;padding:6px 14px;flex:0">Cancel</div>
+      <div class="tpl-section" style="margin:0;padding:6px 14px;flex:0">Save Changes</div>
+    </div>
+  </div>
+  <h2 id="sections">Form Sections</h2>
+  <p>Long forms use section headers to group related fields. Section headers are 14px fw-700 with a bottom border, margin-bottom:20px. Each section is separated by margin-top:28px.</p>
+  <div class="ds-preview" style="max-width:600px">
+    <div style="font-size:14px;font-weight:700;color:#0F172A;padding-bottom:10px;border-bottom:1px solid #E2E8F0;margin-bottom:18px">Basic Information</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px">
+      <div class="form-group" style="margin:0"><label class="form-label">First Name</label><input class="input" type="text" placeholder="First name"/></div>
+      <div class="form-group" style="margin:0"><label class="form-label">Last Name</label><input class="input" type="text" placeholder="Last name"/></div>
+    </div>
+    <div class="form-group"><label class="form-label">Email Address</label><input class="input" type="email" placeholder="user@Syhrezz.id"/></div>
+    <div style="font-size:14px;font-weight:700;color:#0F172A;padding-bottom:10px;border-bottom:1px solid #E2E8F0;margin:28px 0 18px">Assignment</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="form-group" style="margin:0"><label class="form-label">Role</label><select class="input"><option value="">Select...</option><option>Supervisor</option><option>Sales</option></select></div>
+      <div class="form-group" style="margin:0"><label class="form-label">Region</label><select class="input"><option value="">Select...</option><option>Jakarta</option><option>Surabaya</option></select></div>
+    </div>
+  </div>
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Form page uses <code>display:grid; grid-template-columns:2fr 1fr; gap:16px</code> for main layout — form on left, summary/preview on right. Section headers use 14px fw-700 with <code>border-bottom:1px solid var(--border)</code> and <code>margin-bottom:18px</code>. Two-column field pairs inside sections use CSS Grid <code>grid-template-columns:1fr 1fr; gap:14px</code>. Cancel always navigates back. Save shows loading spinner then success toast on completion.</div>
+  </div>
+<div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 't-form';</script>
+<script src="../shared/ds-shell.js"></script></body></html>

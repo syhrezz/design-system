@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>List Page Template — Syhrezz Design System</title><link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}.btn-primary{background:#6366F1;color:#fff;}.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}.btn-sm{padding:6px 12px;font-size:12px;border-radius:8px;}.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:700;}.badge-success{background:#DEF7EC;color:#03543F;}.badge-warning{background:#FEF3C7;color:#92400E;}.badge-info{background:#E1EFFE;color:#1E429F;}.badge-dot::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;display:inline-block;}.tpl-section{background:#EEF2FF;border:2px dashed #C7D2FE;border-radius:10px;padding:12px 16px;font-size:11px;font-weight:700;color:#6366F1;text-align:center;margin-bottom:8px;}.form-group{margin-bottom:14px;}.form-label{display:block;font-size:12px;font-weight:700;color:#64748B;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}.input{width:100%;padding:9px 12px;border-radius:10px;border:1px solid #E2E8F0;font-size:13px;font-family:inherit;outline:none;color:#0F172A;background:#fff;}</style>
+</head><body><div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">N</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar"><nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Templates</a><span>/</span><strong>List Page Template</strong></nav><div class="ds-topbar-right"><span class="ds-topbar-tag">Template</span></div></header>
+<div class="ds-main"><article class="ds-page ds-page-wide">
+  <div class="ds-page-header"><div class="ds-page-meta"><span class="ds-meta-badge new">Template</span></div>
+    <h1>List Page Template</h1>
+    <p class="ds-page-lead">The list page is the standard template for browsable data collections: users, customers, prospects, products, and transactions. It combines a filter bar with a full CRUD table.</p>
+  </div>
+  <h2 id="wireframe">Wireframe</h2>
+  <div class="ds-preview ds-preview-surface">
+    <div class="tpl-section">Page Header — h1 + subtitle + "Add [Item]" button</div>
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <div class="tpl-section" style="flex:2;margin:0">Search input (icon left)</div>
+      <div class="tpl-section" style="flex:1;margin:0">Select: Role/Status</div>
+      <div class="tpl-section" style="flex:1;margin:0">Select: Region</div>
+    </div>
+    <div class="tpl-section" style="padding:40px">Table Wrap (toolbar + table + pagination)</div>
+    <div class="tpl-section" style="opacity:.5">Empty State (shown when data.length === 0)</div>
+    <div class="tpl-section" style="opacity:.3">Add/Edit Modal (hidden by default)</div>
+    <div class="tpl-section" style="opacity:.3">Delete Confirm Modal (hidden by default)</div>
+  </div>
+  <h2 id="structure">Structure</h2>
+  <div class="ds-code-block"><button class="ds-copy-btn">Copy</button><pre><code><span class="cm">/* List page HTML structure */</span>
+&lt;main&gt;
+  &lt;div class="content"&gt;
+    <span class="cm">1. Page header</span>
+    &lt;div class="page-header"&gt;...&lt;/div&gt;
+
+    <span class="cm">2. Filter bar</span>
+    &lt;div class="filter-bar"&gt;
+      &lt;div class="filter-item"&gt;&lt;input class="input" type="search"/&gt;&lt;/div&gt;
+      &lt;div class="filter-item"&gt;&lt;select class="input"&gt;...&lt;/select&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    <span class="cm">3. Table</span>
+    &lt;div class="table-wrap"&gt;
+      &lt;div class="table-toolbar"&gt;...&lt;/div&gt;
+      &lt;table&gt;...&lt;/table&gt;
+      &lt;div class="table-pagination"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+
+    <span class="cm">4. Empty state (conditional)</span>
+    &lt;div class="empty-state" id="emptyState" style="display:none"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/main&gt;
+
+<span class="cm">5. Modals (outside main, inside body)</span>
+&lt;div class="modal-overlay" id="addModal"&gt;...&lt;/div&gt;
+&lt;div class="modal-overlay" id="deleteModal"&gt;...&lt;/div&gt;</code></pre></div>
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content"><strong>For AI coding assistants:</strong> The modals must be placed OUTSIDE the main content area but INSIDE the body tag — at the bottom of the page. The filter bar uses <code>display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px</code>. Filters trigger instantly on change event. The empty state div is shown/hidden based on whether the filtered data array is empty. Always include both an "add" modal and a "delete confirm" modal — even if the page only demonstrates read-only behavior.</div>
+  </div>
+<div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 't-list';</script>
+<script src="../shared/ds-shell.js"></script></body></html>

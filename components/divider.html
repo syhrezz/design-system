@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Divider - Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}.btn-primary{background:#6366F1;color:#fff;}.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}.btn-sm{padding:6px 12px;font-size:12px;border-radius:8px;}.form-group{margin-bottom:16px;}.form-label{display:block;font-size:12px;font-weight:700;color:#64748B;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;}</style>
+</head><body>
+<div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">S</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Components</a><span>/</span><strong>Divider</strong></nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main"><article class="ds-page">
+<div class="ds-page-header-full">
+  <div class="ds-status-bar"><span class="ds-status-badge stable">Stable</span><span class="ds-version-badge">v1.0.0</span><span class="ds-meta-badge type">Layout</span></div>
+  <h1>Divider</h1>
+</div>
+<p class="ds-page-lead">Dividers are thin visual separators that create clear boundaries between content sections. They can be horizontal (between rows) or vertical (between columns), and optionally carry a text label.</p>
+<h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Divider when</div><ul class="ds-when-list"><li>Separating distinct groups within a card</li><li>Between form sections</li><li>Dropdown menu item groups</li><li>"or" separators between actions (e.g. login form)</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Divider when</div><ul class="ds-when-list"><li>Spacing alone is sufficient — use margin/gap</li><li>Between every item — creates visual noise</li><li>Cards already provide visual separation</li></ul></div>
+</div>
+<h2 id="anatomy">Anatomy</h2>
+<style>
+.divider{border:none;border-top:1px solid #E2E8F0;margin:16px 0;}
+.divider-label{display:flex;align-items:center;gap:12px;margin:16px 0;color:#94A3B8;font-size:12px;font-weight:600;white-space:nowrap;}
+.divider-label::before,.divider-label::after{content:'';flex:1;border-top:1px solid #E2E8F0;}
+.divider-vertical{width:1px;background:#E2E8F0;align-self:stretch;margin:0 12px;}
+</style>
+<div class="ds-anatomy-parts">
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Line</div><div class="ds-anatomy-part-desc">1px solid #E2E8F0. For horizontal: border-top. For vertical: width:1px, background:#E2E8F0. Use &lt;hr&gt; for semantic horizontal dividers.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Label (optional)</div><div class="ds-anatomy-part-desc">Centered text between two lines. 12px fw-600 color:#94A3B8. Lines extend to fill remaining width via flex:1 pseudo-elements.</div></div>
+</div>
+<h2 id="variants">Variants</h2>
+<div class="ds-preview" style="display:flex;flex-direction:column;gap:24px">
+  <div><div class="ds-preview-label">Horizontal (default)</div><hr class="divider"/></div>
+  <div><div class="ds-preview-label">With label</div><div class="divider-label">or</div></div>
+  <div><div class="ds-preview-label">With section label</div><div class="divider-label">Account Settings</div></div>
+  <div><div class="ds-preview-label">Vertical (inline)</div><div style="display:flex;align-items:center;height:40px"><span style="font-size:13px;color:#64748B">Item 1</span><div class="divider-vertical"></div><span style="font-size:13px;color:#64748B">Item 2</span><div class="divider-vertical"></div><span style="font-size:13px;color:#64748B">Item 3</span></div></div>
+</div>
+<h2 id="states">States</h2>
+<p>Dividers are purely presentational — no interactive states apply. They render statically and do not respond to any user interaction.</p>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">orientation</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">'horizontal'</span></td><td class="ds-prop-desc"><div class="ds-prop-values">'horizontal' | 'vertical'</div></td></tr>
+  <tr><td><span class="ds-prop-name">label</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Optional text in the center of a horizontal divider.</td></tr>
+  <tr><td><span class="ds-prop-name">spacing</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">'md'</span></td><td class="ds-prop-desc">Vertical margin above and below.<div class="ds-prop-values">'sm'(8px) | 'md'(16px) | 'lg'(24px)</div></td></tr>
+</tbody></table>
+<h2 id="behavior">Behavior</h2><p>Dividers are static. No behavior. They render as a visible line. Labeled dividers use CSS ::before and ::after pseudo-elements on the wrapper div to create the extending lines.</p>
+<h2 id="accessibility">Accessibility</h2>
+<div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody>
+  <tr><td>Horizontal dividers</td><td>Use &lt;hr&gt; element for semantic horizontal dividers. Adds role="separator" automatically.</td></tr>
+  <tr><td>Decorative dividers</td><td>If purely decorative (visual only), add aria-hidden="true".</td></tr>
+  <tr><td>Labeled dividers</td><td>Use a div with the label text — no special ARIA needed.</td></tr>
+</tbody></table></div>
+<h2 id="composition">Composition</h2>
+<div class="ds-composition-grid">
+  <div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Between form sections in a card</div><div class="ds-composition-item">Dropdown item group separator</div><div class="ds-composition-item">"or" between login options</div><div class="ds-composition-item">Vertical between toolbar buttons</div></div></div>
+  <div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">Between every list item — use row borders</div><div class="ds-composition-item">Between cards — use gap instead</div></div></div>
+</div>
+<h2 id="best-practices">Best Practices</h2>
+<div class="ds-bp-grid">
+  <div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Use dividers sparingly — only when spacing alone isn't enough to signal a content boundary.</div><div class="ds-bp-reason">Too many dividers create visual noise and reduce readability.</div></div></div>
+  <div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Add dividers between every card, every section, and every item on a page.</div><div class="ds-bp-reason">Over-dividing fragments the layout and makes it harder to scan.</div></div></div>
+</div>
+<h2 id="content">Content Rules</h2>
+<div class="ds-content-rules">
+  <div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good label</div><div class="ds-content-example">or</div><div class="ds-content-reason">Single word, lowercase, concise.</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad label</div><div class="ds-content-example">--- OR CHOOSE ANOTHER OPTION ---</div><div class="ds-content-reason">Excessive decoration. The divider lines provide enough visual separation.</div></div></div>
+</div>
+<h2 id="ai-spec">AI Implementation Guide</h2>
+<div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+  <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Horizontal divider: &lt;hr class="divider"&gt; with border-top:1px solid #E2E8F0. Labeled divider: &lt;div class="divider-label"&gt;or&lt;/div&gt; with ::before/::after pseudo-elements (flex:1, border-top). Vertical: width:1px, background:#E2E8F0, align-self:stretch. Color is always #E2E8F0 — never change this.</div>
+</div>
+<h2 id="related">Related Components</h2>
+<div class="ds-related-grid">
+  <a href="card.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/></svg></div><div class="ds-related-card-name">Card</div><div class="ds-related-card-desc">Container that uses dividers internally</div></a>
+  <a href="dropdown.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div><div class="ds-related-card-name">Dropdown</div><div class="ds-related-card-desc">Uses dividers between menu groups</div></a>
+</div>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why #E2E8F0 specifically?</div><div class="ds-decision-a">This is the --border token — the same color used for card borders, input borders, and table row borders. Using the same color for dividers ensures visual consistency. A divider should be subtle — barely there — just enough to signal a boundary without drawing attention to itself.</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>Initial release — horizontal, vertical, and labeled variants</li><li>Uses --border token for consistent color</li></ul></div></div></div>
+<div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 'divider';</script>
+<script src="../shared/ds-shell.js"></script>
+</body></html>

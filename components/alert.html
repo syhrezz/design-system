@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Alert — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.alert{border-radius:12px;padding:14px 18px;display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;}
+.alert-icon{width:18px;height:18px;flex-shrink:0;margin-top:1px;}
+.alert-content{flex:1;font-size:13px;line-height:1.6;}
+.alert-content strong{font-weight:700;}
+.alert-action{flex-shrink:0;}
+.alert-warning{background:linear-gradient(135deg,#FEF3C7,#FFFBEB);border:1px solid #FCD34D;}
+.alert-warning .alert-content{color:#92400E;}
+.alert-danger{background:#FDE2E2;border:1px solid #FCA5A5;}
+.alert-danger .alert-content{color:#9B1C1C;}
+.alert-info{background:#E1EFFE;border:1px solid #BFDBFE;}
+.alert-info .alert-content{color:#1E429F;}
+.alert-success{background:#DEF7EC;border:1px solid #6EE7B7;}
+.alert-success .alert-content{color:#03543F;}
+.alert-dismissible{position:relative;}
+.alert-close{background:none;border:none;cursor:pointer;opacity:.5;transition:opacity .15s;padding:0;line-height:1;font-size:16px;flex-shrink:0;}
+.alert-close:hover{opacity:1;}
+.btn-sm{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}
+.btn-outline-warning{background:transparent;color:#92400E;border:1px solid #F59E0B;}
+.btn-outline-warning:hover{background:#FFFBEB;}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-header">
+    <div class="ds-sidebar-logo">
+      <div class="ds-sidebar-logo-icon">N</div>
+      <div class="ds-sidebar-logo-text">
+        <div class="ds-sidebar-logo-name">Syhrezz</div>
+        <div class="ds-sidebar-logo-version">v1.0</div>
+      </div>
+    </div>
+    <div class="ds-search-wrap">
+      <div class="ds-search-box">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/>
+        <span class="ds-search-kbd">&#8984;K</span>
+      </div>
+      <div id="ds-search-results"></div>
+    </div>
+  </div>
+  <nav class="ds-sidebar-nav" id="ds-nav-links"></nav>
+</aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb">
+    <a href="../index.html">Syhrezz</a><span>/</span>
+    <a href="#">Components</a><span>/</span>
+    <strong>Alert</strong>
+  </nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main">
+<article class="ds-page">
+  <div class="ds-page-header">
+    <div class="ds-page-meta">
+      <span class="ds-meta-badge stable">Stable</span>
+      <span class="ds-meta-badge type">Feedback</span>
+    </div>
+    <h1>Alert</h1>
+    <p class="ds-page-lead">Alerts are persistent inline banners that communicate page-level status, warnings, or information. Unlike toasts, they do not auto-dismiss and are embedded in the page layout.</p>
+  </div>
+
+  <h2 id="overview">Overview</h2>
+  <p>Use alerts when the information is important enough to remain visible while the user interacts with the page. Alerts appear below the page header, above the main content area. They use the same semantic color system as badges and toasts but with border-radius:12px and a bordered style.</p>
+
+  <div class="ds-callout ds-callout-info">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <div class="ds-callout-content"><strong>Alert vs Toast:</strong> Use an <strong>Alert</strong> when the message must remain visible for the user to act on. Use a <strong>Toast</strong> for transient feedback after a user action (save, delete, etc.).</div>
+  </div>
+
+  <!-- VARIANTS -->
+  <h2 id="variants">Variants</h2>
+  <div class="ds-example">
+    <div class="ds-example-toolbar"><span class="ds-example-title">All Alert Types</span><button class="ds-show-source-btn">Show source</button></div>
+    <div class="ds-preview" style="display:flex;flex-direction:column;gap:0">
+      <div class="alert alert-warning">
+        <svg class="alert-icon" fill="none" viewBox="0 0 24 24" stroke="#E3A008"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        <div class="alert-content"><strong>Attention:</strong> 3 team members have not checked in today. Location data may be outdated.</div>
+        <button class="btn-sm btn-outline-warning alert-action">View</button>
+      </div>
+      <div class="alert alert-danger">
+        <svg class="alert-icon" fill="none" viewBox="0 0 24 24" stroke="#F05252"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <div class="alert-content"><strong>Note:</strong> Temporary password will be auto-generated. User must change it on first login.</div>
+      </div>
+      <div class="alert alert-info">
+        <svg class="alert-icon" fill="none" viewBox="0 0 24 24" stroke="#3B5BDB"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <div class="alert-content">Showing data for the last 6 months. Use the date range filter in the topbar to adjust.</div>
+      </div>
+      <div class="alert alert-success" style="margin-bottom:0">
+        <svg class="alert-icon" fill="none" viewBox="0 0 24 24" stroke="#0E9F6E"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+        <div class="alert-content">All systems operational. Last backup completed 2 hours ago.</div>
+      </div>
+    </div>
+    <div class="ds-code-block" style="display:none">
+      <button class="ds-copy-btn">Copy</button>
+      <pre><code><span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"alert alert-warning"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;svg</span> <span class="prop">class</span>=<span class="str">"alert-icon"</span> <span class="prop">fill</span>=<span class="str">"none"</span> <span class="prop">viewBox</span>=<span class="str">"0 0 24 24"</span> <span class="prop">stroke</span>=<span class="str">"#E3A008"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/svg&gt;</span>
+  <span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"alert-content"</span><span class="kw">&gt;&lt;strong&gt;</span>Attention:<span class="kw">&lt;/strong&gt;</span> Your message here.<span class="kw">&lt;/div&gt;</span>
+  <span class="cm">&lt;!-- optional action button --&gt;</span>
+  <span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"btn-sm btn-outline-warning alert-action"</span><span class="kw">&gt;</span>View<span class="kw">&lt;/button&gt;</span>
+<span class="kw">&lt;/div&gt;</span>
+
+<span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"alert alert-danger"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"alert alert-info"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"alert alert-success"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;</span></code></pre>
+    </div>
+  </div>
+
+  <!-- TOKEN TABLE -->
+  <h2 id="tokens">Token Reference</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Variant</th><th>Background</th><th>Border</th><th>Text Color</th><th>Icon Stroke</th></tr></thead>
+      <tbody>
+        <tr><td>warning</td><td class="default">linear-gradient(135deg,#FEF3C7,#FFFBEB)</td><td class="default">#FCD34D</td><td class="default">#92400E</td><td class="default">#E3A008</td></tr>
+        <tr><td>danger</td><td class="default">#FDE2E2</td><td class="default">#FCA5A5</td><td class="default">#9B1C1C</td><td class="default">#F05252</td></tr>
+        <tr><td>info</td><td class="default">#E1EFFE</td><td class="default">#BFDBFE</td><td class="default">#1E429F</td><td class="default">#3B5BDB</td></tr>
+        <tr><td>success</td><td class="default">#DEF7EC</td><td class="default">#6EE7B7</td><td class="default">#03543F</td><td class="default">#0E9F6E</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AI SPEC -->
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content">
+      <strong>For AI coding assistants:</strong> Alerts are <code>&lt;div&gt;</code> elements with class <code>.alert .alert-{type}</code>. They always contain: an SVG icon with stroke color matching the type, a <code>.alert-content</code> div with the message, and an optional action button. The icon stroke color is ALWAYS the same as the warning/danger/info/success solid color token — not the text color. Place alerts immediately after the page header, before the main content grid.
+    </div>
+  </div>
+
+  <h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Alert when</div><ul class="ds-when-list"><li>Page-level status that must remain visible while user works</li><li>System warnings that affect the current page</li><li>Persistent errors that require user action</li><li>Important notes in forms (e.g. password policy)</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Alert when</div><ul class="ds-when-list"><li>Transient feedback — use Toast instead</li><li>Field-level validation — use form-error-msg</li><li>Modal-level warnings — use callout inside modal</li></ul></div>
+</div>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">type</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Semantic type.<div class="ds-prop-values">'warning' | 'danger' | 'info' | 'success'</div></td></tr>
+  <tr><td><span class="ds-prop-name">children</span></td><td><span class="ds-prop-type">ReactNode</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Alert message content. Can include strong tags for emphasis.</td></tr>
+  <tr><td><span class="ds-prop-name">action</span></td><td><span class="ds-prop-type">ReactNode</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Optional action button rendered on the right. Use .btn-sm with variant matching alert type.</td></tr>
+</tbody></table>
+<h2 id="behavior">Behavior</h2>
+<p>Alerts are static — they have no entrance animation, no auto-dismiss, and no interactive behavior unless an action button is explicitly added. They render when the condition is true and unmount when false. Place immediately after the page header, before the main content grid.</p>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why gradient background for warning alerts?</div><div class="ds-decision-a">Warning alerts use <code>linear-gradient(135deg,#FEF3C7,#FFFBEB)</code> instead of flat color. The subtle gradient adds warmth and visual interest that signals "this needs attention" more effectively than a flat background. It makes warnings feel more urgent than success/info alerts while remaining softer than danger.</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>4 semantic types: warning, danger, info, success</li><li>Optional action button slot</li><li>SVG icon replaces emoji for consistency</li></ul></div></div></div><h2 id="states">States</h2><p>Alert banners are static. They render when the condition is true and unmount when false. No hover, focus, or interactive states unless an action button is included.</p><h2 id="accessibility">Accessibility</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody><tr><td>role="alert"</td><td>Add to danger alerts. Triggers immediate screen reader announcement.</td></tr><tr><td>role="status"</td><td>Use for info/success alerts. Polite announcement, less urgent.</td></tr><tr><td>Color alone</td><td>Never rely on color only. Always include icon + text label together.</td></tr></tbody></table></div><h2 id="composition">Composition</h2><div class="ds-composition-grid"><div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Top of page content, below page header</div><div class="ds-composition-item">Inside modal body as a warning/note</div><div class="ds-composition-item">With optional action button on right</div></div></div><div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">Inside table cells or list rows</div><div class="ds-composition-item">More than 2 stacked on one page</div><div class="ds-composition-item">As replacement for toast notifications</div></div></div></div><h2 id="best-practices">Best Practices</h2><div class="ds-bp-grid"><div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#03543F;background:#DEF7EC;padding:10px;border-radius:8px">Place alert immediately after page header, before main content.</div><div class="ds-bp-reason">Users see the alert before engaging with page content.</div></div></div><div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#9B1C1C;background:#FDE2E2;padding:10px;border-radius:8px">Place alerts buried inside card content or after tables.</div><div class="ds-bp-reason">Users may miss the alert entirely.</div></div></div></div><h2 id="related">Related Components</h2><div class="ds-related-grid"><a href="toast.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg></div><div class="ds-related-card-name">Toast</div><div class="ds-related-card-desc">Transient feedback</div></a><a href="modal.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm0 8a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zm12 0a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg></div><div class="ds-related-card-name">Modal</div><div class="ds-related-card-desc">Blocking attention</div></a></div><h2 id="anatomy">Anatomy</h2><div class="ds-anatomy-parts"><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Container</div><div class="ds-anatomy-part-desc">div.alert.alert-{type}. border-radius:12px, padding:14px 18px, display:flex, border:1px, semantic background color.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Icon</div><div class="ds-anatomy-part-desc">Inline SVG, 18px, stroke matches semantic color (not text color). flex-shrink:0, margin-top:1px for alignment.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Content</div><div class="ds-anatomy-part-desc">div.alert-content. flex:1, font-size:13px, line-height:1.6. Can contain strong tags for emphasis.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">4</div><div class="ds-anatomy-part-name">Action (optional)</div><div class="ds-anatomy-part-desc">Optional .btn-sm on the right. flex-shrink:0. Use variant matching the alert type.</div></div></div>
+
+  <h2 id="content">Content Rules</h2>
+<div class="ds-content-rules">
+  <div class="ds-content-row">
+    <div class="ds-content-good"><div class="ds-content-label">Good</div><div class="ds-content-example">3 sales reps have not checked in today.</div><div class="ds-content-reason">Specific, actionable, present tense.</div></div>
+    <div class="ds-content-bad"><div class="ds-content-label">Bad</div><div class="ds-content-example">There is an error in the system.</div><div class="ds-content-reason">Vague — users cannot act on this.</div></div>
+  </div>
+  <div class="ds-content-row">
+    <div class="ds-content-good"><div class="ds-content-label">Good Action Label</div><div class="ds-content-example">View Details</div><div class="ds-content-reason">Describes exactly what clicking does.</div></div>
+    <div class="ds-content-bad"><div class="ds-content-label">Bad Action Label</div><div class="ds-content-example">Click Here</div><div class="ds-content-reason">Describes the interaction not the outcome.</div></div>
+  </div>
+</div><div id="ds-prev-next"></div>
+</article>
+<aside class="ds-toc" id="ds-toc"></aside>
+</div>
+</div>
+<script>window.DS_ACTIVE_PAGE = 'alert';</script>
+<script src="../shared/ds-shell.js"></script>
+</body>
+</html>

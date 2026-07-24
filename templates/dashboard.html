@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dashboard Template — Syhrezz Design System</title><link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}.btn-primary{background:#6366F1;color:#fff;}.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}.btn-sm{padding:6px 12px;font-size:12px;border-radius:8px;}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:700;}.badge-success{background:#DEF7EC;color:#03543F;}.badge-warning{background:#FEF3C7;color:#92400E;}.badge-info{background:#E1EFFE;color:#1E429F;}
+.tpl-section{background:#EEF2FF;border:2px dashed #C7D2FE;border-radius:10px;padding:12px 16px;font-size:11px;font-weight:700;color:#6366F1;text-align:center;margin-bottom:8px;}
+.form-group{margin-bottom:14px;}.form-label{display:block;font-size:12px;font-weight:700;color:#64748B;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}
+.input{width:100%;padding:9px 12px;border-radius:10px;border:1px solid #E2E8F0;font-size:13px;font-family:inherit;outline:none;color:#0F172A;background:#fff;}
+.input:focus{border-color:#3B5BDB;box-shadow:0 0 0 3px rgba(59,91,219,.1);}
+</style>
+</head><body><div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">N</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar"><nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Templates</a><span>/</span><strong>Dashboard Template</strong></nav><div class="ds-topbar-right"><span class="ds-topbar-tag">Template</span></div></header>
+<div class="ds-main"><article class="ds-page ds-page-wide">
+  <div class="ds-page-header"><div class="ds-page-meta"><span class="ds-meta-badge new">Template</span></div>
+    <h1>Dashboard Template</h1>
+    <p class="ds-page-lead">The standard dashboard page template for Sales and Manager roles. Combines KPI cards, charts, follow-up list, activity feed, data table, and todo list into the canonical Syhrezz dashboard layout.</p>
+  </div>
+  <h2 id="wireframe">Wireframe</h2>
+  <div class="ds-preview ds-preview-surface">
+    <div style="font-size:11px;font-weight:700;color:#0F172A;margin-bottom:12px;letter-spacing:-.2px">Page structure (top to bottom)</div>
+    <div class="tpl-section">Page Header — h1 + subtitle + action buttons</div>
+    <div class="tpl-section">Optional: Alert Banner (system warnings)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:8px">
+      <div class="tpl-section">KPI 1</div><div class="tpl-section">KPI 2</div><div class="tpl-section">KPI 3</div><div class="tpl-section">KPI 4</div>
+    </div>
+    <div style="display:grid;grid-template-columns:3fr 2fr;gap:8px;margin-bottom:8px">
+      <div class="tpl-section" style="padding:24px">Revenue Chart (Chart.js)</div>
+      <div class="tpl-section" style="padding:24px">Target Card (ring)</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+      <div class="tpl-section" style="padding:20px">Follow-up List</div>
+      <div class="tpl-section" style="padding:20px">Activity Feed</div>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:8px">
+      <div class="tpl-section" style="padding:20px">Data Table</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="tpl-section" style="padding:12px">Todo List</div>
+        <div class="tpl-section" style="padding:12px">Pipeline Donut</div>
+      </div>
+    </div>
+  </div>
+  <h2 id="components">Components Used</h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Section</th><th>Component</th><th>Notes</th></tr></thead><tbody>
+    <tr><td>Page header</td><td>h1 + p + .btn .btn-primary .btn-sm</td><td>24px fw-800, right-aligned actions</td></tr>
+    <tr><td>KPI grid</td><td>.kpi-card .kpi-{color} × 4</td><td>.fade-up .fu-1 through .fu-4 stagger</td></tr>
+    <tr><td>Revenue chart</td><td>Chart.js line, height:200px div</td><td>With period toggle buttons (1M/3M/6M)</td></tr>
+    <tr><td>Target card</td><td>SVG ring + .target-stat-grid</td><td>Dark gradient bg, 75% example</td></tr>
+    <tr><td>Follow-up list</td><td>.fu-item.overdue/.today/.upcoming</td><td>Left border color indicates urgency</td></tr>
+    <tr><td>Activity feed</td><td>.act-item with typed icon boxes</td><td>call/visit/deal/email icon bg colors</td></tr>
+    <tr><td>Data Table</td><td>.table-wrap + .user-cell + badges</td><td>Hot/warm/cold temperature badges</td></tr>
+    <tr><td>Todo list</td><td>.todo-item with priority dots</td><td>Red = high, amber = medium</td></tr>
+    <tr><td>Pipeline donut</td><td>Chart.js doughnut, cutout:68%</td><td>Colors: hot/warm/cold/deal palette</td></tr>
+  </tbody></table></div>
+  <h2 id="live">Working Reference</h2>
+  <p>The <code>sample-dashboard.html</code> file included with this design system is the canonical working implementation for this template — fully functional HTML with all components composed correctly, including animated KPI cards, Chart.js charts, follow-up list, activity feed, data table, todo list, and toast notifications.</p>
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Always include a toast container at the bottom of the page that auto-fires a welcome/info toast after 700ms. KPI cards use <code>.fade-up .fu-1</code> through <code>.fu-4</code> stagger animation. Charts require Chart.js CDN and must have <code>responsive:true, maintainAspectRatio:false</code> in options. The follow-up list left border colors are: overdue=#F05252, today=#E3A008, upcoming=#0E9F6E. Todo priority dots: red=#F05252 (high), amber=#E3A008 (medium), slate=#CBD5E1 (low).</div>
+  </div>
+<div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 't-dashboard';</script>
+<script src="../shared/ds-shell.js"></script></body></html>

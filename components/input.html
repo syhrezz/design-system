@@ -1,0 +1,360 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Input — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.form-group{margin-bottom:16px;}
+.form-label{display:block;font-size:12px;font-weight:700;color:#64748B;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;}
+.input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid #E2E8F0;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;outline:none;color:#0F172A;background:#fff;transition:border-color .2s,box-shadow .2s;}
+.input:hover{border-color:#CBD5E1;}
+.input:focus{border-color:#3B5BDB;box-shadow:0 0 0 3px rgba(59,91,219,.1);}
+.input::placeholder{color:#94A3B8;}
+.input:disabled{background:#F8FAFC;color:#94A3B8;cursor:not-allowed;opacity:.75;}
+.input:read-only{background:#F8FAFC;color:#64748B;}
+.input-error{border-color:#F05252!important;}
+.input-error:focus{box-shadow:0 0 0 3px rgba(240,82,82,.1)!important;}
+.input-success-state{border-color:#0E9F6E!important;}
+.input-success-state:focus{box-shadow:0 0 0 3px rgba(14,159,110,.1)!important;}
+.input-wrap{position:relative;}
+.input-icon-left{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#94A3B8;pointer-events:none;display:flex;align-items:center;}
+.input-icon-right{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#94A3B8;display:flex;align-items:center;cursor:pointer;}
+.input-wrap .input.has-icon-left{padding-left:36px;}
+.input-wrap .input.has-icon-right{padding-right:36px;}
+.form-hint{font-size:11px;color:#94A3B8;margin-top:4px;line-height:1.4;}
+.form-error-msg{font-size:11px;color:#F05252;margin-top:4px;font-weight:600;display:flex;align-items:center;gap:4px;}
+.form-success-msg{font-size:11px;color:#0E9F6E;margin-top:4px;font-weight:600;display:flex;align-items:center;gap:4px;}
+.input-char-count{font-size:10px;color:#94A3B8;text-align:right;margin-top:2px;}
+.input-char-count.over{color:#F05252;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-header">
+    <div class="ds-sidebar-logo">
+      <div class="ds-sidebar-logo-icon">S</div>
+      <div class="ds-sidebar-logo-text">
+        <div class="ds-sidebar-logo-name">Syhrezz</div>
+        <div class="ds-sidebar-logo-version">v1.0</div>
+      </div>
+    </div>
+    <div class="ds-search-wrap">
+      <div class="ds-search-box">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/>
+        <span class="ds-search-kbd">&#8984;K</span>
+      </div>
+      <div id="ds-search-results"></div>
+    </div>
+  </div>
+  <nav class="ds-sidebar-nav" id="ds-nav-links"></nav>
+</aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb">
+    <a href="../index.html">Syhrezz</a><span>/</span>
+    <a href="#">Components</a><span>/</span>
+    <strong>Input</strong>
+  </nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main">
+<article class="ds-page">
+
+<!-- PAGE HEADER -->
+<div class="ds-page-header-full">
+  <div class="ds-status-bar">
+    <span class="ds-status-badge stable">Stable</span>
+    <span class="ds-version-badge">v1.0.0</span>
+    <span class="ds-meta-badge type">Form</span>
+  </div>
+  <div class="ds-component-intro">
+    <div class="ds-component-intro-text">
+      <h1>Input</h1>
+      <p class="ds-page-lead">Text input fields collect single-line data from users. They are the foundation of every form in the system. All input types — text, email, password, search, number — share the same base style via the <code>.input</code> class.</p>
+    </div>
+    <div class="ds-component-intro-preview">
+      <div style="width:220px">
+        <div class="form-group" style="margin:0">
+          <label class="form-label">Email</label>
+          <div class="input-wrap">
+            <span class="input-icon-left"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></span>
+            <input class="input has-icon-left" type="email" placeholder="you@company.com"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 1. OVERVIEW -->
+<h2 id="overview">Overview</h2>
+<h3 id="when-to-use">When to Use</h3>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use">
+    <div class="ds-when-title">
+      <svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+      Use Input when
+    </div>
+    <ul class="ds-when-list">
+      <li>Collecting short, single-line text data</li>
+      <li>Email, password, name, phone number fields</li>
+      <li>Search boxes and filter inputs</li>
+      <li>Number or date input</li>
+      <li>Any free-form text under ~100 characters</li>
+    </ul>
+  </div>
+  <div class="ds-when-card ds-when-not">
+    <div class="ds-when-title">
+      <svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+      Don't use Input when
+    </div>
+    <ul class="ds-when-list">
+      <li>Multi-line content needed — use Textarea instead</li>
+      <li>Choosing from predefined options — use Select</li>
+      <li>Binary true/false — use Checkbox or Toggle</li>
+      <li>Long content (&gt;100 chars) — use Textarea</li>
+      <li>Searching with autocomplete — use a combobox pattern</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 2. PLAYGROUND -->
+
+  <h2 id="anatomy">Anatomy</h2>
+<div class="ds-preview" style="padding:32px 40px">
+  <div style="position:relative;display:inline-block;width:300px">
+    <div class="form-group" style="margin:0;position:relative">
+      <label class="form-label" style="position:relative">Email Address
+        <div class="ds-anatomy-callout" style="top:-28px;left:0">Label</div>
+      </label>
+      <div class="input-wrap" style="position:relative">
+        <span class="input-icon-left"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></span>
+        <input class="input has-icon-left" type="email" value="user@company.com" style="border-color:#3B5BDB;box-shadow:0 0 0 3px rgba(59,91,219,.1)"/>
+        <div class="ds-anatomy-callout" style="top:-26px;left:10px">Icon</div>
+        <div class="ds-anatomy-callout" style="top:-26px;right:0">Container</div>
+      </div>
+      <div class="form-hint" style="position:relative">Enter your work email address
+        <div class="ds-anatomy-callout" style="top:-26px;left:0">Hint text</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ds-anatomy-parts">
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Label</div><div class="ds-anatomy-part-desc">UPPERCASE 12px fw-700, color:#64748B, letter-spacing:0.5px. Always a <code>&lt;label&gt;</code> element linked to input via for/id. Never omit label — use visually-hidden label if label must be hidden.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Container</div><div class="ds-anatomy-part-desc">The <code>&lt;input&gt;</code> element with class <code>.input</code>. padding:10px 14px, border-radius:10px, border:1px solid #E2E8F0, font-size:13px. Width is 100% by default.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Icon (optional)</div><div class="ds-anatomy-part-desc">Absolute-positioned SVG inside <code>.input-wrap</code>. Left icon uses <code>.input-icon-left</code> + adds <code>.has-icon-left</code> to input (padding-left:36px). Right icon uses <code>.input-icon-right</code> + <code>.has-icon-right</code>.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">4</div><div class="ds-anatomy-part-name">Hint Text</div><div class="ds-anatomy-part-desc">Optional helper text below the input. Class <code>.form-hint</code>. 11px, #94A3B8. Visible in default state. Replaced by error/success message when validation fires.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">5</div><div class="ds-anatomy-part-name">Validation Message</div><div class="ds-anatomy-part-desc">Error: <code>.form-error-msg</code> — 11px #F05252 fw-600, includes warning icon. Success: <code>.form-success-msg</code> — 11px #0E9F6E. Replaces hint text when shown.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">6</div><div class="ds-anatomy-part-name">Focus Ring</div><div class="ds-anatomy-part-desc">3px soft ring via box-shadow. Primary: <code>0 0 0 3px rgba(59,91,219,.1)</code> with border-color:#3B5BDB. Error: <code>0 0 0 3px rgba(240,82,82,.1)</code>. Never outline:none.</div></div>
+</div>
+<!-- STATES --><h2 id="states">States</h2>
+<div class="ds-states-grid">
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="form-group" style="margin:0;width:200px"><input class="input" type="text" placeholder="Enter value..."/></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Default</div><div class="ds-state-cell-desc">border:#E2E8F0, bg:#fff</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="form-group" style="margin:0;width:200px"><input class="input" type="text" placeholder="Hover..." style="border-color:#CBD5E1"/></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Hover</div><div class="ds-state-cell-desc">border-color:#CBD5E1</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="form-group" style="margin:0;width:200px"><input class="input" type="text" value="Focused" style="border-color:#3B5BDB;box-shadow:0 0 0 3px rgba(59,91,219,.1)"/></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Focus</div><div class="ds-state-cell-desc">border:#3B5BDB + 3px ring</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="form-group" style="margin:0;width:200px"><input class="input input-error" type="text" value="bad@"/><div class="form-error-msg"><svg style="width:11px;height:11px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>Invalid email</div></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Error</div><div class="ds-state-cell-desc">border:#F05252 + error msg</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="form-group" style="margin:0;width:200px"><input class="input input-success-state" type="text" value="valid@company.com"/><div class="form-success-msg"><svg style="width:11px;height:11px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Email available</div></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Success</div><div class="ds-state-cell-desc">border:#0E9F6E + success msg</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="form-group" style="margin:0;width:200px"><input class="input" type="text" value="disabled value" disabled/></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Disabled</div><div class="ds-state-cell-desc">bg:#F8FAFC, opacity:.75</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="form-group" style="margin:0;width:200px"><input class="input" type="text" value="Read only value" readonly/></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Read Only</div><div class="ds-state-cell-desc">bg:#F8FAFC, no edit cursor</div></div></div>
+</div>
+
+<!-- PROPERTIES -->
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table">
+  <thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td><span class="ds-prop-name">type</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">'text'</span></td><td class="ds-prop-desc">HTML input type. Always set explicitly.<div class="ds-prop-values">'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url' | 'date'</div></td></tr>
+    <tr><td><span class="ds-prop-name">placeholder</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Ghost text shown when empty. Should hint at the expected format, not repeat the label.</td></tr>
+    <tr><td><span class="ds-prop-name">value</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Controlled value. Use with onChange for controlled inputs.</td></tr>
+    <tr><td><span class="ds-prop-name">disabled</span></td><td><span class="ds-prop-type">boolean</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">false</span></td><td class="ds-prop-desc">Prevents all interaction. bg:#F8FAFC, opacity:.75, cursor:not-allowed.</td></tr>
+    <tr><td><span class="ds-prop-name">readOnly</span></td><td><span class="ds-prop-type">boolean</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">false</span></td><td class="ds-prop-desc">Prevents editing but allows focus and selection. bg:#F8FAFC. Different from disabled — still focusable.</td></tr>
+    <tr><td><span class="ds-prop-name">error</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Error message text. When set, adds .input-error to input and renders .form-error-msg below.</td></tr>
+    <tr><td><span class="ds-prop-name">hint</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Helper text shown below input. Hidden when error is active.</td></tr>
+    <tr><td><span class="ds-prop-name">label</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Label text. Always required — use visually hidden label if design requires no visible label.</td></tr>
+    <tr><td><span class="ds-prop-name">iconLeft</span></td><td><span class="ds-prop-type">ReactNode</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">SVG icon displayed on the left. Adds padding-left:36px to input automatically.</td></tr>
+    <tr><td><span class="ds-prop-name">iconRight</span></td><td><span class="ds-prop-type">ReactNode</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">SVG icon displayed on the right. Adds padding-right:36px to input. Often used for clear or toggle actions.</td></tr>
+    <tr><td><span class="ds-prop-name">onChange</span></td><td><span class="ds-prop-type">function</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Change handler for controlled inputs.<div class="ds-prop-values">(e: ChangeEvent&lt;HTMLInputElement&gt;) =&gt; void</div></td></tr>
+    <tr><td><span class="ds-prop-name">maxLength</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Max character count. When set, show a character counter (.input-char-count) below the input.</td></tr>
+  </tbody>
+</table>
+
+<!-- ACCESSIBILITY -->
+<h2 id="accessibility">Accessibility</h2>
+<table class="ds-keyboard-table">
+  <thead><tr><th>Key</th><th>Action</th></tr></thead>
+  <tbody>
+    <tr><td><span class="ds-kbd">Tab</span></td><td>Move focus to input</td></tr>
+    <tr><td><span class="ds-kbd">Shift</span>+<span class="ds-kbd">Tab</span></td><td>Move focus away</td></tr>
+    <tr><td><span class="ds-kbd">Esc</span></td><td>Clear search inputs (type="search") or blur</td></tr>
+    <tr><td>Type</td><td>Enters character into input</td></tr>
+    <tr><td><span class="ds-kbd">Ctrl</span>+<span class="ds-kbd">A</span></td><td>Select all text</td></tr>
+  </tbody>
+</table>
+<div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead><tr><th>Requirement</th><th>Implementation</th></tr></thead>
+    <tbody>
+      <tr><td>Label association</td><td>Always use <code>&lt;label for="inputId"&gt;</code> linked to <code>&lt;input id="inputId"&gt;</code>. Never use placeholder as substitute for label.</td></tr>
+      <tr><td>Error announcement</td><td>Add <code>aria-invalid="true"</code> to input in error state. Error message div gets <code>role="alert"</code> for immediate announcement.</td></tr>
+      <tr><td>Required fields</td><td>Add <code>aria-required="true"</code> and visual <code>*</code> indicator after label.</td></tr>
+      <tr><td>Description</td><td>Link hint text via <code>aria-describedby="hintId"</code> on input.</td></tr>
+      <tr><td>Password visibility toggle</td><td>Right-icon button must have <code>aria-label="Show password"</code> / <code>aria-label="Hide password"</code>.</td></tr>
+      <tr><td>Focus ring</td><td>Never remove. 3px soft box-shadow ring, visible on all focus states including keyboard and mouse.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- BEHAVIOR -->
+<h2 id="behavior">Behavior</h2>
+<table class="ds-behavior-table">
+  <thead><tr><th>Trigger</th><th>Behavior</th></tr></thead>
+  <tbody>
+    <tr><td><span class="ds-behavior-trigger">Focus</span></td><td>border-color:#3B5BDB + box-shadow: 0 0 0 3px rgba(59,91,219,.1). Transition: 0.2s.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Hover (unfocused)</span></td><td>border-color:#CBD5E1. Subtle darkening signals interactivity.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Blur</span></td><td>Triggers validation if field has been touched. Reverts to default border if no error. Never validate on keystroke unless explicitly needed.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Input (type)</span></td><td>Updates value. Character counter updates if maxLength set. No validation on keystroke by default.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Disabled</span></td><td>No hover, focus, or click response. opacity:.75, cursor:not-allowed, bg:#F8FAFC.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Error state</span></td><td>border-color:#F05252, focus ring rgba(240,82,82,.1). Error message rendered with icon below. Clears on successful re-validation.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Password toggle</span></td><td>Right eye-icon toggles type between "password" and "text". Icon changes to reflect current state.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Clear (search)</span></td><td>X button in right icon clears value and re-focuses input.</td></tr>
+  </tbody>
+</table>
+
+<!-- COMPOSITION -->
+<h2 id="composition">Composition</h2>
+<div class="ds-composition-grid">
+  <div class="ds-composition-card">
+    <div class="ds-composition-header allowed">
+      <svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+      <span class="ds-composition-header-title">Allowed</span>
+    </div>
+    <div class="ds-composition-body">
+      <div class="ds-composition-item">Inside .form-group with .form-label above</div>
+      <div class="ds-composition-item">Inside Modal body for forms</div>
+      <div class="ds-composition-item">Inside filter bar with flex:1 min-width</div>
+      <div class="ds-composition-item">With .input-wrap for icon variants</div>
+      <div class="ds-composition-item">With .form-error-msg or .form-hint below</div>
+      <div class="ds-composition-item">Two-column grid for paired fields (name, address)</div>
+    </div>
+  </div>
+  <div class="ds-composition-card">
+    <div class="ds-composition-header forbidden">
+      <svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+      <span class="ds-composition-header-title">Forbidden</span>
+    </div>
+    <div class="ds-composition-body">
+      <div class="ds-composition-item">Without a label (use aria-label if label hidden)</div>
+      <div class="ds-composition-item">Placeholder used as label substitute</div>
+      <div class="ds-composition-item">Bare input without .form-group wrapper</div>
+      <div class="ds-composition-item">Inline in body text or table cells</div>
+      <div class="ds-composition-item">Nested inside another input</div>
+      <div class="ds-composition-item">Validation error without .form-error-msg message</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT RULES -->
+<h2 id="content">Content Rules</h2>
+<div class="ds-content-rules">
+  <div class="ds-content-row">
+    <div class="ds-content-good"><div class="ds-content-label">Good Label</div><div class="ds-content-example">Email Address</div><div class="ds-content-reason">Noun phrase. UPPERCASE. Specific.</div></div>
+    <div class="ds-content-bad"><div class="ds-content-label">Bad Label</div><div class="ds-content-example">Enter your email here</div><div class="ds-content-reason">Sentence case. Too verbose for a label.</div></div>
+  </div>
+  <div class="ds-content-row">
+    <div class="ds-content-good"><div class="ds-content-label">Good Placeholder</div><div class="ds-content-example">you@company.com</div><div class="ds-content-reason">Shows expected format, not the label.</div></div>
+    <div class="ds-content-bad"><div class="ds-content-label">Bad Placeholder</div><div class="ds-content-example">Email Address</div><div class="ds-content-reason">Duplicates the label. Disappears on type.</div></div>
+  </div>
+  <div class="ds-content-row">
+    <div class="ds-content-good"><div class="ds-content-label">Good Error</div><div class="ds-content-example">Please enter a valid email address</div><div class="ds-content-reason">Specific, tells user what to fix.</div></div>
+    <div class="ds-content-bad"><div class="ds-content-label">Bad Error</div><div class="ds-content-example">Invalid input</div><div class="ds-content-reason">Vague, provides no guidance.</div></div>
+  </div>
+</div>
+
+<!-- AI SPEC -->
+<h2 id="ai-spec">AI Implementation Guide</h2>
+<div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead><tr><th>Rule</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Always wrap in .form-group</td><td>Every input must be inside <code>&lt;div class="form-group"&gt;</code> with margin-bottom:16px.</td></tr>
+      <tr><td>Label is mandatory</td><td>Always include <code>&lt;label class="form-label"&gt;</code> linked via for/id. UPPERCASE 12px fw-700 letter-spacing:0.5px.</td></tr>
+      <tr><td>Base class</td><td>All form fields (input, select, textarea) use <code>.input</code> class. Never custom-style individual fields.</td></tr>
+      <tr><td>Error state</td><td>Add <code>.input-error</code> to input AND render <code>&lt;div class="form-error-msg"&gt;</code> with warning SVG icon below.</td></tr>
+      <tr><td>Focus ring</td><td>Never override. box-shadow: 0 0 0 3px rgba(59,91,219,.1) on focus. For error state: rgba(240,82,82,.1).</td></tr>
+      <tr><td>Icon pattern</td><td>Wrap in <code>.input-wrap</code>. Add <code>.has-icon-left</code> or <code>.has-icon-right</code> to input. Place icon as sibling inside .input-wrap.</td></tr>
+      <tr><td>Never validate on keystroke</td><td>Validate on blur (when user leaves field) or on form submit. Never show errors while user is typing.</td></tr>
+      <tr><td>Placeholder vs label</td><td>Placeholder shows example format (e.g., "user@company.com"). Label names the field (e.g., "EMAIL ADDRESS"). Never use placeholder as label.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- RELATED -->
+<h2 id="related">Related Components</h2>
+<div class="ds-related-grid">
+  <a href="select.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg></div><div class="ds-related-card-name">Select</div><div class="ds-related-card-desc">Choose from predefined options</div></a>
+  <a href="textarea.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h8"/></svg></div><div class="ds-related-card-name">Textarea</div><div class="ds-related-card-desc">Multi-line text input</div></a>
+  <a href="checkbox.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div class="ds-related-card-name">Checkbox</div><div class="ds-related-card-desc">Binary selection</div></a>
+  <a href="modal.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm0 8a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6z"/></svg></div><div class="ds-related-card-name">Modal</div><div class="ds-related-card-desc">Contains form inputs</div></a>
+</div>
+
+<!-- DESIGN DECISIONS -->
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why 10px border-radius instead of a sharper or fully rounded style?</div><div class="ds-decision-a">10px is the standard radius for interactive controls (inputs, selects, textareas, dropdown items). It feels modern without being too casual. It differs from cards (20px) to signal "this is a control, not a container" and from buttons (12px) to avoid visual confusion between the two.</div></div>
+<div class="ds-decision"><div class="ds-decision-q">Why use box-shadow for focus ring instead of outline?</div><div class="ds-decision-a">box-shadow respects the border-radius, creating a soft ring that hugs the shape of the input. The native outline is rectangular and ignores border-radius. The 3px soft ring at 10% opacity adds a halo effect that is subtle on default state and visible enough for accessibility without being jarring.</div></div>
+<div class="ds-decision"><div class="ds-decision-q">Why validate on blur, not on keystroke?</div><div class="ds-decision-a">Showing errors while the user is still typing is disruptive and frustrating — the input is in a valid in-progress state that shouldn't be flagged. Blur validation respects the user's flow: it checks when they signal "I'm done with this field" by moving away. This is standard UX practice and reduces false error states.</div></div>
+
+<!-- CHANGELOG -->
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog">
+  <div class="ds-changelog-entry">
+    <div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div>
+    <div class="ds-changelog-body"><ul>
+      <li>Initial release — all HTML input types supported via .input class</li>
+      <li>5 states: default, hover, focus, error, success, disabled, read-only</li>
+      <li>Icon support (left and right) via .input-wrap pattern</li>
+      <li>Validation messages (.form-error-msg, .form-success-msg)</li>
+      <li>Character counter support via .input-char-count</li>
+    </ul></div>
+  </div>
+</div>
+
+<h2 id="best-practices">Best Practices</h2>
+<div class="ds-bp-grid">
+  <div class="ds-bp-card">
+    <div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div>
+    <div class="ds-bp-body">
+      <div class="form-group" style="margin:0;max-width:260px"><label class="form-label">Email Address</label><input class="input" type="email" placeholder="you@company.com"/><div class="form-hint">Enter your work email.</div></div>
+      <div class="ds-bp-reason">Specific label, contextual placeholder showing format, helpful hint below.</div>
+    </div>
+  </div>
+  <div class="ds-bp-card">
+    <div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div>
+    <div class="ds-bp-body">
+      <div class="form-group" style="margin:0;max-width:260px"><input class="input" type="text" placeholder="Email Address"/></div>
+      <div class="ds-bp-reason">No label, placeholder used as label substitute — disappears on type, inaccessible.</div>
+    </div>
+  </div>
+  <div class="ds-bp-card">
+    <div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div>
+    <div class="ds-bp-body">
+      <div class="form-group" style="margin:0;max-width:260px"><label class="form-label">Password <span style="color:#F05252">*</span></label><input class="input" type="password" placeholder="Min. 8 characters"/></div>
+      <div class="ds-bp-reason">Required indicator, type=password for security, placeholder shows constraint.</div>
+    </div>
+  </div>
+  <div class="ds-bp-card">
+    <div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div>
+    <div class="ds-bp-body">
+      <div class="form-group" style="margin:0;max-width:260px"><label class="form-label">Password</label><input class="input input-error" type="text" value="pass"/><div class="form-error-msg" style="font-size:10px">Error</div></div>
+      <div class="ds-bp-reason">type=text for password (exposes value), vague error message, no guidance.</div>
+    </div>
+  </div>
+</div><div id="ds-prev-next"></div>
+</article>
+<aside class="ds-toc" id="ds-toc"></aside>
+</div></div>
+<script>window.DS_ACTIVE_PAGE = 'input';</script>
+<script src="../shared/ds-shell.js"></script>
+</body></html>

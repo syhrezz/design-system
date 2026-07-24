@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Stepper / Wizard - Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}.btn-primary{background:#6366F1;color:#fff;}.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}.btn-sm{padding:6px 12px;font-size:12px;border-radius:8px;}</style>
+</head><body>
+<div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">S</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Components</a><span>/</span><strong>Stepper / Wizard</strong></nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main"><article class="ds-page">
+<div class="ds-page-header-full">
+  <div class="ds-status-bar"><span class="ds-status-badge stable">Stable</span><span class="ds-version-badge">v1.0.0</span><span class="ds-meta-badge type">Navigation</span></div>
+  <h1>Stepper / Wizard</h1>
+</div>
+<p class="ds-page-lead">Stepper (also called Wizard) breaks a complex multi-step process into clearly numbered steps with progress indication. It guides users through sequential tasks — setup flows, onboarding, checkout, and multi-step forms.</p>
+<h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Stepper when</div><ul class="ds-when-list"><li>Multi-step form with 3-7 logical sections</li><li>Onboarding or setup wizard</li><li>Sequential process where order matters</li><li>User needs progress feedback on long tasks</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Stepper when</div><ul class="ds-when-list"><li>Only 1-2 steps — use a modal form instead</li><li>Steps are non-sequential (any order) — use Tabs</li><li>More than 7 steps — reconsider the UX</li></ul></div>
+</div>
+<h2 id="anatomy">Anatomy</h2>
+<style>
+.stepper{display:flex;align-items:flex-start;gap:0;margin-bottom:32px;}
+.stepper-step{display:flex;flex-direction:column;align-items:center;flex:1;position:relative;}
+.stepper-step:not(:last-child)::after{content:'';position:absolute;top:16px;left:calc(50% + 20px);right:calc(-50% + 20px);height:2px;background:#E2E8F0;}
+.stepper-step.completed:not(:last-child)::after{background:#6366F1;}
+.stepper-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;font-family:'Plus Jakarta Sans',sans-serif;z-index:1;position:relative;transition:all .2s;}
+.stepper-dot.pending{background:#F1F5F9;color:#94A3B8;border:2px solid #E2E8F0;}
+.stepper-dot.active{background:#6366F1;color:#fff;box-shadow:0 0 0 4px rgba(99,102,241,.2);}
+.stepper-dot.completed{background:#0E9F6E;color:#fff;}
+.stepper-label{font-size:11px;font-weight:600;margin-top:8px;text-align:center;max-width:80px;}
+.stepper-label.pending{color:#94A3B8;}
+.stepper-label.active{color:#6366F1;}
+.stepper-label.completed{color:#0E9F6E;}
+.stepper-content{background:#fff;border:1px solid #E2E8F0;border-radius:14px;padding:24px;margin-bottom:20px;}
+.stepper-footer{display:flex;justify-content:space-between;align-items:center;}
+</style>
+<div class="ds-anatomy-parts">
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Step indicator</div><div class="ds-anatomy-part-desc">Numbered circle. pending: gray bg. active: #6366F1 + glow ring. completed: #0E9F6E + checkmark. 32px diameter.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Connector line</div><div class="ds-anatomy-part-desc">Horizontal line between steps. Color: #E2E8F0 (pending) → #6366F1 (completed). Top: 16px (center of 32px dot).</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Step label</div><div class="ds-anatomy-part-desc">11px fw-600. Below the dot. Truncates at ~80px width. Color matches step state.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">4</div><div class="ds-anatomy-part-name">Content area</div><div class="ds-anatomy-part-desc">White card below stepper. Changes content per active step. Consistent padding: 24px.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">5</div><div class="ds-anatomy-part-name">Navigation footer</div><div class="ds-anatomy-part-desc">Back (outline, left) + Next/Submit (primary, right) buttons. Step counter in center.</div></div>
+</div>
+<h2 id="variants">Variants</h2>
+<div class="ds-preview">
+  <div class="stepper">
+    <div class="stepper-step completed">
+      <div class="stepper-dot completed"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></div>
+      <div class="stepper-label completed">Account</div>
+    </div>
+    <div class="stepper-step active">
+      <div class="stepper-dot active">2</div>
+      <div class="stepper-label active">Details</div>
+    </div>
+    <div class="stepper-step">
+      <div class="stepper-dot pending">3</div>
+      <div class="stepper-label pending">Review</div>
+    </div>
+    <div class="stepper-step">
+      <div class="stepper-dot pending">4</div>
+      <div class="stepper-label pending">Complete</div>
+    </div>
+  </div>
+  <div class="stepper-content">
+    <div style="font-size:14px;font-weight:700;color:#0F172A;margin-bottom:4px">Step 2 of 4 — Details</div>
+    <div style="font-size:13px;color:#64748B">Fill in the details for this step. Content changes per active step.</div>
+  </div>
+  <div class="stepper-footer">
+    <button class="btn btn-outline btn-sm">
+      <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      Back
+    </button>
+    <span style="font-size:12px;color:#94A3B8">Step 2 of 4</span>
+    <button class="btn btn-primary btn-sm">
+      Next
+      <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</div>
+<h2 id="states">States</h2>
+<div class="ds-states-grid">
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="stepper-dot pending">3</div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Pending</div><div class="ds-state-cell-desc">bg:#F1F5F9, color:#94A3B8</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="stepper-dot active">2</div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Active</div><div class="ds-state-cell-desc">bg:#6366F1, white number, glow ring</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="stepper-dot completed"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Completed</div><div class="ds-state-cell-desc">bg:#0E9F6E, white checkmark</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="stepper-dot pending" style="opacity:.4;cursor:not-allowed">4</div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Disabled</div><div class="ds-state-cell-desc">opacity:.4, not clickable</div></div></div>
+</div>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">steps</span></td><td><span class="ds-prop-type">array</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Array of {label, content}. 3-7 items recommended.</td></tr>
+  <tr><td><span class="ds-prop-name">currentStep</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">0</span></td><td class="ds-prop-desc">Zero-indexed active step number.</td></tr>
+  <tr><td><span class="ds-prop-name">onNext</span></td><td><span class="ds-prop-type">function</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Called when Next button is clicked. Validate current step before advancing.</td></tr>
+  <tr><td><span class="ds-prop-name">onBack</span></td><td><span class="ds-prop-type">function</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Called when Back button is clicked. Back is disabled on step 0.</td></tr>
+  <tr><td><span class="ds-prop-name">onSubmit</span></td><td><span class="ds-prop-type">function</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Called on last step when Next becomes Submit.</td></tr>
+  <tr><td><span class="ds-prop-name">allowSkip</span></td><td><span class="ds-prop-type">boolean</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">false</span></td><td class="ds-prop-desc">When true, users can click completed step dots to jump back.</td></tr>
+</tbody></table>
+<h2 id="behavior">Behavior</h2>
+<table class="ds-behavior-table"><thead><tr><th>Trigger</th><th>Behavior</th></tr></thead><tbody>
+  <tr><td><span class="ds-behavior-trigger">Next click</span></td><td>Validate current step fields first. If valid: mark current as completed, advance to next step, scroll to top of content.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Back click</span></td><td>Go to previous step. Previous step remains completed (not reset). Back is disabled on step 0.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Last step Submit</span></td><td>Next button label changes to "Submit". Click fires onSubmit. Show loading state while submitting.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Completed dot click</span></td><td>If allowSkip:true, clicking a completed step navigates back to it. Clears completion of all subsequent steps.</td></tr>
+</tbody></table>
+<h2 id="accessibility">Accessibility</h2>
+<div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody>
+  <tr><td>Step list</td><td>Use &lt;ol&gt; for step indicators. Each step is &lt;li&gt;.</td></tr>
+  <tr><td>Current step</td><td>Add aria-current="step" to the active step indicator.</td></tr>
+  <tr><td>Progress</td><td>Add aria-label="Step 2 of 4" to the stepper container.</td></tr>
+  <tr><td>Content region</td><td>Add aria-live="polite" to content area so screen readers announce step changes.</td></tr>
+</tbody></table></div>
+<h2 id="composition">Composition</h2>
+<div class="ds-composition-grid">
+  <div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Full page layout for setup/onboarding</div><div class="ds-composition-item">Inside a large modal (modal-lg)</div><div class="ds-composition-item">Form fields inside each step content panel</div></div></div>
+  <div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">Nested steppers</div><div class="ds-composition-item">More than 7 steps</div><div class="ds-composition-item">Non-sequential processes (use Tabs)</div></div></div>
+</div>
+<h2 id="best-practices">Best Practices</h2>
+<div class="ds-bp-grid">
+  <div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Validate each step before advancing. Show inline errors in the current step — never on the next step.</div><div class="ds-bp-reason">Errors caught early prevent frustration at submission time.</div></div></div>
+  <div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Allow users to skip ahead to future steps without completing current ones.</div><div class="ds-bp-reason">Future steps may depend on data from previous steps. Skipping breaks data integrity.</div></div></div>
+</div>
+<h2 id="content">Content Rules</h2>
+<div class="ds-content-rules">
+  <div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good step labels</div><div class="ds-content-example">Account / Details / Review / Done</div><div class="ds-content-reason">Short nouns (1-2 words). Each describes the category of data on that step.</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad step labels</div><div class="ds-content-example">Step 1 / Step 2 / Step 3</div><div class="ds-content-reason">Generic numbers give no context about what each step contains.</div></div></div>
+</div>
+<h2 id="ai-spec">AI Implementation Guide</h2>
+<div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+  <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Stepper has 3 zones: indicator row (dots + connectors), content panel (current step), navigation footer (Back / counter / Next). Step dots: 32px circles — pending:gray, active:#6366F1+glow, completed:#0E9F6E+checkmark. Connector lines use CSS ::after on each step. Last step: Next becomes "Submit". Back disabled on step 0. Always validate current step before calling onNext. Show loading state on Submit.</div>
+</div>
+<h2 id="related">Related Components</h2>
+<div class="ds-related-grid">
+  <a href="tabs.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></div><div class="ds-related-card-name">Tabs</div><div class="ds-related-card-desc">Non-sequential sections</div></a>
+  <a href="modal.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm0 8a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6z"/></svg></div><div class="ds-related-card-name">Modal</div><div class="ds-related-card-desc">Simple 1-step forms</div></a>
+  <a href="button.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="8" width="18" height="8" rx="4" stroke-width="2"/></svg></div><div class="ds-related-card-name">Button</div><div class="ds-related-card-desc">Back/Next/Submit actions</div></a>
+</div>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why show completed steps as green (#0E9F6E) instead of keeping them primary (#6366F1)?</div><div class="ds-decision-a">Green = done. It uses the success semantic color to communicate "this is finished and correct". Keeping completed steps purple would create ambiguity with the active step. The green checkmark communicates completion clearly without users having to count steps or read labels.</div></div>
+<div class="ds-decision"><div class="ds-decision-q">Why connector lines change color as steps complete?</div><div class="ds-decision-a">The line between step 1 (completed, green) and step 2 (active, purple) should be green — it connects two completed/active states. Color-filling the connector as steps complete provides a visual "progress bar" effect across the entire stepper width, reinforcing the sense of forward movement.</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>Initial release — pending/active/completed states, connector lines, Back/Next/Submit navigation</li><li>allowSkip mode for clicking completed steps</li><li>aria-live on content area for screen reader announcements</li></ul></div></div></div>
+<div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 'stepper';</script>
+<script src="../shared/ds-shell.js"></script>
+</body></html>

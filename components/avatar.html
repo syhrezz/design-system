@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Avatar — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.avatar{border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;color:#fff;flex-shrink:0;position:relative;}
+.avatar-xs{width:24px;height:24px;font-size:9px;}
+.avatar-sm{width:32px;height:32px;font-size:11px;}
+.avatar-md{width:40px;height:40px;font-size:14px;}
+.avatar-lg{width:48px;height:48px;font-size:16px;}
+.avatar-xl{width:64px;height:64px;font-size:20px;}
+.avatar-2xl{width:80px;height:80px;font-size:24px;}
+.avatar-status{position:absolute;bottom:0;right:0;width:10px;height:10px;border-radius:50%;border:2px solid #fff;}
+.avatar-status-online{background:#0E9F6E;}
+.avatar-status-offline{background:#94A3B8;}
+.avatar-status-busy{background:#F05252;}
+.avatar-group{display:flex;}
+.avatar-group .avatar{border:2px solid #fff;margin-left:-8px;}
+.avatar-group .avatar:first-child{margin-left:0;}
+.avatar-square{border-radius:12px;}
+.avatar-square.avatar-sm{border-radius:8px;}
+.avatar-square.avatar-xs{border-radius:6px;}
+/* background color palette */
+.av-slate{background:#1E293B;} .av-indigo{background:#312E81;} .av-green{background:#065F46;}
+.av-red{background:#7C2D12;} .av-blue{background:#1E40AF;} .av-purple{background:#3B0764;}
+.av-teal{background:#134E4A;} .av-amber{background:#78350F;} .av-gray{background:#374151;}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-header">
+    <div class="ds-sidebar-logo">
+      <div class="ds-sidebar-logo-icon">N</div>
+      <div class="ds-sidebar-logo-text">
+        <div class="ds-sidebar-logo-name">Syhrezz</div>
+        <div class="ds-sidebar-logo-version">v1.0</div>
+      </div>
+    </div>
+    <div class="ds-search-wrap">
+      <div class="ds-search-box">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/>
+        <span class="ds-search-kbd">&#8984;K</span>
+      </div>
+      <div id="ds-search-results"></div>
+    </div>
+  </div>
+  <nav class="ds-sidebar-nav" id="ds-nav-links"></nav>
+</aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb">
+    <a href="../index.html">Syhrezz</a><span>/</span>
+    <a href="#">Components</a><span>/</span>
+    <strong>Avatar</strong>
+  </nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main">
+<article class="ds-page">
+  <div class="ds-page-header">
+    <div class="ds-page-meta">
+      <span class="ds-meta-badge stable">Stable</span>
+      <span class="ds-meta-badge type">Display</span>
+    </div>
+    <h1>Avatar</h1>
+    <p class="ds-page-lead">Avatars represent users using initials on a colored circular background. Syhrezz uses initials-only avatars — no photo uploads. Background color is deterministic based on the user's name.</p>
+  </div>
+
+  <h2 id="overview">Overview</h2>
+  <p>Avatars display the first two letters of a user's name in uppercase, white text, on a dark-toned background. The background color is chosen deterministically from a palette of 9 colors using <code>name.charCodeAt(0) % 9</code>. This ensures the same user always gets the same color across all pages.</p>
+
+  <!-- SIZES -->
+  <h2 id="sizes">Sizes</h2>
+  <div class="ds-example">
+    <div class="ds-example-toolbar"><span class="ds-example-title">All Sizes</span><button class="ds-show-source-btn">Show source</button></div>
+    <div class="ds-preview" style="display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap">
+      <div style="text-align:center"><div class="ds-preview-label">xs · 24px</div><span class="avatar avatar-xs av-slate">BS</span></div>
+      <div style="text-align:center"><div class="ds-preview-label">sm · 32px</div><span class="avatar avatar-sm av-slate">BS</span></div>
+      <div style="text-align:center"><div class="ds-preview-label">md · 40px</div><span class="avatar avatar-md av-slate">BS</span></div>
+      <div style="text-align:center"><div class="ds-preview-label">lg · 48px</div><span class="avatar avatar-lg av-indigo">AW</span></div>
+      <div style="text-align:center"><div class="ds-preview-label">xl · 64px</div><span class="avatar avatar-xl av-green">RP</span></div>
+      <div style="text-align:center"><div class="ds-preview-label">2xl · 80px</div><span class="avatar avatar-2xl av-blue">DK</span></div>
+    </div>
+    <div class="ds-code-block" style="display:none">
+      <button class="ds-copy-btn">Copy</button>
+      <pre><code><span class="kw">&lt;span</span> <span class="prop">class</span>=<span class="str">"avatar avatar-xs"</span> <span class="prop">style</span>=<span class="str">"background:#1E293B"</span><span class="kw">&gt;</span>BS<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;span</span> <span class="prop">class</span>=<span class="str">"avatar avatar-sm"</span> <span class="prop">style</span>=<span class="str">"background:#1E293B"</span><span class="kw">&gt;</span>BS<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;span</span> <span class="prop">class</span>=<span class="str">"avatar avatar-md"</span> <span class="prop">style</span>=<span class="str">"background:#1E293B"</span><span class="kw">&gt;</span>BS<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;span</span> <span class="prop">class</span>=<span class="str">"avatar avatar-lg"</span> <span class="prop">style</span>=<span class="str">"background:#312E81"</span><span class="kw">&gt;</span>AW<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;span</span> <span class="prop">class</span>=<span class="str">"avatar avatar-xl"</span> <span class="prop">style</span>=<span class="str">"background:#065F46"</span><span class="kw">&gt;</span>RP<span class="kw">&lt;/span&gt;</span></code></pre>
+    </div>
+  </div>
+
+  <!-- STATUS INDICATOR -->
+  <h2 id="status">With Status Indicator</h2>
+  <div class="ds-example">
+    <div class="ds-example-toolbar"><span class="ds-example-title">Status Variants</span><button class="ds-show-source-btn">Show source</button></div>
+    <div class="ds-preview" style="display:flex;gap:20px;flex-wrap:wrap;align-items:center">
+      <div style="text-align:center">
+        <div class="ds-preview-label">Online</div>
+        <span class="avatar avatar-md av-slate" style="position:relative">BS<span class="avatar-status avatar-status-online"></span></span>
+      </div>
+      <div style="text-align:center">
+        <div class="ds-preview-label">Busy</div>
+        <span class="avatar avatar-md av-indigo" style="position:relative">AW<span class="avatar-status avatar-status-busy"></span></span>
+      </div>
+      <div style="text-align:center">
+        <div class="ds-preview-label">Offline</div>
+        <span class="avatar avatar-md av-green" style="position:relative">RP<span class="avatar-status avatar-status-offline"></span></span>
+      </div>
+    </div>
+    <div class="ds-code-block" style="display:none">
+      <button class="ds-copy-btn">Copy</button>
+      <pre><code><span class="kw">&lt;span</span> <span class="prop">class</span>=<span class="str">"avatar avatar-md"</span> <span class="prop">style</span>=<span class="str">"background:#1E293B;position:relative"</span><span class="kw">&gt;</span>
+  BS
+  <span class="kw">&lt;span</span> <span class="prop">class</span>=<span class="str">"avatar-status avatar-status-online"</span><span class="kw">&gt;&lt;/span&gt;</span>
+<span class="kw">&lt;/span&gt;</span></code></pre>
+    </div>
+  </div>
+
+  <!-- AVATAR GROUP -->
+  <h2 id="group">Avatar Group</h2>
+  <div class="ds-example">
+    <div class="ds-example-toolbar"><span class="ds-example-title">Stacked Group</span><button class="ds-show-source-btn">Show source</button></div>
+    <div class="ds-preview" style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+      <div>
+        <div class="ds-preview-label">Default group (sm)</div>
+        <div class="avatar-group">
+          <span class="avatar avatar-sm av-slate">BS</span>
+          <span class="avatar avatar-sm av-indigo">AW</span>
+          <span class="avatar avatar-sm av-green">RP</span>
+          <span class="avatar avatar-sm av-red">DK</span>
+          <span class="avatar avatar-sm" style="background:#475569;font-size:10px">+5</span>
+        </div>
+      </div>
+      <div>
+        <div class="ds-preview-label">Medium group</div>
+        <div class="avatar-group">
+          <span class="avatar avatar-md av-slate">BS</span>
+          <span class="avatar avatar-md av-indigo">AW</span>
+          <span class="avatar avatar-md av-green">RP</span>
+          <span class="avatar avatar-md" style="background:#475569;font-size:12px">+8</span>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code-block" style="display:none">
+      <button class="ds-copy-btn">Copy</button>
+      <pre><code><span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"avatar-group"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;span</span> <span class="prop">class</span>=<span class="str">"avatar avatar-sm"</span> <span class="prop">style</span>=<span class="str">"background:#1E293B"</span><span class="kw">&gt;</span>BS<span class="kw">&lt;/span&gt;</span>
+  <span class="kw">&lt;span</span> <span class="prop">class</span>=<span class="str">"avatar avatar-sm"</span> <span class="prop">style</span>=<span class="str">"background:#312E81"</span><span class="kw">&gt;</span>AW<span class="kw">&lt;/span&gt;</span>
+  <span class="kw">&lt;span</span> <span class="prop">class</span>=<span class="str">"avatar avatar-sm"</span> <span class="prop">style</span>=<span class="str">"background:#475569;font-size:10px"</span><span class="kw">&gt;</span>+5<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;/div&gt;</span></code></pre>
+    </div>
+  </div>
+
+  <!-- SQUARE VARIANT -->
+  <h2 id="square">Square Variant</h2>
+  <p>Used for logos and company avatars — not user avatars.</p>
+  <div class="ds-preview" style="display:flex;gap:16px;align-items:center">
+    <span class="avatar avatar-sm avatar-square av-slate">PT</span>
+    <span class="avatar avatar-md avatar-square av-blue">CV</span>
+    <span class="avatar avatar-lg avatar-square av-green">UD</span>
+  </div>
+
+  <!-- COLOR PALETTE -->
+  <h2 id="colors">Background Color Palette</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Class</th><th>Hex Value</th><th>Index (name.charCodeAt(0) % 9)</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">.av-slate</td><td class="default">#1E293B</td><td class="default">0</td></tr>
+        <tr><td class="mono">.av-indigo</td><td class="default">#312E81</td><td class="default">1</td></tr>
+        <tr><td class="mono">.av-green</td><td class="default">#065F46</td><td class="default">2</td></tr>
+        <tr><td class="mono">.av-red</td><td class="default">#7C2D12</td><td class="default">3</td></tr>
+        <tr><td class="mono">.av-blue</td><td class="default">#1E40AF</td><td class="default">4</td></tr>
+        <tr><td class="mono">.av-purple</td><td class="default">#3B0764</td><td class="default">5</td></tr>
+        <tr><td class="mono">.av-teal</td><td class="default">#134E4A</td><td class="default">6</td></tr>
+        <tr><td class="mono">.av-amber</td><td class="default">#78350F</td><td class="default">7</td></tr>
+        <tr><td class="mono">.av-gray</td><td class="default">#374151</td><td class="default">8</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AI SPEC -->
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content">
+      <strong>For AI coding assistants:</strong> Avatars are always <code>&lt;span&gt;</code> elements, always circular (border-radius:50%). Initials are always the first two characters of the full name, uppercase. Background color uses: <code>const COLORS = ['#1E293B','#312E81','#065F46','#7C2D12','#1E40AF','#3B0764','#134E4A','#78350F','#374151']; bg = COLORS[name.charCodeAt(0) % 9]</code>. In avatar groups, each avatar gets <code>border:2px solid #fff; margin-left:-8px</code> (first child: margin-left:0). The overflow counter ("+N") uses <code>background:#475569</code>.
+    </div>
+  </div>
+
+  <h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Avatar when</div><ul class="ds-when-list"><li>Representing a user in tables, lists, comments</li><li>Profile headers and user chips in topbar</li><li>Avatar groups to show team members</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Avatar when</div><ul class="ds-when-list"><li>Representing a company or entity — use a square variant or logo</li><li>As a standalone CTA — wrap in a button</li></ul></div>
+</div>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">name</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">User's full name. Initials are derived as first 2 characters. Background color is deterministic: COLORS[name.charCodeAt(0) % 9].</td></tr>
+  <tr><td><span class="ds-prop-name">size</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">'md'</span></td><td class="ds-prop-desc"><div class="ds-prop-values">'xs'(24px) | 'sm'(32px) | 'md'(40px) | 'lg'(48px) | 'xl'(64px) | '2xl'(80px)</div></td></tr>
+  <tr><td><span class="ds-prop-name">status</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Status indicator dot.<div class="ds-prop-values">'online' | 'busy' | 'offline'</div></td></tr>
+  <tr><td><span class="ds-prop-name">shape</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">'circle'</span></td><td class="ds-prop-desc"><div class="ds-prop-values">'circle' | 'square'</div> Square variant used for company/entity avatars.</td></tr>
+</tbody></table>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why deterministic background color?</div><div class="ds-decision-a">Users expect the same person to always have the same avatar color across all pages and sessions. Deterministic coloring (based on name.charCodeAt(0) % 9) ensures consistency without needing to store a color preference per user. It also ensures the same color is shown in different sessions and browsers.</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>6 sizes, 9-color deterministic palette, status indicators, group stacking, square variant</li></ul></div></div></div><h2 id="states">States</h2><div class="ds-states-grid"><div class="ds-state-cell"><div class="ds-state-cell-preview"><span style="width:40px;height:40px;border-radius:50%;background:#1E293B;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff">BS</span></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Default</div><div class="ds-state-cell-desc">Circle, initials, dark bg</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview"><span style="width:40px;height:40px;border-radius:50%;background:#065F46;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;position:relative">AW<span style="position:absolute;bottom:0;right:0;width:10px;height:10px;border-radius:50%;background:#0E9F6E;border:2px solid #fff"></span></span></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Online</div><div class="ds-state-cell-desc">Green status dot</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview"><div style="display:flex"><span style="width:32px;height:32px;border-radius:50%;background:#1E293B;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;border:2px solid #fff">BS</span><span style="width:32px;height:32px;border-radius:50%;background:#312E81;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;border:2px solid #fff;margin-left:-8px">AW</span><span style="width:32px;height:32px;border-radius:50%;background:#475569;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;border:2px solid #fff;margin-left:-8px">+3</span></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Group</div><div class="ds-state-cell-desc">Stacked with -8px margin</div></div></div></div><h2 id="accessibility">Accessibility</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody><tr><td>alt text</td><td>Add aria-label="[Name]'s avatar" on avatar element for screen readers.</td></tr><tr><td>Status dot</td><td>Announce status change with aria-live region, not just visual dot change.</td></tr></tbody></table></div><h2 id="composition">Composition</h2><div class="ds-composition-grid"><div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Table user-cell pattern</div><div class="ds-composition-item">Topbar user chip</div><div class="ds-composition-item">Avatar groups for team display</div></div></div><div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">Avatar as standalone CTA without button wrapper</div><div class="ds-composition-item">More than 5 in a group without +N overflow</div></div></div></div><h2 id="best-practices">Best Practices</h2><div class="ds-bp-grid"><div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Always use deterministic color assignment so the same user always gets the same color.</div><div class="ds-bp-reason">Consistency builds user recognition across pages and sessions.</div></div></div><div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Randomly assign colors on each render.</div><div class="ds-bp-reason">Random colors confuse users who rely on color for quick identification.</div></div></div></div><h2 id="related">Related Components</h2><div class="ds-related-grid"><a href="topbar.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></div><div class="ds-related-card-name">Topbar</div><div class="ds-related-card-desc">User chip in header</div></a><a href="table.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div><div class="ds-related-card-name">Table</div><div class="ds-related-card-desc">User cells in rows</div></a></div><h2 id="anatomy">Anatomy</h2><div class="ds-anatomy-parts"><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Container</div><div class="ds-anatomy-part-desc">span element. border-radius:50%, display:inline-flex, align-items/justify-content:center. Size set via .avatar-{size} class.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Initials</div><div class="ds-anatomy-part-desc">Text content: first 2 characters of name, uppercase. Color:#fff always. Font-weight:700. Size scales per avatar size.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Background Color</div><div class="ds-anatomy-part-desc">Deterministic: COLORS[name.charCodeAt(0) % 9]. 9 dark tone options. Never changes for same user.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">4</div><div class="ds-anatomy-part-name">Status Dot (optional)</div><div class="ds-anatomy-part-desc">Absolute positioned span. bottom:0, right:0. 10px circle. border:2px solid #fff. Color: green/red/gray per status.</div></div></div><h2 id="content">Content Rules</h2><div class="ds-content-rules"><div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good</div><div class="ds-content-example">BS (Budi Santoso)</div><div class="ds-content-reason">First 2 chars of full name, uppercase</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad</div><div class="ds-content-example">B or Budi</div><div class="ds-content-reason">Single char or first name only — always use 2 chars from full name</div></div></div></div>
+
+  <h2 id="behavior">Behavior</h2><p>Avatars are static display elements with no interactive behavior by default. They render deterministically from the user name — same name always produces same color and initials. If used inside a clickable element (e.g. a user chip in the topbar), the interaction belongs to the parent element, not the avatar. Status dots update reactively when connection state changes — no animation, instant swap.</p><div id="ds-prev-next"></div>
+</article>
+<aside class="ds-toc" id="ds-toc"></aside>
+</div>
+</div>
+<script>window.DS_ACTIVE_PAGE = 'avatar';</script>
+<script src="../shared/ds-shell.js"></script>
+</body>
+</html>

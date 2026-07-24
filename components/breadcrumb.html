@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Breadcrumb - Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}.btn-primary{background:#6366F1;color:#fff;}.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}.btn-sm{padding:6px 12px;font-size:12px;border-radius:8px;}.form-group{margin-bottom:16px;}.form-label{display:block;font-size:12px;font-weight:700;color:#64748B;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;}.input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid #E2E8F0;font-size:13px;font-family:inherit;outline:none;color:#0F172A;background:#fff;transition:border-color .2s,box-shadow .2s;}.input:focus{border-color:#3B5BDB;box-shadow:0 0 0 3px rgba(59,91,219,.1);}</style>
+</head><body>
+<div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">S</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Components</a><span>/</span><strong>Breadcrumb</strong></nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main"><article class="ds-page">
+<div class="ds-page-header-full">
+  <div class="ds-status-bar"><span class="ds-status-badge stable">Stable</span><span class="ds-version-badge">v1.0.0</span><span class="ds-meta-badge type">Navigation</span></div>
+  <h1>Breadcrumb</h1>
+</div>
+<p class="ds-page-lead">Breadcrumbs show the user their current location within the page hierarchy and provide quick navigation back to parent pages. Essential on detail pages and settings sub-pages.</p>
+<h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Breadcrumb when</div><ul class="ds-when-list"><li>Detail pages (customer detail, user detail)</li><li>Settings sub-pages (Settings &gt; Notifications)</li><li>Any page 2+ levels deep in the hierarchy</li><li>Users need to understand their current location</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Breadcrumb when</div><ul class="ds-when-list"><li>Top-level pages — they have no parent to navigate to</li><li>Already shown in topbar breadcrumb for the page</li><li>Single-page apps with no real hierarchy</li></ul></div>
+</div>
+<h2 id="anatomy">Anatomy</h2>
+<style>
+.breadcrumb{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.breadcrumb-item{font-size:13px;color:#64748B;text-decoration:none;transition:color .15s;}
+.breadcrumb-item:hover{color:#6366F1;}
+.breadcrumb-item.current{color:#0F172A;font-weight:600;cursor:default;}
+.breadcrumb-sep{color:#CBD5E1;font-size:12px;user-select:none;}
+.breadcrumb-item.home svg{width:14px;height:14px;}
+</style>
+<div class="ds-anatomy-parts">
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">nav wrapper</div><div class="ds-anatomy-part-desc">&lt;nav aria-label="Breadcrumb"&gt; contains an &lt;ol&gt; list. Provides landmark navigation for screen readers.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Ancestor links</div><div class="ds-anatomy-part-desc">&lt;a&gt; elements. 13px color:#64748B. Hover: color:#6366F1. Underline on hover.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Separator</div><div class="ds-anatomy-part-desc">SVG chevron (/) or slash character. color:#CBD5E1. aria-hidden="true". Purely decorative.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">4</div><div class="ds-anatomy-part-name">Current page</div><div class="ds-anatomy-part-desc">Last item. Not a link. 13px fw-600 color:#0F172A. aria-current="page".</div></div>
+</div>
+<h2 id="variants">Variants</h2>
+<div class="ds-preview" style="display:flex;flex-direction:column;gap:20px">
+  <div>
+    <div class="ds-preview-label">Default (text + chevron)</div>
+    <nav aria-label="Breadcrumb">
+      <div class="breadcrumb">
+        <a href="#" class="breadcrumb-item">Dashboard</a>
+        <span class="breadcrumb-sep"><svg style="width:12px;height:12px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+        <a href="#" class="breadcrumb-item">Users</a>
+        <span class="breadcrumb-sep"><svg style="width:12px;height:12px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+        <span class="breadcrumb-item current" aria-current="page">Ahmad Hendra</span>
+      </div>
+    </nav>
+  </div>
+  <div>
+    <div class="ds-preview-label">With home icon</div>
+    <nav aria-label="Breadcrumb">
+      <div class="breadcrumb">
+        <a href="#" class="breadcrumb-item home"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></a>
+        <span class="breadcrumb-sep"><svg style="width:12px;height:12px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+        <a href="#" class="breadcrumb-item">Settings</a>
+        <span class="breadcrumb-sep"><svg style="width:12px;height:12px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+        <span class="breadcrumb-item current" aria-current="page">Notifications</span>
+      </div>
+    </nav>
+  </div>
+  <div>
+    <div class="ds-preview-label">Truncated (long paths)</div>
+    <nav aria-label="Breadcrumb">
+      <div class="breadcrumb">
+        <a href="#" class="breadcrumb-item">Dashboard</a>
+        <span class="breadcrumb-sep"><svg style="width:12px;height:12px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+        <span class="breadcrumb-item" style="color:#94A3B8">...</span>
+        <span class="breadcrumb-sep"><svg style="width:12px;height:12px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+        <a href="#" class="breadcrumb-item">Customers</a>
+        <span class="breadcrumb-sep"><svg style="width:12px;height:12px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+        <span class="breadcrumb-item current" aria-current="page">PT Maju Jaya</span>
+      </div>
+    </nav>
+  </div>
+</div>
+<h2 id="states">States</h2>
+<p>Breadcrumb items have two states: <strong>Link</strong> (ancestor pages — clickable, hover color change) and <strong>Current</strong> (last item — not clickable, fw-600, darker color, aria-current="page"). Separators are always static with no interactive state.</p>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">items</span></td><td><span class="ds-prop-type">array</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Array of {label, href}. Last item is always current (no href needed).<div class="ds-prop-values">[{label:'Dashboard',href:'/'},{label:'Users',href:'/users'},{label:'Ahmad Hendra'}]</div></td></tr>
+  <tr><td><span class="ds-prop-name">separator</span></td><td><span class="ds-prop-type">string|ReactNode</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">chevron SVG</span></td><td class="ds-prop-desc">Separator between items. Default is a chevron-right SVG icon.</td></tr>
+  <tr><td><span class="ds-prop-name">showHome</span></td><td><span class="ds-prop-type">boolean</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">false</span></td><td class="ds-prop-desc">Replaces first item label with a home icon SVG.</td></tr>
+  <tr><td><span class="ds-prop-name">maxItems</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Max visible items before truncating middle items with "...".</td></tr>
+</tbody></table>
+<h2 id="behavior">Behavior</h2>
+<table class="ds-behavior-table"><thead><tr><th>Trigger</th><th>Behavior</th></tr></thead><tbody>
+  <tr><td><span class="ds-behavior-trigger">Ancestor link click</span></td><td>Navigates to href. Standard browser navigation.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Current item click</span></td><td>No action — not a link. cursor:default.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Truncated "..." click</span></td><td>Expands to show all hidden intermediate items.</td></tr>
+</tbody></table>
+<h2 id="accessibility">Accessibility</h2>
+<div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody>
+  <tr><td>Landmark</td><td>&lt;nav aria-label="Breadcrumb"&gt; wraps the entire component.</td></tr>
+  <tr><td>List structure</td><td>Use &lt;ol&gt; list — breadcrumbs are ordered. Each item is &lt;li&gt;.</td></tr>
+  <tr><td>Current page</td><td>Add aria-current="page" to the last (current) item.</td></tr>
+  <tr><td>Separator</td><td>Add aria-hidden="true" to separator elements.</td></tr>
+</tbody></table></div>
+<h2 id="composition">Composition</h2>
+<div class="ds-composition-grid">
+  <div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Below topbar, above page header h1</div><div class="ds-composition-item">Inside topbar breadcrumb (simplified version)</div><div class="ds-composition-item">On detail pages, settings sub-pages</div></div></div>
+  <div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">On top-level pages (Dashboard, Users list)</div><div class="ds-composition-item">Inside modals or drawers</div><div class="ds-composition-item">More than 5 levels deep without truncation</div></div></div>
+</div>
+<h2 id="best-practices">Best Practices</h2>
+<div class="ds-bp-grid">
+  <div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><nav><div class="breadcrumb"><a href="#" class="breadcrumb-item">Users</a><span class="breadcrumb-sep"><svg style="width:11px;height:11px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span><span class="breadcrumb-item current">Ahmad Hendra</span></div></nav><div class="ds-bp-reason">Shows clear path. Current page is not a link.</div></div></div>
+  <div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><nav><div class="breadcrumb"><a href="#" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="#" class="breadcrumb-item">App</a><span class="breadcrumb-sep">/</span><a href="#" class="breadcrumb-item">Module</a><span class="breadcrumb-sep">/</span><a href="#" class="breadcrumb-item">Section</a><span class="breadcrumb-sep">/</span><a href="#" class="breadcrumb-item current">Sub-Section</a></div></nav><div class="ds-bp-reason">Too many levels, current page is still a link. Truncate and use aria-current.</div></div></div>
+</div>
+<h2 id="content">Content Rules</h2>
+<div class="ds-content-rules">
+  <div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good item labels</div><div class="ds-content-example">Dashboard / Users / Ahmad Hendra</div><div class="ds-content-reason">Mirror the actual page headings. Short and recognizable.</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad item labels</div><div class="ds-content-example">Go back to the users list page</div><div class="ds-content-reason">Too verbose. Breadcrumb items should be page names, not instructions.</div></div></div>
+</div>
+<h2 id="ai-spec">AI Implementation Guide</h2>
+<div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+  <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Always use &lt;nav aria-label="Breadcrumb"&gt; &gt; &lt;ol&gt; &gt; &lt;li&gt; structure. Ancestor items are &lt;a&gt; tags. Last item is NOT a link — use &lt;span aria-current="page"&gt;. Separators use aria-hidden="true". Separator: chevron-right SVG, color:#CBD5E1. Place breadcrumb below topbar, above page h1. Never show on top-level pages.</div>
+</div>
+<h2 id="related">Related Components</h2>
+<div class="ds-related-grid">
+  <a href="topbar.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></div><div class="ds-related-card-name">Topbar</div><div class="ds-related-card-desc">Simplified breadcrumb in header</div></a>
+  <a href="tabs.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></div><div class="ds-related-card-name">Tabs</div><div class="ds-related-card-desc">Same-level section navigation</div></a>
+</div>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why chevron-right instead of slash as separator?</div><div class="ds-decision-a">The chevron visually communicates directionality — it points forward, reinforcing the hierarchical flow from left (root) to right (current). A slash is ambiguous — it could represent a path separator, a date, or a ratio. The chevron is unambiguous.</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>Initial release — text, home icon, and truncated variants</li><li>Proper semantic nav+ol+li structure</li><li>aria-current="page" on current item</li></ul></div></div></div>
+<div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 'breadcrumb';</script>
+<script src="../shared/ds-shell.js"></script>
+</body></html>

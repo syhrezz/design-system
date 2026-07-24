@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Number Input - Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}.btn-primary{background:#6366F1;color:#fff;}.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}.btn-sm{padding:6px 12px;font-size:12px;border-radius:8px;}.form-group{margin-bottom:16px;}.form-label{display:block;font-size:12px;font-weight:700;color:#64748B;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;}.input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid #E2E8F0;font-size:13px;font-family:inherit;outline:none;color:#0F172A;background:#fff;transition:border-color .2s,box-shadow .2s;}.input:focus{border-color:#3B5BDB;box-shadow:0 0 0 3px rgba(59,91,219,.1);}</style>
+</head><body>
+<div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">S</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Components</a><span>/</span><strong>Number Input</strong></nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main"><article class="ds-page">
+<div class="ds-page-header-full">
+  <div class="ds-status-bar"><span class="ds-status-badge stable">Stable</span><span class="ds-version-badge">v1.0.0</span><span class="ds-meta-badge type">Form</span></div>
+  <h1>Number Input</h1>
+</div>
+<p class="ds-page-lead">Number Input extends the standard Input with increment/decrement stepper buttons. Used when users need to enter a precise numeric value with constrained min/max bounds, such as quantity, age, score, or page count.</p>
+<h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Number Input when</div><ul class="ds-when-list"><li>Entering a specific numeric value (quantity, count, score)</li><li>Bounded values where min/max matter</li><li>User benefits from increment/decrement control</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Number Input when</div><ul class="ds-when-list"><li>Selecting a value from a range — use a Slider</li><li>Large numbers without bounds — use a plain Input type="number"</li><li>Choosing from discrete options — use Select or Radio</li></ul></div>
+</div>
+<h2 id="anatomy">Anatomy</h2>
+<style>
+.number-input-wrap{display:inline-flex;align-items:center;border:1px solid #E2E8F0;border-radius:10px;overflow:hidden;background:#fff;transition:border-color .2s,box-shadow .2s;}
+.number-input-wrap:focus-within{border-color:#3B5BDB;box-shadow:0 0 0 3px rgba(59,91,219,.1);}
+.number-input-btn{width:36px;height:40px;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#64748B;transition:background .15s,color .15s;flex-shrink:0;font-size:16px;font-weight:600;}
+.number-input-btn:hover{background:#F8FAFC;color:#0F172A;}
+.number-input-btn:active{background:#F1F5F9;}
+.number-input-btn:disabled{opacity:.4;cursor:not-allowed;}
+.number-input-btn.left{border-right:1px solid #E2E8F0;}
+.number-input-btn.right{border-left:1px solid #E2E8F0;}
+.number-input-field{width:64px;height:40px;border:none;outline:none;text-align:center;font-size:14px;font-weight:600;color:#0F172A;font-family:inherit;background:transparent;}
+.number-input-field::-webkit-inner-spin-button,.number-input-field::-webkit-outer-spin-button{appearance:none;}
+</style>
+<div class="ds-anatomy-parts">
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Decrement button</div><div class="ds-anatomy-part-desc">Left button. Displays "−". 36×40px. Disabled when value === min. border-right separates from input.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Value input</div><div class="ds-anatomy-part-desc">Center input[type=number]. text-align:center, 64px width. No spinner arrows (webkit hidden). fw-600 14px.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Increment button</div><div class="ds-anatomy-part-desc">Right button. Displays "+". 36×40px. Disabled when value === max. border-left separates from input.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">4</div><div class="ds-anatomy-part-name">Container</div><div class="ds-anatomy-part-desc">.number-input-wrap. overflow:hidden, border-radius:10px, border:1px solid #E2E8F0. Focus-within applies the standard focus ring.</div></div>
+</div>
+<h2 id="variants">Variants</h2>
+<div class="ds-preview" style="display:flex;flex-direction:column;gap:20px">
+  <div>
+    <div class="ds-preview-label">Default</div>
+    <div class="number-input-wrap">
+      <button class="number-input-btn left" onclick="changeNum(this,-1)">&#8722;</button>
+      <input class="number-input-field" type="number" value="1" min="0" max="99" id="num1"/>
+      <button class="number-input-btn right" onclick="changeNum(this,1)">+</button>
+    </div>
+  </div>
+  <div>
+    <div class="ds-preview-label">With label and bounds</div>
+    <div class="form-group" style="margin:0">
+      <label class="form-label">Quantity</label>
+      <div class="number-input-wrap">
+        <button class="number-input-btn left" onclick="changeNum(this,-1)" disabled>&#8722;</button>
+        <input class="number-input-field" type="number" value="0" min="0" max="10" id="num2"/>
+        <button class="number-input-btn right" onclick="changeNum(this,1)">+</button>
+      </div>
+      <div class="form-hint">Min: 0 &middot; Max: 10</div>
+    </div>
+  </div>
+  <div>
+    <div class="ds-preview-label">Disabled</div>
+    <div class="number-input-wrap" style="opacity:.45;cursor:not-allowed">
+      <button class="number-input-btn left" disabled>&#8722;</button>
+      <input class="number-input-field" type="number" value="5" disabled/>
+      <button class="number-input-btn right" disabled>+</button>
+    </div>
+  </div>
+</div>
+<script>
+function changeNum(btn, delta) {
+  const wrap = btn.closest('.number-input-wrap');
+  const input = wrap.querySelector('input');
+  const min = parseInt(input.min) || 0;
+  const max = parseInt(input.max) || 999;
+  const newVal = Math.min(max, Math.max(min, parseInt(input.value || 0) + delta));
+  input.value = newVal;
+  wrap.querySelectorAll('.number-input-btn')[0].disabled = newVal <= min;
+  wrap.querySelectorAll('.number-input-btn')[1].disabled = newVal >= max;
+}
+</script>
+<h2 id="states">States</h2>
+<div class="ds-states-grid">
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="number-input-wrap"><button class="number-input-btn left">&#8722;</button><input class="number-input-field" type="number" value="5"/><button class="number-input-btn right">+</button></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Default</div><div class="ds-state-cell-desc">Both buttons active</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="number-input-wrap" style="border-color:#3B5BDB;box-shadow:0 0 0 3px rgba(59,91,219,.1)"><button class="number-input-btn left">&#8722;</button><input class="number-input-field" type="number" value="5" style="color:#3B5BDB"/><button class="number-input-btn right">+</button></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Focus</div><div class="ds-state-cell-desc">Standard focus ring on container</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="number-input-wrap"><button class="number-input-btn left" disabled style="opacity:.4;cursor:not-allowed">&#8722;</button><input class="number-input-field" type="number" value="0"/><button class="number-input-btn right">+</button></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">At minimum</div><div class="ds-state-cell-desc">Decrement disabled</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><div class="number-input-wrap"><button class="number-input-btn left">&#8722;</button><input class="number-input-field" type="number" value="10"/><button class="number-input-btn right" disabled style="opacity:.4;cursor:not-allowed">+</button></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">At maximum</div><div class="ds-state-cell-desc">Increment disabled</div></div></div>
+</div>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">value</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Controlled numeric value.</td></tr>
+  <tr><td><span class="ds-prop-name">min</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Minimum allowed value. Disables decrement button when reached.</td></tr>
+  <tr><td><span class="ds-prop-name">max</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Maximum allowed value. Disables increment button when reached.</td></tr>
+  <tr><td><span class="ds-prop-name">step</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">1</span></td><td class="ds-prop-desc">Amount to increment/decrement per click.</td></tr>
+  <tr><td><span class="ds-prop-name">onChange</span></td><td><span class="ds-prop-type">function</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Called with new numeric value on every change.</td></tr>
+  <tr><td><span class="ds-prop-name">disabled</span></td><td><span class="ds-prop-type">boolean</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">false</span></td><td class="ds-prop-desc">Disables all interaction. opacity:.45.</td></tr>
+</tbody></table>
+<h2 id="behavior">Behavior</h2>
+<table class="ds-behavior-table"><thead><tr><th>Trigger</th><th>Behavior</th></tr></thead><tbody>
+  <tr><td><span class="ds-behavior-trigger">Decrement click</span></td><td>value = Math.max(min, value - step). Calls onChange. Disables button if new value === min.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Increment click</span></td><td>value = Math.min(max, value + step). Calls onChange. Disables button if new value === max.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Direct input</span></td><td>User can type directly. Clamp to min/max on blur. Reject non-numeric characters.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Arrow keys</span></td><td>When input is focused, Up/Down arrows increment/decrement by step. Native behavior.</td></tr>
+</tbody></table>
+<h2 id="accessibility">Accessibility</h2>
+<div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody>
+  <tr><td>Button labels</td><td>Decrement button: aria-label="Decrease". Increment button: aria-label="Increase".</td></tr>
+  <tr><td>Input</td><td>type="number" with aria-valuemin, aria-valuemax, aria-valuenow.</td></tr>
+  <tr><td>Label</td><td>Wrap in .form-group with .form-label. Associate label with input via for/id.</td></tr>
+</tbody></table></div>
+<h2 id="composition">Composition</h2>
+<div class="ds-composition-grid">
+  <div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Inside .form-group with .form-label</div><div class="ds-composition-item">With .form-hint showing min/max bounds</div><div class="ds-composition-item">Inside modal or settings form</div></div></div>
+  <div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">For large unbounded numbers — use plain Input type="number"</div><div class="ds-composition-item">For selecting from options — use Select or Radio</div></div></div>
+</div>
+<h2 id="best-practices">Best Practices</h2>
+<div class="ds-bp-grid">
+  <div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Always show hint text with min/max bounds so users know the valid range.</div><div class="ds-bp-reason">Prevents frustration when values are silently clamped.</div></div></div>
+  <div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Use Number Input for values like price, phone number, or ID — use plain Input instead.</div><div class="ds-bp-reason">Increment/decrement is misleading for non-countable numeric fields.</div></div></div>
+</div>
+<h2 id="content">Content Rules</h2>
+<div class="ds-content-rules">
+  <div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good label + hint</div><div class="ds-content-example">Quantity · Min: 1, Max: 99</div><div class="ds-content-reason">Label names the field, hint shows constraints.</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad</div><div class="ds-content-example">Number</div><div class="ds-content-reason">Too generic. Does not communicate purpose or constraints.</div></div></div>
+</div>
+<h2 id="ai-spec">AI Implementation Guide</h2>
+<div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+  <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Three elements inside .number-input-wrap: button.left (decrement), input[type=number] (value), button.right (increment). Container has border + border-radius:10px + focus-within ring. Hide native number spinners: input::-webkit-inner-spin-button{appearance:none}. Clamp logic: Math.max(min, Math.min(max, value+delta)). Disable decrement when value===min, increment when value===max.</div>
+</div>
+<h2 id="related">Related Components</h2>
+<div class="ds-related-grid">
+  <a href="input.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5"/></svg></div><div class="ds-related-card-name">Input</div><div class="ds-related-card-desc">Plain text/number input</div></a>
+  <a href="select.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg></div><div class="ds-related-card-name">Select</div><div class="ds-related-card-desc">Choosing from a fixed list</div></a>
+</div>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why buttons inside the input container instead of outside?</div><div class="ds-decision-a">Embedding the buttons inside the container creates a single cohesive unit — the entire component feels like one form control. Buttons outside would look like separate actions rather than part of the input. The inner border-left/border-right between buttons and input maintains clear zones while keeping visual unity.</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>Initial release — min/max/step support, disabled state, focus-within ring</li><li>Auto-disable buttons at bounds</li></ul></div></div></div>
+<div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 'number-input';</script>
+<script src="../shared/ds-shell.js"></script>
+</body></html>

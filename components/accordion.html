@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Accordion - Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}.btn-primary{background:#6366F1;color:#fff;}.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}.btn-sm{padding:6px 12px;font-size:12px;border-radius:8px;}</style>
+</head><body>
+<div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">S</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Components</a><span>/</span><strong>Accordion</strong></nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main"><article class="ds-page">
+<div class="ds-page-header-full">
+  <div class="ds-status-bar"><span class="ds-status-badge stable">Stable</span><span class="ds-version-badge">v1.0.0</span><span class="ds-meta-badge type">Layout</span></div>
+  <h1>Accordion</h1>
+</div>
+<p class="ds-page-lead">Accordion allows sections of content to be expanded and collapsed independently. Used to progressively disclose information and reduce cognitive load when displaying multiple sections of related content.</p>
+<h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Accordion when</div><ul class="ds-when-list"><li>FAQ sections with many questions</li><li>Settings grouped by category</li><li>Long forms with logical sections</li><li>When content is optional — user chooses what to read</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Accordion when</div><ul class="ds-when-list"><li>Content is short enough to display fully</li><li>Users need to compare sections side by side</li><li>Critical information that must always be visible</li><li>Only 1-2 sections — use Cards instead</li></ul></div>
+</div>
+<h2 id="anatomy">Anatomy</h2>
+<style>
+.accordion{border:1px solid #E2E8F0;border-radius:12px;overflow:hidden;}
+.accordion-item{border-bottom:1px solid #E2E8F0;}
+.accordion-item:last-child{border-bottom:none;}
+.accordion-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:#fff;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;color:#0F172A;text-align:left;transition:background .15s;}
+.accordion-trigger:hover{background:#F8FAFC;}
+.accordion-trigger.open{background:#F8FAFC;color:#6366F1;}
+.accordion-chevron{width:16px;height:16px;flex-shrink:0;color:#94A3B8;transition:transform .2s;}
+.accordion-trigger.open .accordion-chevron{transform:rotate(180deg);color:#6366F1;}
+.accordion-content{overflow:hidden;max-height:0;transition:max-height .25s cubic-bezier(.4,0,.2,1);}
+.accordion-content.open{max-height:400px;}
+.accordion-content-inner{padding:0 18px 16px;font-size:13px;color:#64748B;line-height:1.6;}
+</style>
+<div class="ds-anatomy-parts">
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Container</div><div class="ds-anatomy-part-desc">div.accordion. border:1px solid #E2E8F0, border-radius:12px, overflow:hidden. Contains all accordion items.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Item</div><div class="ds-anatomy-part-desc">div.accordion-item. border-bottom separates items. Last item has no border.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Trigger</div><div class="ds-anatomy-part-desc">button.accordion-trigger. Full width, flex space-between. Title left, chevron right. Hover: bg:#F8FAFC. Open: title color:#6366F1.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">4</div><div class="ds-anatomy-part-name">Chevron</div><div class="ds-anatomy-part-desc">16px SVG icon. Rotates 180deg on open. color:#94A3B8 default → #6366F1 open. transition:transform 0.2s.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">5</div><div class="ds-anatomy-part-name">Content panel</div><div class="ds-anatomy-part-desc">div.accordion-content. max-height:0 → max-height:400px transition (0.25s cubic-bezier). Inner div has padding:0 18px 16px.</div></div>
+</div>
+<h2 id="variants">Variants</h2>
+<div class="ds-preview">
+  <div class="accordion">
+    <div class="accordion-item">
+      <button class="accordion-trigger open" onclick="toggleAccordion(this)">
+        What payment methods do you accept?
+        <svg class="accordion-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="accordion-content open"><div class="accordion-content-inner">We accept all major credit cards (Visa, Mastercard, Amex), bank transfers, and digital wallets. Enterprise customers can also use purchase orders.</div></div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        How do I reset my password?
+        <svg class="accordion-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="accordion-content"><div class="accordion-content-inner">Click "Forgot password" on the login page. Enter your email address and we will send a reset link within 5 minutes.</div></div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        Can I export my data?
+        <svg class="accordion-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="accordion-content"><div class="accordion-content-inner">Yes. Go to Settings &gt; Data Export and select your preferred format (CSV, Excel, PDF). Large exports are delivered by email.</div></div>
+    </div>
+  </div>
+</div>
+<script>
+function toggleAccordion(trigger) {
+  const content = trigger.nextElementSibling;
+  const isOpen = trigger.classList.contains('open');
+  trigger.classList.toggle('open', !isOpen);
+  content.classList.toggle('open', !isOpen);
+}
+</script>
+<h2 id="states">States</h2>
+<div class="ds-states-grid">
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><button class="accordion-trigger" style="width:200px;border-radius:8px;border:1px solid #E2E8F0">Section Title<svg style="width:14px;height:14px;color:#94A3B8;flex-shrink:0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Collapsed</div><div class="ds-state-cell-desc">Default. Content hidden (max-height:0)</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><button class="accordion-trigger open" style="width:200px;border-radius:8px;border:1px solid #E2E8F0">Section Title<svg style="width:14px;height:14px;color:#6366F1;flex-shrink:0;transform:rotate(180deg)" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Expanded</div><div class="ds-state-cell-desc">Content visible, chevron rotated, title:#6366F1</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><button class="accordion-trigger" style="width:200px;border-radius:8px;border:1px solid #E2E8F0;background:#F8FAFC">Section Title (hover)<svg style="width:14px;height:14px;color:#94A3B8;flex-shrink:0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Hover</div><div class="ds-state-cell-desc">bg:#F8FAFC</div></div></div>
+</div>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">items</span></td><td><span class="ds-prop-type">array</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Array of {title, content, defaultOpen?}.</td></tr>
+  <tr><td><span class="ds-prop-name">allowMultiple</span></td><td><span class="ds-prop-type">boolean</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">true</span></td><td class="ds-prop-desc">When false, opening one item closes others (exclusive mode).</td></tr>
+  <tr><td><span class="ds-prop-name">defaultOpen</span></td><td><span class="ds-prop-type">string[]</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">[]</span></td><td class="ds-prop-desc">Array of item IDs to open by default on mount.</td></tr>
+</tbody></table>
+<h2 id="behavior">Behavior</h2>
+<table class="ds-behavior-table"><thead><tr><th>Trigger</th><th>Behavior</th></tr></thead><tbody>
+  <tr><td><span class="ds-behavior-trigger">Trigger click</span></td><td>Toggles open/closed. Content animates via max-height transition (0.25s cubic-bezier). Chevron rotates 180deg.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Multiple open</span></td><td>Default: multiple items can be open simultaneously. Set allowMultiple:false for exclusive mode.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Keyboard Enter/Space</span></td><td>Triggers open/close when trigger is focused.</td></tr>
+</tbody></table>
+<h2 id="accessibility">Accessibility</h2>
+<div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody>
+  <tr><td>Trigger element</td><td>Always a &lt;button&gt; — never a div with onclick.</td></tr>
+  <tr><td>aria-expanded</td><td>"true" when open, "false" when closed on trigger button.</td></tr>
+  <tr><td>aria-controls</td><td>Points to the content panel ID from the trigger button.</td></tr>
+  <tr><td>Content visibility</td><td>Use max-height:0 + overflow:hidden instead of display:none, so screen readers can still access content.</td></tr>
+</tbody></table></div>
+<h2 id="composition">Composition</h2>
+<div class="ds-composition-grid">
+  <div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">FAQ sections</div><div class="ds-composition-item">Settings grouped by category</div><div class="ds-composition-item">Inside cards for collapsible sub-sections</div></div></div>
+  <div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">Nested accordions inside accordion content</div><div class="ds-composition-item">Critical always-visible content</div><div class="ds-composition-item">Inside modals (too much content)</div></div></div>
+</div>
+<h2 id="best-practices">Best Practices</h2>
+<div class="ds-bp-grid">
+  <div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Keep trigger labels concise (3-6 words). Open the most important section by default.</div><div class="ds-bp-reason">Users scan accordion triggers to decide what to open. Short labels scan faster.</div></div></div>
+  <div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Use accordion when content could be shown fully on the page without overwhelming the user.</div><div class="ds-bp-reason">Accordion hides information — only use when there is genuinely too much to show at once.</div></div></div>
+</div>
+<h2 id="content">Content Rules</h2>
+<div class="ds-content-rules">
+  <div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good trigger</div><div class="ds-content-example">Payment methods</div><div class="ds-content-reason">Noun phrase. Short. Scannable.</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad trigger</div><div class="ds-content-example">Click here to learn about all the different payment methods we accept</div><div class="ds-content-reason">Too long for an accordion trigger.</div></div></div>
+</div>
+<h2 id="ai-spec">AI Implementation Guide</h2>
+<div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+  <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Trigger is always a &lt;button&gt;. Content animates via max-height: 0 → max-height: 400px (not display:none). Transition: 0.25s cubic-bezier(0.4,0,0.2,1). Chevron uses transform:rotate(180deg) when open. Add aria-expanded to trigger. Use &lt;button class="accordion-trigger"&gt; — never a div. Container has border + border-radius:12px + overflow:hidden.</div>
+</div>
+<h2 id="related">Related Components</h2>
+<div class="ds-related-grid">
+  <a href="tabs.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></div><div class="ds-related-card-name">Tabs</div><div class="ds-related-card-desc">Side-by-side section switching</div></a>
+  <a href="card.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/></svg></div><div class="ds-related-card-name">Card</div><div class="ds-related-card-desc">Static content container</div></a>
+</div>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why max-height animation instead of height animation?</div><div class="ds-decision-a">CSS cannot animate height:auto. max-height animation is the standard workaround — set max-height to a value larger than the content will ever be. The cubic-bezier easing makes the animation feel snappy and natural rather than mechanical.</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>Initial release — single and multiple open modes</li><li>max-height animation with cubic-bezier easing</li><li>Chevron rotation indicator</li><li>aria-expanded accessibility support</li></ul></div></div></div>
+<div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 'accordion';</script>
+<script src="../shared/ds-shell.js"></script>
+</body></html>

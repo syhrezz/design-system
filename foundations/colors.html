@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Colors — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:24px;}
+.swatch{border-radius:10px;overflow:hidden;border:1px solid #E2E8F0;cursor:pointer;transition:transform .15s;}
+.swatch:hover{transform:translateY(-2px);}
+.swatch-color{height:52px;}
+.swatch-info{padding:8px 10px;background:#fff;}
+.swatch-name{font-size:11px;font-weight:700;color:#0F172A;}
+.swatch-hex{font-size:10px;color:#64748B;font-family:'JetBrains Mono',monospace;margin-top:1px;}
+.swatch-var{font-size:9px;color:#94A3B8;font-family:'JetBrains Mono',monospace;margin-top:1px;}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-header">
+    <div class="ds-sidebar-logo">
+      <div class="ds-sidebar-logo-icon">N</div>
+      <div class="ds-sidebar-logo-text">
+        <div class="ds-sidebar-logo-name">Syhrezz</div>
+        <div class="ds-sidebar-logo-version">v1.0</div>
+      </div>
+    </div>
+    <div class="ds-search-wrap">
+      <div class="ds-search-box">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/>
+        <span class="ds-search-kbd">&#8984;K</span>
+      </div>
+      <div id="ds-search-results"></div>
+    </div>
+  </div>
+  <nav class="ds-sidebar-nav" id="ds-nav-links"></nav>
+</aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb">
+    <a href="../index.html">Syhrezz</a><span>/</span>
+    <a href="#">Foundations</a><span>/</span>
+    <strong>Colors</strong>
+  </nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Foundation</span></div>
+</header>
+<div class="ds-main">
+<article class="ds-page">
+  <div class="ds-page-header">
+    <div class="ds-page-meta"><span class="ds-meta-badge stable">Stable</span></div>
+    <h1>Colors</h1>
+    <p class="ds-page-lead">The Syhrezz color system is built on semantic CSS custom properties. Never hardcode hex values in components — always reference the token. Every color has a defined purpose and must not be used outside that purpose.</p>
+  </div>
+
+  <div class="ds-callout ds-callout-warning">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#92400E"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+    <div class="ds-callout-content"><strong>Color discipline:</strong> Do NOT use full-saturation colors as backgrounds in the UI. Always use the soft <code>-bg</code> tinted variants for backgrounds and the dark <code>-text</code> variants for text. The full color is only used for icons, borders, and accent bars.</div>
+  </div>
+
+  <h2 id="brand">Brand Colors</h2>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#3B5BDB"></div><div class="swatch-info"><div class="swatch-name">Primary</div><div class="swatch-hex">#3B5BDB</div><div class="swatch-var">--primary</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#EEF2FF;border-bottom:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-name">Primary Light</div><div class="swatch-hex">#EEF2FF</div><div class="swatch-var">--primary-light</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#2F4AC7"></div><div class="swatch-info"><div class="swatch-name">Primary Dark</div><div class="swatch-hex">#2F4AC7</div><div class="swatch-var">--primary-dark</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#6366F1"></div><div class="swatch-info"><div class="swatch-name">Director Accent</div><div class="swatch-hex">#6366F1</div><div class="swatch-var">--accent-director</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#0F172A"></div><div class="swatch-info"><div class="swatch-name">Admin Accent</div><div class="swatch-hex">#0F172A</div><div class="swatch-var">--accent-admin</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#2563EB"></div><div class="swatch-info"><div class="swatch-name">Sales Accent</div><div class="swatch-hex">#2563EB</div><div class="swatch-var">--accent-sales</div></div></div>
+  </div>
+
+  <h2 id="semantic">Semantic Colors</h2>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#0E9F6E"></div><div class="swatch-info"><div class="swatch-name">Success</div><div class="swatch-hex">#0E9F6E</div><div class="swatch-var">--success</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#DEF7EC;border-bottom:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-name">Success BG</div><div class="swatch-hex">#DEF7EC</div><div class="swatch-var">--success-bg</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#03543F"></div><div class="swatch-info"><div class="swatch-name">Success Text</div><div class="swatch-hex">#03543F</div><div class="swatch-var">--success-text</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#E3A008"></div><div class="swatch-info"><div class="swatch-name">Warning</div><div class="swatch-hex">#E3A008</div><div class="swatch-var">--warning</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#FEF3C7;border-bottom:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-name">Warning BG</div><div class="swatch-hex">#FEF3C7</div><div class="swatch-var">--warning-bg</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#92400E"></div><div class="swatch-info"><div class="swatch-name">Warning Text</div><div class="swatch-hex">#92400E</div><div class="swatch-var">--warning-text</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#F05252"></div><div class="swatch-info"><div class="swatch-name">Danger</div><div class="swatch-hex">#F05252</div><div class="swatch-var">--danger</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#FDE2E2;border-bottom:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-name">Danger BG</div><div class="swatch-hex">#FDE2E2</div><div class="swatch-var">--danger-bg</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#9B1C1C"></div><div class="swatch-info"><div class="swatch-name">Danger Text</div><div class="swatch-hex">#9B1C1C</div><div class="swatch-var">--danger-text</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#3B5BDB"></div><div class="swatch-info"><div class="swatch-name">Info</div><div class="swatch-hex">#3B5BDB</div><div class="swatch-var">--info</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#E1EFFE;border-bottom:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-name">Info BG</div><div class="swatch-hex">#E1EFFE</div><div class="swatch-var">--info-bg</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#1E429F"></div><div class="swatch-info"><div class="swatch-name">Info Text</div><div class="swatch-hex">#1E429F</div><div class="swatch-var">--info-text</div></div></div>
+  </div>
+
+  <h2 id="surface">Surface & Text</h2>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#F8FAFC;border-bottom:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-name">Surface</div><div class="swatch-hex">#F8FAFC</div><div class="swatch-var">--surface</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#F0F4FF;border-bottom:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-name">Surface Director</div><div class="swatch-hex">#F0F4FF</div><div class="swatch-var">--surface-dir</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#FFFFFF;border-bottom:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-name">Card</div><div class="swatch-hex">#FFFFFF</div><div class="swatch-var">--card</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#E2E8F0"></div><div class="swatch-info"><div class="swatch-name">Border</div><div class="swatch-hex">#E2E8F0</div><div class="swatch-var">--border</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#0F172A"></div><div class="swatch-info"><div class="swatch-name">Text Primary</div><div class="swatch-hex">#0F172A</div><div class="swatch-var">--text-primary</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#64748B"></div><div class="swatch-info"><div class="swatch-name">Text Secondary</div><div class="swatch-hex">#64748B</div><div class="swatch-var">--text-secondary</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#94A3B8"></div><div class="swatch-info"><div class="swatch-name">Text Muted</div><div class="swatch-hex">#94A3B8</div><div class="swatch-var">--text-muted</div></div></div>
+  </div>
+
+  <h2 id="temperature">Lead Temperature (app)</h2>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#fef2f2;border-bottom:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-name">Hot BG</div><div class="swatch-hex">#fef2f2</div><div class="swatch-var">--hot-bg</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#dc2626"></div><div class="swatch-info"><div class="swatch-name">Hot Text</div><div class="swatch-hex">#dc2626</div><div class="swatch-var">--hot-text</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#fff7ed;border-bottom:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-name">Warm BG</div><div class="swatch-hex">#fff7ed</div><div class="swatch-var">--warm-bg</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ea580c"></div><div class="swatch-info"><div class="swatch-name">Warm Text</div><div class="swatch-hex">#ea580c</div><div class="swatch-var">--warm-text</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#f0f9ff;border-bottom:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-name">Cold BG</div><div class="swatch-hex">#f0f9ff</div><div class="swatch-var">--cold-bg</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#0284c7"></div><div class="swatch-info"><div class="swatch-name">Cold Text</div><div class="swatch-hex">#0284c7</div><div class="swatch-var">--cold-text</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#f0fdf4;border-bottom:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-name">Deal BG</div><div class="swatch-hex">#f0fdf4</div><div class="swatch-var">--deal-bg</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#16a34a"></div><div class="swatch-info"><div class="swatch-name">Deal Text</div><div class="swatch-hex">#16a34a</div><div class="swatch-var">--deal-text</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#f9fafb;border-bottom:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-name">Lost BG</div><div class="swatch-hex">#f9fafb</div><div class="swatch-var">--lost-bg</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#6b7280"></div><div class="swatch-info"><div class="swatch-name">Lost Text</div><div class="swatch-hex">#6b7280</div><div class="swatch-var">--lost-text</div></div></div>
+  </div>
+
+  <h2 id="sidebar">Sidebar Backgrounds</h2>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#0F172A"></div><div class="swatch-info"><div class="swatch-name">Primary Role</div><div class="swatch-hex">#0F172A</div><div class="swatch-var">--sidebar-bg</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#0C0F1A"></div><div class="swatch-info"><div class="swatch-name">Director</div><div class="swatch-hex">#0C0F1A</div><div class="swatch-var">--sidebar-bg-director</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#1e3a8a"></div><div class="swatch-info"><div class="swatch-name">Sales / Manager</div><div class="swatch-hex">#1e3a8a</div><div class="swatch-var">--sidebar-bg-sales</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#94A3B8"></div><div class="swatch-info"><div class="swatch-name">Sidebar Text</div><div class="swatch-hex">#94A3B8</div><div class="swatch-var">--sidebar-text</div></div></div>
+  </div>
+
+  <h2 id="usage">Usage Rules</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Token</th><th>Use</th><th>Never Use For</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">--primary</td><td>Links, focus rings, active indicators</td><td>Backgrounds, large surfaces</td></tr>
+        <tr><td class="mono">--primary-light</td><td>Badge backgrounds, hover states, tinted surfaces</td><td>Text color</td></tr>
+        <tr><td class="mono">--accent-director</td><td>Accent role primary buttons, active nav, accent bars</td><td>Any non-director context</td></tr>
+        <tr><td class="mono">--success / --danger / --warning</td><td>Icons, left accent borders, SVG strokes</td><td>Text color or large background fills</td></tr>
+        <tr><td class="mono">--success-bg / --danger-bg / --warning-bg</td><td>Badge backgrounds, alert backgrounds, callout fills</td><td>Button backgrounds, hover states</td></tr>
+        <tr><td class="mono">--surface</td><td>Page background</td><td>Card backgrounds (use --card)</td></tr>
+        <tr><td class="mono">--text-muted</td><td>Placeholders, timestamps, secondary metadata</td><td>Primary content, headings</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="ds-prev-next"></div>
+</article>
+<aside class="ds-toc" id="ds-toc"></aside>
+</div>
+</div>
+<script>window.DS_ACTIVE_PAGE = 'colors';</script>
+<script src="../shared/ds-shell.js"></script>
+</body>
+</html>

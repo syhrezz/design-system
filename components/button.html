@@ -1,0 +1,941 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Button — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+/* Button component styles */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:12px;font-size:14px;font-weight:600;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;transition:all 0.2s cubic-bezier(0.4,0,0.2,1);border:none;text-decoration:none;white-space:nowrap;position:relative;overflow:hidden;}
+.btn:hover{transform:translateY(-2px);}
+.btn:active{transform:translateY(0) scale(.98);}
+.btn:focus-visible{outline:2px solid #6366F1;outline-offset:2px;}
+.btn-primary{background:#6366F1;color:#fff;box-shadow:0 4px 14px rgba(99,102,241,0.3);}
+.btn-primary:hover{background:#4F46E5;box-shadow:0 6px 20px rgba(99,102,241,0.4);}
+.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}
+.btn-outline:hover{border-color:#6366F1;color:#6366F1;background:#EEF2FF;}
+.btn-danger{background:#F05252;color:#fff;box-shadow:0 4px 14px rgba(240,82,82,0.3);}
+.btn-danger:hover{background:#DC2626;box-shadow:0 6px 20px rgba(240,82,82,0.4);}
+.btn-success{background:#0E9F6E;color:#fff;box-shadow:0 4px 14px rgba(14,159,110,0.25);}
+.btn-success:hover{background:#057A55;}
+.btn-ghost{background:transparent;color:#64748B;box-shadow:none;}
+.btn-ghost:hover{background:#F8FAFC;color:#0F172A;transform:translateY(0);}
+.btn-dark{background:#0F172A;color:#fff;}
+.btn-dark:hover{opacity:.9;}
+.btn-lg{padding:13px 26px;font-size:15px;border-radius:13px;}
+.btn-sm{padding:6px 12px;font-size:12px;border-radius:8px;gap:6px;}
+.btn-xs{padding:4px 10px;font-size:11px;border-radius:7px;gap:5px;}
+.btn-icon-only{padding:9px;gap:0;border-radius:10px;}
+.btn-icon-only.btn-sm{padding:7px;border-radius:8px;}
+.btn:disabled{opacity:0.45;cursor:not-allowed;transform:none !important;box-shadow:none !important;pointer-events:none;}
+.btn-loading{pointer-events:none;opacity:0.8;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn-spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;}
+.btn-spinner-dark{border-color:rgba(99,102,241,.15);border-top-color:#6366F1;}
+/* Hover state simulation */
+.state-hover{transform:translateY(-2px) !important;}
+.state-hover.btn-primary{box-shadow:0 6px 20px rgba(99,102,241,.4) !important;background:#4F46E5 !important;}
+.state-hover.btn-outline{border-color:#6366F1 !important;color:#6366F1 !important;background:#EEF2FF !important;}
+.state-focus{outline:2px solid #6366F1 !important;outline-offset:2px !important;}
+.state-active{transform:scale(.98) !important;}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-header">
+    <div class="ds-sidebar-logo">
+      <div class="ds-sidebar-logo-icon">S</div>
+      <div class="ds-sidebar-logo-text">
+        <div class="ds-sidebar-logo-name">Syhrezz</div>
+        <div class="ds-sidebar-logo-version">v1.0</div>
+      </div>
+    </div>
+    <div class="ds-search-wrap">
+      <div class="ds-search-box">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/>
+        <span class="ds-search-kbd">&#8984;K</span>
+      </div>
+      <div id="ds-search-results"></div>
+    </div>
+  </div>
+  <nav class="ds-sidebar-nav" id="ds-nav-links"></nav>
+</aside>
+
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb">
+    <a href="../index.html">Syhrezz</a><span>/</span>
+    <a href="#">Components</a><span>/</span>
+    <strong>Button</strong>
+  </nav>
+  <div class="ds-topbar-right">
+    <span class="ds-topbar-tag">Component</span>
+  </div>
+</header>
+
+<div class="ds-main">
+<article class="ds-page">
+
+<!-- ── PAGE HEADER ── -->
+<div class="ds-page-header-full">
+  <div class="ds-status-bar">
+    <span class="ds-status-badge stable">Stable</span>
+    <span class="ds-version-badge">v1.0.0</span>
+    <span class="ds-updated-badge">Updated Jul 2026</span>
+    <span class="ds-meta-badge type">Interactive</span>
+  </div>
+  <div class="ds-component-intro">
+    <div class="ds-component-intro-text">
+      <h1>Button</h1>
+      <p class="ds-page-lead">Buttons trigger actions or navigate users to a new context. They communicate what happens when tapped and establish a clear visual hierarchy through variant, size, and placement. Every interactive action in the system uses a button.</p>
+    </div>
+    <div class="ds-component-intro-preview">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-outline">Outline</button>
+        <button class="btn btn-ghost">Ghost</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 1. OVERVIEW ── -->
+<h2 id="overview">Overview</h2>
+
+<h3 id="when-to-use">When to Use</h3>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use">
+    <div class="ds-when-title">
+      <svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+      Use button when
+    </div>
+    <ul class="ds-when-list">
+      <li>User needs to trigger an action (save, delete, submit)</li>
+      <li>User needs to navigate to a new page or context</li>
+      <li>A clear call-to-action is needed in a form or dialog</li>
+      <li>Confirming or cancelling a destructive operation</li>
+      <li>Triggering a modal, dropdown, or overlay</li>
+    </ul>
+  </div>
+  <div class="ds-when-card ds-when-not">
+    <div class="ds-when-title">
+      <svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+      Don't use button when
+    </div>
+    <ul class="ds-when-list">
+      <li>Linking within body text — use a text link instead</li>
+      <li>Displaying status — use a badge instead</li>
+      <li>Showing options in a list — use a select or dropdown</li>
+      <li>Tab-based navigation — use a tabs component</li>
+      <li>There are more than 3–4 CTAs in one area — reconsider hierarchy</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ds-callout ds-callout-info">
+  <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+  <div class="ds-callout-content"><strong>Base class required:</strong> Every button <em>must</em> have <code>.btn</code> as its base class plus one variant class. Never use a bare <code>&lt;button&gt;</code> without classes. Never apply Tailwind utility classes to buttons.</div>
+</div>
+
+<!-- ── 2. LIVE PREVIEW ── -->
+<h2 id="preview">Live Preview</h2><!-- ── 3. ANATOMY ── -->
+<h2 id="anatomy">Anatomy</h2>
+<p>The button is composed of 5 parts. Each part has a defined role, style, and behavior.</p>
+<div class="ds-preview" style="padding:32px 40px">
+  <div style="position:relative;display:inline-flex">
+    <button class="btn btn-primary" style="font-size:16px;padding:12px 24px;pointer-events:none">
+      <svg style="width:18px;height:18px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+      Add User
+    </button>
+    <!-- Callout: Container -->
+    <div class="ds-anatomy-callout" style="top:-32px;left:50%;transform:translateX(-50%)">Container</div>
+    <!-- Callout: Icon -->
+    <div class="ds-anatomy-callout" style="bottom:-32px;left:20px">Icon</div>
+    <!-- Callout: Label -->
+    <div class="ds-anatomy-callout" style="bottom:-32px;right:10px">Label</div>
+  </div>
+</div>
+<div class="ds-anatomy-parts">
+  <div class="ds-anatomy-part-row">
+    <div class="ds-anatomy-part-num">1</div>
+    <div class="ds-anatomy-part-name">Container</div>
+    <div class="ds-anatomy-part-desc">The outer element — always a <code>&lt;button&gt;</code> or <code>&lt;a&gt;</code>. Has the background color, border-radius, padding, and shadow. Receives hover and focus states. Border-radius: 12px (md), 8px (sm), 7px (xs), 13px (lg).</div>
+  </div>
+  <div class="ds-anatomy-part-row">
+    <div class="ds-anatomy-part-num">2</div>
+    <div class="ds-anatomy-part-name">Icon (optional)</div>
+    <div class="ds-anatomy-part-desc">Inline SVG, Heroicons outline. Always placed before the label. Size: 18px (lg), 16px (md), 14px (sm), 12px (xs). <code>flex-shrink:0</code> always. <code>stroke="currentColor"</code> inherits button text color.</div>
+  </div>
+  <div class="ds-anatomy-part-row">
+    <div class="ds-anatomy-part-num">3</div>
+    <div class="ds-anatomy-part-name">Label</div>
+    <div class="ds-anatomy-part-desc">Text content of the button. Font: Plus Jakarta Sans. Size: 15px (lg), 14px (md), 12px (sm), 11px (xs). Weight: 600. White-space: nowrap. Never truncate button labels.</div>
+  </div>
+  <div class="ds-anatomy-part-row">
+    <div class="ds-anatomy-part-num">4</div>
+    <div class="ds-anatomy-part-name">Loading Indicator</div>
+    <div class="ds-anatomy-part-desc">A 14px spinner rendered as a <code>&lt;span class="btn-spinner"&gt;</code>. Replaces or precedes the icon. Border-color matches button variant — white for filled buttons, indigo for outline. Added programmatically on async action start.</div>
+  </div>
+  <div class="ds-anatomy-part-row">
+    <div class="ds-anatomy-part-num">5</div>
+    <div class="ds-anatomy-part-name">Focus Ring</div>
+    <div class="ds-anatomy-part-desc">Visible on keyboard focus only (<code>:focus-visible</code>). Style: <code>outline: 2px solid #6366F1; outline-offset: 2px</code>. Never hidden. Required for accessibility. Not shown on mouse click.</div>
+  </div>
+</div>
+
+<!-- ── 4. VARIANTS ── -->
+<h2 id="variants">Variants</h2>
+<div class="ds-states-grid" style="grid-template-columns:repeat(3,1fr)">
+  <div class="ds-state-cell">
+    <div class="ds-state-cell-preview"><button class="btn btn-primary">Primary</button></div>
+    <div class="ds-state-cell-label">
+      <div class="ds-state-cell-name">Primary</div>
+      <div class="ds-state-cell-desc">Main CTA. One per section maximum. bg:#6366F1</div>
+    </div>
+  </div>
+  <div class="ds-state-cell">
+    <div class="ds-state-cell-preview"><button class="btn btn-outline">Outline</button></div>
+    <div class="ds-state-cell-label">
+      <div class="ds-state-cell-name">Outline</div>
+      <div class="ds-state-cell-desc">Secondary action. Pairs with primary.</div>
+    </div>
+  </div>
+  <div class="ds-state-cell">
+    <div class="ds-state-cell-preview"><button class="btn btn-danger">Danger</button></div>
+    <div class="ds-state-cell-label">
+      <div class="ds-state-cell-name">Danger</div>
+      <div class="ds-state-cell-desc">Destructive actions only. Always needs confirm modal.</div>
+    </div>
+  </div>
+  <div class="ds-state-cell">
+    <div class="ds-state-cell-preview"><button class="btn btn-success">Success</button></div>
+    <div class="ds-state-cell-label">
+      <div class="ds-state-cell-name">Success</div>
+      <div class="ds-state-cell-desc">Positive confirmations. Approve, complete.</div>
+    </div>
+  </div>
+  <div class="ds-state-cell">
+    <div class="ds-state-cell-preview"><button class="btn btn-ghost">Ghost</button></div>
+    <div class="ds-state-cell-label">
+      <div class="ds-state-cell-name">Ghost</div>
+      <div class="ds-state-cell-desc">Tertiary. Minimal visual weight. No hover lift.</div>
+    </div>
+  </div>
+  <div class="ds-state-cell">
+    <div class="ds-state-cell-preview" style="background:#1E293B"><button class="btn btn-dark">Dark</button></div>
+    <div class="ds-state-cell-label">
+      <div class="ds-state-cell-name">Dark</div>
+      <div class="ds-state-cell-desc">Dark accent role CTA. bg:#0F172A.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 5. SIZES ── -->
+<h2 id="sizes">Sizes</h2>
+<div class="ds-quick-ref">
+  <div class="ds-quick-ref-grid">
+    <div class="ds-quick-ref-item"><div class="ds-quick-ref-label">Large</div><div class="ds-quick-ref-value">.btn-lg</div></div>
+    <div class="ds-quick-ref-item"><div class="ds-quick-ref-label">Default</div><div class="ds-quick-ref-value">.btn (no modifier)</div></div>
+    <div class="ds-quick-ref-item"><div class="ds-quick-ref-label">Small</div><div class="ds-quick-ref-value">.btn-sm</div></div>
+    <div class="ds-quick-ref-item"><div class="ds-quick-ref-label">Extra Small</div><div class="ds-quick-ref-value">.btn-xs</div></div>
+  </div>
+</div>
+<div class="ds-preview" style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+  <div style="text-align:center">
+    <div class="ds-preview-label">lg · 15px · 13px 26px</div>
+    <button class="btn btn-primary btn-lg">Button</button>
+  </div>
+  <div style="text-align:center">
+    <div class="ds-preview-label">md · 14px · 10px 20px</div>
+    <button class="btn btn-primary">Button</button>
+  </div>
+  <div style="text-align:center">
+    <div class="ds-preview-label">sm · 12px · 6px 12px</div>
+    <button class="btn btn-primary btn-sm">Button</button>
+  </div>
+  <div style="text-align:center">
+    <div class="ds-preview-label">xs · 11px · 4px 10px</div>
+    <button class="btn btn-primary btn-xs">Button</button>
+  </div>
+</div>
+<div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead><tr><th>Size</th><th>Class</th><th>Font</th><th>Padding</th><th>Radius</th><th>Min Height</th><th>Use When</th></tr></thead>
+    <tbody>
+      <tr><td>Large</td><td class="mono">.btn-lg</td><td class="default">15px fw-600</td><td class="default">13px 26px</td><td class="default">13px</td><td class="default">48px</td><td>Hero CTAs, prominent page actions</td></tr>
+      <tr><td>Default (md)</td><td class="mono">.btn</td><td class="default">14px fw-600</td><td class="default">10px 20px</td><td class="default">12px</td><td class="default">44px</td><td>Standard page actions, modal footers</td></tr>
+      <tr><td>Small</td><td class="mono">.btn-sm</td><td class="default">12px fw-600</td><td class="default">6px 12px</td><td class="default">8px</td><td class="default">36px</td><td>Table row actions, filter bars, toolbars</td></tr>
+      <tr><td>Extra Small</td><td class="mono">.btn-xs</td><td class="default">11px fw-600</td><td class="default">4px 10px</td><td class="default">7px</td><td class="default">28px</td><td>Inline chips, dense list actions</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── 6. STATES ── -->
+<h2 id="states">States</h2>
+<p>Every state has defined visual treatment and behavioral impact. Always communicate state changes visually — never rely on label text alone.</p>
+<div class="ds-states-grid">
+  <div class="ds-state-cell">
+    <div class="ds-state-cell-preview"><button class="btn btn-primary">Default</button></div>
+    <div class="ds-state-cell-label"><div class="ds-state-cell-name">Default</div><div class="ds-state-cell-desc">Resting state. bg:#6366F1, shadow, cursor:pointer</div></div>
+  </div>
+  <div class="ds-state-cell">
+    <div class="ds-state-cell-preview"><button class="btn btn-primary state-hover">Hover</button></div>
+    <div class="ds-state-cell-label"><div class="ds-state-cell-name">Hover</div><div class="ds-state-cell-desc">translateY(-2px), deeper shadow, bg darkens</div></div>
+  </div>
+  <div class="ds-state-cell">
+    <div class="ds-state-cell-preview"><button class="btn btn-primary state-focus">Focus</button></div>
+    <div class="ds-state-cell-label"><div class="ds-state-cell-name">Focus</div><div class="ds-state-cell-desc">2px #6366F1 outline, 2px offset. :focus-visible only</div></div>
+  </div>
+  <div class="ds-state-cell">
+    <div class="ds-state-cell-preview"><button class="btn btn-primary state-active">Active/Pressed</button></div>
+    <div class="ds-state-cell-label"><div class="ds-state-cell-name">Active</div><div class="ds-state-cell-desc">scale(.98), no translateY. Tactile press feel</div></div>
+  </div>
+  <div class="ds-state-cell">
+    <div class="ds-state-cell-preview"><button class="btn btn-primary" disabled>Disabled</button></div>
+    <div class="ds-state-cell-label"><div class="ds-state-cell-name">Disabled</div><div class="ds-state-cell-desc">opacity:.45, cursor:not-allowed, no hover effect</div></div>
+  </div>
+  <div class="ds-state-cell">
+    <div class="ds-state-cell-preview">
+      <button class="btn btn-primary btn-loading">
+        <span class="btn-spinner"></span>Saving...
+      </button>
+    </div>
+    <div class="ds-state-cell-label"><div class="ds-state-cell-name">Loading</div><div class="ds-state-cell-desc">Spinner + label change. pointer-events:none</div></div>
+  </div>
+  <div class="ds-state-cell">
+    <div class="ds-state-cell-preview"><button class="btn btn-outline state-hover">Outline Hover</button></div>
+    <div class="ds-state-cell-label"><div class="ds-state-cell-name">Outline Hover</div><div class="ds-state-cell-desc">border+text → #6366F1, bg → #EEF2FF</div></div>
+  </div>
+  <div class="ds-state-cell">
+    <div class="ds-state-cell-preview"><button class="btn btn-outline" disabled>Outline Disabled</button></div>
+    <div class="ds-state-cell-label"><div class="ds-state-cell-name">Outline Disabled</div><div class="ds-state-cell-desc">opacity:.45, same visual weight</div></div>
+  </div>
+</div>
+
+<!-- ── 7. PROPERTIES ── -->
+<h2 id="properties">Properties</h2>
+<p>Complete API reference. In HTML, properties map to CSS classes and native attributes. In React, they map to component props.</p>
+<table class="ds-props-table">
+  <thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th><th>Accepted Values</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><span class="ds-prop-name">variant</span></td>
+      <td><span class="ds-prop-type">string</span></td>
+      <td><span class="ds-prop-optional">optional</span></td>
+      <td><span class="ds-prop-default">'primary'</span></td>
+      <td class="ds-prop-desc">Visual style of the button. Controls background, text color, shadow.</td>
+      <td><div class="ds-prop-values">'primary' | 'outline' | 'danger' | 'success' | 'ghost' | 'dark'</div></td>
+    </tr>
+    <tr>
+      <td><span class="ds-prop-name">size</span></td>
+      <td><span class="ds-prop-type">string</span></td>
+      <td><span class="ds-prop-optional">optional</span></td>
+      <td><span class="ds-prop-default">'md'</span></td>
+      <td class="ds-prop-desc">Controls padding, font-size, and border-radius.</td>
+      <td><div class="ds-prop-values">'lg' | 'md' | 'sm' | 'xs'</div></td>
+    </tr>
+    <tr>
+      <td><span class="ds-prop-name">disabled</span></td>
+      <td><span class="ds-prop-type">boolean</span></td>
+      <td><span class="ds-prop-optional">optional</span></td>
+      <td><span class="ds-prop-default">false</span></td>
+      <td class="ds-prop-desc">Disables interaction. Adds opacity:.45, cursor:not-allowed. Use HTML disabled attribute — do NOT use aria-disabled alone.</td>
+      <td><div class="ds-prop-values">true | false</div></td>
+    </tr>
+    <tr>
+      <td><span class="ds-prop-name">loading</span></td>
+      <td><span class="ds-prop-type">boolean</span></td>
+      <td><span class="ds-prop-optional">optional</span></td>
+      <td><span class="ds-prop-default">false</span></td>
+      <td class="ds-prop-desc">Shows loading spinner, blocks clicks. Add .btn-loading class + spinner element + change label text. Do NOT just disable.</td>
+      <td><div class="ds-prop-values">true | false</div></td>
+    </tr>
+    <tr>
+      <td><span class="ds-prop-name">type</span></td>
+      <td><span class="ds-prop-type">string</span></td>
+      <td><span class="ds-prop-optional">optional</span></td>
+      <td><span class="ds-prop-default">'button'</span></td>
+      <td class="ds-prop-desc">HTML button type. Always set explicitly. Use 'submit' for form submission, 'button' for everything else.</td>
+      <td><div class="ds-prop-values">'button' | 'submit' | 'reset'</div></td>
+    </tr>
+    <tr>
+      <td><span class="ds-prop-name">icon</span></td>
+      <td><span class="ds-prop-type">ReactNode</span></td>
+      <td><span class="ds-prop-optional">optional</span></td>
+      <td><span class="ds-prop-default">undefined</span></td>
+      <td class="ds-prop-desc">SVG icon rendered before label. Heroicons outline, sized per button size (lg:18px, md:16px, sm:14px, xs:12px).</td>
+      <td><div class="ds-prop-values">SVG element</div></td>
+    </tr>
+    <tr>
+      <td><span class="ds-prop-name">iconOnly</span></td>
+      <td><span class="ds-prop-type">boolean</span></td>
+      <td><span class="ds-prop-optional">optional</span></td>
+      <td><span class="ds-prop-default">false</span></td>
+      <td class="ds-prop-desc">Removes horizontal padding, making button square. MUST have aria-label for accessibility.</td>
+      <td><div class="ds-prop-values">true | false</div></td>
+    </tr>
+    <tr>
+      <td><span class="ds-prop-name">onClick</span></td>
+      <td><span class="ds-prop-type">function</span></td>
+      <td><span class="ds-prop-optional">optional</span></td>
+      <td><span class="ds-prop-default">undefined</span></td>
+      <td class="ds-prop-desc">Click handler. Not needed for type="submit" buttons inside forms.</td>
+      <td><div class="ds-prop-values">(event: MouseEvent) =&gt; void</div></td>
+    </tr>
+    <tr>
+      <td><span class="ds-prop-name">className</span></td>
+      <td><span class="ds-prop-type">string</span></td>
+      <td><span class="ds-prop-optional">optional</span></td>
+      <td><span class="ds-prop-default">undefined</span></td>
+      <td class="ds-prop-desc">Additional CSS classes. Should only extend, never override base button styles.</td>
+      <td><div class="ds-prop-values">any CSS class string</div></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ── 8. ACCESSIBILITY ── -->
+<h2 id="accessibility">Accessibility</h2>
+<h3>Keyboard Navigation</h3>
+<table class="ds-keyboard-table">
+  <thead><tr><th>Key</th><th>Action</th></tr></thead>
+  <tbody>
+    <tr><td><span class="ds-kbd">Tab</span></td><td>Move focus to button</td></tr>
+    <tr><td><span class="ds-kbd">Shift</span> + <span class="ds-kbd">Tab</span></td><td>Move focus away from button</td></tr>
+    <tr><td><span class="ds-kbd">Enter</span></td><td>Activate button (same as click)</td></tr>
+    <tr><td><span class="ds-kbd">Space</span></td><td>Activate button (same as click)</td></tr>
+  </tbody>
+</table>
+<h3>ARIA Requirements</h3>
+<div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead><tr><th>Scenario</th><th>Required Attribute</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Icon-only button</td><td><code>aria-label</code></td><td><code>&lt;button aria-label="Delete user"&gt;</code></td></tr>
+      <tr><td>Loading state</td><td><code>aria-busy="true"</code></td><td>Announces "busy" to screen readers</td></tr>
+      <tr><td>Disabled state</td><td>Native <code>disabled</code> attr</td><td>Never use aria-disabled alone — native disabled prevents all interaction</td></tr>
+      <tr><td>Toggle button</td><td><code>aria-pressed</code></td><td><code>aria-pressed="true|false"</code></td></tr>
+      <tr><td>Opens dialog</td><td><code>aria-haspopup="dialog"</code></td><td>Announces the intent to open dialog</td></tr>
+      <tr><td>Expands content</td><td><code>aria-expanded</code></td><td><code>aria-expanded="true|false"</code></td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="ds-callout ds-callout-info">
+  <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+  <div class="ds-callout-content"><strong>Touch target:</strong> Minimum 44×44px on touch devices. Default md button height is 44px. btn-sm is 36px — add extra padding wrapper on mobile if needed.</div>
+</div>
+
+<!-- ── 9. BEHAVIOR ── -->
+<h2 id="behavior">Behavior</h2>
+<table class="ds-behavior-table">
+  <thead><tr><th>Trigger</th><th>Behavior</th></tr></thead>
+  <tbody>
+    <tr><td><span class="ds-behavior-trigger">Click</span></td><td>Fires onClick handler. If type="submit", submits parent form. If loading or disabled, click is blocked entirely (pointer-events:none).</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Hover</span></td><td>translateY(-2px) + deeper shadow (all variants except ghost). Ghost: background changes to #F8FAFC, no lift. Transition: 0.2s cubic-bezier(0.4,0,0.2,1).</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Focus (:focus-visible)</span></td><td>2px solid #6366F1 outline, 2px offset. Only shown on keyboard navigation, not mouse click. Never remove or hide focus ring.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Active/Press</span></td><td>scale(0.98) + translateY(0). Removes the hover lift on press. Creates tactile pressed feeling.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Disabled</span></td><td>opacity:0.45, cursor:not-allowed, pointer-events:none. No hover/focus visual changes. Screen reader still announces as disabled.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Loading start</span></td><td>Add .btn-loading class + prepend spinner element + update label text (e.g. "Save" → "Saving..."). Block clicks immediately.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Loading end</span></td><td>Remove .btn-loading + remove spinner + restore original label. Show success/error toast as feedback.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Destructive click</span></td><td>MUST open confirmation modal before executing. Never fire delete/destructive action directly from button click.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Form submit</span></td><td>type="submit" triggers native form validation before firing. type="button" never triggers form submission.</td></tr>
+  </tbody>
+</table>
+
+<!-- ── 10. COMPOSITION ── -->
+<h2 id="composition">Composition</h2>
+<p>Buttons must be placed intentionally. Incorrect placement creates hierarchy confusion and accessibility issues.</p>
+<div class="ds-composition-grid">
+  <div class="ds-composition-card">
+    <div class="ds-composition-header allowed">
+      <svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+      <span class="ds-composition-header-title">Allowed Composition</span>
+    </div>
+    <div class="ds-composition-body">
+      <div class="ds-composition-item">Modal footer — Cancel (outline) + Confirm (primary or danger)</div>
+      <div class="ds-composition-item">Form footer — Cancel (outline) + Submit (primary)</div>
+      <div class="ds-composition-item">Table toolbar — Export (outline) + Add Item (primary)</div>
+      <div class="ds-composition-item">Card action — single ghost or outline CTA</div>
+      <div class="ds-composition-item">Page header — primary CTA right-aligned</div>
+      <div class="ds-composition-item">Icon-only buttons in toolbars and sidebars</div>
+    </div>
+  </div>
+  <div class="ds-composition-card">
+    <div class="ds-composition-header forbidden">
+      <svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+      <span class="ds-composition-header-title">Forbidden Composition</span>
+    </div>
+    <div class="ds-composition-body">
+      <div class="ds-composition-item">Two primary buttons side by side — ambiguous hierarchy</div>
+      <div class="ds-composition-item">Primary button inside another button — invalid HTML</div>
+      <div class="ds-composition-item">Danger button without confirmation modal</div>
+      <div class="ds-composition-item">More than one primary CTA per section</div>
+      <div class="ds-composition-item">Icon-only button without aria-label</div>
+      <div class="ds-composition-item">Button inside a table cell (use ghost-sm instead)</div>
+    </div>
+  </div>
+</div>
+
+<h3>Real Composition Examples</h3>
+<div class="ds-preview">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div>
+      <div class="ds-preview-label">Modal Footer (cancel left, confirm right)</div>
+      <div style="display:flex;justify-content:flex-end;gap:10px;padding:12px 16px;border:1px solid #E2E8F0;border-radius:10px;background:#F8FAFC">
+        <button class="btn btn-outline btn-sm">Cancel</button>
+        <button class="btn btn-primary btn-sm">Save User</button>
+      </div>
+    </div>
+    <div>
+      <div class="ds-preview-label">Destructive Modal Footer</div>
+      <div style="display:flex;justify-content:flex-end;gap:10px;padding:12px 16px;border:1px solid #E2E8F0;border-radius:10px;background:#F8FAFC">
+        <button class="btn btn-outline btn-sm">Cancel</button>
+        <button class="btn btn-danger btn-sm">Delete User</button>
+      </div>
+    </div>
+    <div>
+      <div class="ds-preview-label">Table Toolbar</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid #E2E8F0;border-radius:10px;background:#F8FAFC">
+        <span style="font-size:13px;font-weight:700;color:#0F172A">User Directory</span>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-outline btn-sm">Export</button>
+          <button class="btn btn-primary btn-sm">
+            <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            Add User
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- p3 start -->
+
+<!-- ── 11. LAYOUT RULES ── -->
+<h2 id="layout">Layout Rules</h2>
+<div class="ds-quick-ref">
+  <div class="ds-quick-ref-grid">
+    <div class="ds-quick-ref-item"><div class="ds-quick-ref-label">Gap (icon + label)</div><div class="ds-quick-ref-value">8px (md), 6px (sm), 5px (xs)</div></div>
+    <div class="ds-quick-ref-item"><div class="ds-quick-ref-label">Min touch target</div><div class="ds-quick-ref-value">44×44px (mobile)</div></div>
+    <div class="ds-quick-ref-item"><div class="ds-quick-ref-label">Alignment</div><div class="ds-quick-ref-value">inline-flex, center</div></div>
+    <div class="ds-quick-ref-item"><div class="ds-quick-ref-label">Width</div><div class="ds-quick-ref-value">auto (hug content)</div></div>
+    <div class="ds-quick-ref-item"><div class="ds-quick-ref-label">Full width</div><div class="ds-quick-ref-value">width:100% on container</div></div>
+    <div class="ds-quick-ref-item"><div class="ds-quick-ref-label">White-space</div><div class="ds-quick-ref-value">nowrap — never wrap</div></div>
+  </div>
+</div>
+<div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead><tr><th>Rule</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Button groups</td><td>Use <code>display:flex; gap:8px</code> for button groups. Never use margin on individual buttons.</td></tr>
+      <tr><td>Modal footer alignment</td><td>Always <code>justify-content:flex-end</code>. Cancel left, confirm right. Gap: 12px.</td></tr>
+      <tr><td>Full-width buttons</td><td>Apply <code>width:100%</code> to the button element directly. Used in auth forms and mobile CTAs.</td></tr>
+      <tr><td>Page header placement</td><td>Primary CTA always right-aligned in page header. Use <code>margin-left:auto</code>.</td></tr>
+      <tr><td>Vertical rhythm</td><td>Buttons sit on the same baseline as adjacent text. Use <code>align-items:center</code> in flex containers.</td></tr>
+      <tr><td>Responsive</td><td>On mobile (&lt;768px), consider full-width primary CTAs in forms. Table row ghost buttons remain the same size.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── 12. CONTENT RULES ── -->
+<h2 id="content">Content Rules</h2>
+<p>Button labels communicate what happens. They must be specific, action-oriented, and name the object being acted on.</p>
+<div class="ds-content-rules">
+  <div class="ds-content-row">
+    <div class="ds-content-good"><div class="ds-content-label">Good</div><div class="ds-content-example">Save Changes</div><div class="ds-content-reason">Names the action and implies the object</div></div>
+    <div class="ds-content-bad"><div class="ds-content-label">Bad</div><div class="ds-content-example">Submit</div><div class="ds-content-reason">Generic, doesn't say what is being submitted</div></div>
+  </div>
+  <div class="ds-content-row">
+    <div class="ds-content-good"><div class="ds-content-label">Good</div><div class="ds-content-example">Delete User</div><div class="ds-content-reason">Names the entity being deleted</div></div>
+    <div class="ds-content-bad"><div class="ds-content-label">Bad</div><div class="ds-content-example">Delete</div><div class="ds-content-reason">Ambiguous — delete what?</div></div>
+  </div>
+  <div class="ds-content-row">
+    <div class="ds-content-good"><div class="ds-content-label">Good</div><div class="ds-content-example">Add User</div><div class="ds-content-reason">Verb + object. Clear and scannable.</div></div>
+    <div class="ds-content-bad"><div class="ds-content-label">Bad</div><div class="ds-content-example">Click Here</div><div class="ds-content-reason">Describes the interaction not the outcome</div></div>
+  </div>
+  <div class="ds-content-row">
+    <div class="ds-content-good"><div class="ds-content-label">Good</div><div class="ds-content-example">Cancel</div><div class="ds-content-reason">Standard, universally understood dismissal</div></div>
+    <div class="ds-content-bad"><div class="ds-content-label">Bad</div><div class="ds-content-example">Never mind / Go back / Close</div><div class="ds-content-reason">Inconsistent — always use "Cancel"</div></div>
+  </div>
+</div>
+<div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead><tr><th>Pattern</th><th>Label</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Create action</td><td class="default">+ Add [Entity]</td><td>Always start with verb. Use "Add" not "Create" or "New".</td></tr>
+      <tr><td>Save action</td><td class="default">Save [Entity] / Save Changes</td><td>Use "Save" not "Update" or "Confirm".</td></tr>
+      <tr><td>Destructive</td><td class="default">Delete [Entity]</td><td>Always name the entity. Use "Delete" not "Remove" or "Erase".</td></tr>
+      <tr><td>Export</td><td class="default">Export CSV / Export PDF</td><td>Specify the format in the label.</td></tr>
+      <tr><td>Cancel/dismiss</td><td class="default">Cancel</td><td>Never use "Close", "Back", or "No".</td></tr>
+      <tr><td>Loading state</td><td class="default">Saving... / Deleting...</td><td>Add "..." suffix. Change verb to present progressive.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── 13. BEST PRACTICES ── -->
+<h2 id="best-practices">Best Practices</h2>
+<div class="ds-bp-grid">
+  <div class="ds-bp-card">
+    <div class="ds-bp-header good">
+      <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+      Do
+    </div>
+    <div class="ds-bp-body">
+      <div style="display:flex;gap:8px;margin-bottom:8px">
+        <button class="btn btn-outline btn-sm">Cancel</button>
+        <button class="btn btn-primary btn-sm">Save User</button>
+      </div>
+      <div class="ds-bp-reason">One primary CTA, one secondary. Clear hierarchy. Cancel on left, confirm on right.</div>
+    </div>
+  </div>
+  <div class="ds-bp-card">
+    <div class="ds-bp-header bad">
+      <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+      Don't
+    </div>
+    <div class="ds-bp-body">
+      <div style="display:flex;gap:8px;margin-bottom:8px">
+        <button class="btn btn-primary btn-sm">Cancel</button>
+        <button class="btn btn-primary btn-sm">Save User</button>
+      </div>
+      <div class="ds-bp-reason">Two primary buttons create ambiguity. User doesn't know which action is preferred.</div>
+    </div>
+  </div>
+  <div class="ds-bp-card">
+    <div class="ds-bp-header good">
+      <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+      Do
+    </div>
+    <div class="ds-bp-body">
+      <button class="btn btn-primary btn-sm">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        Add User
+      </button>
+      <div class="ds-bp-reason" style="margin-top:8px">Specific label + icon. User knows exactly what happens.</div>
+    </div>
+  </div>
+  <div class="ds-bp-card">
+    <div class="ds-bp-header bad">
+      <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+      Don't
+    </div>
+    <div class="ds-bp-body">
+      <button class="btn btn-primary btn-sm">Click Here</button>
+      <div class="ds-bp-reason" style="margin-top:8px">Vague label. "Click Here" describes the interaction, not the outcome.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 14. COMMON MISTAKES ── -->
+<h2 id="common-mistakes">Common Mistakes</h2>
+<div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead><tr><th>Mistake</th><th>Problem</th><th>Correct Approach</th></tr></thead>
+    <tbody>
+      <tr><td>Two primary buttons</td><td>Creates visual ambiguity, user doesn't know the preferred action</td><td>One primary max per section. Use outline for secondary.</td></tr>
+      <tr><td>No confirmation for delete</td><td>Destructive action fires immediately, can't be undone</td><td>Always open a confirm modal with .btn-danger before deleting</td></tr>
+      <tr><td>Using div/span as button</td><td>No keyboard support, no accessibility, breaks focus management</td><td>Always use native <code>&lt;button&gt;</code> element</td></tr>
+      <tr><td>Removing focus ring</td><td>Breaks keyboard navigation, WCAG failure</td><td>Never add <code>outline:none</code> — use <code>:focus-visible</code> only</td></tr>
+      <tr><td>Icon-only without aria-label</td><td>Screen reader users can't understand the button's purpose</td><td>Always add <code>aria-label="[action]"</code> to icon-only buttons</td></tr>
+      <tr><td>Just disabling on async</td><td>User gets no feedback that action is in progress</td><td>Add .btn-loading + spinner + change label to "Saving..."</td></tr>
+      <tr><td>Mixing button sizes in a group</td><td>Visual inconsistency breaks hierarchy</td><td>All buttons in a group must be the same size</td></tr>
+      <tr><td>Using full-size buttons in tables</td><td>Takes too much space, clutters the row</td><td>Use .btn-ghost-sm for table row actions</td></tr>
+      <tr><td>Hardcoded colors</td><td>Breaks theming, diverges from design system</td><td>Never use inline color styles. Use .btn-{variant} classes only.</td></tr>
+      <tr><td>Button wrapping text</td><td>Breaks layout, inconsistent appearance</td><td>Button labels use white-space:nowrap — shorten the label instead</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── 15. REAL EXAMPLES ── -->
+<h2 id="real-examples">Real Examples</h2>
+<div class="ds-examples-grid">
+  <div class="ds-example-card">
+    <div class="ds-example-card-preview">
+      <div style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:0 4px">
+        <div style="font-size:13px;font-weight:800;color:#0F172A">User Directory</div>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-outline btn-sm">Export</button>
+          <button class="btn btn-primary btn-sm">
+            <svg style="width:12px;height:12px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            Add User
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="ds-example-card-meta">
+      <div class="ds-example-card-title">Table Toolbar</div>
+      <div class="ds-example-card-context">Outline (secondary) + Primary CTA</div>
+    </div>
+  </div>
+  <div class="ds-example-card">
+    <div class="ds-example-card-preview">
+      <div style="display:flex;justify-content:flex-end;gap:8px;width:100%">
+        <button class="btn btn-outline btn-sm">Cancel</button>
+        <button class="btn btn-danger btn-sm">Delete User</button>
+      </div>
+    </div>
+    <div class="ds-example-card-meta">
+      <div class="ds-example-card-title">Confirm Delete Modal</div>
+      <div class="ds-example-card-context">Outline (cancel) + Danger (confirm)</div>
+    </div>
+  </div>
+  <div class="ds-example-card">
+    <div class="ds-example-card-preview">
+      <button class="btn btn-primary btn-loading" style="width:100%">
+        <span class="btn-spinner"></span>Saving Changes...
+      </button>
+    </div>
+    <div class="ds-example-card-meta">
+      <div class="ds-example-card-title">Form Submit Loading</div>
+      <div class="ds-example-card-context">Full-width primary in loading state</div>
+    </div>
+  </div>
+  <div class="ds-example-card">
+    <div class="ds-example-card-preview">
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-ghost btn-sm" title="Edit" aria-label="Edit">
+          <svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+        </button>
+        <button class="btn btn-ghost btn-sm" style="color:#F05252" title="Delete" aria-label="Delete">
+          <svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="ds-example-card-meta">
+      <div class="ds-example-card-title">Table Row Actions</div>
+      <div class="ds-example-card-context">Ghost-sm icon-only buttons in table</div>
+    </div>
+  </div>
+  <div class="ds-example-card">
+    <div class="ds-example-card-preview" style="background:linear-gradient(135deg,#0F172A,#1E293B)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%">
+        <button style="display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px;font-size:11px;border-radius:8px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12);cursor:pointer;font-family:inherit;font-weight:600">Backup</button>
+        <button style="display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px;font-size:11px;border-radius:8px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12);cursor:pointer;font-family:inherit;font-weight:600">Clear Cache</button>
+      </div>
+    </div>
+    <div class="ds-example-card-meta">
+      <div class="ds-example-card-title">Dark Card Actions</div>
+      <div class="ds-example-card-context">Translucent white variant on dark bg</div>
+    </div>
+  </div>
+  <div class="ds-example-card">
+    <div class="ds-example-card-preview">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="ds-quick-ref-item" style="flex:1">
+          <a href="foundations/colors.html" style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;background:#6366F1;color:#fff;box-shadow:0 4px 14px rgba(99,102,241,.3)">Get Started</a>
+        </div>
+        <div>
+          <a href="#" style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.15)">View Demo</a>
+        </div>
+      </div>
+    </div>
+    <div class="ds-example-card-meta">
+      <div class="ds-example-card-title">Hero CTA Group</div>
+      <div class="ds-example-card-context">Primary + ghost-outline on hero bg</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 16. CODE EXAMPLES ── -->
+<h2 id="code">Code Examples</h2>
+
+<div class="ds-example">
+  <div class="ds-example-toolbar">
+    <span class="ds-example-title">HTML — All Variants</span>
+    <button class="ds-show-source-btn">Show source</button>
+  </div>
+  <div class="ds-preview ds-preview-grid">
+    <button class="btn btn-primary">Primary</button>
+    <button class="btn btn-outline">Outline</button>
+    <button class="btn btn-danger">Danger</button>
+    <button class="btn btn-success">Success</button>
+    <button class="btn btn-ghost">Ghost</button>
+    <button class="btn btn-dark">Dark</button>
+  </div>
+  <div class="ds-code-block" style="display:none">
+    <button class="ds-copy-btn">Copy</button>
+    <pre><code><span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"btn btn-primary"</span> <span class="prop">type</span>=<span class="str">"button"</span><span class="kw">&gt;</span>Primary<span class="kw">&lt;/button&gt;</span>
+<span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"btn btn-outline"</span> <span class="prop">type</span>=<span class="str">"button"</span><span class="kw">&gt;</span>Outline<span class="kw">&lt;/button&gt;</span>
+<span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"btn btn-danger"</span> <span class="prop">type</span>=<span class="str">"button"</span><span class="kw">&gt;</span>Danger<span class="kw">&lt;/button&gt;</span>
+<span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"btn btn-success"</span> <span class="prop">type</span>=<span class="str">"button"</span><span class="kw">&gt;</span>Success<span class="kw">&lt;/button&gt;</span>
+<span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"btn btn-ghost"</span> <span class="prop">type</span>=<span class="str">"button"</span><span class="kw">&gt;</span>Ghost<span class="kw">&lt;/button&gt;</span></code></pre>
+  </div>
+</div>
+
+<div class="ds-example">
+  <div class="ds-example-toolbar">
+    <span class="ds-example-title">HTML — With Icon + Loading + Disabled</span>
+    <button class="ds-show-source-btn">Show source</button>
+  </div>
+  <div class="ds-preview ds-preview-grid">
+    <button class="btn btn-primary">
+      <svg style="width:16px;height:16px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+      Add User
+    </button>
+    <button class="btn btn-primary btn-loading">
+      <span class="btn-spinner"></span>Saving...
+    </button>
+    <button class="btn btn-primary" disabled>Disabled</button>
+    <button class="btn btn-outline btn-icon-only" aria-label="Settings" title="Settings">
+      <svg style="width:16px;height:16px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+    </button>
+  </div>
+  <div class="ds-code-block" style="display:none">
+    <button class="ds-copy-btn">Copy</button>
+    <pre><code><span class="cm">&lt;!-- Icon + label --&gt;</span>
+<span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"btn btn-primary"</span> <span class="prop">type</span>=<span class="str">"button"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;svg</span> <span class="prop">style</span>=<span class="str">"width:16px;height:16px"</span> <span class="prop">fill</span>=<span class="str">"none"</span> <span class="prop">viewBox</span>=<span class="str">"0 0 24 24"</span> <span class="prop">stroke</span>=<span class="str">"currentColor"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;path</span> <span class="prop">stroke-linecap</span>=<span class="str">"round"</span> <span class="prop">stroke-linejoin</span>=<span class="str">"round"</span> <span class="prop">stroke-width</span>=<span class="str">"2"</span> <span class="prop">d</span>=<span class="str">"M12 4v16m8-8H4"</span><span class="kw">/&gt;&lt;/svg&gt;</span>
+  Add User
+<span class="kw">&lt;/button&gt;</span>
+
+<span class="cm">&lt;!-- Loading state --&gt;</span>
+<span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"btn btn-primary btn-loading"</span> <span class="prop">type</span>=<span class="str">"button"</span> <span class="prop">aria-busy</span>=<span class="str">"true"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;span</span> <span class="prop">class</span>=<span class="str">"btn-spinner"</span><span class="kw">&gt;&lt;/span&gt;</span>Saving...
+<span class="kw">&lt;/button&gt;</span>
+
+<span class="cm">&lt;!-- Disabled --&gt;</span>
+<span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"btn btn-primary"</span> <span class="prop">type</span>=<span class="str">"button"</span> <span class="prop">disabled</span><span class="kw">&gt;</span>Disabled<span class="kw">&lt;/button&gt;</span>
+
+<span class="cm">&lt;!-- Icon only -- aria-label required --&gt;</span>
+<span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"btn btn-outline btn-icon-only"</span> <span class="prop">type</span>=<span class="str">"button"</span> <span class="prop">aria-label</span>=<span class="str">"Settings"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;svg</span> <span class="prop">style</span>=<span class="str">"width:16px;height:16px"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/svg&gt;</span>
+<span class="kw">&lt;/button&gt;</span></code></pre>
+  </div>
+</div>
+
+<!-- ── 17. AI IMPLEMENTATION GUIDE ── -->
+<h2 id="ai-spec">AI Implementation Guide</h2>
+<div class="ds-callout ds-callout-info">
+  <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+  <div class="ds-callout-content">This section is designed for AI coding assistants. It describes the Button component as a complete engineering specification so it can be implemented without ambiguity.</div>
+</div>
+<div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead><tr><th>Aspect</th><th>Specification</th></tr></thead>
+    <tbody>
+      <tr><td>Element</td><td>Always native <code>&lt;button&gt;</code> or <code>&lt;a&gt;</code>. Never div, span, or any non-interactive element.</td></tr>
+      <tr><td>Base class</td><td><code>.btn</code> is required on every button. Adding only a variant class without .btn is invalid.</td></tr>
+      <tr><td>Variants</td><td>primary | outline | danger | success | ghost | dark — applied as <code>.btn-{variant}</code></td></tr>
+      <tr><td>Sizes</td><td>lg | md (default, no modifier) | sm | xs — applied as <code>.btn-{size}</code></td></tr>
+      <tr><td>Font</td><td>Plus Jakarta Sans, 14px (md), font-weight: 600. Never change font family or weight.</td></tr>
+      <tr><td>Hover behavior</td><td>ALL variants: translateY(-2px). Exception: ghost — no lift, background only. Transition: 0.2s cubic-bezier(0.4,0,0.2,1).</td></tr>
+      <tr><td>Active behavior</td><td>ALL variants: scale(0.98), translateY(0). Creates tactile press.</td></tr>
+      <tr><td>Focus ring</td><td>NEVER remove. outline: 2px solid #6366F1; outline-offset: 2px on :focus-visible.</td></tr>
+      <tr><td>Icon sizing</td><td>lg: 18px | md: 16px | sm: 14px | xs: 12px. Always inline SVG, stroke="currentColor".</td></tr>
+      <tr><td>Icon placement</td><td>Always BEFORE label. Never after. Gap: 8px (md), 6px (sm), 5px (xs).</td></tr>
+      <tr><td>Loading pattern</td><td>Add .btn-loading + prepend .btn-spinner span + update label text. DO NOT just disable.</td></tr>
+      <tr><td>Destructive rule</td><td>Danger buttons MUST trigger a confirmation modal. NEVER fire delete directly.</td></tr>
+      <tr><td>Form submit</td><td>Use type="submit" inside forms. Use type="button" for all other buttons.</td></tr>
+      <tr><td>Icon-only</td><td>Add .btn-icon-only class + aria-label attribute. No label text.</td></tr>
+      <tr><td>Colors</td><td>Primary: #6366F1 (accent) | Dark: #0F172A | Never hardcode. Use .btn-{variant} classes.</td></tr>
+    </tbody>
+  </table>
+</div>
+<h3>Common AI Mistakes</h3>
+<div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead><tr><th>Mistake</th><th>Correct</th></tr></thead>
+    <tbody>
+      <tr><td>Using <code>&lt;div onclick&gt;</code> as button</td><td>Always use native <code>&lt;button type="button"&gt;</code></td></tr>
+      <tr><td>Adding only .btn-primary without .btn</td><td>Always include base .btn class: <code>class="btn btn-primary"</code></td></tr>
+      <tr><td>Two primary buttons side by side</td><td>One primary max. Use outline for secondary.</td></tr>
+      <tr><td>Firing delete without modal</td><td>Always open confirm modal with .btn-danger before any destructive action</td></tr>
+      <tr><td>Using Tailwind bg-indigo-600 for button</td><td>Use .btn-primary class — never override with utility classes</td></tr>
+      <tr><td>Icon-only without aria-label</td><td>Add aria-label="[action description]" to every icon-only button</td></tr>
+      <tr><td>Just disabling during async</td><td>Add .btn-loading + spinner element + change label text</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── 18. RELATED COMPONENTS ── -->
+<h2 id="related">Related Components</h2>
+<div class="ds-related-grid">
+  <a href="badge.html" class="ds-related-card">
+    <div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg></div>
+    <div class="ds-related-card-name">Badge</div>
+    <div class="ds-related-card-desc">Status display, not action</div>
+  </a>
+  <a href="modal.html" class="ds-related-card">
+    <div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm0 8a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zm12 0a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg></div>
+    <div class="ds-related-card-name">Modal</div>
+    <div class="ds-related-card-desc">Contains confirm buttons</div>
+  </a>
+  <a href="dropdown.html" class="ds-related-card">
+    <div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+    <div class="ds-related-card-name">Dropdown</div>
+    <div class="ds-related-card-desc">Button triggers menu</div>
+  </a>
+  <a href="input.html" class="ds-related-card">
+    <div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></div>
+    <div class="ds-related-card-name">Input</div>
+    <div class="ds-related-card-desc">Form fields with submit</div>
+  </a>
+  <a href="toast.html" class="ds-related-card">
+    <div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg></div>
+    <div class="ds-related-card-name">Toast</div>
+    <div class="ds-related-card-desc">Button action feedback</div>
+  </a>
+  <a href="table.html" class="ds-related-card">
+    <div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div>
+    <div class="ds-related-card-name">Table</div>
+    <div class="ds-related-card-desc">Toolbar and row actions</div>
+  </a>
+</div>
+
+<!-- ── 19. DESIGN DECISIONS ── -->
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision">
+  <div class="ds-decision-q">Why does hover lift the button (translateY)?</div>
+  <div class="ds-decision-a">The upward movement creates a sense of physical elevation — the button "rises to meet" the cursor. This provides clear hover feedback without changing color dramatically, and creates a satisfying, responsive feel. Ghost buttons are excluded because their low visual weight means a lift would feel disproportionate.</div>
+</div>
+<div class="ds-decision">
+  <div class="ds-decision-q">Why is border-radius 12px for the default size?</div>
+  <div class="ds-decision-a">12px sits between sharp (4px) and pill (999px). It feels modern and friendly without being too casual. It also scales proportionally — larger buttons get 13px, smaller buttons get 8px and 7px, maintaining visual harmony across sizes.</div>
+</div>
+<div class="ds-decision">
+  <div class="ds-decision-q">Why does the primary button use #6366F1 (indigo) not pure blue?</div>
+  <div class="ds-decision-a">Indigo sits between blue and violet on the spectrum, giving it more sophistication than standard blue (#3B82F6) while remaining professional. It also differentiates the design system from generic Material/Tailwind-default blue that saturates most web UIs.</div>
+</div>
+<div class="ds-decision">
+  <div class="ds-decision-q">Why is ghost button the exception to hover lift?</div>
+  <div class="ds-decision-a">Ghost buttons have no visual "weight" — they're transparent. Lifting a weightless object feels wrong physically. Instead, ghost buttons gain a subtle background on hover (#F8FAFC), which provides feedback through color change rather than movement.</div>
+</div>
+<div class="ds-decision">
+  <div class="ds-decision-q">Why must danger buttons always open a confirm modal?</div>
+  <div class="ds-decision-a">Destructive actions cannot be undone. A single misclick would cause permanent data loss. The confirmation step is a deliberate friction point — it protects users from accidental destruction while keeping the button visually available (not hidden or disabled).</div>
+</div>
+
+<!-- ── 20. CHANGELOG ── -->
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog">
+  <div class="ds-changelog-entry">
+    <div class="ds-changelog-header">
+      <span class="ds-changelog-version">v1.0.0</span>
+      <span class="ds-changelog-date">July 2026</span>
+      <span class="ds-changelog-badge added">Added</span>
+    </div>
+    <div class="ds-changelog-body">
+      <ul>
+        <li>Initial release — 6 variants (primary, outline, danger, success, ghost, dark)</li>
+        <li>4 sizes (lg, md, sm, xs) with proportional radius scaling</li>
+        <li>Loading state with spinner animation</li>
+        <li>Icon support with per-size sizing rules</li>
+        <li>Icon-only variant with accessibility requirements</li>
+        <li>Full keyboard navigation and focus management</li>
+        <li>WCAG AA compliant contrast ratios across all variants</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  <div id="ds-prev-next"></div>
+</article>
+<aside class="ds-toc" id="ds-toc"></aside>
+</div><!-- /ds-main -->
+</div><!-- /ds-shell -->
+
+<script>window.DS_ACTIVE_PAGE = 'button';</script>
+<script src="../shared/ds-shell.js"></script>
+</body>
+</html>

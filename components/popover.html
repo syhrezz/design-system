@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Popover - Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}.btn-primary{background:#6366F1;color:#fff;}.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}.btn-sm{padding:6px 12px;font-size:12px;border-radius:8px;}</style>
+</head><body>
+<div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">S</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Components</a><span>/</span><strong>Popover</strong></nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main"><article class="ds-page">
+<div class="ds-page-header-full">
+  <div class="ds-status-bar"><span class="ds-status-badge stable">Stable</span><span class="ds-version-badge">v1.0.0</span><span class="ds-meta-badge type">Overlay</span></div>
+  <h1>Popover</h1>
+</div>
+<p class="ds-page-lead">Popover is a click-triggered floating panel that contains rich content — unlike Tooltip (hover-only, text-only), Popover supports interactive content including buttons, forms, and lists. It appears on click and closes when clicking outside.</p>
+<h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Popover when</div><ul class="ds-when-list"><li>Contextual info panel triggered by click (not hover)</li><li>Inline mini-forms (date picker, color picker trigger)</li><li>User profile preview card on hover/click</li><li>Rich help/documentation panel</li><li>Confirmation panel for non-destructive actions</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Popover when</div><ul class="ds-when-list"><li>Simple text hint — use Tooltip instead</li><li>List of actions — use Dropdown instead</li><li>Complex full forms — use Modal instead</li><li>Critical blocking content — use Modal (popover can be dismissed)</li></ul></div>
+</div>
+<h2 id="anatomy">Anatomy</h2>
+<style>
+.popover-wrap{position:relative;display:inline-block;}
+.popover-panel{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#fff;border:1px solid #E2E8F0;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.12);padding:16px;min-width:220px;z-index:400;}
+.popover-panel::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#E2E8F0;}
+.popover-panel::before{content:'';position:absolute;top:calc(100% - 1px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#fff;z-index:1;}
+.popover-title{font-size:13px;font-weight:700;color:#0F172A;margin-bottom:4px;}
+.popover-desc{font-size:12px;color:#64748B;line-height:1.5;margin-bottom:12px;}
+</style>
+<div class="ds-anatomy-parts">
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Trigger</div><div class="ds-anatomy-part-desc">Any element. Button is most common. Must have aria-expanded and aria-controls attributes. Click toggles popover open/closed.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Panel</div><div class="ds-anatomy-part-desc">White card. bg:#fff, border:1px solid #E2E8F0, border-radius:14px, box-shadow (0 10px 40px rgba(0,0,0,.12)), padding:16px, min-width:220px. z-index:400.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Arrow</div><div class="ds-anatomy-part-desc">CSS border triangle via ::after and ::before pseudo-elements. Points toward trigger. Color matches panel bg and border.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">4</div><div class="ds-anatomy-part-name">Content</div><div class="ds-anatomy-part-desc">Free-form — title, description, buttons, forms. Not restricted like Tooltip.</div></div>
+</div>
+<h2 id="variants">Variants</h2>
+<div class="ds-preview" style="padding:60px 40px;display:flex;gap:40px;flex-wrap:wrap;justify-content:center;align-items:flex-end">
+  <div>
+    <div class="ds-preview-label">Info popover</div>
+    <div class="popover-wrap">
+      <div class="popover-panel">
+        <div class="popover-title">What is GPS tracking?</div>
+        <div class="popover-desc">Location data is collected every 5 minutes from field representatives and displayed on the map in real time.</div>
+        <button class="btn btn-primary btn-sm">View Map</button>
+      </div>
+      <button class="btn btn-outline btn-sm">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Learn more
+      </button>
+    </div>
+  </div>
+  <div>
+    <div class="ds-preview-label">User profile popover</div>
+    <div class="popover-wrap">
+      <div class="popover-panel">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+          <div style="width:36px;height:36px;border-radius:50%;background:#1E293B;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0">AH</div>
+          <div><div style="font-size:13px;font-weight:700;color:#0F172A">Ahmad Hendra</div><div style="font-size:11px;color:#94A3B8">Administrator</div></div>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-outline btn-sm" style="flex:1">Profile</button>
+          <button class="btn btn-outline btn-sm" style="flex:1;color:#F05252;border-color:#FDE2E2">Logout</button>
+        </div>
+      </div>
+      <button class="btn btn-outline btn-sm">View profile</button>
+    </div>
+  </div>
+</div>
+<h2 id="states">States</h2>
+<div class="ds-states-grid">
+  <div class="ds-state-cell"><div class="ds-state-cell-preview"><button class="btn btn-outline btn-sm">Open popover</button></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Closed (default)</div><div class="ds-state-cell-desc">Panel hidden (display:none)</div></div></div>
+  <div class="ds-state-cell"><div class="ds-state-cell-preview" style="padding:60px 20px 20px;position:relative"><div style="background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:10px;font-size:11px;color:#64748B;box-shadow:0 4px 20px rgba(0,0,0,.1)">Popover content here</div><button class="btn btn-outline btn-sm" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%)">Trigger</button></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Open</div><div class="ds-state-cell-desc">Panel visible above trigger</div></div></div>
+</div>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">trigger</span></td><td><span class="ds-prop-type">ReactNode</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Element that opens the popover on click.</td></tr>
+  <tr><td><span class="ds-prop-name">content</span></td><td><span class="ds-prop-type">ReactNode</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Free-form content rendered inside the panel.</td></tr>
+  <tr><td><span class="ds-prop-name">position</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">'top'</span></td><td class="ds-prop-desc">Panel position relative to trigger.<div class="ds-prop-values">'top' | 'bottom' | 'left' | 'right'</div></td></tr>
+  <tr><td><span class="ds-prop-name">open</span></td><td><span class="ds-prop-type">boolean</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">false</span></td><td class="ds-prop-desc">Controlled open state.</td></tr>
+  <tr><td><span class="ds-prop-name">onClose</span></td><td><span class="ds-prop-type">function</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Called when popover closes (click outside or Escape).</td></tr>
+</tbody></table>
+<h2 id="behavior">Behavior</h2>
+<table class="ds-behavior-table"><thead><tr><th>Trigger</th><th>Behavior</th></tr></thead><tbody>
+  <tr><td><span class="ds-behavior-trigger">Trigger click</span></td><td>Toggles panel display:none → display:block. Adds document click listener for outside click detection.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Click outside</span></td><td>Closes panel. Use mousedown (not click) listener to prevent conflicts with trigger click.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Escape key</span></td><td>Closes panel. Returns focus to trigger button.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Tab out of panel</span></td><td>Closes panel when focus moves outside the popover content.</td></tr>
+</tbody></table>
+<h2 id="accessibility">Accessibility</h2>
+<div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody>
+  <tr><td>Trigger button</td><td>aria-expanded="true|false" and aria-controls="[panel-id]".</td></tr>
+  <tr><td>Panel</td><td>role="dialog" if it contains interactive content. id matching trigger''s aria-controls.</td></tr>
+  <tr><td>Focus management</td><td>Move focus to first focusable element inside panel on open. Return to trigger on close.</td></tr>
+  <tr><td>Escape key</td><td>Always closes popover.</td></tr>
+</tbody></table></div>
+<h2 id="composition">Composition</h2>
+<div class="ds-composition-grid">
+  <div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Info panel with title, description, action button</div><div class="ds-composition-item">User profile card preview</div><div class="ds-composition-item">Inline confirmation (non-destructive)</div><div class="ds-composition-item">Date picker trigger panel</div></div></div>
+  <div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">Destructive confirmations — use Modal</div><div class="ds-composition-item">Full forms — use Modal</div><div class="ds-composition-item">Navigation links — use Dropdown</div><div class="ds-composition-item">Simple text — use Tooltip</div></div></div>
+</div>
+<h2 id="best-practices">Best Practices</h2>
+<div class="ds-bp-grid">
+  <div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Keep popover content focused and minimal. One clear purpose per popover.</div><div class="ds-bp-reason">Popovers are lightweight — if content grows complex, promote to Modal.</div></div></div>
+  <div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Nest multiple popovers or open popovers from inside other popovers.</div><div class="ds-bp-reason">Layered overlays create confusing z-index conflicts and poor UX.</div></div></div>
+</div>
+<h2 id="content">Content Rules</h2>
+<div class="ds-content-rules">
+  <div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good popover title</div><div class="ds-content-example">Location Tracking</div><div class="ds-content-reason">Noun phrase. 2 words. Describes the topic.</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad popover title</div><div class="ds-content-example">Click here to find out more about how location tracking works</div><div class="ds-content-reason">Instruction instead of topic. Too long for a panel title.</div></div></div>
+</div>
+<h2 id="ai-spec">AI Implementation Guide</h2>
+<div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+  <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Popover = Tooltip + rich content + click trigger. Container: position:relative on wrapper. Panel: position:absolute, bg:#fff, border:#E2E8F0, radius:14px, shadow, min-width:220px, z-index:400. Arrow: CSS border triangles via ::before/::after. Click outside: document.addEventListener("mousedown") — check if !wrap.contains(e.target). Escape closes. aria-expanded on trigger. Unlike Dropdown (action list), Popover contains informational or form content.</div>
+</div>
+<h2 id="related">Related Components</h2>
+<div class="ds-related-grid">
+  <a href="tooltip.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div class="ds-related-card-name">Tooltip</div><div class="ds-related-card-desc">Text-only hover hint</div></a>
+  <a href="dropdown.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div><div class="ds-related-card-name">Dropdown</div><div class="ds-related-card-desc">Click-triggered action list</div></a>
+  <a href="modal.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm0 8a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6z"/></svg></div><div class="ds-related-card-name">Modal</div><div class="ds-related-card-desc">Complex content, blocking</div></a>
+</div>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">How is Popover different from Dropdown?</div><div class="ds-decision-a">Dropdown is a menu — a list of actions. Its items are navigation links or action buttons. Popover is an information panel — it can contain anything: text, forms, profile cards, status details. The distinction is purpose: Dropdown = "choose an action", Popover = "view information or interact with a mini-panel".</div></div>
+<div class="ds-decision"><div class="ds-decision-q">Why position top (above trigger) as default?</div><div class="ds-decision-a">Popovers above the trigger don't obstruct the content the user just clicked. Most triggers are in toolbars or inline with content — positioning above reveals the contextual information without covering other relevant content below.</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>Initial release — 4 position variants (top/bottom/left/right)</li><li>CSS arrow via ::before/::after</li><li>Click-outside close + Escape key close</li><li>Focus management on open/close</li></ul></div></div></div>
+<div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 'popover';</script>
+<script src="../shared/ds-shell.js"></script>
+</body></html>

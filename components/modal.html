@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Modal — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal{background:#fff;width:100%;max-width:500px;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:modalIn .3s ease;}
+@keyframes modalIn{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-sm{max-width:380px;}
+.modal-lg{max-width:680px;}
+.modal-header{padding:20px 24px;border-bottom:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;}
+.modal-title{font-size:16px;font-weight:800;color:#0F172A;letter-spacing:-.3px;}
+.modal-close{background:none;border:none;cursor:pointer;color:#94A3B8;font-size:20px;line-height:1;padding:4px;border-radius:6px;transition:all .15s;}
+.modal-close:hover{background:#F1F5F9;color:#0F172A;}
+.modal-body{padding:24px;}
+.modal-footer{padding:16px 24px;border-top:1px solid #E2E8F0;display:flex;justify-content:flex-end;gap:12px;}
+.modal-footer.between{justify-content:space-between;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;transition:all .2s;border:none;}
+.btn-primary{background:#6366F1;color:#fff;box-shadow:0 4px 14px rgba(99,102,241,.3);}
+.btn-primary:hover{background:#4F46E5;transform:translateY(-1px);}
+.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}
+.btn-outline:hover{border-color:#6366F1;color:#6366F1;background:#EEF2FF;}
+.btn-danger{background:#F05252;color:#fff;box-shadow:0 4px 14px rgba(240,82,82,.3);}
+.btn-danger:hover{background:#DC2626;transform:translateY(-1px);}
+.btn-sm{padding:6px 12px;font-size:12px;border-radius:8px;}
+.form-group{margin-bottom:14px;}
+.form-label{display:block;font-size:12px;font-weight:700;color:#64748B;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}
+.input{width:100%;padding:9px 12px;border-radius:10px;border:1px solid #E2E8F0;font-size:13px;font-family:inherit;outline:none;color:#0F172A;transition:border-color .2s,box-shadow .2s;}
+.input:focus{border-color:#3B5BDB;box-shadow:0 0 0 3px rgba(59,91,219,.1);}
+/* Demo inline modal */
+.modal-demo{border:1px solid #E2E8F0;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.08);}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-header">
+    <div class="ds-sidebar-logo">
+      <div class="ds-sidebar-logo-icon">N</div>
+      <div class="ds-sidebar-logo-text">
+        <div class="ds-sidebar-logo-name">Syhrezz</div>
+        <div class="ds-sidebar-logo-version">v1.0</div>
+      </div>
+    </div>
+    <div class="ds-search-wrap">
+      <div class="ds-search-box">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/>
+        <span class="ds-search-kbd">&#8984;K</span>
+      </div>
+      <div id="ds-search-results"></div>
+    </div>
+  </div>
+  <nav class="ds-sidebar-nav" id="ds-nav-links"></nav>
+</aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb">
+    <a href="../index.html">Syhrezz</a><span>/</span>
+    <a href="#">Components</a><span>/</span>
+    <strong>Modal</strong>
+  </nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main">
+<article class="ds-page">
+
+  <div class="ds-page-header">
+    <div class="ds-page-meta">
+      <span class="ds-meta-badge stable">Stable</span>
+      <span class="ds-meta-badge type">Overlay</span>
+    </div>
+    <h1>Modal</h1>
+    <p class="ds-page-lead">Modals are focused overlay dialogs that interrupt the user to complete a task, confirm an action, or display contextual information without navigating away.</p>
+  </div>
+
+  <h2 id="overview">Overview</h2>
+  <p>Every modal has three sections: <strong>header</strong> (title + close button), <strong>body</strong> (content), and <strong>footer</strong> (actions). The overlay uses <code>backdrop-filter:blur(4px)</code> and <code>rgba(0,0,0,.5)</code>. The modal enters with a <code>scale(0.95)→scale(1)</code> animation over 0.3s. Clicking the overlay closes the modal.</p>
+
+  <div class="ds-callout ds-callout-warning">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#92400E"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+    <div class="ds-callout-content"><strong>Action order:</strong> Cancel/secondary action is always on the left. Primary/confirm action is always on the right. For destructive modals, the primary action is <code>.btn-danger</code>.</div>
+  </div>
+
+  <!-- FORM MODAL -->
+  <h2 id="form-modal">Form Modal</h2>
+  <div class="ds-example">
+    <div class="ds-example-toolbar"><span class="ds-example-title">Form Modal (most common)</span><button class="ds-show-source-btn">Show source</button></div>
+    <div class="ds-preview ds-preview-surface" style="padding:20px">
+      <div style="display:flex;gap:10px;margin-bottom:20px">
+        <button class="btn btn-primary btn-sm" onclick="document.getElementById('demo-modal-form').style.display='flex'">Open Form Modal</button>
+        <button class="btn btn-danger btn-sm" onclick="document.getElementById('demo-modal-confirm').style.display='flex'">Open Confirm Modal</button>
+      </div>
+      <p style="font-size:12px;color:#94A3B8">Click buttons above to see modals</p>
+    </div>
+    <div class="ds-code-block" style="display:none">
+      <button class="ds-copy-btn">Copy</button>
+      <pre><code><span class="cm">&lt;!-- Overlay --&gt;</span>
+<span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"modal-overlay"</span> <span class="prop">id</span>=<span class="str">"myModal"</span> <span class="prop">style</span>=<span class="str">"display:none"</span>
+  <span class="prop">onclick</span>=<span class="str">"if(event.target===this)this.style.display='none'"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"modal"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"modal-header"</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"modal-title"</span><span class="kw">&gt;</span>Add New User<span class="kw">&lt;/div&gt;</span>
+      <span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"modal-close"</span> <span class="prop">onclick</span>=<span class="str">"document.getElementById('myModal').style.display='none'"</span><span class="kw">&gt;</span>&amp;#x2715;<span class="kw">&lt;/button&gt;</span>
+    <span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"modal-body"</span><span class="kw">&gt;</span>
+      <span class="cm">&lt;!-- form content --&gt;</span>
+    <span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"modal-footer"</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"btn btn-outline"</span><span class="kw">&gt;</span>Cancel<span class="kw">&lt;/button&gt;</span>
+      <span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"btn btn-primary"</span><span class="kw">&gt;</span>Save User<span class="kw">&lt;/button&gt;</span>
+    <span class="kw">&lt;/div&gt;</span>
+  <span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/div&gt;</span></code></pre>
+    </div>
+  </div>
+
+  <!-- TOKEN TABLE -->
+  <h2 id="tokens">Token Reference</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Part</th><th>Class</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Overlay bg</td><td class="mono">.modal-overlay</td><td class="default">rgba(0,0,0,.5) + backdrop-filter:blur(4px)</td></tr>
+        <tr><td>Container</td><td class="mono">.modal</td><td class="default">bg:#fff, max-width:500px, radius:16px, shadow-modal</td></tr>
+        <tr><td>Small</td><td class="mono">.modal.modal-sm</td><td class="default">max-width:380px</td></tr>
+        <tr><td>Large</td><td class="mono">.modal.modal-lg</td><td class="default">max-width:680px</td></tr>
+        <tr><td>Header</td><td class="mono">.modal-header</td><td class="default">padding:20px 24px, border-bottom:1px solid #E2E8F0</td></tr>
+        <tr><td>Title</td><td class="mono">.modal-title</td><td class="default">16px, fw-800, letter-spacing:-.3px</td></tr>
+        <tr><td>Close btn</td><td class="mono">.modal-close</td><td class="default">&#x2715; character, hover:bg:#F1F5F9</td></tr>
+        <tr><td>Body</td><td class="mono">.modal-body</td><td class="default">padding:24px</td></tr>
+        <tr><td>Footer</td><td class="mono">.modal-footer</td><td class="default">padding:16px 24px, border-top, flex end, gap:12px</td></tr>
+        <tr><td>Enter animation</td><td>—</td><td class="default">scale(.95)+opacity(0) → scale(1)+opacity(1), 0.3s ease</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ACCESSIBILITY -->
+  <h2 id="accessibility">Accessibility</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Requirement</th><th>Implementation</th></tr></thead>
+      <tbody>
+        <tr><td>Focus trap</td><td>On open, move focus to first focusable element inside modal. Tab cycles within modal only.</td></tr>
+        <tr><td>Escape key</td><td>Always closes the modal. Add <code>keydown</code> listener for <code>e.key === 'Escape'</code>.</td></tr>
+        <tr><td>Body scroll</td><td>Set <code>document.body.style.overflow = 'hidden'</code> on open, restore on close.</td></tr>
+        <tr><td>ARIA</td><td>Add <code>role="dialog"</code>, <code>aria-modal="true"</code>, <code>aria-labelledby</code> pointing to modal title.</td></tr>
+        <tr><td>Return focus</td><td>On close, return focus to the trigger button that opened the modal.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AI SPEC -->
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content">
+      <strong>For AI coding assistants:</strong> Modal overlay uses <code>display:none</code> by default, changed to <code>display:flex</code> to show. The overlay itself must be the flex container — never the modal container. Clicking outside the modal (on the overlay) should close it: <code>onclick="if(event.target===this)this.style.display='none'"</code>. Destructive modals MUST use <code>.btn-danger</code> for confirm, never <code>.btn-primary</code>. Always include a cancel button.
+    </div>
+  </div>
+
+  
+<h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Modal when</div><ul class="ds-when-list"><li>Collecting form data without leaving current page</li><li>Confirming a destructive action</li><li>Displaying focused information that requires user response</li><li>Multi-step workflow in a contained context</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Modal when</div><ul class="ds-when-list"><li>Content is too complex — use a dedicated page</li><li>Showing non-critical information — use a toast</li><li>On mobile for long forms — use a drawer or page instead</li><li>Nesting modals inside modals — avoid modal stacking</li></ul></div>
+</div>
+
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table">
+  <thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td><span class="ds-prop-name">open</span></td><td><span class="ds-prop-type">boolean</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">false</span></td><td class="ds-prop-desc">Controls visibility. display:none → display:flex toggle. Never use visibility:hidden.</td></tr>
+    <tr><td><span class="ds-prop-name">onClose</span></td><td><span class="ds-prop-type">function</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Called when user clicks overlay, presses Escape, or clicks close button.</td></tr>
+    <tr><td><span class="ds-prop-name">size</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">'default'</span></td><td class="ds-prop-desc">Width variant.<div class="ds-prop-values">'sm' (380px) | 'default' (500px) | 'lg' (680px)</div></td></tr>
+    <tr><td><span class="ds-prop-name">title</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Modal title in header. 16px fw-800. Used for aria-labelledby.</td></tr>
+    <tr><td><span class="ds-prop-name">footer</span></td><td><span class="ds-prop-type">ReactNode</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Footer content. Always Cancel (left) + Confirm (right). Use .btn-danger for destructive confirms.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="behavior">Behavior</h2>
+<table class="ds-behavior-table">
+  <thead><tr><th>Trigger</th><th>Behavior</th></tr></thead>
+  <tbody>
+    <tr><td><span class="ds-behavior-trigger">Open</span></td><td>display:none → display:flex. Focus moves to first focusable element. Body scroll locked (overflow:hidden). Animation: scale(.95)+opacity(0) → scale(1)+opacity(1), 0.3s ease.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Click overlay</span></td><td>Closes modal. Implemented via if(event.target===this) check. Only fires when clicking the overlay directly, not modal content.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Escape key</span></td><td>Always closes modal. Add keydown listener for e.key==='Escape'. Required for accessibility.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Close button</span></td><td>× character button in header. Calls onClose handler.</td></tr>
+    <tr><td><span class="ds-behavior-trigger">Close</span></td><td>display:flex → display:none. Focus returns to trigger element. Body scroll restored.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="best-practices">Best Practices</h2>
+<div class="ds-bp-grid">
+  <div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="display:flex;justify-content:flex-end;gap:8px"><button class="btn btn-outline btn-sm">Cancel</button><button class="btn btn-primary btn-sm">Save User</button></div><div class="ds-bp-reason">Cancel left, confirm right. Primary for safe actions.</div></div></div>
+  <div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="display:flex;justify-content:flex-end;gap:8px"><button class="btn btn-danger btn-sm">Save User</button><button class="btn btn-outline btn-sm">Cancel</button></div><div class="ds-bp-reason">Wrong order. Danger for non-destructive. Cancel on right.</div></div></div>
+</div>
+
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why scale(.95) → scale(1) for the open animation?</div><div class="ds-decision-a">The slight scale-up creates a sense of the modal emerging from the page rather than just appearing. It draws the eye to the center of the screen without being jarring. The 0.3s duration is long enough to feel intentional but short enough to feel snappy.</div></div>
+<div class="ds-decision"><div class="ds-decision-q">Why backdrop-filter:blur(4px) on the overlay?</div><div class="ds-decision-a">The blur communicates depth — the modal is above the page. It softens the background without making it completely invisible, helping users maintain spatial context of where they were.</div></div>
+
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>Initial release — 3 size variants (sm, default, lg)</li><li>backdrop-filter blur overlay with click-outside close</li><li>Scale animation on open</li><li>Focus trap and body scroll lock</li><li>Escape key closes modal</li></ul></div></div></div><h2 id="states">States</h2><div class="ds-states-grid"><div class="ds-state-cell"><div class="ds-state-cell-preview"><div style="background:rgba(0,0,0,.3);border-radius:8px;padding:12px;width:180px"><div style="background:#fff;border-radius:10px;padding:10px;font-size:10px;color:#0F172A;box-shadow:0 8px 24px rgba(0,0,0,.15)"><div style="font-weight:700;margin-bottom:4px">Modal Title</div><div style="color:#64748B;font-size:9px">Content area</div><div style="display:flex;justify-content:flex-end;gap:4px;margin-top:8px"><span style="background:#E2E8F0;border-radius:4px;padding:2px 6px;font-size:9px">Cancel</span><span style="background:#6366F1;color:#fff;border-radius:4px;padding:2px 6px;font-size:9px">Confirm</span></div></div></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Open</div><div class="ds-state-cell-desc">Overlay visible, focus trapped, body scroll locked</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview"><div style="width:160px;height:60px;background:#F8FAFC;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#94A3B8">No overlay</div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Closed</div><div class="ds-state-cell-desc">display:none, focus returns to trigger</div></div></div></div><h2 id="accessibility">Accessibility</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody><tr><td>role="dialog"</td><td>Add to .modal element.</td></tr><tr><td>aria-modal="true"</td><td>Add to .modal element. Tells screen readers this is a modal.</td></tr><tr><td>aria-labelledby</td><td>Point to the modal title element ID.</td></tr><tr><td>Focus trap</td><td>Tab and Shift+Tab cycle only within modal while open.</td></tr><tr><td>Escape key</td><td>Always closes modal. Required.</td></tr><tr><td>Return focus</td><td>On close, return focus to trigger button.</td></tr></tbody></table></div><h2 id="composition">Composition</h2><div class="ds-composition-grid"><div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Form fields in modal body</div><div class="ds-composition-item">Alert/callout inside modal body for warnings</div><div class="ds-composition-item">Cancel + Confirm in footer (Cancel left, Confirm right)</div><div class="ds-composition-item">Scrollable modal-body for long content</div></div></div><div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">Modal inside modal (no stacking)</div><div class="ds-composition-item">Primary button for destructive actions (use danger)</div><div class="ds-composition-item">Modal without close button or Escape handler</div></div></div></div><h2 id="best-practices">Best Practices</h2><div class="ds-bp-grid"><div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="display:flex;justify-content:flex-end;gap:8px"><button class="btn btn-outline btn-sm">Cancel</button><button class="btn btn-primary btn-sm">Save</button></div><div class="ds-bp-reason">Clear hierarchy. Cancel left, confirm right.</div></div></div><div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Use a modal for content that requires full-page context or extensive scrolling.</div><div class="ds-bp-reason">Complex workflows belong on dedicated pages, not modals.</div></div></div></div><h2 id="related">Related Components</h2><div class="ds-related-grid"><a href="button.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></div><div class="ds-related-card-name">Button</div><div class="ds-related-card-desc">Modal triggers and actions</div></a><a href="input.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></div><div class="ds-related-card-name">Input</div><div class="ds-related-card-desc">Form fields in modals</div></a><a href="alert.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div><div class="ds-related-card-name">Alert</div><div class="ds-related-card-desc">Warnings inside modals</div></a></div><h2 id="anatomy">Anatomy</h2><div class="ds-anatomy-parts"><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Overlay</div><div class="ds-anatomy-part-desc">div.modal-overlay. position:fixed, inset:0, background:rgba(0,0,0,.5), backdrop-filter:blur(4px), display:flex, align-items/justify-content:center, z-index:1000.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Container</div><div class="ds-anatomy-part-desc">div.modal. bg:#fff, max-width:500px, border-radius:16px, overflow:hidden. Animation: scale(.95)+opacity(0) → scale(1)+opacity(1).</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Header</div><div class="ds-anatomy-part-desc">div.modal-header. padding:20px 24px, border-bottom. Title (16px fw-800) left. Close button (×) right.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">4</div><div class="ds-anatomy-part-name">Body</div><div class="ds-anatomy-part-desc">div.modal-body. padding:24px. Contains form fields, content, or callouts.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">5</div><div class="ds-anatomy-part-name">Footer</div><div class="ds-anatomy-part-desc">div.modal-footer. padding:16px 24px, border-top, justify-content:flex-end, gap:12px. Cancel left, confirm right.</div></div></div><h2 id="content">Content Rules</h2><div class="ds-content-rules"><div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good modal title</div><div class="ds-content-example">Add New User</div><div class="ds-content-reason">Action + object. 16px fw-800. Specific.</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad modal title</div><div class="ds-content-example">Form</div><div class="ds-content-reason">Too vague — does not describe what is being done.</div></div></div><div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good confirm button</div><div class="ds-content-example">Save User</div><div class="ds-content-reason">Names the action and object</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad confirm button</div><div class="ds-content-example">OK / Submit / Yes</div><div class="ds-content-reason">Vague — does not describe what is confirmed</div></div></div></div>
+
+  <div id="ds-prev-next"></div>
+</article>
+<aside class="ds-toc" id="ds-toc"></aside>
+</div>
+</div>
+
+<!-- FORM MODAL DEMO -->
+<div class="modal-overlay" id="demo-modal-form" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Add New User</div>
+      <button class="modal-close" onclick="document.getElementById('demo-modal-form').style.display='none'">&#x2715;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Full Name</label><input class="input" type="text" placeholder="Enter full name"/></div>
+      <div class="form-group"><label class="form-label">Email</label><input class="input" type="email" placeholder="user@Syhrezz.id"/></div>
+      <div class="form-group" style="margin-bottom:0"><label class="form-label">Role</label>
+        <select class="input"><option>Select role...</option><option>Supervisor</option><option>Sales</option></select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="document.getElementById('demo-modal-form').style.display='none'">Cancel</button>
+      <button class="btn btn-primary" onclick="document.getElementById('demo-modal-form').style.display='none'">Save User</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL DEMO -->
+<div class="modal-overlay" id="demo-modal-confirm" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal modal-sm">
+    <div class="modal-header">
+      <div class="modal-title">Delete User?</div>
+      <button class="modal-close" onclick="document.getElementById('demo-modal-confirm').style.display='none'">&#x2715;</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:#64748B;line-height:1.6">This will permanently delete <strong style="color:#0F172A">Budi Santoso</strong> and all associated data. This action cannot be undone.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="document.getElementById('demo-modal-confirm').style.display='none'">Cancel</button>
+      <button class="btn btn-danger" onclick="document.getElementById('demo-modal-confirm').style.display='none'">Delete User</button>
+    </div>
+  </div>
+</div>
+
+<script>window.DS_ACTIVE_PAGE = 'modal';</script>
+<script src="../shared/ds-shell.js"></script>
+</body>
+</html>

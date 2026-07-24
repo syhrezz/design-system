@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pagination — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.pagination{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:1px solid #E2E8F0;font-size:12px;color:#64748B;flex-wrap:wrap;gap:10px;}
+.page-btns{display:flex;gap:4px;}
+.page-btn{width:30px;height:30px;border-radius:8px;border:1px solid #E2E8F0;background:#fff;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;color:#64748B;font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;}
+.page-btn:hover{border-color:#6366F1;color:#6366F1;background:#EEF2FF;}
+.page-btn.active{background:#6366F1;border-color:#6366F1;color:#fff;font-weight:700;}
+.page-btn.ellipsis{cursor:default;border-color:transparent;background:transparent;}
+.page-btn.ellipsis:hover{border-color:transparent;background:transparent;color:#64748B;}
+.page-btn-wide{width:auto;padding:0 10px;}
+</style>
+</head><body><div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">N</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar"><nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Components</a><span>/</span><strong>Pagination</strong></nav><div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div></header>
+<div class="ds-main"><article class="ds-page">
+  <div class="ds-page-header"><div class="ds-page-meta"><span class="ds-meta-badge stable">Stable</span><span class="ds-meta-badge type">Navigation</span></div>
+    <h1>Pagination</h1>
+    <p class="ds-page-lead">Pagination controls allow users to navigate through multi-page data sets in tables and lists. Always paired with a record count summary on the left and page buttons on the right.</p>
+  </div>
+  <h2 id="overview">Overview</h2>
+  <p>Pagination sits inside <code>.table-pagination</code> at the bottom of every <code>.table-wrap</code>. It always shows: a count summary on the left ("Showing 1–20 of 124") and page number buttons on the right. Prev/next arrows flank the numbered buttons.</p>
+  <h2 id="variants">Variants</h2>
+  <div class="ds-example">
+    <div class="ds-example-toolbar"><span class="ds-example-title">Standard Pagination</span><button class="ds-show-source-btn">Show source</button></div>
+    <div class="ds-preview" style="padding:0;overflow:hidden;border-radius:12px;border:1px solid #E2E8F0">
+      <div class="pagination">
+        <span>Showing <strong style="color:#0F172A">1–20</strong> of <strong style="color:#0F172A">124</strong> users</span>
+        <div class="page-btns">
+          <button class="page-btn" title="Previous">
+            <svg style="width:12px;height:12px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn ellipsis">...</button>
+          <button class="page-btn">7</button>
+          <button class="page-btn" title="Next">
+            <svg style="width:12px;height:12px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code-block" style="display:none"><button class="ds-copy-btn">Copy</button><pre><code><span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"table-pagination"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;span&gt;</span>Showing <span class="kw">&lt;strong&gt;</span>1–20<span class="kw">&lt;/strong&gt;</span> of <span class="kw">&lt;strong&gt;</span>124<span class="kw">&lt;/strong&gt;</span> users<span class="kw">&lt;/span&gt;</span>
+  <span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"page-btns"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"page-btn"</span><span class="kw">&gt;</span><span class="cm">&lt;!-- prev arrow SVG --&gt;</span><span class="kw">&lt;/button&gt;</span>
+    <span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"page-btn active"</span><span class="kw">&gt;</span>1<span class="kw">&lt;/button&gt;</span>
+    <span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"page-btn"</span><span class="kw">&gt;</span>2<span class="kw">&lt;/button&gt;</span>
+    <span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"page-btn"</span><span class="kw">&gt;</span>3<span class="kw">&lt;/button&gt;</span>
+    <span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"page-btn ellipsis"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/button&gt;</span>
+    <span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"page-btn"</span><span class="kw">&gt;</span>7<span class="kw">&lt;/button&gt;</span>
+    <span class="kw">&lt;button</span> <span class="prop">class</span>=<span class="str">"page-btn"</span><span class="kw">&gt;</span><span class="cm">&lt;!-- next arrow SVG --&gt;</span><span class="kw">&lt;/button&gt;</span>
+  <span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/div&gt;</span></code></pre></div>
+  </div>
+  <h2 id="compact">Compact Variant</h2>
+  <p>For smaller spaces — prev/next buttons with text labels instead of numbers.</p>
+  <div class="ds-preview">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:12px;color:#64748B">Page <strong style="color:#0F172A">1</strong> of <strong style="color:#0F172A">7</strong></span>
+      <div class="page-btns">
+        <button class="page-btn page-btn-wide">
+          <svg style="width:11px;height:11px;margin-right:4px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>Prev
+        </button>
+        <button class="page-btn page-btn-wide">Next
+          <svg style="width:11px;height:11px;margin-left:4px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <h2 id="tokens">Token Reference</h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Part</th><th>Class</th><th>Value</th></tr></thead><tbody>
+    <tr><td>Container</td><td class="mono">.table-pagination</td><td>padding:12px 16px, border-top:1px solid #E2E8F0, flex space-between, 12px color:#64748B</td></tr>
+    <tr><td>Page button</td><td class="mono">.page-btn</td><td>30x30px, radius:8px, border:#E2E8F0, bg:#fff, hover: border+color #6366F1, bg:#EEF2FF</td></tr>
+    <tr><td>Active page</td><td class="mono">.page-btn.active</td><td>bg:#6366F1, border:#6366F1, color:#fff, fw-700</td></tr>
+    <tr><td>Ellipsis</td><td class="mono">.page-btn.ellipsis</td><td>cursor:default, transparent border/bg. No hover effect.</td></tr>
+    <tr><td>Prev/Next arrows</td><td>—</td><td>12x12px SVG chevron icons inside .page-btn</td></tr>
+    <tr><td>Count text</td><td>—</td><td>12px, color:#64748B. Numbers in &lt;strong&gt; with color:#0F172A</td></tr>
+    <tr><td>Gap between buttons</td><td>—</td><td>4px (flex gap on .page-btns)</td></tr>
+  </tbody></table></div>
+  <h2 id="behavior">Behavior Rules</h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Rule</th><th>Detail</th></tr></thead><tbody>
+    <tr><td>Always show first and last page</td><td>Never hide page 1 or the last page. Use ellipsis (...) for gaps in between.</td></tr>
+    <tr><td>Show max 5 visible pages</td><td>prev | 1 | ... | 3 4 5 | ... | 12 | next — around current page</td></tr>
+    <tr><td>Disable prev on page 1</td><td>Add <code>disabled</code> attribute and <code>opacity:0.5; cursor:not-allowed</code> to prev button on first page.</td></tr>
+    <tr><td>Disable next on last page</td><td>Same as above for next button on last page.</td></tr>
+    <tr><td>Count summary</td><td>Always show "Showing X–Y of Z [items]". Calculate X = (page-1)*pageSize+1, Y = min(page*pageSize, total).</td></tr>
+  </tbody></table></div>
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Pagination always lives inside <code>.table-pagination</code> at the bottom of <code>.table-wrap</code>. Active page uses <code>.page-btn.active</code> — bg:#6366F1. Ellipsis buttons use <code>.page-btn.ellipsis</code> — no hover effect. The count summary always uses the pattern "Showing X–Y of Z". For the default page size use 20 rows per page. Prev button is always the leftmost, Next is always rightmost. Both use 12x12px SVG chevron icons.</div>
+  </div>
+  <h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Pagination when</div><ul class="ds-when-list"><li>Dataset has more than 20 records</li><li>User needs to navigate to specific pages</li><li>Performance requires server-side paging</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Pagination when</div><ul class="ds-when-list"><li>Dataset has fewer than 20 items — show all</li><li>Infinite scroll is used — mutually exclusive</li></ul></div>
+</div>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">currentPage</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Active page number (1-indexed).</td></tr>
+  <tr><td><span class="ds-prop-name">totalPages</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Total number of pages.</td></tr>
+  <tr><td><span class="ds-prop-name">pageSize</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">20</span></td><td class="ds-prop-desc">Records per page. Used to calculate count summary text.</td></tr>
+  <tr><td><span class="ds-prop-name">totalItems</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Total record count for "Showing X-Y of Z" summary.</td></tr>
+  <tr><td><span class="ds-prop-name">onPageChange</span></td><td><span class="ds-prop-type">function</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Called with new page number when user navigates.</td></tr>
+</tbody></table>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why always show first and last page?</div><div class="ds-decision-a">Users need spatial context — knowing there are 42 pages helps them understand the scale of the dataset. Always showing page 1 and the last page, with ellipsis in between, provides this context without showing all pages. The current page and its neighbors (±1) are always visible for immediate navigation.</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>Standard and compact variants</li><li>Always-visible first/last page with ellipsis</li><li>Disabled prev on page 1, disabled next on last page</li></ul></div></div></div><h2 id="states">States</h2><div class="ds-states-grid"><div class="ds-state-cell"><div class="ds-state-cell-preview"><div style="display:flex;gap:3px"><div style="width:26px;height:26px;border-radius:6px;border:1px solid #E2E8F0;background:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;color:#64748B">&#8249;</div><div style="width:26px;height:26px;border-radius:6px;background:#6366F1;border:1px solid #6366F1;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:700">1</div><div style="width:26px;height:26px;border-radius:6px;border:1px solid #E2E8F0;background:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;color:#64748B">2</div><div style="width:26px;height:26px;border-radius:6px;border:1px solid #E2E8F0;background:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;color:#64748B">&#8250;</div></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Active page</div><div class="ds-state-cell-desc">bg:#6366F1, white text, fw-700</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview"><div style="display:flex;gap:3px"><div style="width:26px;height:26px;border-radius:6px;border:1px solid #E2E8F0;background:#F8FAFC;opacity:.45;display:flex;align-items:center;justify-content:center;font-size:11px;color:#94A3B8;cursor:not-allowed">&#8249;</div></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Disabled</div><div class="ds-state-cell-desc">opacity:.45, cursor:not-allowed</div></div></div></div><h2 id="accessibility">Accessibility</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody><tr><td>aria-label</td><td>Add aria-label="Pagination" to the nav wrapper.</td></tr><tr><td>Page buttons</td><td>Each page button: aria-label="Page X" or aria-current="page" on active.</td></tr><tr><td>Prev/Next</td><td>aria-label="Previous page" and aria-label="Next page" on arrow buttons.</td></tr><tr><td>Disabled</td><td>Use disabled attribute on prev when page=1 and next when page=last.</td></tr></tbody></table></div><h2 id="composition">Composition</h2><div class="ds-composition-grid"><div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Bottom of .table-wrap, inside .table-pagination</div><div class="ds-composition-item">Count summary text on the left</div><div class="ds-composition-item">Page buttons on the right</div></div></div><div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">Standalone without a table</div><div class="ds-composition-item">Inside modal or card header</div></div></div></div><h2 id="best-practices">Best Practices</h2><div class="ds-bp-grid"><div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Always show the count summary: "Showing 1-20 of 124 items".</div><div class="ds-bp-reason">Users need context about dataset size to understand how many pages to expect.</div></div></div><div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Show all page numbers without ellipsis for large datasets.</div><div class="ds-bp-reason">Showing 50+ page buttons overwhelms the UI — use ellipsis pattern.</div></div></div></div><h2 id="related">Related Components</h2><div class="ds-related-grid"><a href="table.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div><div class="ds-related-card-name">Table</div><div class="ds-related-card-desc">Always paired with table</div></a></div><h2 id="anatomy">Anatomy</h2><div class="ds-anatomy-parts"><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Container</div><div class="ds-anatomy-part-desc">div.table-pagination. display:flex, justify-content:space-between, padding:12px 16px, border-top:1px solid #E2E8F0.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Count Summary</div><div class="ds-anatomy-part-desc">Left-aligned text. "Showing X-Y of Z [items]". 12px color:#64748B. Numbers wrapped in strong for emphasis.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Page Buttons</div><div class="ds-anatomy-part-desc">div.page-btns. flex, gap:4px. Contains prev arrow, numbered pages, ellipsis, next arrow.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">4</div><div class="ds-anatomy-part-name">Page Button</div><div class="ds-anatomy-part-desc">button.page-btn. 30×30px, radius:8px, border:#E2E8F0. Active: bg:#6366F1 color:#fff. Disabled: opacity:.45.</div></div></div><h2 id="content">Content Rules</h2><div class="ds-content-rules"><div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good count text</div><div class="ds-content-example">Showing 1–20 of 124 users</div><div class="ds-content-reason">Names the entity type — users, not "items" or "results"</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad count text</div><div class="ds-content-example">Page 1</div><div class="ds-content-reason">No context about total records or current range</div></div></div></div>
+
+  <div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 'pagination';</script>
+<script src="../shared/ds-shell.js"></script>
+</body></html>

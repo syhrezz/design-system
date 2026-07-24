@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Breakpoints — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>.bp-bar{height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;margin-bottom:8px;}</style>
+</head><body><div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">N</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar"><nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Foundations</a><span>/</span><strong>Breakpoints</strong></nav><div class="ds-topbar-right"><span class="ds-topbar-tag">Foundation</span></div></header>
+<div class="ds-main"><article class="ds-page">
+  <div class="ds-page-header"><div class="ds-page-meta"><span class="ds-meta-badge stable">Stable</span></div>
+    <h1>Breakpoints</h1>
+    <p class="ds-page-lead">Syhrezz defines three responsive breakpoints. The layout transitions from a full desktop shell, to a tablet-optimised view, to a fully mobile layout with an off-canvas sidebar.</p>
+  </div>
+  <h2 id="scale">Breakpoint Scale</h2>
+  <div class="ds-preview">
+    <div class="bp-bar" style="background:#6366F1">Desktop — &gt; 1200px — Full sidebar + all grid columns + right TOC</div>
+    <div class="bp-bar" style="background:#0E9F6E">Tablet — 768px–1200px — Sidebar visible, right TOC hidden, grids collapse</div>
+    <div class="bp-bar" style="background:#E3A008">Mobile — &lt; 768px — Off-canvas sidebar, single column, bottom nav</div>
+  </div>
+  <h2 id="tokens">Breakpoint Reference</h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Name</th><th>Range</th><th>Media Query</th><th>Key Changes</th></tr></thead><tbody>
+    <tr><td>Desktop</td><td class="default">&gt; 1200px</td><td class="mono">@media (min-width: 1200px)</td><td>Full layout — sidebar 268px, all grids, right TOC visible</td></tr>
+    <tr><td>Tablet</td><td class="default">768–1200px</td><td class="mono">@media (max-width: 1200px)</td><td>Right TOC hidden. KPI grid 2-col. Cards stack to 1 col.</td></tr>
+    <tr><td>Mobile</td><td class="default">&lt; 768px</td><td class="mono">@media (max-width: 768px)</td><td>Sidebar off-canvas (translateX -100%). Topbar left:0. Main margin:0. KPI 1-col.</td></tr>
+  </tbody></table></div>
+  <h2 id="rules">Layout Rules per Breakpoint</h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Element</th><th>Desktop</th><th>Tablet</th><th>Mobile</th></tr></thead><tbody>
+    <tr><td>Sidebar</td><td class="default">Fixed, 268px</td><td class="default">Fixed, 268px (collapsible)</td><td class="default">Off-canvas, toggle button</td></tr>
+    <tr><td>Topbar left offset</td><td class="default">268px</td><td class="default">268px</td><td class="default">0</td></tr>
+    <tr><td>Main margin-left</td><td class="default">268px</td><td class="default">268px</td><td class="default">0</td></tr>
+    <tr><td>KPI grid</td><td class="default">4 columns</td><td class="default">2 columns</td><td class="default">1 column</td></tr>
+    <tr><td>Content grid (.grid-2)</td><td class="default">2 columns</td><td class="default">1 column</td><td class="default">1 column</td></tr>
+    <tr><td>Right TOC</td><td class="default">Visible</td><td class="default">Hidden</td><td class="default">Hidden</td></tr>
+    <tr><td>Page padding</td><td class="default">28px 32px</td><td class="default">20px 24px</td><td class="default">16px</td></tr>
+  </tbody></table></div>
+  <h2 id="mobile-patterns">Mobile-Specific Patterns</h2>
+  <p>On mobile, the sidebar becomes an off-canvas drawer. A hamburger button in the topbar toggles it. A dark overlay covers the main content when the sidebar is open. Tapping the overlay closes the sidebar.</p>
+  <div class="ds-code-block"><button class="ds-copy-btn">Copy</button><pre><code><span class="cm">/* Mobile sidebar — off canvas by default */</span>
+<span class="cls">@media (max-width: 768px)</span> {
+  <span class="cls">.ds-sidebar</span> { <span class="prop">transform</span>: translateX(<span class="num">-100%</span>); <span class="prop">transition</span>: <span class="fn">var</span>(<span class="str">--transition-sidebar</span>); }
+  <span class="cls">.ds-sidebar.open</span> { <span class="prop">transform</span>: translateX(<span class="num">0</span>); }
+  <span class="cls">.ds-main</span> { <span class="prop">margin-left</span>: <span class="num">0</span>; }
+  <span class="cls">.ds-topbar</span> { <span class="prop">left</span>: <span class="num">0</span>; }
+}</code></pre></div>
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Syhrezz has exactly 3 breakpoints: 1200px (tablet/desktop boundary) and 768px (mobile boundary). Breakpoints are defined in CSS <code>@media</code> queries only — not in JavaScript. The sidebar never disappears on tablet — it only goes off-canvas on mobile (&lt;768px). Always use <code>var(--transition-sidebar)</code> for sidebar slide animations.</div>
+  </div>
+  <div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 'breakpoints';</script>
+<script src="../shared/ds-shell.js"></script></body></html>

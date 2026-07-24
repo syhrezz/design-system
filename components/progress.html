@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Progress — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.progress-wrap{margin-bottom:14px;}
+.progress-header{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-bottom:5px;}
+.progress-label{font-weight:600;color:#0F172A;}
+.progress-pct{font-weight:700;}
+.progress-sub{font-size:11px;color:#94A3B8;margin-top:3px;}
+.progress-bar{height:6px;background:#F1F5F9;border-radius:999px;overflow:hidden;}
+.progress-bar-lg{height:8px;}
+.progress-bar-sm{height:4px;}
+.progress-fill{height:100%;border-radius:999px;transition:width .5s ease;}
+.progress-fill-blue{background:#3B5BDB;}
+.progress-fill-green{background:#0E9F6E;}
+.progress-fill-amber{background:#E3A008;}
+.progress-fill-red{background:#F05252;}
+.progress-fill-indigo{background:#6366F1;}
+.progress-fill-gradient{background:linear-gradient(90deg,#6366F1,#8B5CF6);}
+/* Ring progress */
+.progress-ring-wrap{display:inline-flex;align-items:center;justify-content:center;position:relative;}
+.progress-ring-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#0F172A;}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-header">
+    <div class="ds-sidebar-logo">
+      <div class="ds-sidebar-logo-icon">N</div>
+      <div class="ds-sidebar-logo-text">
+        <div class="ds-sidebar-logo-name">Syhrezz</div>
+        <div class="ds-sidebar-logo-version">v1.0</div>
+      </div>
+    </div>
+    <div class="ds-search-wrap">
+      <div class="ds-search-box">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/>
+        <span class="ds-search-kbd">&#8984;K</span>
+      </div>
+      <div id="ds-search-results"></div>
+    </div>
+  </div>
+  <nav class="ds-sidebar-nav" id="ds-nav-links"></nav>
+</aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb">
+    <a href="../index.html">Syhrezz</a><span>/</span>
+    <a href="#">Components</a><span>/</span>
+    <strong>Progress</strong>
+  </nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main">
+<article class="ds-page">
+  <div class="ds-page-header">
+    <div class="ds-page-meta">
+      <span class="ds-meta-badge stable">Stable</span>
+      <span class="ds-meta-badge type">Display</span>
+    </div>
+    <h1>Progress</h1>
+    <p class="ds-page-lead">Progress bars show completion status for tasks, targets, and metrics. Syhrezz uses thin horizontal bars (4–8px) and SVG circular rings for target achievement display.</p>
+  </div>
+
+  <h2 id="overview">Overview</h2>
+  <p>Progress bars are always paired with a label and percentage value. The fill color uses semantic tokens — green for good, amber for warning, red for critical. Gradient fills are used for the Executive dashboard target ring.</p>
+
+  <!-- PLAYGROUND -->
+
+  <h2 id="when-to-use">When to Use</h2>
+  <div class="ds-when-grid">
+    <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Progress when</div><ul class="ds-when-list"><li>Showing completion percentage toward a goal or target</li><li>Regional or team performance comparison</li><li>Upload, download, or processing progress</li><li>Target cards showing achievement percentage</li></ul></div>
+    <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Progress when</div><ul class="ds-when-list"><li>Loading state — use a spinner instead</li><li>Binary states — use a checkbox</li><li>Showing a score or rating</li></ul></div>
+  </div>
+
+  <h2 id="anatomy">Anatomy</h2>
+  <div class="ds-anatomy-parts">
+    <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Wrapper</div><div class="ds-anatomy-part-desc">div.progress-wrap. Contains label row + bar. margin-bottom:12px.</div></div>
+    <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Header Row</div><div class="ds-anatomy-part-desc">div.progress-header. display:flex, justify-content:space-between. Contains label (left) + percentage text (right).</div></div>
+    <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Track</div><div class="ds-anatomy-part-desc">div.progress-bar. bg:#F1F5F9, border-radius:999px, overflow:hidden. Height: 4px (sm), 6px (default), 8px (lg).</div></div>
+    <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">4</div><div class="ds-anatomy-part-name">Fill</div><div class="ds-anatomy-part-desc">div.progress-fill. Width set via inline style="width:X%". Color via .progress-fill-{color} class. transition:width .5s ease.</div></div>
+    <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">5</div><div class="ds-anatomy-part-name">SVG Ring (variant)</div><div class="ds-anatomy-part-desc">Used in target cards. SVG circle with stroke-dasharray:213.6, stroke-dashoffset = 213.6*(1-pct/100). Rotated -90deg. 80px default size.</div></div>
+  </div>
+
+  <h2 id="states">States</h2>
+  <div class="ds-states-grid">
+    <div class="ds-state-cell"><div class="ds-state-cell-preview"><div style="width:180px"><div class="progress-bar" style="height:6px;background:#F1F5F9;border-radius:999px;overflow:hidden"><div class="progress-fill" style="height:100%;width:92%;background:#0E9F6E;border-radius:999px"></div></div></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">On Track (&gt;75%)</div><div class="ds-state-cell-desc">Green fill</div></div></div>
+    <div class="ds-state-cell"><div class="ds-state-cell-preview"><div style="width:180px"><div class="progress-bar" style="height:6px;background:#F1F5F9;border-radius:999px;overflow:hidden"><div class="progress-fill" style="height:100%;width:55%;background:#6366F1;border-radius:999px"></div></div></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Default (40-75%)</div><div class="ds-state-cell-desc">Indigo fill</div></div></div>
+    <div class="ds-state-cell"><div class="ds-state-cell-preview"><div style="width:180px"><div class="progress-bar" style="height:6px;background:#F1F5F9;border-radius:999px;overflow:hidden"><div class="progress-fill" style="height:100%;width:35%;background:#E3A008;border-radius:999px"></div></div></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Warning (25-40%)</div><div class="ds-state-cell-desc">Amber fill</div></div></div>
+    <div class="ds-state-cell"><div class="ds-state-cell-preview"><div style="width:180px"><div class="progress-bar" style="height:6px;background:#F1F5F9;border-radius:999px;overflow:hidden"><div class="progress-fill" style="height:100%;width:18%;background:#F05252;border-radius:999px"></div></div></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Critical (&lt;25%)</div><div class="ds-state-cell-desc">Red fill</div></div></div>
+  </div>
+
+  <h2 id="properties">Properties</h2>
+  <table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+    <tr><td><span class="ds-prop-name">value</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Current value. Set via inline style="width:X%" on .progress-fill.</td></tr>
+    <tr><td><span class="ds-prop-name">max</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">100</span></td><td class="ds-prop-desc">Maximum value. Percentage = (value/max)*100.</td></tr>
+    <tr><td><span class="ds-prop-name">color</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">'indigo'</span></td><td class="ds-prop-desc">Fill color. Use semantic colors based on threshold.<div class="ds-prop-values">'green'(&gt;75%) | 'indigo'(default) | 'amber'(25-40%) | 'red'(&lt;25%) | 'gradient'</div></td></tr>
+    <tr><td><span class="ds-prop-name">size</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">'default'</span></td><td class="ds-prop-desc"><div class="ds-prop-values">'sm'(4px) | 'default'(6px) | 'lg'(8px)</div></td></tr>
+    <tr><td><span class="ds-prop-name">label</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Label text shown above left. Always pair with a percentage value.</td></tr>
+  </tbody></table>
+
+  <h2 id="accessibility">Accessibility</h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody>
+    <tr><td>role="progressbar"</td><td>Add to .progress-bar element.</td></tr>
+    <tr><td>aria-valuenow</td><td>Current numeric value.</td></tr>
+    <tr><td>aria-valuemin / aria-valuemax</td><td>Always 0 and max (usually 100).</td></tr>
+    <tr><td>aria-label</td><td>Describe what is measured: <code>aria-label="Jakarta region completion"</code>.</td></tr>
+  </tbody></table></div>
+
+  <h2 id="behavior">Behavior</h2>
+  <p>Progress bars are static display elements. They update when the underlying data changes — the fill width animates via <code>transition: width 0.5s ease</code>. No user interaction. Color should update semantically based on the value threshold.</p>
+
+  <h2 id="composition">Composition</h2>
+  <div class="ds-composition-grid">
+    <div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Inside stat cards with label + percentage</div><div class="ds-composition-item">Regional performance comparison tables</div><div class="ds-composition-item">Target cards with SVG ring variant</div></div></div>
+    <div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">As a loading indicator — use spinner</div><div class="ds-composition-item">Without a label — always pair with text</div><div class="ds-composition-item">With percentage color mismatching fill color</div></div></div>
+  </div>
+
+  <h2 id="best-practices">Best Practices</h2>
+  <div class="ds-bp-grid">
+    <div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Always pair progress bar with a label and percentage value. Use semantic color matching the fill.</div><div class="ds-bp-reason">Bar alone lacks context — users need to know what is being measured.</div></div></div>
+    <div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Use a red fill but show black percentage text, or use progress bars without any labels.</div><div class="ds-bp-reason">Color mismatch confuses semantic meaning. Unlabeled bars require users to infer.</div></div></div>
+  </div>
+
+  <h2 id="content">Content Rules</h2>
+  <div class="ds-content-rules">
+    <div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good label</div><div class="ds-content-example">Jakarta Region</div><div class="ds-content-reason">Names what is being measured. Specific.</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad label</div><div class="ds-content-example">Progress</div><div class="ds-content-reason">Does not identify what is being tracked.</div></div></div>
+  </div>
+
+  <h2 id="ai-spec">AI Implementation Guide</h2>
+  <div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Progress bars always have a <code>.progress-wrap</code> parent. Fill width is always set via inline <code>style="width:X%"</code>. Use semantic colors: green for &gt;75%, indigo/blue for 40-75%, amber for 25-40%, red for &lt;25%. SVG ring formula: circumference = 2πr = 213.6 (r=34). stroke-dashoffset = 213.6*(1-pct/100). Always rotate SVG -90deg. Always include role="progressbar" with aria-valuenow.</div>
+  </div>
+
+  <h2 id="related">Related Components</h2>
+  <div class="ds-related-grid">
+    <a href="card.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div><div class="ds-related-card-name">Card</div><div class="ds-related-card-desc">Progress inside stat cards</div></a>
+    <a href="badge.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg></div><div class="ds-related-card-name">Badge</div><div class="ds-related-card-desc">Status display</div></a>
+  </div>
+
+  <h2 id="design-decisions">Design Decisions</h2>
+  <div class="ds-decision"><div class="ds-decision-q">Why semantic color coding?</div><div class="ds-decision-a">Progress bars in dashboards communicate performance at a glance. Using green for high, amber for moderate, and red for low creates an instant visual signal without reading the percentage. This follows established dashboard conventions in enterprise software.</div></div>
+  <div class="ds-decision"><div class="ds-decision-q">Why SVG ring instead of CSS border-radius ring?</div><div class="ds-decision-a">SVG stroke-dashoffset provides precise control over the fill amount with smooth animation. CSS-only circular progress is brittle and harder to animate reliably across browsers. The SVG approach also supports accessible aria attributes naturally.</div></div>
+
+  <h2 id="changelog">Changelog</h2>
+  <div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>Linear bars in 3 sizes + SVG circular ring for target cards</li><li>5 semantic color variants with threshold guidance</li><li>transition: width 0.5s ease on fill element</li></ul></div></div></div><div id="ds-prev-next"></div>
+</article>
+<aside class="ds-toc" id="ds-toc"></aside>
+</div>
+</div>
+<script>window.DS_ACTIVE_PAGE = 'progress';</script>
+<script src="../shared/ds-shell.js"></script>
+</body>
+</html>

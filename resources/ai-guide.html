@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Implementation Guide — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-header">
+    <div class="ds-sidebar-logo">
+      <div class="ds-sidebar-logo-icon">N</div>
+      <div class="ds-sidebar-logo-text">
+        <div class="ds-sidebar-logo-name">Syhrezz</div>
+        <div class="ds-sidebar-logo-version">v1.0</div>
+      </div>
+    </div>
+    <div class="ds-search-wrap">
+      <div class="ds-search-box">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/>
+        <span class="ds-search-kbd">&#8984;K</span>
+      </div>
+      <div id="ds-search-results"></div>
+    </div>
+  </div>
+  <nav class="ds-sidebar-nav" id="ds-nav-links"></nav>
+</aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb">
+    <a href="../index.html">Syhrezz</a><span>/</span>
+    <a href="#">Resources</a><span>/</span>
+    <strong>AI Implementation Guide</strong>
+  </nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Resource</span></div>
+</header>
+<div class="ds-main">
+<article class="ds-page">
+  <div class="ds-page-header">
+    <div class="ds-page-meta"><span class="ds-meta-badge new">New</span></div>
+    <h1>AI Implementation Guide</h1>
+    <p class="ds-page-lead">This guide is written specifically for AI coding assistants. It contains the non-negotiable rules, patterns, and constraints that define the Syhrezz visual identity. When building any page for this system, follow these rules exactly.</p>
+  </div>
+
+  <div class="ds-callout ds-callout-danger">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#9B1C1C"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+    <div class="ds-callout-content"><strong>Critical:</strong> Do NOT introduce Tailwind utility classes, Material UI, shadcn, Bootstrap, Ant Design, or any other design system into Syhrezz pages. Every component must use the class-based system defined in this design system. Every visual value must come from CSS custom properties defined in <code>ds-tokens.css</code>.</div>
+  </div>
+
+  <h2 id="identity">Design Identity Rules</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Rule</th><th>Correct</th><th>Wrong</th></tr></thead>
+      <tbody>
+        <tr><td>Font family</td><td class="mono">'Plus Jakarta Sans', sans-serif</td><td>Inter, Roboto, system-ui, -apple-system</td></tr>
+        <tr><td>Font for sales pages</td><td class="mono">'Poppins', sans-serif</td><td>Any other font</td></tr>
+        <tr><td>Primary CTA color (Accent)</td><td class="mono">#6366F1</td><td>#3B82F6, any blue</td></tr>
+        <tr><td>Primary CTA color (Dark)</td><td class="mono">#0F172A</td><td>Any other color</td></tr>
+        <tr><td>Page background</td><td class="mono">#F8FAFC (var(--surface))</td><td>#fff, #f5f5f5, #f0f0f0</td></tr>
+        <tr><td>Card background</td><td class="mono">#fff (var(--card))</td><td>Any tinted white</td></tr>
+        <tr><td>Sidebar background</td><td class="mono">#0F172A (primary role)</td><td>Any other dark color</td></tr>
+        <tr><td>Border color</td><td class="mono">#E2E8F0 (var(--border))</td><td>#d1d5db, #e5e7eb</td></tr>
+        <tr><td>Card border radius</td><td class="mono">20px (var(--r-4xl))</td><td>8px, 12px, 24px, 1rem</td></tr>
+        <tr><td>Button border radius</td><td class="mono">12px (default md)</td><td>4px, 6px, rounded-full</td></tr>
+        <tr><td>Icons</td><td>Inline SVG, Heroicons outline, stroke-width:2</td><td>Font Awesome, Lucide, emoji, img tags</td></tr>
+        <tr><td>Icon size in buttons</td><td class="mono">16px (md), 14px (sm), 18px (lg)</td><td>24px, 1em, 1rem</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="layout">Page Layout Rules</h2>
+  <div class="ds-callout ds-callout-info">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <div class="ds-callout-content">Every Syhrezz page follows this exact structure: <strong>Fixed sidebar (left) + Fixed topbar (top, offset by sidebar width) + Scrollable main content area</strong>. The sidebar state (collapsed/expanded) is persisted in localStorage. Main content shifts when the sidebar collapses.</div>
+  </div>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Element</th><th>CSS</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Sidebar width (expanded)</td><td class="mono">width</td><td>268px (Dark), 280px (Accent), 260px (supervisor)</td></tr>
+        <tr><td>Sidebar width (collapsed)</td><td class="mono">width</td><td>68px (primary role), 80px (Accent)</td></tr>
+        <tr><td>Sidebar position</td><td class="mono">position</td><td>fixed, left:0, top:0, height:100vh, z-index:1000</td></tr>
+        <tr><td>Topbar height</td><td class="mono">height</td><td>56–64px</td></tr>
+        <tr><td>Topbar position</td><td class="mono">position</td><td>fixed, top:0, left:[sidebar-width], right:0, z-index:100</td></tr>
+        <tr><td>Main margin</td><td class="mono">margin-left</td><td>Equal to sidebar width. Shifts on collapse.</td></tr>
+        <tr><td>Main padding-top</td><td class="mono">padding-top</td><td>Equal to topbar height</td></tr>
+        <tr><td>Content inner padding</td><td class="mono">padding</td><td>28px 32px (admin/director), 20px (mobile)</td></tr>
+        <tr><td>Content max-width</td><td class="mono">max-width</td><td>1400px, margin:0 auto</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="components">Component Rules</h2>
+
+  <h3 id="rule-buttons">Buttons</h3>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Rule</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Base class always required</td><td>Every button needs <code>.btn</code> + one variant class. Never just <code>.btn-primary</code> alone.</td></tr>
+        <tr><td>Hover lift</td><td>All variants use <code>transform:translateY(-2px)</code> on hover. Ghost is the exception — no lift.</td></tr>
+        <tr><td>Destructive actions</td><td>Danger buttons MUST trigger a confirmation modal before executing. Never fire delete directly.</td></tr>
+        <tr><td>Form submit</td><td>Use <code>type="submit"</code> for forms, <code>type="button"</code> for everything else.</td></tr>
+        <tr><td>Loading pattern</td><td>Add <code>.btn-loading</code> + prepend spinner element + change label text. Never just disable.</td></tr>
+        <tr><td>Icon-only buttons</td><td>Must have <code>aria-label</code> or <code>title</code> attribute.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="rule-forms">Form Fields</h3>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Rule</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Label style</td><td>Always UPPERCASE, 12px, fw-700, letter-spacing:0.5px, color:#64748B</td></tr>
+        <tr><td>Input class</td><td>Always use <code>.input</code> class. Also applies to <code>&lt;select&gt;</code> and <code>&lt;textarea&gt;</code>.</td></tr>
+        <tr><td>Focus ring</td><td>Always <code>0 0 0 3px rgba(59,91,219,.1)</code> — never a solid outline</td></tr>
+        <tr><td>Error state</td><td>Add <code>.input-error</code> to input AND render <code>.form-error-msg</code> div below it</td></tr>
+        <tr><td>Form group</td><td>Every field wrapped in <code>.form-group</code> with <code>margin-bottom:16px</code></td></tr>
+        <tr><td>Icon in input</td><td>Wrap in <code>.input-wrap</code>, add <code>.has-icon-left</code> or <code>.has-icon-right</code> to input</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="rule-tables">Tables</h3>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Rule</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Always wrapped</td><td>Table must be inside <code>.table-wrap</code>. Never a bare <code>&lt;table&gt;</code>.</td></tr>
+        <tr><td>Toolbar required</td><td>Every table has a <code>.table-toolbar</code> with title on left, actions on right.</td></tr>
+        <tr><td>User cell pattern</td><td>30px circle avatar + stacked name (13px fw-600) + email (11px #94A3B8)</td></tr>
+        <tr><td>Dates and IDs</td><td>Always use <code>font-family: var(--font-mono)</code> for dates, IDs, transaction numbers</td></tr>
+        <tr><td>Action buttons</td><td>Last column only. Use ghost-sm buttons, never full-size buttons in table rows.</td></tr>
+        <tr><td>Empty state</td><td>Every table must have an empty state that renders when data array is empty.</td></tr>
+        <tr><td>Pagination</td><td>Always include <code>.table-pagination</code> with count text left, page buttons right.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="rule-modals">Modals</h3>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Rule</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Overlay is flex container</td><td>The overlay div is <code>display:flex; align-items:center; justify-content:center</code></td></tr>
+        <tr><td>Show/hide</td><td>Use <code>display:none</code> → <code>display:flex</code>. Never visibility or opacity alone.</td></tr>
+        <tr><td>Click outside</td><td>Add <code>onclick="if(event.target===this)this.style.display='none'"</code> to overlay</td></tr>
+        <tr><td>Escape key</td><td>Always add keydown listener for Escape to close modal</td></tr>
+        <tr><td>Body scroll lock</td><td>Set <code>document.body.style.overflow='hidden'</code> on open, restore on close</td></tr>
+        <tr><td>Footer order</td><td>Cancel/secondary always LEFT. Confirm/primary always RIGHT.</td></tr>
+        <tr><td>Destructive modals</td><td>Use <code>.btn-danger</code> for confirm button, never <code>.btn-primary</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="rule-sidebar">Sidebar</h3>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Rule</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Collapse state</td><td>Persisted in <code>localStorage</code> with key <code>{role}-sidebar-collapsed</code></td></tr>
+        <tr><td>Active indicator</td><td>4px wide left border (absolute positioned), primary/accent color, glowing box-shadow</td></tr>
+        <tr><td>Label fade</td><td>On collapse: <code>opacity:0; transform:translateX(-10px)</code> transition on labels</td></tr>
+        <tr><td>Section labels</td><td>10px, fw-700–800, UPPERCASE, letter-spacing:1.5–2px, rgba(148,163,184,.35–.4)</td></tr>
+        <tr><td>Scrollbar</td><td>Sidebar nav uses hidden scrollbar: <code>scrollbar-width:none</code> + <code>::-webkit-scrollbar{display:none}</code></td></tr>
+        <tr><td>Toggle button</td><td>Always at bottom of sidebar. State saved to localStorage on click.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="patterns">Reusable Pattern Rules</h2>
+
+  <h3 id="pattern-dashboard">Dashboard Page Pattern</h3>
+  <div class="ds-code-block">
+    <button class="ds-copy-btn">Copy</button>
+    <pre><code><span class="cm">/* Dashboard page structure — always in this order */</span>
+
+<span class="num">1.</span> Page Header (h1 + subtitle + action buttons)
+<span class="num">2.</span> Optional Alert Banner (if system warnings exist)
+<span class="num">3.</span> KPI Grid (4 columns, gradient cards OR white stat cards)
+<span class="num">4.</span> Main Content Grid (2–3 column layout):
+   - Charts / Target card
+   - Follow-up list / Activity feed
+<span class="num">5.</span> Secondary Content Grid:
+   - Data table (2/3 width)
+   - Todo list + donut chart (1/3 width)</code></pre>
+  </div>
+
+  <h3 id="pattern-crud">CRUD Table Page Pattern</h3>
+  <div class="ds-code-block">
+    <button class="ds-copy-btn">Copy</button>
+    <pre><code><span class="num">1.</span> Page Header (title + "Add [Item]" button)
+<span class="num">2.</span> Filter Bar (search input + select filters, flex wrap)
+<span class="num">3.</span> Table Wrap:
+   - Toolbar (title + count + bulk actions + export + add button)
+   - Table (checkbox col + data cols + badge col + actions col)
+   - Pagination
+<span class="num">4.</span> Empty State (when data.length === 0)
+<span class="num">5.</span> Modal (for add/edit form)</code></pre>
+  </div>
+
+  <h3 id="pattern-detail">Detail Page Pattern</h3>
+  <div class="ds-code-block">
+    <button class="ds-copy-btn">Copy</button>
+    <pre><code><span class="num">1.</span> Page Header (back button + entity name + status badge + actions)
+<span class="num">2.</span> Info Cards Grid (2 columns):
+   - Left: Main info (name, contact, address, etc.)
+   - Right: Stats/metrics, status, assigned rep
+<span class="num">3.</span> Tabs (Overview / Activities / Transactions / Contacts)
+<span class="num">4.</span> Tab content panels (each tab renders its own list/table)</code></pre>
+  </div>
+
+  <h2 id="common-mistakes">Common Mistakes to Avoid</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Mistake</th><th>Correct Approach</th></tr></thead>
+      <tbody>
+        <tr><td>Using emoji as icons</td><td>Always use inline SVG with stroke="currentColor", no emoji anywhere in UI</td></tr>
+        <tr><td>Hardcoding hex values</td><td>Always use CSS custom properties: <code>var(--primary)</code>, <code>var(--border)</code>, etc.</td></tr>
+        <tr><td>Adding Tailwind classes</td><td>Use the design system class-based API exclusively</td></tr>
+        <tr><td>Two primary buttons side-by-side</td><td>One primary CTA max. Use outline for secondary actions.</td></tr>
+        <tr><td>Bare table element</td><td>Always wrap in <code>.table-wrap</code> with toolbar and pagination</td></tr>
+        <tr><td>Nesting cards inside cards</td><td>Use sections or dividers within a single card</td></tr>
+        <tr><td>Full-saturation badge backgrounds</td><td>Always use the soft <code>-bg</code> token with its matching <code>-text</code> token</td></tr>
+        <tr><td>Hardcoded font-family strings</td><td>Use <code>var(--font-primary)</code> or <code>var(--font-mono)</code></td></tr>
+        <tr><td>Large border-radius on buttons</td><td>Buttons use 12px (md), 10px (Dark), 8px (sm), 7px (xs) — not rounded-full</td></tr>
+        <tr><td>Delete without confirmation</td><td>All destructive actions require a confirmation modal with .btn-danger</td></tr>
+        <tr><td>Sidebar without localStorage</td><td>Always persist collapse state to localStorage</td></tr>
+        <tr><td>Using img tags for icons</td><td>Inline SVG only — no icon fonts, no img tags, no emoji</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="prompt">Recommended AI Prompt</h2>
+  <p>When working with an AI assistant on a new Syhrezz page, provide this context at the start of your conversation:</p>
+  <div class="ds-code-block">
+    <button class="ds-copy-btn">Copy</button>
+    <pre><code><span class="cm">I am building a page using the Syhrezz Design System. Follow these rules exactly:</span>
+
+<span class="str">VISUAL IDENTITY (non-negotiable):</span>
+- Font: 'Plus Jakarta Sans', sans-serif (primary UI) — 'Poppins' for alternative role pages
+- Primary accent: #6366F1 (default) | Dark accent: #0F172A | Blue accent: #2563EB
+- Page background: #F8FAFC | Card background: #FFFFFF | Border color: #E2E8F0
+- Card radius: 20px | Button radius: 12px (md), 8px (sm) | Badge/pill: 999px
+- All values must use CSS custom properties from ds-tokens.css — NEVER hardcode hex values
+
+<span class="str">LAYOUT:</span>
+- Fixed dark sidebar (268px) + Fixed topbar (56px) + Scrollable main content area
+- Sidebar collapses to 68px, state persisted in localStorage
+- Content max-width: 1400px, padding: 28px 32px
+
+<span class="str">ICONS:</span>
+- ALWAYS inline SVG, Heroicons outline style, stroke-width:2, stroke="currentColor"
+- NEVER use emoji, icon fonts, or img tags for icons
+
+<span class="str">COMPONENTS:</span>
+- Buttons: always .btn + .btn-{variant} — never bare unstyled buttons
+- Tables: always inside .table-wrap with toolbar + pagination
+- Modals: overlay is flex container, display:none/flex toggle, cancel LEFT / confirm RIGHT
+- Badges: always soft bg+text token pairs — never full-saturation backgrounds
+- Forms: labels UPPERCASE 12px fw-700 letter-spacing:.5px, .input class for all fields, .form-group wrapper
+- See the Syhrezz Design System documentation for full component reference</code></pre>
+  </div>
+
+  <div id="ds-prev-next"></div>
+</article>
+<aside class="ds-toc" id="ds-toc"></aside>
+</div>
+</div>
+<script>window.DS_ACTIVE_PAGE = 'ai-guide';</script>
+<script src="../shared/ds-shell.js"></script>
+</body>
+</html>

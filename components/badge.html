@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Badge — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;}
+.badge-dot::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;flex-shrink:0;}
+.badge-success{background:#DEF7EC;color:#03543F;}
+.badge-warning{background:#FEF3C7;color:#92400E;}
+.badge-danger{background:#FDE2E2;color:#9B1C1C;}
+.badge-info{background:#E1EFFE;color:#1E429F;}
+.badge-purple{background:#F5F3FF;color:#5521B5;}
+.badge-amber{background:#FEF3C7;color:#92400E;}
+.badge-neutral{background:#F1F5F9;color:#64748B;}
+.badge-hot{background:#fef2f2;color:#dc2626;}
+.badge-warm{background:#fff7ed;color:#ea580c;}
+.badge-cold{background:#f0f9ff;color:#0284c7;}
+.badge-deal{background:#f0fdf4;color:#16a34a;}
+.badge-lost{background:#f9fafb;color:#6b7280;}
+.badge-sm{padding:2px 7px;font-size:10px;}
+.badge-lg{padding:6px 14px;font-size:13px;}
+.badge-outline-success{background:transparent;color:#0E9F6E;border:1px solid #0E9F6E;}
+.badge-outline-danger{background:transparent;color:#F05252;border:1px solid #F05252;}
+.badge-outline-warning{background:transparent;color:#E3A008;border:1px solid #E3A008;}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-header">
+    <div class="ds-sidebar-logo">
+      <div class="ds-sidebar-logo-icon">N</div>
+      <div class="ds-sidebar-logo-text">
+        <div class="ds-sidebar-logo-name">Syhrezz</div>
+        <div class="ds-sidebar-logo-version">v1.0</div>
+      </div>
+    </div>
+    <div class="ds-search-wrap">
+      <div class="ds-search-box">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/>
+        <span class="ds-search-kbd">&#8984;K</span>
+      </div>
+      <div id="ds-search-results"></div>
+    </div>
+  </div>
+  <nav class="ds-sidebar-nav" id="ds-nav-links"></nav>
+</aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb">
+    <a href="../index.html">Syhrezz</a><span>/</span>
+    <a href="#">Components</a><span>/</span>
+    <strong>Badge</strong>
+  </nav>
+  <div class="ds-topbar-right">
+    <span class="ds-topbar-tag">Component</span>
+  </div>
+</header>
+<div class="ds-main">
+<article class="ds-page">
+
+  <div class="ds-page-header">
+    <div class="ds-page-meta">
+      <span class="ds-meta-badge stable">Stable</span>
+      <span class="ds-meta-badge type">Display</span>
+    </div>
+    <h1>Badge</h1>
+    <p class="ds-page-lead">Badges are small status indicators used to communicate state, category, or quantity. They are always pill-shaped, always soft-colored, and never use hard/saturated backgrounds.</p>
+  </div>
+
+  <h2 id="overview">Overview</h2>
+  <p>Badges appear inline next to text, in table cells, and in card headers. The design language uses <strong>soft tinted backgrounds</strong> (10–15% opacity of the semantic color) paired with a dark-tinted text color from the same hue family. Never use a full-saturation background like <code>#0E9F6E</code> directly — always use the <code>-bg</code> token pair.</p>
+
+  <div class="ds-callout ds-callout-warning">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#92400E"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+    <div class="ds-callout-content"><strong>Never use emojis inside badges.</strong> Use text labels only. The dot modifier (<code>.badge-dot</code>) adds a colored dot via CSS pseudo-element — no emoji needed.</div>
+  </div>
+
+  <!-- PLAYGROUND -->
+
+  <h2 id="when-to-use">When to Use</h2>
+  <div class="ds-when-grid">
+    <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Badge when</div><ul class="ds-when-list"><li>Indicating the status of a record (Active, Pending, Inactive)</li><li>Categorizing by role, type, or classification</li><li>Labeling items in tables, lists, and cards</li></ul></div>
+    <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Badge when</div><ul class="ds-when-list"><li>An action is needed — use a Button instead</li><li>Displaying long text (&gt;3 words) — use a callout</li><li>Navigation or filtering — use tabs or a select</li></ul></div>
+  </div>
+
+  <h2 id="anatomy">Anatomy</h2>
+  <div class="ds-anatomy-parts">
+    <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Container</div><div class="ds-anatomy-part-desc">Always a <code>&lt;span&gt;</code> element. display:inline-flex, align-items:center. Pill shape via border-radius:999px. Never a div or button.</div></div>
+    <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Dot Indicator (optional)</div><div class="ds-anatomy-part-desc">Added via <code>.badge-dot</code> class. CSS <code>::before</code> pseudo-element. width/height:6px, border-radius:50%, background:currentColor.</div></div>
+    <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Label Text</div><div class="ds-anatomy-part-desc">Plain text only. 11px fw-700. Never use emoji, icons, or HTML inside badge text. Keep to 1–3 words maximum.</div></div>
+    <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">4</div><div class="ds-anatomy-part-name">Color Pair</div><div class="ds-anatomy-part-desc">Always paired tokens: soft background + matching dark text. Never full-saturation backgrounds.</div></div>
+  </div>
+
+  <h2 id="variants">Variants</h2>
+  <div class="ds-preview ds-preview-grid">
+    <div><div class="ds-preview-label">Success</div><span class="badge badge-success badge-dot">Active</span></div>
+    <div><div class="ds-preview-label">Warning</div><span class="badge badge-warning badge-dot">Pending</span></div>
+    <div><div class="ds-preview-label">Danger</div><span class="badge badge-danger badge-dot">Inactive</span></div>
+    <div><div class="ds-preview-label">Info</div><span class="badge badge-info">Admin</span></div>
+    <div><div class="ds-preview-label">Purple</div><span class="badge badge-purple">Director</span></div>
+    <div><div class="ds-preview-label">Neutral</div><span class="badge badge-neutral">Archived</span></div>
+    <div><div class="ds-preview-label">Hot</div><span class="badge badge-hot">Hot</span></div>
+    <div><div class="ds-preview-label">Warm</div><span class="badge badge-warm">Warm</span></div>
+    <div><div class="ds-preview-label">Cold</div><span class="badge badge-cold">Cold</span></div>
+    <div><div class="ds-preview-label">Deal</div><span class="badge badge-deal">Deal</span></div>
+    <div><div class="ds-preview-label">Lost</div><span class="badge badge-lost">Lost</span></div>
+  </div>
+
+  <h2 id="sizes">Sizes</h2>
+  <div class="ds-preview" style="display:flex;gap:16px;align-items:center">
+    <div><div class="ds-preview-label">Small</div><span class="badge badge-success badge-sm">Active</span></div>
+    <div><div class="ds-preview-label">Default</div><span class="badge badge-success">Active</span></div>
+    <div><div class="ds-preview-label">Large</div><span class="badge badge-success badge-lg">Active</span></div>
+  </div>
+
+  <h2 id="tokens">Token Reference</h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Background</th><th>Text Color</th><th>Use For</th></tr></thead><tbody>
+    <tr><td class="mono">.badge-success</td><td class="default">#DEF7EC</td><td class="default">#03543F</td><td>Active, approved, completed</td></tr>
+    <tr><td class="mono">.badge-warning</td><td class="default">#FEF3C7</td><td class="default">#92400E</td><td>Pending, review, in progress</td></tr>
+    <tr><td class="mono">.badge-danger</td><td class="default">#FDE2E2</td><td class="default">#9B1C1C</td><td>Inactive, rejected, error</td></tr>
+    <tr><td class="mono">.badge-info</td><td class="default">#E1EFFE</td><td class="default">#1E429F</td><td>Role: Admin, informational</td></tr>
+    <tr><td class="mono">.badge-purple</td><td class="default">#F5F3FF</td><td class="default">#5521B5</td><td>Role: Director</td></tr>
+    <tr><td class="mono">.badge-neutral</td><td class="default">#F1F5F9</td><td class="default">#64748B</td><td>Archived, no status</td></tr>
+    <tr><td class="mono">.badge-hot</td><td class="default">#fef2f2</td><td class="default">#dc2626</td><td>Lead: Hot prospect</td></tr>
+    <tr><td class="mono">.badge-warm</td><td class="default">#fff7ed</td><td class="default">#ea580c</td><td>Lead: Warm prospect</td></tr>
+    <tr><td class="mono">.badge-cold</td><td class="default">#f0f9ff</td><td class="default">#0284c7</td><td>Lead: Cold prospect</td></tr>
+    <tr><td class="mono">.badge-deal</td><td class="default">#f0fdf4</td><td class="default">#16a34a</td><td>Lead: Closed deal</td></tr>
+    <tr><td class="mono">.badge-lost</td><td class="default">#f9fafb</td><td class="default">#6b7280</td><td>Lead: Lost deal</td></tr>
+  </tbody></table></div>
+
+  <h2 id="states">States</h2>
+  <p>Badges are static display elements — they have no interactive states. They do not respond to hover, focus, or click. If interaction is needed, use a Button component instead.</p>
+
+  <h2 id="properties">Properties</h2>
+  <table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+    <tr><td><span class="ds-prop-name">variant</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Color theme.<div class="ds-prop-values">'success'|'warning'|'danger'|'info'|'purple'|'amber'|'neutral'|'hot'|'warm'|'cold'|'deal'|'lost'</div></td></tr>
+    <tr><td><span class="ds-prop-name">dot</span></td><td><span class="ds-prop-type">boolean</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">false</span></td><td class="ds-prop-desc">Adds colored dot via CSS ::before. Use for status badges.</td></tr>
+    <tr><td><span class="ds-prop-name">size</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">'default'</span></td><td class="ds-prop-desc"><div class="ds-prop-values">'sm' | 'default' | 'lg'</div></td></tr>
+    <tr><td><span class="ds-prop-name">children</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Label text. Plain text only. Max 3 words.</td></tr>
+  </tbody></table>
+
+  <h2 id="accessibility">Accessibility</h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody>
+    <tr><td>Screen reader</td><td>Badge text is read inline as part of its parent context. No additional ARIA needed for static badges.</td></tr>
+    <tr><td>Color alone</td><td>Never rely on color alone. Always include a text label. Dot indicators supplement but never replace the label.</td></tr>
+    <tr><td>Contrast</td><td>All badge color pairs meet WCAG AA minimum 4.5:1 contrast ratio.</td></tr>
+  </tbody></table></div>
+
+  <h2 id="composition">Composition</h2>
+  <div class="ds-composition-grid">
+    <div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Inline with text in table cells</div><div class="ds-composition-item">In card headers next to titles</div><div class="ds-composition-item">In nav items as count indicators</div></div></div>
+    <div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">With onClick or hover styles</div><div class="ds-composition-item">Full-saturation background colors</div><div class="ds-composition-item">Emoji or icons inside badge text</div></div></div>
+  </div>
+
+  <h2 id="best-practices">Best Practices</h2>
+  <div class="ds-bp-grid">
+    <div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><span class="badge badge-success badge-dot">Active</span><div class="ds-bp-reason">Soft bg, dot indicator, specific label. Paired token set.</div></div></div>
+    <div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><span class="badge" style="background:#0E9F6E;color:#fff">Active</span><div class="ds-bp-reason">Full-saturation background — looks like a button.</div></div></div>
+  </div>
+
+  <h2 id="content">Content Rules</h2>
+  <div class="ds-content-rules">
+    <div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good</div><div class="ds-content-example">Active</div><div class="ds-content-reason">1 word, clear status</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad</div><div class="ds-content-example">Currently Active User</div><div class="ds-content-reason">Too long — max 3 words</div></div></div>
+  </div>
+
+  <h2 id="ai-spec">AI Implementation Guide</h2>
+  <div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Badges are always <code>&lt;span&gt;</code> elements, always inline-flex. Base class is <code>.badge</code> + one variant class. The dot is added via <code>.badge-dot</code> CSS ::before — never a DOM element. Do NOT use emoji. Never make badges interactive. Always use the soft bg+text paired token system.</div>
+  </div>
+
+  <h2 id="related">Related Components</h2>
+  <div class="ds-related-grid">
+    <a href="button.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="8" width="18" height="8" rx="4" stroke-width="2"/></svg></div><div class="ds-related-card-name">Button</div><div class="ds-related-card-desc">When action is needed</div></a>
+    <a href="table.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div><div class="ds-related-card-name">Table</div><div class="ds-related-card-desc">Badges in status columns</div></a>
+  </div>
+
+  <h2 id="design-decisions">Design Decisions</h2>
+  <div class="ds-decision"><div class="ds-decision-q">Why soft backgrounds instead of full-saturation?</div><div class="ds-decision-a">Badges appear inline with text. Full-saturation backgrounds compete aggressively with primary actions and create visual noise in data-dense views like tables. Soft tinted backgrounds provide clear categorization without interrupting reading flow.</div></div>
+  <div class="ds-decision"><div class="ds-decision-q">Why is the dot a CSS ::before instead of a DOM element?</div><div class="ds-decision-a">A CSS pseudo-element is purely decorative — screen readers ignore it. A real DOM element would be read aloud unnecessarily. The text label alone conveys the status to assistive technologies.</div></div>
+
+  <h2 id="changelog">Changelog</h2>
+  <div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>13 variants across status, role, and lead temperature categories</li><li>Dot indicator via CSS ::before pseudo-element</li><li>3 sizes: sm, default, lg</li></ul></div></div></div><h2 id="behavior">Behavior</h2><p>Badges are purely presentational — no hover, focus, click, or animation states. Their value updates reactively when the underlying data changes. The UI re-renders with the new variant and label instantly. No entrance or exit animation is applied to badge changes. If a badge needs to be interactive (e.g. a removable tag), that is a separate component with button semantics.</p><div id="ds-prev-next"></div>
+</article>
+<aside class="ds-toc" id="ds-toc"></aside>
+</div>
+</div>
+<script>window.DS_ACTIVE_PAGE = 'badge';</script>
+<script src="../shared/ds-shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Motion — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.motion-demo-box{width:80px;height:80px;background:#6366F1;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s cubic-bezier(.4,0,.2,1);}
+.motion-demo-box:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(99,102,241,.4);}
+.fade-up-demo{animation:fadeUp .4s ease forwards;}
+.skeleton{background:linear-gradient(90deg,#F1F5F9 25%,#E2E8F0 50%,#F1F5F9 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px;}
+.pulse-dot{width:10px;height:10px;border-radius:50%;background:#0E9F6E;animation:pulseDot 2s ease-in-out infinite;display:inline-block;}
+.spinner{width:20px;height:20px;border:2px solid rgba(99,102,241,.2);border-top-color:#6366F1;border-radius:50%;animation:spin .7s linear infinite;}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">N</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Foundations</a><span>/</span><strong>Motion</strong></nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Foundation</span></div>
+</header>
+<div class="ds-main">
+<article class="ds-page">
+  <div class="ds-page-header">
+    <div class="ds-page-meta"><span class="ds-meta-badge stable">Stable</span></div>
+    <h1>Motion</h1>
+    <p class="ds-page-lead">Motion in Syhrezz is subtle and purposeful. Every transition serves a function — communicating state change, providing feedback, or guiding attention. Never add animation purely for decoration.</p>
+  </div>
+
+  <h2 id="transitions">Transition Tokens</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">--transition-fast</td><td class="default">all 0.15s ease</td><td>Row hover backgrounds, feed items, tooltip appearance</td></tr>
+        <tr><td class="mono">--transition-base</td><td class="default">all 0.2s ease</td><td>Buttons, badges, nav items (Dark), inputs border/shadow</td></tr>
+        <tr><td class="mono">--transition-smooth</td><td class="default">all 0.2s cubic-bezier(0.4,0,0.2,1)</td><td>Nav items (Accent), card hover, button hover lift, dropdown</td></tr>
+        <tr><td class="mono">--transition-sidebar</td><td class="default">all 0.35s cubic-bezier(0.4,0,0.2,1)</td><td>Sidebar collapse/expand width change</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="hover">Hover Behaviors</h2>
+  <div class="ds-preview">
+    <div style="display:flex;gap:20px;align-items:flex-end;flex-wrap:wrap">
+      <div>
+        <div class="ds-preview-label">Card hover (translateY -3px)</div>
+        <div class="motion-demo-box">Hover me</div>
+      </div>
+      <div>
+        <div class="ds-preview-label">Button hover (translateY -2px)</div>
+        <button style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s cubic-bezier(.4,0,.2,1);border:none;background:#6366F1;color:#fff;box-shadow:0 4px 14px rgba(99,102,241,.3)">Hover me</button>
+      </div>
+      <div>
+        <div class="ds-preview-label">Nav item (translateX 4px)</div>
+        <div style="background:#0F172A;border-radius:10px;padding:8px">
+          <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;color:#94A3B8;font-size:13px;cursor:pointer;transition:all .2s cubic-bezier(.4,0,.2,1);width:160px" onmouseover="this.style.transform='translateX(4px)';this.style.background='rgba(255,255,255,.08)';this.style.color='#fff'" onmouseout="this.style.transform='';this.style.background='transparent';this.style.color='#94A3B8'">
+            <svg style="width:16px;height:16px;flex-shrink:0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Dashboard
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="keyframes">Keyframe Animations</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Name</th><th>Keyframe</th><th>Duration</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">fadeIn</td><td class="default">opacity:0 + translateY(10px) → full</td><td class="default">0.4s ease</td><td>General content reveal on page load — <code>.fade-in</code></td></tr>
+        <tr><td class="mono">fadeUp</td><td class="default">opacity:0 + translateY(18px) → full</td><td class="default">0.4s ease</td><td>Dashboard KPI cards staggered entrance — <code>.fade-up</code></td></tr>
+        <tr><td class="mono">modalIn</td><td class="default">scale(0.95)+opacity:0 → scale(1)+opacity:1</td><td class="default">0.3s ease</td><td>Modal dialog open animation</td></tr>
+        <tr><td class="mono">shimmer</td><td class="default">bg-position sweep left→right</td><td class="default">1.5s infinite</td><td>Skeleton loading state</td></tr>
+        <tr><td class="mono">pulseDot</td><td class="default">opacity + scale oscillate</td><td class="default">2s ease infinite</td><td>Live Location indicator, real-time data dot</td></tr>
+        <tr><td class="mono">spin</td><td class="default">rotate 0→360deg</td><td class="default">0.7s linear infinite</td><td>Button loading spinner</td></tr>
+        <tr><td class="mono">toastIn</td><td class="default">opacity:0 + translateY(10px) → full</td><td class="default">0.3s ease</td><td>Toast notification entrance</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="demos">Live Examples</h2>
+  <div class="ds-preview">
+    <div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap">
+      <div style="text-align:center">
+        <div class="ds-preview-label">Fade Up (.fade-up)</div>
+        <div class="fade-up-demo" style="background:#EEF2FF;border-radius:10px;padding:16px 20px;font-size:13px;font-weight:600;color:#6366F1">Animated in</div>
+      </div>
+      <div style="text-align:center">
+        <div class="ds-preview-label">Skeleton shimmer</div>
+        <div style="display:flex;flex-direction:column;gap:8px;width:160px">
+          <div class="skeleton" style="height:12px;width:80%"></div>
+          <div class="skeleton" style="height:10px;width:60%"></div>
+          <div class="skeleton" style="height:10px;width:90%"></div>
+        </div>
+      </div>
+      <div style="text-align:center">
+        <div class="ds-preview-label">Pulse dot (live)</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#0F172A">
+          <span class="pulse-dot"></span> Live tracking
+        </div>
+      </div>
+      <div style="text-align:center">
+        <div class="ds-preview-label">Spinner (loading)</div>
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="stagger">Stagger Pattern</h2>
+  <p>Dashboard KPI cards animate in with staggered delays. Add <code>.fade-up</code> to each card, then <code>.fu-1</code> through <code>.fu-4</code> for the delay offsets.</p>
+  <div class="ds-code-block">
+    <button class="ds-copy-btn">Copy</button>
+    <pre><code><span class="cm">/* CSS */</span>
+<span class="cls">.fade-up</span>  { <span class="prop">animation</span>: fadeUp .4s ease forwards; <span class="prop">opacity</span>: <span class="num">0</span>; }
+<span class="cls">.fu-1</span>     { <span class="prop">animation-delay</span>: .05s; }
+<span class="cls">.fu-2</span>     { <span class="prop">animation-delay</span>: .10s; }
+<span class="cls">.fu-3</span>     { <span class="prop">animation-delay</span>: .15s; }
+<span class="cls">.fu-4</span>     { <span class="prop">animation-delay</span>: .20s; }
+
+<span class="cm">&lt;!-- HTML --&gt;</span>
+<span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"kpi-card kpi-blue fade-up fu-1"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"kpi-card kpi-green fade-up fu-2"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"kpi-card kpi-amber fade-up fu-3"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;div</span> <span class="prop">class</span>=<span class="str">"kpi-card kpi-red fade-up fu-4"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;</span></code></pre>
+  </div>
+
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Every interactive element must have a transition. Use <code>var(--transition-smooth)</code> for most UI elements. Use <code>var(--transition-fast)</code> for hover backgrounds only. Never use transitions longer than 0.35s — that is reserved for sidebar collapse only. Button hover always uses <code>transform:translateY(-2px)</code>. Card hover always uses <code>transform:translateY(-3px)</code>. KPI card hover always uses <code>transform:translateY(-4px)</code>. Ghost buttons do NOT lift on hover.</div>
+  </div>
+  <div id="ds-prev-next"></div>
+</article>
+<aside class="ds-toc" id="ds-toc"></aside>
+</div>
+</div>
+<script>window.DS_ACTIVE_PAGE = 'motion';</script>
+<script src="../shared/ds-shell.js"></script>
+</body>
+</html>

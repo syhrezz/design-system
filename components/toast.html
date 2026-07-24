@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Toast — Syhrezz Design System</title>
+<link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.toast-container{display:flex;flex-direction:column;gap:10px;max-width:360px;}
+.toast{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid #E2E8F0;border-radius:14px;padding:14px 16px;box-shadow:0 8px 24px rgba(0,0,0,.1);position:relative;}
+.toast-success{border-left:4px solid #0E9F6E;}
+.toast-error{border-left:4px solid #F05252;}
+.toast-warning{border-left:4px solid #E3A008;}
+.toast-info{border-left:4px solid #6366F1;}
+.toast-icon{width:20px;height:20px;flex-shrink:0;margin-top:1px;}
+.toast-body{flex:1;}
+.toast-title{font-size:13px;font-weight:700;color:#0F172A;}
+.toast-msg{font-size:12px;color:#64748B;margin-top:2px;line-height:1.4;}
+.toast-close{position:absolute;top:10px;right:10px;background:none;border:none;cursor:pointer;color:#94A3B8;font-size:16px;line-height:1;padding:2px;border-radius:4px;transition:all .15s;}
+.toast-close:hover{background:#F1F5F9;color:#0F172A;}
+@keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.toast-enter{animation:toastIn .3s ease forwards;}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-header">
+    <div class="ds-sidebar-logo">
+      <div class="ds-sidebar-logo-icon">N</div>
+      <div class="ds-sidebar-logo-text">
+        <div class="ds-sidebar-logo-name">Syhrezz</div>
+        <div class="ds-sidebar-logo-version">v1.0</div>
+      </div>
+    </div>
+    <div class="ds-search-wrap">
+      <div class="ds-search-box">
+        <svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/>
+        <span class="ds-search-kbd">&#8984;K</span>
+      </div>
+      <div id="ds-search-results"></div>
+    </div>
+  </div>
+  <nav class="ds-sidebar-nav" id="ds-nav-links"></nav>
+</aside>
+<header class="ds-topbar">
+  <nav class="ds-topbar-breadcrumb">
+    <a href="../index.html">Syhrezz</a><span>/</span>
+    <a href="#">Components</a><span>/</span>
+    <strong>Toast</strong>
+  </nav>
+  <div class="ds-topbar-right"><span class="ds-topbar-tag">Component</span></div>
+</header>
+<div class="ds-main">
+<article class="ds-page">
+  <div class="ds-page-header">
+    <div class="ds-page-meta">
+      <span class="ds-meta-badge stable">Stable</span>
+      <span class="ds-meta-badge type">Feedback</span>
+    </div>
+    <h1>Toast</h1>
+    <p class="ds-page-lead">Toasts are transient, non-blocking notifications that appear in the bottom-right corner of the screen. They auto-dismiss after 4 seconds and stack vertically up to 3 at a time.</p>
+  </div>
+
+  <h2 id="overview">Overview</h2>
+  <p>Toasts provide feedback for user-initiated actions. They should be brief, clear, and not require user interaction to dismiss (though a close button is always provided). Use toasts for system feedback — not for critical errors that require user action (use a modal for those).</p>
+
+  <div class="ds-callout ds-callout-info">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <div class="ds-callout-content"><strong>Max 3 toasts:</strong> When a 4th toast would appear, the oldest is removed first. This prevents the screen from being overwhelmed with notifications.</div>
+  </div>
+
+  <!-- PLAYGROUND -->
+
+  <h2 id="variants">Variants</h2>
+  <div class="ds-example">
+    <div class="ds-example-toolbar"><span class="ds-example-title">All Toast Types</span><button class="ds-show-source-btn">Show source</button></div>
+    <div class="ds-preview">
+      <div class="toast-container">
+        <div class="toast toast-success">
+          <svg class="toast-icon" fill="none" viewBox="0 0 24 24" stroke="#0E9F6E"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+          <div class="toast-body"><div class="toast-title">User Added</div><div class="toast-msg">Budi Santoso has been successfully added.</div></div>
+          <button class="toast-close">&#x2715;</button>
+        </div>
+        <div class="toast toast-error">
+          <svg class="toast-icon" fill="none" viewBox="0 0 24 24" stroke="#F05252"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <div class="toast-body"><div class="toast-title">Error</div><div class="toast-msg">Failed to save changes. Please try again.</div></div>
+          <button class="toast-close">&#x2715;</button>
+        </div>
+        <div class="toast toast-warning">
+          <svg class="toast-icon" fill="none" viewBox="0 0 24 24" stroke="#E3A008"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+          <div class="toast-body"><div class="toast-title">Warning</div><div class="toast-msg">Location data is 15 minutes old.</div></div>
+          <button class="toast-close">&#x2715;</button>
+        </div>
+        <div class="toast toast-info">
+          <svg class="toast-icon" fill="none" viewBox="0 0 24 24" stroke="#6366F1"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <div class="toast-body"><div class="toast-title">Info</div><div class="toast-msg">Showing data for the last 6 months.</div></div>
+          <button class="toast-close">&#x2715;</button>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code-block" style="display:none">
+      <button class="ds-copy-btn">Copy</button>
+      <pre><code><span class="cm">/* Toast container — position fixed, bottom-right */</span>
+<span class="kw">&lt;div</span> <span class="prop">id</span>=<span class="str">"toastContainer"</span>
+  <span class="prop">style</span>=<span class="str">"position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:10px"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;/div&gt;</span>
+
+<span class="cm">/* JS function to show toast */</span>
+<span class="fn">function</span> <span class="fn">showToast</span>(type, title, msg) {
+  <span class="kw">const</span> icons = {
+    success: <span class="str">'&lt;svg...checkmark...&gt;'</span>,
+    error:   <span class="str">'&lt;svg...x-circle...&gt;'</span>,
+    warning: <span class="str">'&lt;svg...triangle...&gt;'</span>,
+    info:    <span class="str">'&lt;svg...info-circle...&gt;'</span>
+  };
+  <span class="kw">const</span> id = <span class="str">'toast-'</span> + Date.now();
+  <span class="kw">const</span> el = document.createElement(<span class="str">'div'</span>);
+  el.className = <span class="str">`toast toast-${type} toast-enter`</span>;
+  el.id = id;
+  el.innerHTML = <span class="str">`${icons[type]}
+    &lt;div class="toast-body"&gt;
+      &lt;div class="toast-title"&gt;${title}&lt;/div&gt;
+      &lt;div class="toast-msg"&gt;${msg}&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;button class="toast-close" onclick="this.closest('.toast').remove()"&gt;&amp;#x2715;&lt;/button&gt;`</span>;
+  document.getElementById(<span class="str">'toastContainer'</span>).appendChild(el);
+  setTimeout(() => el.remove(), <span class="num">4000</span>);
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- TOKEN TABLE -->
+  <h2 id="tokens">Token Reference</h2>
+  <div class="ds-table-wrap">
+    <table class="ds-table">
+      <thead><tr><th>Type</th><th>Left Border Color</th><th>Icon Color</th><th>Use For</th></tr></thead>
+      <tbody>
+        <tr><td>success</td><td class="default">#0E9F6E</td><td class="default">#0E9F6E</td><td>Saved, created, approved, completed</td></tr>
+        <tr><td>error</td><td class="default">#F05252</td><td class="default">#F05252</td><td>Failed operations, system errors</td></tr>
+        <tr><td>warning</td><td class="default">#E3A008</td><td class="default">#E3A008</td><td>Stale data, non-critical issues</td></tr>
+        <tr><td>info</td><td class="default">#6366F1</td><td class="default">#6366F1</td><td>Informational, context, announcements</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AI SPEC -->
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info">
+    <svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content">
+      <strong>For AI coding assistants:</strong> The toast container is <code>position:fixed; bottom:24px; right:24px; z-index:9999</code>. Toasts are appended to the container via JS — never hardcoded in HTML. The left border accent is set via border-left, NOT border-left-color on the base class. Icons are always inline SVG matching the type color. Auto-dismiss uses <code>setTimeout(4000)</code>. Max 3: when count exceeds 3, remove <code>container.firstChild</code> first.
+    </div>
+  </div>
+
+  <h2 id="when-to-use">When to Use</h2>
+<div class="ds-when-grid">
+  <div class="ds-when-card ds-when-use"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Use Toast when</div><ul class="ds-when-list"><li>Confirming a user action completed (saved, deleted, sent)</li><li>Non-blocking system notifications</li><li>Brief error feedback after async operations</li><li>Progressive disclosure of background process results</li></ul></div>
+  <div class="ds-when-card ds-when-not"><div class="ds-when-title"><svg style="width:14px;height:14px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't use Toast when</div><ul class="ds-when-list"><li>Critical errors requiring user action — use Alert banner or Modal</li><li>Persistent information — toasts auto-dismiss</li><li>Displaying more than 2 sentences of content</li><li>Replacing form validation messages</li></ul></div>
+</div>
+<h2 id="properties">Properties</h2>
+<table class="ds-props-table"><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr></thead><tbody>
+  <tr><td><span class="ds-prop-name">type</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Semantic type. Controls left border color and icon.<div class="ds-prop-values">'success' | 'error' | 'warning' | 'info'</div></td></tr>
+  <tr><td><span class="ds-prop-name">title</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-required">required</span></td><td><span class="ds-prop-default">—</span></td><td class="ds-prop-desc">Bold heading. 13px fw-700. Keep to 2–4 words.</td></tr>
+  <tr><td><span class="ds-prop-name">message</span></td><td><span class="ds-prop-type">string</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">undefined</span></td><td class="ds-prop-desc">Supporting detail. 12px #64748B. Max 1 sentence.</td></tr>
+  <tr><td><span class="ds-prop-name">duration</span></td><td><span class="ds-prop-type">number</span></td><td><span class="ds-prop-optional">optional</span></td><td><span class="ds-prop-default">4000</span></td><td class="ds-prop-desc">Auto-dismiss delay in ms. Set to 0 to disable auto-dismiss.</td></tr>
+</tbody></table>
+<h2 id="behavior">Behavior</h2>
+<table class="ds-behavior-table"><thead><tr><th>Trigger</th><th>Behavior</th></tr></thead><tbody>
+  <tr><td><span class="ds-behavior-trigger">Show</span></td><td>Append to #toastContainer. Animate in (fadeUp 0.3s). Increment counter.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Stack limit (3)</span></td><td>When count reaches 3, remove oldest toast before adding new one.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Auto-dismiss</span></td><td>setTimeout(4000ms) then el.remove(). Counter decrements.</td></tr>
+  <tr><td><span class="ds-behavior-trigger">Close button</span></td><td>× button removes toast immediately. Counter decrements.</td></tr>
+</tbody></table>
+<h2 id="design-decisions">Design Decisions</h2>
+<div class="ds-decision"><div class="ds-decision-q">Why bottom-right positioning?</div><div class="ds-decision-a">Bottom-right is the established convention for toast notifications (popularized by macOS system notifications, Windows Action Center). Users have learned to expect non-critical feedback there. It avoids interrupting the primary content area (center/top) and stays out of the way of navigation (left sidebar, top bar).</div></div>
+<div class="ds-decision"><div class="ds-decision-q">Why a maximum stack of 3?</div><div class="ds-decision-a">More than 3 toasts creates visual noise that users will start ignoring or dismissing hastily. Capping at 3 forces the system to prioritize — the oldest, least relevant toast is removed when a new one arrives.</div></div>
+<h2 id="changelog">Changelog</h2>
+<div class="ds-changelog"><div class="ds-changelog-entry"><div class="ds-changelog-header"><span class="ds-changelog-version">v1.0.0</span><span class="ds-changelog-date">July 2026</span><span class="ds-changelog-badge added">Added</span></div><div class="ds-changelog-body"><ul><li>4 semantic types with matching left border and icon colors</li><li>Stack limit of 3 with FIFO removal</li><li>4000ms auto-dismiss with manual close button</li><li>fadeUp entrance animation</li></ul></div></div></div><h2 id="states">States</h2><div class="ds-states-grid"><div class="ds-state-cell"><div class="ds-state-cell-preview"><div style="background:#fff;border:1px solid #E2E8F0;border-left:4px solid #0E9F6E;border-radius:10px;padding:10px 12px;font-size:11px;max-width:200px"><strong style="color:#0F172A">Saved</strong><div style="color:#64748B;margin-top:2px">Changes saved successfully.</div></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Success</div><div class="ds-state-cell-desc">Left border #0E9F6E</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview"><div style="background:#fff;border:1px solid #E2E8F0;border-left:4px solid #F05252;border-radius:10px;padding:10px 12px;font-size:11px;max-width:200px"><strong style="color:#0F172A">Error</strong><div style="color:#64748B;margin-top:2px">Action failed.</div></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Error</div><div class="ds-state-cell-desc">Left border #F05252</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview"><div style="background:#fff;border:1px solid #E2E8F0;border-left:4px solid #E3A008;border-radius:10px;padding:10px 12px;font-size:11px;max-width:200px"><strong style="color:#0F172A">Warning</strong><div style="color:#64748B;margin-top:2px">Check your settings.</div></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Warning</div><div class="ds-state-cell-desc">Left border #E3A008</div></div></div><div class="ds-state-cell"><div class="ds-state-cell-preview"><div style="background:#fff;border:1px solid #E2E8F0;border-left:4px solid #6366F1;border-radius:10px;padding:10px 12px;font-size:11px;max-width:200px"><strong style="color:#0F172A">Info</strong><div style="color:#64748B;margin-top:2px">System updated.</div></div></div><div class="ds-state-cell-label"><div class="ds-state-cell-name">Info</div><div class="ds-state-cell-desc">Left border #6366F1</div></div></div></div><h2 id="accessibility">Accessibility</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Requirement</th><th>Implementation</th></tr></thead><tbody><tr><td>aria-live</td><td>Toast container: aria-live="polite" for success/info/warning. aria-live="assertive" for errors.</td></tr><tr><td>aria-atomic</td><td>Add aria-atomic="true" to toast container.</td></tr><tr><td>Focus</td><td>Toasts do not steal focus. They are purely informational announcements.</td></tr></tbody></table></div><h2 id="composition">Composition</h2><div class="ds-composition-grid"><div class="ds-composition-card"><div class="ds-composition-header allowed"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span class="ds-composition-header-title">Allowed</span></div><div class="ds-composition-body"><div class="ds-composition-item">Bottom-right fixed container</div><div class="ds-composition-item">Stacked max 3 at once</div><div class="ds-composition-item">Auto-dismiss after 4000ms</div></div></div><div class="ds-composition-card"><div class="ds-composition-header forbidden"><svg class="ds-composition-header-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg><span class="ds-composition-header-title">Forbidden</span></div><div class="ds-composition-body"><div class="ds-composition-item">Toasts as replacement for form validation</div><div class="ds-composition-item">More than 3 visible at once</div><div class="ds-composition-item">Toasts requiring user interaction before dismissal</div></div></div></div><h2 id="best-practices">Best Practices</h2><div class="ds-bp-grid"><div class="ds-bp-card"><div class="ds-bp-header good"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Do</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Show success toast after every completed async action to confirm the operation succeeded.</div><div class="ds-bp-reason">Users need feedback that their action was processed.</div></div></div><div class="ds-bp-card"><div class="ds-bp-header bad"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>Don't</div><div class="ds-bp-body"><div style="font-size:12px;color:#64748B">Use error toast as the only error feedback for form validation.</div><div class="ds-bp-reason">Form errors belong inline next to the fields, not as toasts.</div></div></div></div><h2 id="related">Related Components</h2><div class="ds-related-grid"><a href="alert.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div><div class="ds-related-card-name">Alert</div><div class="ds-related-card-desc">Persistent messages</div></a><a href="modal.html" class="ds-related-card"><div class="ds-related-card-icon"><svg style="width:16px;height:16px;color:#6366F1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm0 8a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zm12 0a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg></div><div class="ds-related-card-name">Modal</div><div class="ds-related-card-desc">Blocking errors</div></a></div><h2 id="anatomy">Anatomy</h2><div class="ds-anatomy-parts"><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Container</div><div class="ds-anatomy-part-desc">div.toast.toast-{type}. bg:#fff, border:1px solid #E2E8F0, border-left:4px solid {semantic-color}, border-radius:14px, box-shadow:shadow-toast.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Icon</div><div class="ds-anatomy-part-desc">Inline SVG, 18px. Color matches the semantic type color (#0E9F6E / #F05252 / #E3A008 / #6366F1). flex-shrink:0.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Content</div><div class="ds-anatomy-part-desc">div.toast-body. Title (13px fw-700) + message (12px #64748B). Title required, message optional.</div></div><div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">4</div><div class="ds-anatomy-part-name">Close Button</div><div class="ds-anatomy-part-desc">button.toast-close. × character, position:absolute top-right. Removes toast immediately on click.</div></div></div><h2 id="content">Content Rules</h2><div class="ds-content-rules"><div class="ds-content-row"><div class="ds-content-good"><div class="ds-content-label">Good toast title</div><div class="ds-content-example">User Added</div><div class="ds-content-reason">Past tense, names what happened, 2 words max</div></div><div class="ds-content-bad"><div class="ds-content-label">Bad toast title</div><div class="ds-content-example">The operation was completed successfully</div><div class="ds-content-reason">Too verbose — toast titles should be 2-4 words max</div></div></div></div><div id="ds-prev-next"></div>
+</article>
+<aside class="ds-toc" id="ds-toc"></aside>
+</div>
+</div>
+
+<!-- Live toast container -->
+<div id="liveToastContainer" style="position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:10px"></div>
+
+<script>window.DS_ACTIVE_PAGE = 'toast';</script>
+<script src="../shared/ds-shell.js"></script>
+<script>
+let tc = 0;
+const ICONS = {
+  success: '<svg style="width:18px;height:18px;flex-shrink:0;margin-top:1px" fill="none" viewBox="0 0 24 24" stroke="#0E9F6E"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>',
+  error:   '<svg style="width:18px;height:18px;flex-shrink:0;margin-top:1px" fill="none" viewBox="0 0 24 24" stroke="#F05252"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+  warning: '<svg style="width:18px;height:18px;flex-shrink:0;margin-top:1px" fill="none" viewBox="0 0 24 24" stroke="#E3A008"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>',
+  info:    '<svg style="width:18px;height:18px;flex-shrink:0;margin-top:1px" fill="none" viewBox="0 0 24 24" stroke="#6366F1"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+};
+function showLiveToast(type, title, msg) {
+  const container = document.getElementById('liveToastContainer');
+  if (tc >= 3) { const f = container.firstChild; if(f){f.remove();tc--;} }
+  const id = 'lt-' + Date.now();
+  const el = document.createElement('div');
+  el.className = 'toast toast-' + type + ' toast-enter';
+  el.id = id;
+  el.innerHTML = ICONS[type] + '<div class="toast-body"><div class="toast-title">' + title + '</div><div class="toast-msg">' + msg + '</div></div><button class="toast-close" onclick="document.getElementById(\'' + id + '\').remove();tc=Math.max(0,tc-1)">&#x2715;</button>';
+  container.appendChild(el); tc++;
+  setTimeout(() => { if(document.getElementById(id)){document.getElementById(id).remove();tc=Math.max(0,tc-1);} }, 4000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Error States — Syhrezz Design System</title><link rel="stylesheet" href="../shared/ds-shell.css"/>
+<style>
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}
+.btn-primary{background:#6366F1;color:#fff;}.btn-outline{background:#fff;color:#0F172A;border:1px solid #E2E8F0;}
+.btn-danger{background:#F05252;color:#fff;}.btn-sm{padding:6px 12px;font-size:12px;border-radius:8px;}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:700;}
+.badge-success{background:#DEF7EC;color:#03543F;}.badge-warning{background:#FEF3C7;color:#92400E;}.badge-danger{background:#FDE2E2;color:#9B1C1C;}.badge-info{background:#E1EFFE;color:#1E429F;}
+</style>
+</head><body><div class="ds-shell"><aside class="ds-sidebar"><div class="ds-sidebar-header"><div class="ds-sidebar-logo"><div class="ds-sidebar-logo-icon">N</div><div class="ds-sidebar-logo-text"><div class="ds-sidebar-logo-name">Syhrezz</div><div class="ds-sidebar-logo-version">v1.0</div></div></div><div class="ds-search-wrap"><div class="ds-search-box"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><input id="ds-search-input" type="text" placeholder="Search..." autocomplete="off"/><span class="ds-search-kbd">&#8984;K</span></div><div id="ds-search-results"></div></div></div><nav class="ds-sidebar-nav" id="ds-nav-links"></nav></aside>
+<header class="ds-topbar"><nav class="ds-topbar-breadcrumb"><a href="../index.html">Syhrezz</a><span>/</span><a href="#">Patterns</a><span>/</span><strong>Error States</strong></nav><div class="ds-topbar-right"><span class="ds-topbar-tag">Pattern</span></div></header>
+<div class="ds-main"><article class="ds-page ds-page-wide">
+  <div class="ds-page-header"><div class="ds-page-meta"><span class="ds-meta-badge stable">Stable</span></div>
+    <h1>Error States</h1>
+    <p class="ds-page-lead">Error states communicate system failures, validation errors, and access issues. Syhrezz uses four error patterns: field validation, inline alert banners, error empty states, and full-page error screens.</p>
+  </div>
+  <h2 id="field-errors">Field Validation Errors</h2>
+  <p>Validation errors appear below the field immediately. The field gets <code>.input-error</code> (red border + red focus ring). A <code>.form-error-msg</code> div shows below with an icon and message.</p>
+  <div class="ds-preview" style="max-width:360px">
+    <div style="margin-bottom:14px">
+      <label style="display:block;font-size:12px;font-weight:700;color:#64748B;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">Email Address</label>
+      <input style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid #F05252;font-size:13px;font-family:inherit;outline:none;box-shadow:0 0 0 3px rgba(240,82,82,.1)" type="email" value="invalid@"/>
+      <div style="font-size:11px;color:#F05252;margin-top:4px;font-weight:600;display:flex;align-items:center;gap:4px">
+        <svg style="width:12px;height:12px;flex-shrink:0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        Please enter a valid email address
+      </div>
+    </div>
+  </div>
+  <h2 id="alert-errors">Alert Banner Errors</h2>
+  <p>For non-field errors like server failures, permission issues, or multi-field validation, use an <code>.alert.alert-danger</code> banner at the top of the form or page section.</p>
+  <div class="ds-preview">
+    <div style="background:#FDE2E2;border:1px solid #FCA5A5;border-radius:12px;padding:14px 18px;display:flex;align-items:flex-start;gap:12px">
+      <svg style="width:18px;height:18px;flex-shrink:0;color:#F05252;margin-top:1px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <div style="flex:1;font-size:13px;color:#9B1C1C;line-height:1.5"><strong>Failed to save changes.</strong> The server returned an error. Please check your connection and try again.</div>
+      <button class="btn btn-sm" style="background:#FDE2E2;color:#9B1C1C;border:1px solid #FCA5A5">Retry</button>
+    </div>
+  </div>
+  <h2 id="error-empty">Error Empty State</h2>
+  <p>When a section fails to load data, render an error empty state instead of the skeleton or content.</p>
+  <div class="ds-preview">
+    <div style="text-align:center;padding:40px 20px">
+      <div style="width:64px;height:64px;background:#FDE2E2;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+        <svg style="width:28px;height:28px;color:#F05252" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+      </div>
+      <div style="font-size:16px;font-weight:800;color:#0F172A;margin-bottom:6px">Failed to load data</div>
+      <div style="font-size:13px;color:#64748B;max-width:280px;margin:0 auto 20px;line-height:1.6">Something went wrong while loading this section. This is usually temporary.</div>
+      <button class="btn btn-outline btn-sm">Retry</button>
+    </div>
+  </div>
+  <h2 id="page-errors">Full-Page Error Screens</h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Error</th><th>Code</th><th>Icon / Style</th><th>CTA</th></tr></thead><tbody>
+    <tr><td>Not Found</td><td>404</td><td>Gradient text "404", --r-4xl rounded box</td><td>"Back to Dashboard" .btn-primary</td></tr>
+    <tr><td>Access Denied</td><td>403</td><td>SVG ban icon (56px, #F05252), bg:#FFF8F0</td><td>"Go Back" .btn-outline</td></tr>
+    <tr><td>Server Error</td><td>500</td><td>Warning icon, neutral bg</td><td>"Retry" + "Contact Support"</td></tr>
+  </tbody></table></div>
+  <h2 id="ai-spec">AI Implementation Notes</h2>
+  <div class="ds-callout ds-callout-info"><svg class="ds-callout-icon" fill="none" viewBox="0 0 24 24" stroke="#1E429F"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    <div class="ds-callout-content"><strong>For AI coding assistants:</strong> Field errors: add <code>.input-error</code> to input + render <code>.form-error-msg</code> with icon below it. Section load errors: replace skeleton/content with error empty state (red icon bg #FDE2E2, stroke-width:1.5). Never show raw error messages to users — always provide a human-readable message and a Retry action. Error empty state icon background is <code>#FDE2E2</code> with icon stroke <code>#F05252</code> at stroke-width:1.5.</div>
+  </div>
+<div id="ds-prev-next"></div>
+</article><aside class="ds-toc" id="ds-toc"></aside></div></div>
+<script>window.DS_ACTIVE_PAGE = 'p-error';</script>
+<script src="../shared/ds-shell.js"></script></body></html>
