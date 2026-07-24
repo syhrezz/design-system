@@ -583,14 +583,14 @@ img { max-width: 100%; }
     height: 32px;
     border-radius: 8px;
     background: none;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid var(--border);
     cursor: pointer;
-    color: var(--text-primary);
+    color: var(--text-secondary);
     flex-shrink: 0;
     margin-right: 8px;
     transition: var(--transition-base);
   }
-  .ds-hamburger:hover { background: var(--surface); }
+  .ds-hamburger:hover { background: var(--surface); color: var(--text-primary); }
 
   /* Page padding */
   .ds-page { padding: 20px 16px 80px; max-width: 100%; }
