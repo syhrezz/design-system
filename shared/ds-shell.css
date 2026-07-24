@@ -529,15 +529,106 @@ img { max-width: 100%; }
 .ds-fade-in { animation: fadeIn 0.3s ease forwards; }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 1200px) {
+
+/* Large laptop (1024–1280px) — hide TOC, tighten page padding */
+@media (max-width: 1280px) {
   .ds-toc { display: none; }
+  .ds-page { padding: 28px 28px 60px; }
 }
+
+/* Small laptop / large tablet (768–1024px) — narrow sidebar, reduce padding */
+@media (max-width: 1024px) {
+  .ds-sidebar { width: 220px; }
+  .ds-main { margin-left: 220px; }
+  .ds-topbar { left: 220px; }
+  .ds-page { padding: 24px 24px 60px; max-width: 100%; }
+  .ds-page h1 { font-size: 22px; }
+  .ds-do-dont { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ds-when-grid { grid-template-columns: 1fr 1fr; }
+  .ds-states-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+}
+
+/* Tablet / mobile (≤768px) — hide sidebar, show hamburger */
 @media (max-width: 768px) {
-  .ds-sidebar { transform: translateX(-100%); transition: var(--transition-sidebar); }
+  /* Sidebar becomes a drawer */
+  .ds-sidebar {
+    width: 280px;
+    transform: translateX(-100%);
+    transition: var(--transition-sidebar);
+    z-index: var(--z-sidebar);
+  }
   .ds-sidebar.open { transform: translateX(0); }
+
+  /* Overlay when sidebar is open */
+  .ds-sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: calc(var(--z-sidebar) - 1);
+    backdrop-filter: blur(2px);
+  }
+  .ds-sidebar-overlay.open { display: block; }
+
+  /* Main takes full width */
   .ds-main { margin-left: 0; }
-  .ds-topbar { left: 0; }
-  .ds-page { padding: 20px 16px 60px; }
+  .ds-topbar { left: 0; padding: 0 16px; }
+
+  /* Hamburger button */
+  .ds-hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    cursor: pointer;
+    color: var(--text-primary);
+    flex-shrink: 0;
+    margin-right: 8px;
+    transition: var(--transition-base);
+  }
+  .ds-hamburger:hover { background: var(--surface); }
+
+  /* Page padding */
+  .ds-page { padding: 20px 16px 80px; max-width: 100%; }
+  .ds-page h1 { font-size: 20px; letter-spacing: -0.5px; }
+  .ds-page h2 { font-size: 14px; }
+  .ds-page-lead { font-size: 13px; }
+
+  /* Stack two-column grids */
+  .ds-do-dont { grid-template-columns: 1fr; }
+  .ds-when-grid { grid-template-columns: 1fr; }
+  .ds-bp-grid { grid-template-columns: 1fr; }
+  .ds-states-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+
+  /* Table scroll */
+  .ds-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Code blocks */
+  .ds-code-block pre { font-size: 11px; padding: 14px 16px; }
+
+  /* TOC hidden */
+  .ds-toc { display: none; }
+
+  /* Example toolbar */
+  .ds-example-toolbar { flex-wrap: wrap; gap: 6px; }
+
+  /* Prev/next */
+  .ds-prev-next { flex-direction: column; gap: 10px; }
+  .ds-prev-next-card { width: 100%; }
+}
+
+/* Small mobile (≤480px) */
+@media (max-width: 480px) {
+  .ds-topbar-breadcrumb { font-size: 11px; }
+  .ds-topbar-breadcrumb a { display: none; }
+  .ds-topbar-breadcrumb span { display: none; }
+  .ds-page { padding: 16px 14px 80px; }
+  .ds-page h1 { font-size: 18px; }
+  .ds-status-bar { gap: 6px; }
 }
 
 /* ============================================================

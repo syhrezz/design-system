@@ -391,6 +391,53 @@ function initCodeTabs() {
   });
 }
 
+// ── MOBILE SIDEBAR ──────────────────────────────────────────────
+function initMobileSidebar() {
+  const sidebar = document.querySelector('.ds-sidebar');
+  const topbar = document.querySelector('.ds-topbar');
+  if (!sidebar || !topbar) return;
+
+  // Create overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'ds-sidebar-overlay';
+  document.body.appendChild(overlay);
+
+  // Create hamburger button
+  const hamburger = document.createElement('button');
+  hamburger.className = 'ds-hamburger';
+  hamburger.setAttribute('aria-label', 'Toggle navigation');
+  hamburger.innerHTML = '<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>';
+  topbar.insertBefore(hamburger, topbar.firstChild);
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+  overlay.addEventListener('click', closeSidebar);
+
+  // Close on nav link click (mobile UX)
+  sidebar.querySelectorAll('.ds-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768) closeSidebar();
+    });
+  });
+
+  // Close on resize back to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) closeSidebar();
+  });
+}
+
 // ── SHOW/HIDE SOURCE ────────────────────────────────────────────
 function initShowSource() {
   document.querySelectorAll('.ds-show-source-btn').forEach(btn => {
@@ -416,4 +463,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initTOC();
   initCodeTabs();
   initShowSource();
+  initMobileSidebar();
 });
