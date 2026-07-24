@@ -1,0 +1,159 @@
+﻿/*
+ * @syhrezz/ui — tokens.css
+ * Design tokens: colors, typography, spacing, radius, shadows, motion, z-index.
+ * Import this in every project that uses the Syhrezz Design System.
+ *
+ * Usage:
+ *   import '@syhrezz/ui/tokens.css'
+ */
+
+/*
+ * Syhrezz Design System — Design Tokens
+ * Single source of truth for all design values.
+ * DO NOT modify visual values — these are the canonical design language.
+ * All documentation pages import this file.
+ */
+
+:root {
+  /* ── BRAND ──────────────────────────────────── */
+  --primary:            #3B5BDB;
+  --primary-light:      #EEF2FF;
+  --primary-dark:       #2F4AC7;
+  --accent-director:    #6366F1;
+  --accent-admin:       #0F172A;
+  --accent-supervisor:  #3B5BDB;
+  --accent-sales:       #2563EB;
+
+  /* ── SEMANTIC ────────────────────────────────── */
+  --success:        #0E9F6E;
+  --success-bg:     #DEF7EC;
+  --success-text:   #03543F;
+  --warning:        #E3A008;
+  --warning-bg:     #FEF3C7;
+  --warning-text:   #92400E;
+  --danger:         #F05252;
+  --danger-bg:      #FDE2E2;
+  --danger-text:    #9B1C1C;
+  --info:           #3B5BDB;
+  --info-bg:        #E1EFFE;
+  --info-text:      #1E429F;
+  --purple-bg:      #F5F3FF;
+  --purple-text:    #5521B5;
+
+  /* ── LEAD TEMPERATURE ────────────────────────── */
+  --hot-bg:    #fef2f2; --hot-text:   #dc2626;
+  --warm-bg:   #fff7ed; --warm-text:  #ea580c;
+  --cold-bg:   #f0f9ff; --cold-text:  #0284c7;
+  --deal-bg:   #f0fdf4; --deal-text:  #16a34a;
+  --lost-bg:   #f9fafb; --lost-text:  #6b7280;
+
+  /* ── SURFACE ─────────────────────────────────── */
+  --surface:       #F8FAFC;
+  --surface-dir:   #F0F4FF;
+  --surface-sales: #F0F4F8;
+  --card:          #FFFFFF;
+  --border:        #E2E8F0;
+  --border-subtle: #F1F5F9;
+
+  /* ── TEXT ────────────────────────────────────── */
+  --text-primary:   #0F172A;
+  --text-secondary: #64748B;
+  --text-muted:     #94A3B8;
+
+  /* ── SIDEBAR ─────────────────────────────────── */
+  --sidebar-bg:          #0F172A;
+  --sidebar-bg-director: #0C0F1A;
+  --sidebar-bg-sales:    #1e3a8a;
+  --sidebar-text:        #94A3B8;
+  --sidebar-hover:       rgba(255,255,255,0.08);
+  --sidebar-active-bg:   linear-gradient(135deg,rgba(99,102,241,0.25),rgba(139,92,246,0.15));
+  --sidebar-active-border: rgba(99,102,241,0.4);
+
+  /* ── GLASS ───────────────────────────────────── */
+  --glass-bg:     rgba(255,255,255,0.8);
+  --glass-border: rgba(255,255,255,0.3);
+
+  /* ── TYPOGRAPHY ──────────────────────────────── */
+  --font-primary: 'Plus Jakarta Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+  --font-sales:   'Poppins', sans-serif;
+
+  /* Font size scale */
+  --text-xs:    10px;
+  --text-sm:    11px;
+  --text-base:  12px;
+  --text-md:    13px;
+  --text-lg:    14px;
+  --text-xl:    15px;
+  --text-2xl:   17px;
+  --text-3xl:   18px;
+  --text-4xl:   24px;
+  --text-5xl:   28px;
+
+  /* Font weights */
+  --fw-regular:   400;
+  --fw-medium:    500;
+  --fw-semibold:  600;
+  --fw-bold:      700;
+  --fw-extrabold: 800;
+
+  /* ── SPACING ─────────────────────────────────── */
+  --sp-1:  2px;  --sp-2:  4px;  --sp-3:  6px;
+  --sp-4:  8px;  --sp-5:  10px; --sp-6:  12px;
+  --sp-7:  14px; --sp-8:  16px; --sp-9:  18px;
+  --sp-10: 20px; --sp-12: 24px; --sp-14: 28px;
+  --sp-16: 32px; --sp-20: 40px; --sp-24: 48px;
+
+  /* ── BORDER RADIUS ───────────────────────────── */
+  --r-xs:   6px;
+  --r-sm:   8px;
+  --r-md:   10px;
+  --r-lg:   12px;
+  --r-xl:   14px;
+  --r-2xl:  16px;
+  --r-3xl:  18px;
+  --r-4xl:  20px;
+  --r-full: 999px;
+
+  /* ── SHADOWS ─────────────────────────────────── */
+  --shadow-xs:          0 1px 3px rgba(0,0,0,0.06);
+  --shadow-sm:          0 4px 6px rgba(0,0,0,0.02);
+  --shadow-md:          0 4px 16px rgba(37,99,235,0.06);
+  --shadow-lg:          0 12px 30px rgba(0,0,0,0.06);
+  --shadow-xl:          0 12px 40px rgba(67,56,202,0.35);
+  --shadow-sidebar:     10px 0 30px rgba(0,0,0,0.1);
+  --shadow-card-hover:  0 12px 30px rgba(0,0,0,0.06);
+  --shadow-btn-primary: 0 4px 14px rgba(99,102,241,0.3);
+  --shadow-btn-hover:   0 6px 20px rgba(99,102,241,0.4);
+  --shadow-logo:        0 8px 16px rgba(99,102,241,0.3);
+  --shadow-modal:       0 20px 60px rgba(0,0,0,0.2);
+  --shadow-toast:       0 8px 24px rgba(0,0,0,0.1);
+
+  /* ── MOTION ──────────────────────────────────── */
+  --transition-fast:    all 0.15s ease;
+  --transition-base:    all 0.2s ease;
+  --transition-smooth:  all 0.2s cubic-bezier(0.4,0,0.2,1);
+  --transition-sidebar: all 0.35s cubic-bezier(0.4,0,0.2,1);
+
+  /* ── LAYOUT ──────────────────────────────────── */
+  --sidebar-width:          268px;
+  --sidebar-width-director: 280px;
+  --sidebar-width-spv:      260px;
+  --sidebar-collapsed:      68px;
+  --topbar-height:          56px;
+  --content-max-width:      1400px;
+
+  /* ── Z-INDEX ─────────────────────────────────── */
+  --z-sidebar:  1000;
+  --z-topbar:   100;
+  --z-modal:    200;
+  --z-toast:    9999;
+  --z-dropdown: 300;
+  --z-tooltip:  400;
+
+  /* ── BREAKPOINTS (reference only — use in @media) ── */
+  /* mobile:  < 768px  */
+  /* tablet:  768–1024px */
+  /* desktop: > 1024px   */
+}
+

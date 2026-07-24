@@ -1,0 +1,14 @@
+﻿/*
+ * @syhrezz/ui — index.css
+ * Convenience file — imports all three files in the correct order.
+ * Use this if you want everything at once.
+ *
+ * Usage:
+ *   import '@syhrezz/ui'
+ *   // or
+ *   import '@syhrezz/ui/index.css'
+ */
+
+@import './tokens.css';
+@import './components.css';
+@import './shell.css';

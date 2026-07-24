@@ -1,0 +1,28 @@
+﻿{
+  "name": "@syhrezz/ui",
+  "version": "1.0.0",
+  "description": "Syhrezz Design System — CSS utility classes, design tokens, and app shell layout.",
+  "keywords": ["design-system", "css", "ui", "components", "tokens"],
+  "author": "Syhrezz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/syhrezz/design-system.git"
+  },
+  "homepage": "https://design-system-five-kappa.vercel.app",
+  "main": "index.css",
+  "style": "index.css",
+  "exports": {
+    ".": "./index.css",
+    "./tokens.css": "./tokens.css",
+    "./components.css": "./components.css",
+    "./shell.css": "./shell.css"
+  },
+  "files": [
+    "tokens.css",
+    "components.css",
+    "shell.css",
+    "index.css",
+    "README.md"
+  ]
+}

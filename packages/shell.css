@@ -1,0 +1,60 @@
+﻿/*
+ * @syhrezz/ui — shell.css
+ * App shell layout: sidebar, topbar, main content area.
+ * Optional — only import if you want the full admin app shell.
+ * Requires tokens.css to be loaded first.
+ *
+ * Usage:
+ *   import '@syhrezz/ui/tokens.css'
+ *   import '@syhrezz/ui/components.css'
+ *   import '@syhrezz/ui/shell.css'   // optional
+ */
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-primary); background: var(--surface); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; }
+
+/* ── SHELL LAYOUT ── */
+.ds-shell { display: flex; min-height: 100vh; }
+
+/* ── SIDEBAR ── */
+.ds-sidebar { width: 260px; height: 100vh; background: var(--sidebar-bg); position: fixed; top: 0; left: 0; display: flex; flex-direction: column; z-index: var(--z-sidebar); border-right: 1px solid rgba(255,255,255,0.04); overflow-x: hidden; }
+.ds-sidebar-header { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.06); flex-shrink: 0; }
+.ds-sidebar-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.ds-sidebar-logo-icon { width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0; background: linear-gradient(135deg,#6366F1,#8B5CF6); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; box-shadow: 0 4px 12px rgba(99,102,241,0.35); }
+.ds-sidebar-logo-text { line-height: 1.2; }
+.ds-sidebar-logo-name { font-size: 14px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
+.ds-sidebar-logo-version { font-size: 10px; color: var(--sidebar-text); font-weight: 600; }
+.ds-sidebar-nav { flex: 1; overflow-y: auto; padding: 10px; }
+.ds-nav-group { margin-bottom: 4px; }
+.ds-nav-group-label { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.25); padding: 8px 10px 4px; }
+.ds-nav-link { display: flex; align-items: center; padding: 7px 10px; border-radius: 8px; font-size: 12px; font-weight: 500; color: var(--sidebar-text); text-decoration: none; transition: all 0.15s; margin-bottom: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ds-nav-link:hover { background: var(--sidebar-hover); color: #fff; }
+.ds-nav-link.active { background: rgba(99,102,241,0.2); color: #A5B4FC; font-weight: 600; border-left: 2px solid #6366F1; padding-left: 8px; }
+
+/* ── TOPBAR ── */
+.ds-topbar { position: fixed; top: 0; left: 260px; right: 0; height: 52px; background: rgba(248,250,252,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 24px; gap: 12px; z-index: var(--z-topbar); }
+.ds-topbar-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+.ds-topbar-breadcrumb a { color: var(--text-muted); transition: color 0.15s; }
+.ds-topbar-breadcrumb a:hover { color: var(--text-primary); }
+.ds-topbar-breadcrumb span { color: var(--text-muted); }
+.ds-topbar-breadcrumb strong { color: var(--text-primary); font-weight: 600; }
+.ds-topbar-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.ds-topbar-tag { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: var(--r-full); background: var(--primary-light); color: var(--primary); }
+
+/* ── MAIN CONTENT ── */
+.ds-main { flex: 1; margin-left: 260px; padding-top: 52px; display: flex; min-height: 100vh; }
+.ds-page { flex: 1; padding: 36px 40px; max-width: 860px; min-width: 0; }
+.ds-page-wide { max-width: 1100px; }
+.ds-toc { width: 200px; flex-shrink: 0; padding: 36px 0 36px 20px; }
+
+/* ── PAGE HEADER ── */
+.ds-page-header-full { margin-bottom: 8px; }
+.ds-page h1 { font-size: 28px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.8px; margin-bottom: 8px; line-height: 1.2; }
+.ds-page h2 { font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 32px 0 12px; letter-spacing: -0.3px; }
+.ds-page h3 { font-size: 13px; font-weight: 700; color: var(--text-primary); margin: 20px 0 8px; }
+.ds-page p { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.7; }
+.ds-page-lead { font-size: 15px; color: var(--text-secondary); margin-bottom: 28px; line-height: 1.7; }
