@@ -10,20 +10,15 @@
 // At runtime we prepend the correct number of "../" based on depth.
 function getPathPrefix() {
   const path = window.location.pathname;
-  // Count how many folder levels deep we are inside v2/
-  // e.g. v2/index.html          → depth 0 → prefix = ''
-  // e.g. v2/components/btn.html → depth 1 → prefix = '../'
-  // e.g. v2/foundations/col.html→ depth 1 → prefix = '../'
-  const v2Match = path.match(/\/design-system\/v2\/(.*)/);
-  if (!v2Match) {
-    // Fallback: count slashes after last 'v2' segment
-    const parts = path.split('/').filter(Boolean);
-    const v2Idx = parts.lastIndexOf('v2');
-    const depth = v2Idx >= 0 ? parts.length - v2Idx - 2 : 0;
-    return depth > 0 ? '../'.repeat(depth) : '';
-  }
-  const afterV2 = v2Match[1]; // e.g. 'components/button.html' or 'index.html'
-  const depth = afterV2.split('/').length - 1; // subdirectory depth
+  // Count subdirectory depth by how many path segments sit above the current file.
+  // The last segment is the filename itself, so depth = total segments - 1.
+  // e.g. /index.html              → parts = ['index.html']            → depth 0 → ''
+  // e.g. /components/button.html  → parts = ['components','button.html'] → depth 1 → '../'
+  // e.g. /patterns/error.html     → parts = ['patterns','error.html']  → depth 1 → '../'
+  // This works the same locally and on Vercel regardless of subdomain or project prefix.
+  const parts = path.split('/').filter(Boolean);
+  // Remove the filename (last segment) to count only directory levels
+  const depth = parts.length - 1;
   return depth > 0 ? '../'.repeat(depth) : '';
 }
 
