@@ -36,6 +36,33 @@
 .qs-step-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:5px;}
 .qs-step-desc{font-size:12px;color:var(--text-secondary);line-height:1.5;}
 
+/* Installation */
+.install-tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:20px;}
+.install-tab{padding:8px 18px;font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;font-family:var(--font-primary);}
+.install-tab:hover{color:var(--text-primary);}
+.install-tab.active{color:#6366F1;border-bottom-color:#6366F1;}
+.install-panel{display:none;}.install-panel.active{display:block;}
+.install-code{background:#0F172A;border-radius:12px;padding:16px 20px;font-family:var(--font-mono);font-size:13px;color:#E2E8F0;position:relative;margin-bottom:14px;overflow-x:auto;}
+.install-code .comment{color:#475569;}
+.install-code .cmd{color:#A5B4FC;}
+.install-code .str{color:#86EFAC;}
+.install-code .kw{color:#F472B6;}
+.install-copy{position:absolute;top:10px;right:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;color:#94A3B8;cursor:pointer;font-family:var(--font-primary);transition:all .15s;}
+.install-copy:hover{background:rgba(255,255,255,.14);color:#fff;}
+.install-note{font-size:12px;color:var(--text-muted);line-height:1.6;margin-bottom:16px;}
+.install-note a{color:#6366F1;font-weight:600;}
+.install-npm-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:10px 16px;margin-bottom:16px;text-decoration:none;transition:all .15s;}
+.install-npm-badge:hover{border-color:#6366F1;box-shadow:0 4px 12px rgba(99,102,241,.1);}
+.install-npm-badge-icon{width:32px;height:32px;background:#CB0000;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff;letter-spacing:-.5px;}
+.install-npm-badge-info{display:flex;flex-direction:column;}
+.install-npm-badge-name{font-size:13px;font-weight:700;color:var(--text-primary);}
+.install-npm-badge-url{font-size:11px;color:var(--text-muted);}
+.install-files-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
+.install-file-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
+.install-file-name{font-family:var(--font-mono);font-size:12px;font-weight:700;color:#6366F1;margin-bottom:4px;}
+.install-file-desc{font-size:11px;color:var(--text-muted);line-height:1.5;}
+.install-file-optional{font-size:9px;font-weight:700;padding:1px 6px;border-radius:999px;background:var(--surface);color:var(--text-muted);margin-left:6px;vertical-align:middle;}
+
 /* Component grid */
 .comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;}
 .comp-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px;text-decoration:none;transition:all .2s;display:block;}
@@ -120,16 +147,145 @@
   </div>
 
   <div style="padding:0 40px 60px">
-    <!-- QUICK START -->
+    <!-- INSTALLATION -->
     <div class="home-section" id="quickstart">
+      <div class="home-section-header">
+        <div class="home-section-title">Installation</div>
+        <a href="https://www.npmjs.com/package/@syhrezz/ui" target="_blank" class="home-section-link">View on npm ↗</a>
+      </div>
+
+      <!-- npm badge -->
+      <a href="https://www.npmjs.com/package/@syhrezz/ui" target="_blank" class="install-npm-badge">
+        <div class="install-npm-badge-icon">npm</div>
+        <div class="install-npm-badge-info">
+          <div class="install-npm-badge-name">@syhrezz/ui</div>
+          <div class="install-npm-badge-url">npmjs.com/package/@syhrezz/ui</div>
+        </div>
+      </a>
+
+      <!-- tabs -->
+      <div class="install-tabs">
+        <button class="install-tab active" onclick="switchInstall('npm')">npm</button>
+        <button class="install-tab" onclick="switchInstall('yarn')">yarn</button>
+        <button class="install-tab" onclick="switchInstall('pnpm')">pnpm</button>
+        <button class="install-tab" onclick="switchInstall('cdn')">CDN</button>
+        <button class="install-tab" onclick="switchInstall('react')">React</button>
+        <button class="install-tab" onclick="switchInstall('next')">Next.js</button>
+      </div>
+
+      <!-- npm -->
+      <div class="install-panel active" id="install-npm">
+        <div class="install-code"><button class="install-copy" onclick="copyInstall(this)">Copy</button><span class="cmd">npm install</span> <span class="str">@syhrezz/ui</span></div>
+        <div class="install-code"><button class="install-copy" onclick="copyInstall(this)">Copy</button><span class="comment">/* In your main CSS or JS entry file */</span>
+<span class="kw">import</span> <span class="str">'@syhrezz/ui/tokens.css'</span>;
+<span class="kw">import</span> <span class="str">'@syhrezz/ui/components.css'</span>;
+<span class="comment">/* optional — only if you need the sidebar + topbar shell */</span>
+<span class="kw">import</span> <span class="str">'@syhrezz/ui/shell.css'</span>;</div>
+        <div class="install-note">Or import everything at once: <code>import '@syhrezz/ui'</code></div>
+      </div>
+
+      <!-- yarn -->
+      <div class="install-panel" id="install-yarn">
+        <div class="install-code"><button class="install-copy" onclick="copyInstall(this)">Copy</button><span class="cmd">yarn add</span> <span class="str">@syhrezz/ui</span></div>
+        <div class="install-code"><button class="install-copy" onclick="copyInstall(this)">Copy</button><span class="comment">/* In your main CSS or JS entry file */</span>
+<span class="kw">import</span> <span class="str">'@syhrezz/ui/tokens.css'</span>;
+<span class="kw">import</span> <span class="str">'@syhrezz/ui/components.css'</span>;
+<span class="kw">import</span> <span class="str">'@syhrezz/ui/shell.css'</span>; <span class="comment">/* optional */</span></div>
+      </div>
+
+      <!-- pnpm -->
+      <div class="install-panel" id="install-pnpm">
+        <div class="install-code"><button class="install-copy" onclick="copyInstall(this)">Copy</button><span class="cmd">pnpm add</span> <span class="str">@syhrezz/ui</span></div>
+        <div class="install-code"><button class="install-copy" onclick="copyInstall(this)">Copy</button><span class="comment">/* In your main CSS or JS entry file */</span>
+<span class="kw">import</span> <span class="str">'@syhrezz/ui/tokens.css'</span>;
+<span class="kw">import</span> <span class="str">'@syhrezz/ui/components.css'</span>;
+<span class="kw">import</span> <span class="str">'@syhrezz/ui/shell.css'</span>; <span class="comment">/* optional */</span></div>
+      </div>
+
+      <!-- cdn -->
+      <div class="install-panel" id="install-cdn">
+        <div class="install-note">No build tool? Link directly from a CDN in your HTML <code>&lt;head&gt;</code>.</div>
+        <div class="install-code"><button class="install-copy" onclick="copyInstall(this)">Copy</button><span class="comment">&lt;!-- Design tokens --&gt;</span>
+<span class="kw">&lt;link</span> rel=<span class="str">"stylesheet"</span> href=<span class="str">"https://cdn.jsdelivr.net/npm/@syhrezz/ui/tokens.css"</span><span class="kw">/&gt;</span>
+<span class="comment">&lt;!-- Component classes --&gt;</span>
+<span class="kw">&lt;link</span> rel=<span class="str">"stylesheet"</span> href=<span class="str">"https://cdn.jsdelivr.net/npm/@syhrezz/ui/components.css"</span><span class="kw">/&gt;</span>
+<span class="comment">&lt;!-- Optional: app shell layout --&gt;</span>
+<span class="kw">&lt;link</span> rel=<span class="str">"stylesheet"</span> href=<span class="str">"https://cdn.jsdelivr.net/npm/@syhrezz/ui/shell.css"</span><span class="kw">/&gt;</span></div>
+      </div>
+
+      <!-- react -->
+      <div class="install-panel" id="install-react">
+        <div class="install-code"><button class="install-copy" onclick="copyInstall(this)">Copy</button><span class="cmd">npm install</span> <span class="str">@syhrezz/ui</span></div>
+        <div class="install-code"><button class="install-copy" onclick="copyInstall(this)">Copy</button><span class="comment">// src/main.tsx</span>
+<span class="kw">import</span> <span class="str">'@syhrezz/ui/tokens.css'</span>;
+<span class="kw">import</span> <span class="str">'@syhrezz/ui/components.css'</span>;
+<span class="kw">import</span> React <span class="kw">from</span> <span class="str">'react'</span>;
+<span class="kw">import</span> ReactDOM <span class="kw">from</span> <span class="str">'react-dom/client'</span>;
+<span class="kw">import</span> App <span class="kw">from</span> <span class="str">'./App'</span>;
+
+ReactDOM.createRoot(document.getElementById(<span class="str">'root'</span>)!).render(
+  &lt;React.StrictMode&gt;&lt;App /&gt;&lt;/React.StrictMode&gt;
+);</div>
+        <div class="install-code"><button class="install-copy" onclick="copyInstall(this)">Copy</button><span class="comment">// Use classes directly in JSX</span>
+<span class="kw">export function</span> <span class="cmd">Button</span>() {
+  <span class="kw">return</span> (
+    &lt;button <span class="cmd">className</span>=<span class="str">"btn btn-primary"</span>&gt;
+      Save Changes
+    &lt;/button&gt;
+  );
+}</div>
+      </div>
+
+      <!-- next -->
+      <div class="install-panel" id="install-next">
+        <div class="install-code"><button class="install-copy" onclick="copyInstall(this)">Copy</button><span class="cmd">npm install</span> <span class="str">@syhrezz/ui</span></div>
+        <div class="install-code"><button class="install-copy" onclick="copyInstall(this)">Copy</button><span class="comment">// app/layout.tsx  (App Router)</span>
+<span class="kw">import</span> <span class="str">'@syhrezz/ui/tokens.css'</span>;
+<span class="kw">import</span> <span class="str">'@syhrezz/ui/components.css'</span>;
+
+<span class="kw">export default function</span> <span class="cmd">RootLayout</span>({ children }: { children: React.ReactNode }) {
+  <span class="kw">return</span> (
+    &lt;html lang=<span class="str">"en"</span>&gt;
+      &lt;body&gt;{children}&lt;/body&gt;
+    &lt;/html&gt;
+  );
+}</div>
+      </div>
+
+      <!-- what's included -->
+      <div style="margin-top:20px">
+        <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">What's included</div>
+        <div class="install-files-grid">
+          <div class="install-file-card">
+            <div class="install-file-name">tokens.css</div>
+            <div class="install-file-desc">CSS custom properties — colors, spacing, radius, shadows, motion, z-index</div>
+          </div>
+          <div class="install-file-card">
+            <div class="install-file-name">components.css</div>
+            <div class="install-file-desc">Component utility classes — badge, table, callout, anatomy, changelog, do/dont</div>
+          </div>
+          <div class="install-file-card">
+            <div class="install-file-name">shell.css <span class="install-file-optional">optional</span></div>
+            <div class="install-file-desc">App shell layout — sidebar, topbar, nav links, main content area</div>
+          </div>
+          <div class="install-file-card">
+            <div class="install-file-name">index.css</div>
+            <div class="install-file-desc">Convenience file — imports all three in the correct order</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK START -->
+    <div class="home-section" id="quickstart-steps">
       <div class="home-section-header">
         <div class="home-section-title">Quick Start</div>
       </div>
       <div class="qs-steps">
         <div class="qs-step">
           <div class="qs-step-num">1</div>
-          <div class="qs-step-title">Import Tokens</div>
-          <div class="qs-step-desc">Link <code>ds-tokens.css</code> in your page head. All CSS custom properties are available globally.</div>
+          <div class="qs-step-title">Install the package</div>
+          <div class="qs-step-desc">Run <code>npm install @syhrezz/ui</code> and import the CSS files into your project entry point.</div>
         </div>
         <div class="qs-step">
           <div class="qs-step-num">2</div>
@@ -402,6 +558,21 @@
 </div><!-- /main -->
 </div><!-- /shell -->
 
+<script>
+function switchInstall(tab) {
+  document.querySelectorAll('.install-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.install-panel').forEach(function(p) { p.classList.remove('active'); });
+  event.target.classList.add('active');
+  document.getElementById('install-' + tab).classList.add('active');
+}
+function copyInstall(btn) {
+  var code = btn.parentElement.innerText.replace('Copy', '').trim();
+  navigator.clipboard.writeText(code).then(function() {
+    btn.textContent = 'Copied!';
+    setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
 <script>window.DS_ACTIVE_PAGE = 'intro';</script>
 <script src="shared/ds-shell.js"></script>
 </body>
