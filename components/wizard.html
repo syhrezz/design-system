@@ -418,12 +418,12 @@ select.input{cursor:pointer;}
 </div>
 
 <h2 id="anatomy">Anatomy</h2>
-<div class="ds-anatomy-wrap">
-  <div class="ds-anatomy-item"><span class="ds-anatomy-num">1</span><strong>Step circle</strong> — shows step number; changes to checkmark when done</div>
-  <div class="ds-anatomy-item"><span class="ds-anatomy-num">2</span><strong>Connector</strong> — line between steps; fills green as steps complete</div>
-  <div class="ds-anatomy-item"><span class="ds-anatomy-num">3</span><strong>Step label</strong> — short name for each step, positioned below the circle</div>
-  <div class="ds-anatomy-item"><span class="ds-anatomy-num">4</span><strong>Panel body</strong> — the active step content area</div>
-  <div class="ds-anatomy-item"><span class="ds-anatomy-num">5</span><strong>Footer</strong> — Back / Next navigation and optional progress text</div>
+<div class="ds-anatomy-parts">
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">1</div><div class="ds-anatomy-part-name">Step circle</div><div class="ds-anatomy-part-desc">Shows step number; switches to a checkmark icon when the step is completed.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">2</div><div class="ds-anatomy-part-name">Connector</div><div class="ds-anatomy-part-desc">Line between steps; fills green as each step is completed to show overall progress.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">3</div><div class="ds-anatomy-part-name">Step label</div><div class="ds-anatomy-part-desc">Short name for each step, positioned below the circle. Keep to 1–2 words.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">4</div><div class="ds-anatomy-part-name">Panel body</div><div class="ds-anatomy-part-desc">The active step content area. Only one panel is visible at a time.</div></div>
+  <div class="ds-anatomy-part-row"><div class="ds-anatomy-part-num">5</div><div class="ds-anatomy-part-name">Footer</div><div class="ds-anatomy-part-desc">Back / Next navigation buttons and optional step progress text (e.g. "Step 2 of 4").</div></div>
 </div>
 
 <h2 id="states">Step States</h2>
@@ -459,26 +459,32 @@ select.input{cursor:pointer;}
 </div>
 
 <h2 id="best-practices">Best Practices</h2>
-<div class="ds-guidelines-grid">
-  <div class="ds-guideline-card ds-guideline-do">
-    <div class="ds-guideline-title">Do</div>
-    <ul class="ds-guideline-list">
-      <li>Keep step labels short (1–2 words)</li>
-      <li>Validate each step before allowing Next</li>
-      <li>Always offer a Back button from step 2 onward</li>
-      <li>Show a summary/review step before final submission</li>
-      <li>Preserve form data when navigating back</li>
-    </ul>
+<div class="ds-do-dont">
+  <div class="ds-do">
+    <div class="ds-do-header"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Do</div>
+    <div class="ds-do-body">
+      <ul style="font-size:13px;color:#0F172A;line-height:1.8;padding-left:16px;margin:0">
+        <li>Keep step labels short (1–2 words)</li>
+        <li>Validate each step before allowing Next</li>
+        <li>Always offer a Back button from step 2 onward</li>
+        <li>Show a summary/review step before final submission</li>
+        <li>Preserve form data when navigating back</li>
+      </ul>
+      <p class="ds-do-reason">Clear labels and validation reduce errors and user frustration.</p>
+    </div>
   </div>
-  <div class="ds-guideline-card ds-guideline-dont">
-    <div class="ds-guideline-title">Don&apos;t</div>
-    <ul class="ds-guideline-list">
-      <li>Don&apos;t use more than 5–6 steps — split into separate pages</li>
-      <li>Don&apos;t lose user input on Back navigation</li>
-      <li>Don&apos;t hide the step count from users</li>
-      <li>Don&apos;t use a wizard for tasks that fit on one screen</li>
-      <li>Don&apos;t disable the Back button on the first step — hide it instead</li>
-    </ul>
+  <div class="ds-dont">
+    <div class="ds-dont-header"><svg style="width:13px;height:13px" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg> Don't</div>
+    <div class="ds-dont-body">
+      <ul style="font-size:13px;color:#0F172A;line-height:1.8;padding-left:16px;margin:0">
+        <li>Don't use more than 5–6 steps — split into pages</li>
+        <li>Don't lose user input on Back navigation</li>
+        <li>Don't hide the step count from users</li>
+        <li>Don't use a wizard for tasks that fit on one screen</li>
+        <li>Don't disable Back on step 1 — hide it instead</li>
+      </ul>
+      <p class="ds-dont-reason">Too many steps and lost data are the top causes of wizard abandonment.</p>
+    </div>
   </div>
 </div>
 
